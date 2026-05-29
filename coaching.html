@@ -466,12 +466,12 @@ document.getElementById('cf').addEventListener('submit',async e=>{
   fd.append('entry.1550393892',em);fd.append('entry.1988273328',ph);
   fd.append('entry.2086466643',ig);fd.append('entry.1765831614',pr);
   fd.append('entry.1402852593',ti);fd.append('entry.1514972266',yn);
-  const mc=new FormData();
-  mc.append('EMAIL',em);mc.append('NAME',n);mc.append('PHONE',ph);
+  const mc=new URLSearchParams();
+  mc.append('EMAIL',em);mc.append('NAME',n);mc.append('FNAME',n);mc.append('PHONE',ph);
   mc.append('b_938d6c40a3864a47a8b3808e7_69042ccccb','');
   try{await Promise.allSettled([
     fetch('https://docs.google.com/forms/d/e/1FAIpQLSd9P2EzYDanIec_GJgQW451BVemY18VOxGq4d7IPFYH05jPyA/formResponse',{method:'POST',mode:'no-cors',body:fd}),
-    fetch('https://gmail.us18.list-manage.com/subscribe/post?u=938d6c40a3864a47a8b3808e7&id=69042ccccb&f_id=0025a9e6f0',{method:'POST',mode:'no-cors',body:mc})
+    fetch('https://gmail.us18.list-manage.com/subscribe/post?u=938d6c40a3864a47a8b3808e7&id=69042ccccb&f_id=0025a9e6f0',{method:'POST',mode:'no-cors',body:mc,headers:{'Content-Type':'application/x-www-form-urlencoded'}})
   ])}catch(_){}
   document.getElementById('cf').style.display='none';
   document.getElementById('ok').classList.add('show');
