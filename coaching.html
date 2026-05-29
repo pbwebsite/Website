@@ -218,13 +218,28 @@ footer a{color:var(--teal-l);text-decoration:none}
 @keyframes orb2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-160px,-220px) scale(1.15)}}
 @keyframes orb3{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-120px,80px) scale(.9)}66%{transform:translate(140px,-100px) scale(1.05)}}
 
-.hero{position:relative;overflow:hidden}
-.hero-photo{position:absolute;inset:0;background-image:url('images/hero-coaching.jpg');background-size:cover;background-position:center 30%;opacity:.32;filter:saturate(1.05) contrast(1.05);z-index:0}
-.hero-photo-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,9,10,.55) 0%,rgba(7,9,10,.4) 35%,rgba(7,9,10,.85) 80%,var(--dark) 100%),linear-gradient(90deg,rgba(7,9,10,.7) 0%,transparent 50%);z-index:1}
+.hero{position:relative;overflow:hidden;min-height:88vh;display:flex;align-items:center}
+@media(min-width:900px){.hero{min-height:94vh}}
+.hero-photo{position:absolute;inset:0;background-image:url('images/hero-coaching.jpg');background-size:cover;background-position:center 25%;opacity:.62;filter:saturate(1.08) contrast(1.08);z-index:0;animation:heroZoom 18s ease-out forwards}
+@keyframes heroZoom{from{transform:scale(1.06)}to{transform:scale(1)}}
+.hero-photo-veil{position:absolute;inset:0;z-index:1;background:
+  radial-gradient(ellipse 80% 70% at 25% 50%,rgba(7,9,10,.4) 0%,rgba(7,9,10,.78) 90%),
+  linear-gradient(180deg,rgba(7,9,10,.55) 0%,transparent 40%,transparent 60%,var(--dark) 100%)
+}
 .hero-content{position:relative;z-index:2}
-.hero-corner{position:absolute;z-index:1;width:80px;height:80px;border:1px solid var(--tborder);opacity:.5}
-.hero-corner.tl{top:24px;left:24px;border-right:none;border-bottom:none}
-.hero-corner.br{bottom:24px;right:24px;border-left:none;border-top:none}
+.hero-corner{position:absolute;z-index:1;width:64px;height:64px;border:1px solid var(--tborder);opacity:.55}
+.hero-corner.tl{top:22px;left:22px;border-right:none;border-bottom:none}
+.hero-corner.br{bottom:90px;right:22px;border-left:none;border-top:none}
+@media(min-width:768px){.hero-corner{width:88px;height:88px}.hero-corner.tl{top:32px;left:32px}.hero-corner.br{bottom:120px;right:32px}}
+
+.hero-meta{position:absolute;top:24px;right:24px;z-index:3;display:none;align-items:center;gap:.6rem;font-family:var(--fd);font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.hero-meta::before{content:'';width:24px;height:1px;background:var(--teal-l)}
+@media(min-width:768px){.hero-meta{display:flex;top:32px;right:32px}}
+
+.hero-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:.6rem;font-family:var(--fd);font-size:.6rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);pointer-events:none}
+.hero-scroll-line{width:1px;height:42px;background:linear-gradient(180deg,var(--teal-l),transparent);position:relative;overflow:hidden}
+.hero-scroll-line::after{content:'';position:absolute;top:0;left:0;right:0;height:14px;background:var(--text);animation:scrollDot 2.4s ease-in-out infinite}
+@keyframes scrollDot{0%{transform:translateY(-14px)}55%{transform:translateY(42px)}100%{transform:translateY(42px)}}
 
 .btn-fill{position:relative;overflow:hidden;transition:all .25s}
 .btn-fill::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transition:left .6s}
@@ -313,6 +328,8 @@ footer a{color:var(--teal-l);text-decoration:none}
   <div class="hero-topline"></div>
   <div class="hero-corner tl" aria-hidden="true"></div>
   <div class="hero-corner br" aria-hidden="true"></div>
+  <div class="hero-meta" aria-hidden="true">PB Performance · GAA S&amp;C</div>
+  <div class="hero-scroll" aria-hidden="true"><span>Scroll</span><div class="hero-scroll-line"></div></div>
   <div class="hero-content">
     <div class="hero-tag">Premium Online Coaching · GAA Players Only</div>
     <h1 class="hero-h1">Develop The<br><span class="t">Physical</span> &amp;<br><span class="g">Mental</span> Edge</h1>
@@ -360,14 +377,9 @@ footer a{color:var(--teal-l);text-decoration:none}
   </div>
 </section>
 
-<section class="athlete-strip" aria-label="Athlete">
+<section class="athlete-strip" aria-label="Antrim Senior Hurler">
   <div class="athlete-strip-img" aria-hidden="true"></div>
   <div class="athlete-strip-veil" aria-hidden="true"></div>
-  <div class="athlete-strip-content">
-    <div class="athlete-strip-label">Athlete · Coach · Player</div>
-    <h2 class="athlete-strip-title">Coached by someone who's <span class="t">still in the arena</span>.</h2>
-    <p class="athlete-strip-sub">Antrim Senior Hurler. MSc in Performance Coaching. Every program is built on the system Paddy uses himself.</p>
-  </div>
 </section>
 
 <section id="program">
