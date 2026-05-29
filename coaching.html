@@ -204,9 +204,79 @@ footer a{color:var(--teal-l);text-decoration:none}
   .apply-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:4.5rem;align-items:start}
   .fcard{padding:2.5rem 2.2rem}
 }
+
+/* === REDESIGN LAYER === */
+.scroll-progress{position:fixed;top:0;left:0;right:0;height:2px;background:transparent;z-index:200}
+.scroll-progress::before{content:'';display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-l),var(--gold));transform-origin:left;transform:scaleX(var(--sp,0));transition:transform .1s}
+
+.bg-orbs{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.bg-orbs span{position:absolute;border-radius:50%;filter:blur(120px);opacity:.12;will-change:transform}
+.bg-orbs span:nth-child(1){width:520px;height:520px;background:var(--teal);top:-160px;left:-160px;animation:orb1 28s ease-in-out infinite}
+.bg-orbs span:nth-child(2){width:480px;height:480px;background:var(--gold);bottom:-160px;right:-160px;animation:orb2 34s ease-in-out infinite;opacity:.09}
+.bg-orbs span:nth-child(3){width:380px;height:380px;background:var(--teal-l);top:40%;left:55%;animation:orb3 38s ease-in-out infinite;opacity:.08}
+@keyframes orb1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(180px,260px) scale(1.1)}}
+@keyframes orb2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-160px,-220px) scale(1.15)}}
+@keyframes orb3{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-120px,80px) scale(.9)}66%{transform:translate(140px,-100px) scale(1.05)}}
+
+.hero{position:relative;overflow:hidden}
+.hero-photo{position:absolute;inset:0;background-image:url('images/hero-coaching.jpg');background-size:cover;background-position:center 30%;opacity:.32;filter:saturate(1.05) contrast(1.05);z-index:0}
+.hero-photo-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,9,10,.55) 0%,rgba(7,9,10,.4) 35%,rgba(7,9,10,.85) 80%,var(--dark) 100%),linear-gradient(90deg,rgba(7,9,10,.7) 0%,transparent 50%);z-index:1}
+.hero-content{position:relative;z-index:2}
+.hero-corner{position:absolute;z-index:1;width:80px;height:80px;border:1px solid var(--tborder);opacity:.5}
+.hero-corner.tl{top:24px;left:24px;border-right:none;border-bottom:none}
+.hero-corner.br{bottom:24px;right:24px;border-left:none;border-top:none}
+
+.btn-fill{position:relative;overflow:hidden;transition:all .25s}
+.btn-fill::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transition:left .6s}
+.btn-fill:hover{box-shadow:0 0 36px rgba(58,143,162,.45);transform:translateY(-2px)}
+.btn-fill:hover::after{left:100%}
+
+.about-grid{display:grid;grid-template-columns:1fr;gap:2.5rem;align-items:center}
+@media(min-width:880px){.about-grid{grid-template-columns:.85fr 1.15fr;gap:4rem}}
+.about-photo{position:relative;aspect-ratio:4/5;background:linear-gradient(135deg,var(--d2) 0%,var(--d3) 50%,var(--d2) 100%);border:1px solid var(--tborder);overflow:hidden;clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px))}
+.about-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s}
+.about-photo:hover img{transform:scale(1.03)}
+.about-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(35deg,rgba(45,110,126,.15),transparent 50%);pointer-events:none}
+.about-photo-cap{position:absolute;bottom:16px;left:16px;font-family:var(--fd);font-size:.65rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--teal-l);background:rgba(7,9,10,.7);padding:.45rem .8rem;backdrop-filter:blur(8px);border:1px solid var(--tborder);z-index:2}
+
+.tier{transition:transform .3s,border-color .3s,box-shadow .3s}
+.tier:hover{transform:translateY(-4px);border-color:var(--tborder)}
+.tier.hot{position:relative;background:linear-gradient(180deg,rgba(45,110,126,.08),var(--d2) 60%);border:1px solid rgba(58,143,162,.35);box-shadow:0 12px 40px rgba(0,0,0,.35),0 0 60px rgba(45,110,126,.12)}
+.tier.hot::after{content:'';position:absolute;inset:-1px;background:linear-gradient(135deg,var(--teal) 0%,transparent 40%,transparent 60%,var(--gold) 100%);z-index:-1;opacity:.5;filter:blur(8px);border-radius:inherit;pointer-events:none}
+
+.t-card{position:relative;transition:transform .3s,border-color .3s}
+.t-card:hover{transform:translateY(-3px);border-color:var(--tborder)}
+.t-card::before{content:'"';position:absolute;top:-1rem;left:1.2rem;font-family:Georgia,'Times New Roman',serif;font-size:7rem;line-height:1;color:var(--teal);opacity:.16;pointer-events:none;font-style:italic;z-index:0}
+.t-card>*{position:relative;z-index:1}
+
+.benefit{transition:background .25s,border-color .25s,transform .25s}
+.benefit:hover{background:rgba(45,110,126,.04);transform:translateX(4px)}
+
+.pillar{transition:transform .3s,box-shadow .3s,border-color .3s}
+.pillar:hover{transform:translateY(-5px);box-shadow:0 14px 44px rgba(0,0,0,.45);border-color:var(--tborder)}
+
+.fcard{position:relative;transition:box-shadow .3s}
+.fcard:hover{box-shadow:0 0 50px rgba(45,110,126,.18)}
+
+.g-box{position:relative;overflow:hidden}
+.g-box::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 50%,rgba(201,168,76,.08),transparent 60%);pointer-events:none}
+
+.hero-h1 .t,.s-title .t{background:linear-gradient(135deg,var(--teal-l) 0%,var(--teal) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero-h1 .g{background:linear-gradient(135deg,var(--gold) 0%,#e0c068 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+@keyframes pulse-dot{0%,100%{opacity:.7}50%{opacity:1}}
+.spot-dot,.cred-dot{animation:pulse-dot 2s ease-in-out infinite}
+
+@media(prefers-reduced-motion:reduce){
+  .bg-orbs span,.spot-dot,.cred-dot{animation:none}
+  *{transition-duration:.01ms!important}
+}
 </style>
 </head>
 <body>
+
+<div class="scroll-progress" id="sp"></div>
+<div class="bg-orbs" aria-hidden="true"><span></span><span></span><span></span></div>
 
 <nav>
   <a class="logo-wrap" href="#">
@@ -217,9 +287,13 @@ footer a{color:var(--teal-l);text-decoration:none}
 </nav>
 
 <section class="hero">
+  <div class="hero-photo" aria-hidden="true"></div>
+  <div class="hero-photo-veil" aria-hidden="true"></div>
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-topline"></div>
+  <div class="hero-corner tl" aria-hidden="true"></div>
+  <div class="hero-corner br" aria-hidden="true"></div>
   <div class="hero-content">
     <div class="hero-tag">Premium Online Coaching · GAA Players Only</div>
     <h1 class="hero-h1">Develop The<br><span class="t">Physical</span> &amp;<br><span class="g">Mental</span> Edge</h1>
@@ -246,18 +320,22 @@ footer a{color:var(--teal-l);text-decoration:none}
 
 <section class="about">
   <div class="wrap">
-    <div class="rv">
-      <blockquote class="pull-quote">"I help GAA players become stronger, fitter, and faster — so they can perform at their best on the field."</blockquote>
-    </div>
-    <div class="rv2 about-body">
-      <p>Tired of feeling heavy-legged on game day, second-guessing your training, or not seeing results from all the work you're putting in?</p>
-      <p>With tailored S&amp;C, performance-based nutrition, and mindset support, you'll show up more prepared — and perform more consistently — every week.</p>
-      <p>This isn't a quick-fix or crash diet. It's a long-term system to help you play at your best all season long.</p>
-      <div class="pills">
-        <span class="pill">MSc Performance Coaching</span>
-        <span class="pill">Antrim Senior</span>
-        <span class="pill">S&amp;C Specialist</span>
-        <span class="pill">Nutrition Coach</span>
+    <div class="about-grid">
+      <div class="rv about-photo">
+        <img src="images/hurling-portrait.jpg" alt="Paddy Burke" onerror="this.style.display='none'">
+        <div class="about-photo-cap">Paddy Burke · Coach</div>
+      </div>
+      <div class="rv2 about-body">
+        <blockquote class="pull-quote">"I help GAA players become stronger, fitter, and faster — so they can perform at their best on the field."</blockquote>
+        <p>Tired of feeling heavy-legged on game day, second-guessing your training, or not seeing results from all the work you're putting in?</p>
+        <p>With tailored S&amp;C, performance-based nutrition, and mindset support, you'll show up more prepared — and perform more consistently — every week.</p>
+        <p>This isn't a quick-fix or crash diet. It's a long-term system to help you play at your best all season long.</p>
+        <div class="pills">
+          <span class="pill">MSc Performance Coaching</span>
+          <span class="pill">Antrim Senior</span>
+          <span class="pill">S&amp;C Specialist</span>
+          <span class="pill">Nutrition Coach</span>
+        </div>
       </div>
     </div>
   </div>
@@ -442,6 +520,17 @@ footer a{color:var(--teal-l);text-decoration:none}
 <script>
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target)}})},{threshold:.08});
 document.querySelectorAll('.rv,.rv2,.rv3').forEach(el=>obs.observe(el));
+const sp=document.getElementById('sp');
+let spTick=false;
+addEventListener('scroll',()=>{
+  if(spTick)return;spTick=true;
+  requestAnimationFrame(()=>{
+    const h=document.documentElement;
+    const p=h.scrollTop/(h.scrollHeight-h.clientHeight)||0;
+    sp.style.setProperty('--sp',Math.max(0,Math.min(1,p)));
+    spTick=false;
+  });
+},{passive:true});
 let yn='';
 document.querySelectorAll('.yn-btn').forEach(b=>{
   b.addEventListener('click',()=>{
