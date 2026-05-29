@@ -204,18 +204,6 @@ footer a{color:var(--teal-l);text-decoration:none}
   .apply-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:4.5rem;align-items:start}
   .fcard{padding:2.5rem 2.2rem}
 }
-/* NEWSLETTER */
-.nl{padding:3.5rem 1.5rem;border-top:1px solid var(--border);background:var(--d3)}
-.nl-inner{max-width:540px;margin:0 auto;text-align:center}
-.nl-label{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--fd);font-size:.65rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--teal-l);margin-bottom:.9rem}
-.nl-title{font-family:var(--fd);font-size:clamp(1.6rem,5vw,2.3rem);font-weight:900;text-transform:uppercase;line-height:1;margin-bottom:.85rem}
-.nl-copy{font-size:.9rem;color:var(--muted);margin-bottom:1.6rem;line-height:1.55}
-.nl-form{display:flex;gap:.5rem;flex-wrap:wrap}
-.nl-input{flex:1 1 200px;background:var(--d2,#0f1417);border:1px solid var(--border);color:var(--text);font-family:inherit;font-size:.95rem;padding:.9rem 1rem;outline:none;transition:border-color .15s;-webkit-appearance:none;border-radius:0}
-.nl-input:focus{border-color:var(--teal)}
-.nl-btn{background:var(--teal);color:#fff;font-family:var(--fd);font-weight:800;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;padding:.9rem 1.7rem;border:none;cursor:pointer;transition:background .2s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));-webkit-tap-highlight-color:transparent}
-.nl-btn:hover{background:var(--teal-l)}
-.nl-note{font-size:.7rem;color:var(--muted);margin-top:.9rem;letter-spacing:.04em}
 </style>
 </head>
 <body>
@@ -446,20 +434,6 @@ footer a{color:var(--teal-l);text-decoration:none}
   </div>
 </section>
 
-<section class="nl">
-  <div class="nl-inner">
-    <div class="nl-label">Newsletter</div>
-    <h3 class="nl-title">Stay in the loop</h3>
-    <p class="nl-copy">Training insights, season prep tips, and the occasional kick up the arse — straight to your inbox. No spam.</p>
-    <form action="https://gmail.us18.list-manage.com/subscribe/post?u=938d6c40a3864a47a8b3808e7&amp;id=69042ccccb&amp;f_id=0025a9e6f0" method="post" target="_blank" class="nl-form" novalidate>
-      <input type="email" name="EMAIL" required placeholder="your@email.com" autocomplete="email" class="nl-input" aria-label="Email address">
-      <div aria-hidden="true" style="position:absolute;left:-5000px"><input type="text" name="b_938d6c40a3864a47a8b3808e7_69042ccccb" tabindex="-1" value=""></div>
-      <button type="submit" name="subscribe" class="nl-btn">Subscribe</button>
-    </form>
-    <p class="nl-note">Unsubscribe anytime.</p>
-  </div>
-</section>
-
 <footer>
   <p>© 2025 PB Performance Coaching</p>
   <p><a href="https://www.instagram.com/pbperformancecoaching" target="_blank">@pbperformancecoaching</a></p>
@@ -492,7 +466,13 @@ document.getElementById('cf').addEventListener('submit',async e=>{
   fd.append('entry.1550393892',em);fd.append('entry.1988273328',ph);
   fd.append('entry.2086466643',ig);fd.append('entry.1765831614',pr);
   fd.append('entry.1402852593',ti);fd.append('entry.1514972266',yn);
-  try{await fetch('https://docs.google.com/forms/d/e/1FAIpQLSd9P2EzYDanIec_GJgQW451BVemY18VOxGq4d7IPFYH05jPyA/formResponse',{method:'POST',mode:'no-cors',body:fd})}catch(_){}
+  const mc=new FormData();
+  mc.append('EMAIL',em);mc.append('NAME',n);mc.append('PHONE',ph);
+  mc.append('b_938d6c40a3864a47a8b3808e7_69042ccccb','');
+  try{await Promise.allSettled([
+    fetch('https://docs.google.com/forms/d/e/1FAIpQLSd9P2EzYDanIec_GJgQW451BVemY18VOxGq4d7IPFYH05jPyA/formResponse',{method:'POST',mode:'no-cors',body:fd}),
+    fetch('https://gmail.us18.list-manage.com/subscribe/post?u=938d6c40a3864a47a8b3808e7&id=69042ccccb&f_id=0025a9e6f0',{method:'POST',mode:'no-cors',body:mc})
+  ])}catch(_){}
   document.getElementById('cf').style.display='none';
   document.getElementById('ok').classList.add('show');
 });
