@@ -271,6 +271,25 @@ footer a{color:var(--teal-l);text-decoration:none}
   .bg-orbs span,.spot-dot,.cred-dot{animation:none}
   *{transition-duration:.01ms!important}
 }
+
+.athlete-strip{position:relative;height:380px;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+@media(min-width:768px){.athlete-strip{height:500px}}
+.athlete-strip-img{position:absolute;inset:0;background-image:url('images/hurling-action.jpg');background-size:cover;background-position:center 35%;filter:saturate(1.08) contrast(1.05)}
+.athlete-strip-veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,9,10,.85) 0%,rgba(7,9,10,.4) 40%,rgba(7,9,10,.3) 60%,rgba(7,9,10,.85) 100%),linear-gradient(180deg,var(--dark) 0%,transparent 15%,transparent 85%,var(--dark) 100%)}
+.athlete-strip-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 1.5rem;max-width:1200px;margin:0 auto;left:0;right:0}
+.athlete-strip-label{font-family:var(--fd);font-size:.7rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--teal-l);margin-bottom:1rem}
+.athlete-strip-title{font-family:var(--fd);font-size:clamp(2.2rem,7vw,4.5rem);font-weight:900;line-height:.95;text-transform:uppercase;max-width:680px}
+.athlete-strip-sub{font-size:.95rem;color:var(--muted);margin-top:1rem;max-width:480px;line-height:1.5}
+
+.apply-paddy{display:flex;align-items:center;gap:1rem;margin-bottom:1.6rem;padding:1.1rem;background:linear-gradient(135deg,rgba(45,110,126,.06),transparent);border-left:2px solid var(--teal)}
+.apply-paddy-photo{width:64px;height:64px;border-radius:50%;background-image:url('images/paddy-bench.jpg');background-size:cover;background-position:center;flex-shrink:0;border:2px solid var(--tborder)}
+.apply-paddy-text{font-family:var(--fb);font-size:.88rem;color:var(--text);line-height:1.4}
+.apply-paddy-text strong{font-family:var(--fd);font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-l);display:block;margin-bottom:.2rem}
+
+.program-grid{display:grid;grid-template-columns:1fr;gap:2.5rem;align-items:start}
+@media(min-width:960px){.program-grid{grid-template-columns:.7fr 1fr;gap:3.5rem}}
+.program-photo{position:relative;aspect-ratio:3/4;background-image:url('images/training-lunge.jpg');background-size:cover;background-position:center;border:1px solid var(--tborder);clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px))}
+.program-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(225deg,transparent 60%,rgba(45,110,126,.18))}
 </style>
 </head>
 <body>
@@ -341,14 +360,27 @@ footer a{color:var(--teal-l);text-decoration:none}
   </div>
 </section>
 
+<section class="athlete-strip" aria-label="Athlete">
+  <div class="athlete-strip-img" aria-hidden="true"></div>
+  <div class="athlete-strip-veil" aria-hidden="true"></div>
+  <div class="athlete-strip-content">
+    <div class="athlete-strip-label">Athlete · Coach · Player</div>
+    <h2 class="athlete-strip-title">Coached by someone who's <span class="t">still in the arena</span>.</h2>
+    <p class="athlete-strip-sub">Antrim Senior Hurler. MSc in Performance Coaching. Every program is built on the system Paddy uses himself.</p>
+  </div>
+</section>
+
 <section id="program">
   <div class="wrap">
     <div class="rv"><div class="s-label">What changes</div><h2 class="s-title">Built to Make You <span class="t">Dominant</span></h2></div>
-    <div class="benefits-grid rv2">
-      <div class="benefit"><div class="b-num">01</div><div class="b-title">Get Faster, Stronger &amp; More Explosive</div><div class="b-text">Position-specific training that translates directly to match performance — not generic gym work.</div></div>
-      <div class="benefit"><div class="b-num">02</div><div class="b-title">Recover Quicker, Reduce Niggles</div><div class="b-text">Smart programming and nutrition that keeps you training consistently without breaking down.</div></div>
-      <div class="benefit"><div class="b-num">03</div><div class="b-title">Stop Guessing. Follow a Proven System</div><div class="b-text">No more winging it. A structured plan that tells you exactly what to do and why.</div></div>
-      <div class="benefit"><div class="b-num">04</div><div class="b-title">Show Up Prepared. Perform Consistently</div><div class="b-text">Arrive to every game and session physically and mentally ready to deliver.</div></div>
+    <div class="program-grid">
+      <div class="rv program-photo" aria-hidden="true"></div>
+      <div class="benefits-grid rv2">
+        <div class="benefit"><div class="b-num">01</div><div class="b-title">Get Faster, Stronger &amp; More Explosive</div><div class="b-text">Position-specific training that translates directly to match performance — not generic gym work.</div></div>
+        <div class="benefit"><div class="b-num">02</div><div class="b-title">Recover Quicker, Reduce Niggles</div><div class="b-text">Smart programming and nutrition that keeps you training consistently without breaking down.</div></div>
+        <div class="benefit"><div class="b-num">03</div><div class="b-title">Stop Guessing. Follow a Proven System</div><div class="b-text">No more winging it. A structured plan that tells you exactly what to do and why.</div></div>
+        <div class="benefit"><div class="b-num">04</div><div class="b-title">Show Up Prepared. Perform Consistently</div><div class="b-text">Arrive to every game and session physically and mentally ready to deliver.</div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -452,6 +484,10 @@ footer a{color:var(--teal-l);text-decoration:none}
         <div class="s-label">Apply Now</div>
         <h2 class="s-title">Ready to <span class="t">Level Up?</span></h2>
         <p class="apply-copy">Fill in the form and Paddy will be in touch personally to discuss the best option for you.</p>
+        <div class="apply-paddy">
+          <div class="apply-paddy-photo" aria-hidden="true"></div>
+          <div class="apply-paddy-text"><strong>Paddy Burke</strong>Personally reviews every application and gets back to you within 24 hours.</div>
+        </div>
         <ul class="a-bullets">
           <li><span class="ic">→</span><span>Takes less than 2 minutes</span></li>
           <li><span class="ic">→</span><span>No obligation — just a chat to see if it's the right fit</span></li>
