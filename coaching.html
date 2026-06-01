@@ -218,28 +218,57 @@ footer a{color:var(--teal-l);text-decoration:none}
 @keyframes orb2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-160px,-220px) scale(1.15)}}
 @keyframes orb3{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-120px,80px) scale(.9)}66%{transform:translate(140px,-100px) scale(1.05)}}
 
-.hero{position:relative;overflow:hidden;min-height:88vh;display:flex;align-items:center}
-@media(min-width:900px){.hero{min-height:94vh}}
-.hero-photo{position:absolute;inset:0;background-image:url('images/hero-coaching.jpg');background-size:cover;background-position:center 25%;opacity:.62;filter:saturate(1.08) contrast(1.08);z-index:0;animation:heroZoom 18s ease-out forwards}
-@keyframes heroZoom{from{transform:scale(1.06)}to{transform:scale(1)}}
-.hero-photo-veil{position:absolute;inset:0;z-index:1;background:
-  radial-gradient(ellipse 80% 70% at 25% 50%,rgba(7,9,10,.4) 0%,rgba(7,9,10,.78) 90%),
-  linear-gradient(180deg,rgba(7,9,10,.55) 0%,transparent 40%,transparent 60%,var(--dark) 100%)
+/* === HERO V2 — editorial slick === */
+.hero{position:relative;overflow:hidden;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:6rem 1.4rem 3rem;background:var(--dark)}
+@media(min-width:768px){.hero{padding:6rem 2.5rem 4rem}}
+
+.hero-bgphoto{position:absolute;inset:0;z-index:0;background-image:url('images/hero-coaching.jpg');background-size:cover;background-position:center 30%;filter:saturate(1.12) contrast(1.06) brightness(.78);animation:heroIn 1.6s cubic-bezier(.16,.84,.44,1) both;will-change:transform,opacity}
+@keyframes heroIn{from{transform:scale(1.05);opacity:0}to{transform:scale(1);opacity:1}}
+.hero-veil{position:absolute;inset:0;z-index:1;background:
+  linear-gradient(180deg,rgba(7,9,10,.55) 0%,rgba(7,9,10,.18) 20%,rgba(7,9,10,.08) 38%,rgba(7,9,10,.55) 65%,var(--dark) 98%),
+  linear-gradient(90deg,rgba(7,9,10,.5) 0%,rgba(7,9,10,.05) 55%,transparent 100%)
 }
-.hero-content{position:relative;z-index:2}
-.hero-corner{position:absolute;z-index:1;width:64px;height:64px;border:1px solid var(--tborder);opacity:.55}
-.hero-corner.tl{top:22px;left:22px;border-right:none;border-bottom:none}
-.hero-corner.br{bottom:90px;right:22px;border-left:none;border-top:none}
-@media(min-width:768px){.hero-corner{width:88px;height:88px}.hero-corner.tl{top:32px;left:32px}.hero-corner.br{bottom:120px;right:32px}}
+.hero-grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.35;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.5'/></svg>")}
 
-.hero-meta{position:absolute;top:24px;right:24px;z-index:3;display:none;align-items:center;gap:.6rem;font-family:var(--fd);font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
-.hero-meta::before{content:'';width:24px;height:1px;background:var(--teal-l)}
-@media(min-width:768px){.hero-meta{display:flex;top:32px;right:32px}}
+.hero-top{position:absolute;top:5.2rem;left:1.4rem;right:1.4rem;z-index:3;display:flex;justify-content:space-between;align-items:center;font-family:var(--fd);font-size:.6rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--text);pointer-events:none}
+@media(min-width:768px){.hero-top{top:6rem;left:2.5rem;right:2.5rem;font-size:.65rem}}
+.hero-top span{display:inline-flex;align-items:center;gap:.7rem;opacity:.78}
+.hero-top span:first-child::before{content:'';width:28px;height:1px;background:var(--teal-l)}
+.hero-top span:last-child::after{content:'';width:28px;height:1px;background:var(--teal-l)}
 
-.hero-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:.6rem;font-family:var(--fd);font-size:.6rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);pointer-events:none}
-.hero-scroll-line{width:1px;height:42px;background:linear-gradient(180deg,var(--teal-l),transparent);position:relative;overflow:hidden}
-.hero-scroll-line::after{content:'';position:absolute;top:0;left:0;right:0;height:14px;background:var(--text);animation:scrollDot 2.4s ease-in-out infinite}
-@keyframes scrollDot{0%{transform:translateY(-14px)}55%{transform:translateY(42px)}100%{transform:translateY(42px)}}
+.hero-content{position:relative;z-index:2;max-width:1180px;margin:0 auto;width:100%}
+
+.hero-tag{display:inline-flex;align-items:center;gap:.7rem;font-family:var(--fd);font-size:.65rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--teal-l);margin-bottom:1.8rem;opacity:0;animation:up .8s .15s forwards;background:none;padding:0}
+.hero-tag::before{content:'';width:32px;height:1px;background:var(--teal-l)}
+
+.hero-h1{font-family:var(--fd);font-size:clamp(3.4rem,13vw,9.5rem);font-weight:900;line-height:.85;text-transform:uppercase;margin-bottom:1.6rem;letter-spacing:-.008em;opacity:0;animation:up .8s .25s forwards;text-shadow:0 2px 30px rgba(0,0,0,.25)}
+
+.hero-sub{font-size:1rem;font-weight:400;color:var(--text);line-height:1.55;margin-bottom:2.4rem;max-width:560px;opacity:0;animation:upSub .8s .35s forwards}
+@media(min-width:768px){.hero-sub{font-size:1.1rem}}
+@keyframes upSub{0%{opacity:0;transform:translateY(20px)}100%{opacity:.86;transform:translateY(0)}}
+
+.hero-cta{display:flex;flex-direction:column;gap:.9rem;margin-bottom:2.6rem;opacity:0;animation:up .8s .45s forwards}
+@media(min-width:560px){.hero-cta{flex-direction:row;align-items:center;gap:1.4rem}}
+.hero-btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;background:var(--teal);color:#fff;font-family:var(--fd);font-weight:800;font-size:.95rem;letter-spacing:.12em;text-transform:uppercase;padding:1.05rem 2rem;text-decoration:none;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));transition:all .25s;position:relative;overflow:hidden}
+.hero-btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);transition:left .6s}
+.hero-btn:hover{background:var(--teal-l);box-shadow:0 0 44px rgba(58,143,162,.5);transform:translateY(-2px)}
+.hero-btn:hover::after{left:100%}
+
+.hero-ghost{background:none;border:none;font-family:var(--fd);font-weight:700;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text);cursor:pointer;padding:.6rem 0;display:inline-flex;align-items:center;gap:.6rem;position:relative;align-self:flex-start}
+.hero-ghost::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(255,255,255,.45);transition:background .2s}
+.hero-ghost:hover::after{background:var(--teal-l)}
+
+.hero-bar{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem 2rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.12);opacity:0;animation:up .8s .55s forwards;max-width:640px}
+@media(min-width:560px){.hero-bar{grid-template-columns:repeat(3,1fr)}}
+.hero-bar-item strong{display:block;font-family:var(--fd);font-size:1.5rem;font-weight:900;line-height:1;margin-bottom:.45rem;color:var(--text);letter-spacing:.01em;text-transform:uppercase}
+.hero-bar-item span{font-family:var(--fd);font-size:.58rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);line-height:1.3;display:block}
+
+.hero-scroll-cue{position:absolute;bottom:1.6rem;right:1.4rem;z-index:3;display:inline-flex;align-items:center;gap:.7rem;font-family:var(--fd);font-size:.6rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--text);opacity:.75;pointer-events:none}
+@media(min-width:768px){.hero-scroll-cue{bottom:2.2rem;right:2.5rem}}
+.hero-scroll-cue .arr{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid rgba(255,255,255,.25);border-radius:50%;font-size:.85rem;animation:bounceY 1.8s ease-in-out infinite}
+@keyframes bounceY{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+
+.hero-bgphoto,.hero-veil,.hero-grain,.hero-scroll-cue,.hero-top,.hero-tag,.hero-h1,.hero-sub,.hero-cta,.hero-bar{animation-fill-mode:both}
 
 .btn-fill{position:relative;overflow:hidden;transition:all .25s}
 .btn-fill::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transition:left .6s}
@@ -321,29 +350,31 @@ footer a{color:var(--teal-l);text-decoration:none}
 </nav>
 
 <section class="hero">
-  <div class="hero-photo" aria-hidden="true"></div>
-  <div class="hero-photo-veil" aria-hidden="true"></div>
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-topline"></div>
-  <div class="hero-corner tl" aria-hidden="true"></div>
-  <div class="hero-corner br" aria-hidden="true"></div>
-  <div class="hero-meta" aria-hidden="true">PB Performance · GAA S&amp;C</div>
-  <div class="hero-scroll" aria-hidden="true"><span>Scroll</span><div class="hero-scroll-line"></div></div>
+  <div class="hero-bgphoto" aria-hidden="true"></div>
+  <div class="hero-veil" aria-hidden="true"></div>
+  <div class="hero-grain" aria-hidden="true"></div>
+
+  <div class="hero-top" aria-hidden="true">
+    <span>PB Performance &middot; 2026</span>
+    <span>GAA Strength &amp; Conditioning</span>
+  </div>
+
   <div class="hero-content">
     <div class="hero-tag">Premium Online Coaching · GAA Players Only</div>
     <h1 class="hero-h1">Develop The<br><span class="t">Physical</span> &amp;<br><span class="g">Mental</span> Edge</h1>
     <p class="hero-sub">We help ambitious GAA players build the strength, speed, and resilience to dominate on the field — every week of the season.</p>
-    <div class="hero-actions">
-      <a class="btn-fill" href="#apply">Apply for coaching <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M7 2l5 5-5 5"/></svg></a>
-      <button class="btn-ghost-d" onclick="document.getElementById('program').scrollIntoView({behavior:'smooth'})">See the program ↓</button>
+    <div class="hero-cta">
+      <a class="hero-btn" href="#apply">Apply for coaching <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M7 2l5 5-5 5"/></svg></a>
+      <button class="hero-ghost" onclick="document.getElementById('program').scrollIntoView({behavior:'smooth'})">See the program ↓</button>
     </div>
-    <div class="hero-stats hero-stats-row">
-      <div class="hero-stat"><strong>MSc</strong><span>Performance Coaching</span></div>
-      
-      <div class="hero-stat"><strong>30</strong><span>Day Guarantee</span></div>
+    <div class="hero-bar">
+      <div class="hero-bar-item"><strong>MSc</strong><span>Performance Coaching</span></div>
+      <div class="hero-bar-item"><strong>Antrim</strong><span>Senior Hurler</span></div>
+      <div class="hero-bar-item"><strong>30 Day</strong><span>Money-back guarantee</span></div>
     </div>
   </div>
+
+  <div class="hero-scroll-cue" aria-hidden="true"><span>Scroll</span><span class="arr">↓</span></div>
 </section>
 
 <div class="cred">
