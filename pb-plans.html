@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Training Plans | PB Performance</title>
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #07090a;
+  --surface: #0d1214;
+  --card: #111618;
+  --border: #1e2a2d;
+  --teal: #3a8fa2;
+  --teal-bright: #4db8d0;
+  --teal-dim: #2D6E7E;
+  --text: #e8eaeb;
+  --muted: #8a9ea3;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2rem;
+  background: rgba(7,9,10,.9);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav__logo {
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: .06em;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav__logo span { color: var(--teal); }
+
+.nav__back {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .15s;
+}
+.nav__back:hover { color: var(--text); }
+
+.nav__tabs {
+  display: flex;
+  gap: .25rem;
+  background: rgba(13,18,20,.8);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: .25rem;
+}
+
+.nav-tab {
+  padding: .4rem 1rem;
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  border-radius: 3px;
+  transition: background .15s, color .15s;
+  white-space: nowrap;
+}
+.nav-tab.active, .nav-tab:hover { background: var(--teal); color: #fff; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 60svh;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('images/training-lunge.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  filter: saturate(.65) contrast(1.2) brightness(.5);
+}
+
+.hero__gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(7,9,10,.1) 0%,
+    rgba(7,9,10,.4) 50%,
+    rgba(7,9,10,.95) 80%,
+    rgba(7,9,10,1) 100%
+  );
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+  width: 100%;
+}
+
+.hero__eyebrow {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1rem;
+}
+
+.hero__headline {
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: -.03em;
+  line-height: .95;
+  margin-bottom: 1rem;
+}
+
+.hero__headline em { font-style: normal; color: var(--teal-bright); }
+
+.hero__sub {
+  font-size: clamp(.9rem, 1.8vw, 1.05rem);
+  color: var(--muted);
+  max-width: 52ch;
+  line-height: 1.7;
+}
+
+/* ── PLAN NAV ── */
+.plan-nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 57px;
+  z-index: 50;
+}
+
+.plan-nav__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  gap: 0;
+}
+
+.plan-nav-btn {
+  padding: 1.1rem 2rem;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color .15s, border-color .15s;
+}
+
+.plan-nav-btn.active {
+  color: var(--teal);
+  border-bottom-color: var(--teal);
+}
+
+.plan-nav-btn:hover { color: var(--text); }
+
+/* ── PLAN SECTIONS ── */
+.plan-section { display: none; }
+.plan-section.active { display: block; }
+
+/* ── SECTION ── */
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.section-label {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: .7rem;
+}
+
+.section-title {
+  font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+  font-weight: 900;
+  letter-spacing: -.025em;
+  line-height: 1.05;
+  margin-bottom: 1rem;
+  text-wrap: balance;
+}
+
+.section-body {
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 55ch;
+  line-height: 1.75;
+  margin-bottom: 3rem;
+}
+
+/* ── PLAN CARD ── */
+.plan-hero-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+
+.plan-hero-card__img {
+  aspect-ratio: 4/3;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.plan-hero-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(.85) contrast(1.05);
+  display: block;
+}
+
+.plan-hero-card__phase {
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: .7rem;
+}
+
+.plan-hero-card__title {
+  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  font-weight: 900;
+  letter-spacing: -.025em;
+  line-height: 1.0;
+  margin-bottom: .8rem;
+}
+
+.plan-hero-card__desc {
+  font-size: .95rem;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 1.8rem;
+}
+
+.plan-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  margin-bottom: 2rem;
+}
+
+.plan-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: .65rem;
+  font-size: .88rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.plan-features li::before {
+  content: '✓';
+  color: var(--teal);
+  font-weight: 800;
+  font-size: .82rem;
+  flex-shrink: 0;
+}
+
+.plan-price-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.plan-price {
+  font-size: 2.8rem;
+  font-weight: 900;
+  letter-spacing: -.03em;
+  line-height: 1;
+}
+
+.plan-price-note {
+  font-size: .82rem;
+  color: var(--muted);
+}
+
+/* BUY BUTTON */
+.buy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .95rem 2.2rem;
+  font-size: .9rem;
+  font-weight: 800;
+  letter-spacing: .05em;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .2s, gap .2s;
+  /* TODO: Replace href with payment link (Stripe, Gumroad, etc.) */
+}
+
+.buy-btn--fill {
+  background: var(--teal);
+  color: #fff;
+  border: none;
+}
+.buy-btn--fill:hover { background: var(--teal-bright); gap: .9rem; }
+
+/* ── TESTIMONIALS ── */
+.testi-bg { background: var(--surface); border-top: 1px solid var(--border); }
+
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 1.4rem;
+}
+
+.testi-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.testi-card:hover { border-color: var(--teal-dim); }
+
+.testi-video {
+  position: relative;
+  aspect-ratio: 9/16;
+  background: #0a0f11;
+  overflow: hidden;
+}
+
+.testi-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.testi-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .9rem;
+  background: linear-gradient(160deg, #0d1a1e, #07090a);
+}
+
+.testi-placeholder__note {
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--border);
+  text-align: center;
+  padding: 0 1rem;
+  line-height: 1.6;
+}
+
+.play-btn {
+  width: 52px; height: 52px;
+  background: rgba(58,143,162,.12);
+  border: 1.5px solid var(--teal-dim);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--teal);
+}
+
+.testi-body { padding: 1.1rem 1.3rem 1.4rem; }
+
+.testi-quote {
+  font-size: .87rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: .7rem;
+  font-style: italic;
+}
+
+.testi-name {
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+/* ── DIVIDER ── */
+.plan-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+footer {
+  padding: 2rem;
+  text-align: center;
+  font-size: .75rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  opacity: .6;
+}
+
+@media (max-width: 768px) {
+  .plan-hero-card { grid-template-columns: 1fr; gap: 2rem; }
+  .plan-hero-card__img { aspect-ratio: 16/9; order: -1; }
+  .nav__tabs { display: none; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .testi-video { aspect-ratio: 16/9; }
+}
+
+@media (max-width: 480px) {
+  .plan-nav__inner { overflow-x: auto; }
+  .plan-nav-btn { padding: 1rem 1.2rem; font-size: .7rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav__logo" href="pb-home.html"><span>PB</span> Performance</a>
+  <a class="nav__back" href="pb-home.html">
+    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+    Back
+  </a>
+  <div class="nav__tabs">
+    <a href="pb-plans.html" class="nav-tab active">Plans</a>
+    <a href="pb-one-to-one.html" class="nav-tab">1-on-1</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__gradient"></div>
+  <div class="hero__content">
+    <div class="hero__eyebrow">Training Programmes</div>
+    <h1 class="hero__headline">The Right Plan<br>for <em>Every Phase.</em></h1>
+    <p class="hero__sub">Structured GAA S&C programmes you can run independently. Built for the actual GAA calendar — pre-season, in-season, and off-season.</p>
+  </div>
+</section>
+
+<!-- PLAN NAV (sticky) -->
+<div class="plan-nav">
+  <div class="plan-nav__inner">
+    <button class="plan-nav-btn active" onclick="showPlan('preseason', this)">Pre-Season</button>
+    <button class="plan-nav-btn" onclick="showPlan('inseason', this)">In-Season</button>
+    <button class="plan-nav-btn" onclick="showPlan('offseason', this)">Off-Season</button>
+  </div>
+</div>
+
+<!-- ────────────────────────── PRE-SEASON ────────────────────────── -->
+<div class="plan-section active" id="plan-preseason">
+
+  <div class="section">
+    <div class="plan-hero-card">
+      <div class="plan-hero-card__img">
+        <img src="images/hurling-action.jpg" alt="Pre-Season Training">
+      </div>
+      <div>
+        <div class="plan-hero-card__phase">Phase 1 — Build</div>
+        <h2 class="plan-hero-card__title">Pre-Season Programme</h2>
+        <p class="plan-hero-card__desc">
+          <!-- TODO: Write 2-3 sentences describing the pre-season programme -->
+          The foundation block. Build your base of strength, power, and conditioning before the season starts — so you arrive ready, not hoping to get fit during it.
+        </p>
+        <ul class="plan-features">
+          <!-- TODO: Update features with actual programme contents -->
+          <li><!-- e.g. --> XX-week structured programme</li>
+          <li>Progressive strength &amp; power blocks</li>
+          <li>GAA-specific conditioning work</li>
+          <li>Video guide for every exercise</li>
+          <li>Weekly training schedule</li>
+          <li><!-- Add feature --></li>
+        </ul>
+        <div class="plan-price-row">
+          <div class="plan-price">€XX <span style="font-size:1rem;font-weight:400;color:var(--muted)">one-off</span></div>
+        </div>
+        <!-- TODO: Replace href with actual payment link -->
+        <a href="#" class="buy-btn buy-btn--fill">
+          Buy Pre-Season Plan
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pre-Season Testimonials -->
+  <section class="testi-bg">
+    <div class="section">
+      <p class="section-label">What Athletes Say</p>
+      <h2 class="section-title">Results from the Pre-Season Plan</h2>
+      <div class="testi-grid">
+
+        <div class="testi-card">
+          <div class="testi-video">
+            <!-- TODO: <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> -->
+            <div class="testi-placeholder">
+              <div class="play-btn"><svg width="19" height="19" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+              <span class="testi-placeholder__note">Video testimonial<br>Upload to YouTube &amp; embed here</span>
+            </div>
+          </div>
+          <div class="testi-body">
+            <p class="testi-quote">"<!-- TODO: Quote -->"</p>
+            <div class="testi-name">Name — Club/County</div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-video">
+            <div class="testi-placeholder">
+              <div class="play-btn"><svg width="19" height="19" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+              <span class="testi-placeholder__note">Video testimonial<br>Upload to YouTube &amp; embed here</span>
+            </div>
+          </div>
+          <div class="testi-body">
+            <p class="testi-quote">"<!-- TODO: Quote -->"</p>
+            <div class="testi-name">Name — Club/County</div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-video">
+            <div class="testi-placeholder">
+              <div class="play-btn"><svg width="19" height="19" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+              <span class="testi-placeholder__note">Video testimonial<br>Upload to YouTube &amp; embed here</span>
+            </div>
+          </div>
+          <div class="testi-body">
+            <p class="testi-quote">"<!-- TODO: Quote -->"</p>
+            <div class="testi-name">Name — Club/County</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ────────────────────────── IN-SEASON ────────────────────────── -->
+<div class="plan-section" id="plan-inseason">
+
+  <div class="section">
+    <div class="plan-hero-card">
+      <div class="plan-hero-card__img">
+        <img src="images/hurling-portrait.jpg" alt="In-Season Training">
+      </div>
+      <div>
+        <div class="plan-hero-card__phase">Phase 2 — Maintain &amp; Perform</div>
+        <h2 class="plan-hero-card__title">In-Season Programme</h2>
+        <p class="plan-hero-card__desc">
+          <!-- TODO: Write 2-3 sentences describing the in-season programme -->
+          Stay strong without burning out. The in-season plan is designed to keep your power and conditioning high throughout the season — fitting around training and match days so you perform when it counts.
+        </p>
+        <ul class="plan-features">
+          <!-- TODO: Update features with actual programme contents -->
+          <li><!-- e.g. --> XX-week season plan</li>
+          <li>Game-day readiness sessions</li>
+          <li>Recovery &amp; load management protocols</li>
+          <li>Adjusted week-by-week around fixtures</li>
+          <li>Video guide for every exercise</li>
+          <li><!-- Add feature --></li>
+        </ul>
+        <div class="plan-price-row">
+          <div class="plan-price">€XX <span style="font-size:1rem;font-weight:400;color:var(--muted)">one-off</span></div>
+        </div>
+        <!-- TODO: Replace href with actual payment link -->
+        <a href="#" class="buy-btn buy-btn--fill">
+          Buy In-Season Plan
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <section class="testi-bg">
+    <div class="section">
+      <p class="section-label">What Athletes Say</p>
+      <h2 class="section-title">Results from the In-Season Plan</h2>
+      <div class="testi-grid">
+
+        <div class="testi-card">
+          <div class="testi-video">
+            <div class="testi-placeholder">
+              <div class="play-btn"><svg width="19" height="19" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+              <span class="testi-placeholder__note">Video testimonial<br>Upload to YouTube &amp; embed here</span>
+            </div>
+          </div>
+          <div class="testi-body">
+            <p class="testi-quote">"<!-- TODO: Quote -->"</p>
+            <div class="testi-name">Name — Club/County</div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-video">
+            <div class="testi-placeholder">
+              <div class="play-btn"><svg width="19" height="19" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+              <span class="testi-placeholder__note">Video testimonial<br>Upload to YouTube &amp; embed here</span>
+            </div>
+          </div>
+          <div class="testi-body">
+            <p class="testi-quote">"<!-- TODO: Quote -->"</p>
+            <div class="testi-name">Name — Club/County</div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-video">
+            <div class="testi-placeholder">
+              <div class="play-btn"><svg width="19" height="19" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+              <span class="testi-placeholder__note">Video testimonial<br>Upload to YouTube &amp; embed here</span>
+            </div>
+          </div>
+          <div class="testi-body">
+            <p class="testi-quote">"<!-- TODO: Quote -->"</p>
+            <div class="testi-name">Name — Club/County</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ────────────────────────── OFF-SEASON ────────────────────────── -->
+<div class="plan-section" id="plan-offseason">
+
+  <div class="section">
+    <div class="plan-hero-card">
+      <div class="plan-hero-card__img">
+        <img src="images/hero-coaching.jpg" alt="Off-Season Training">
+      </div>
+      <div>
+        <div class="plan-hero-card__phase">Phase 3 — Rebuild &amp; Grow</div>
+        <h2 class="plan-hero-card__title">Off-Season Programme</h2>
+        <p class="plan-hero-card__desc">
+          <!-- TODO: Write 2-3 sentences describing the off-season programme -->
+          The off-season is where the real gains happen. This is the time to build serious strength, fix imbalances, and come back a different athlete — not just a fitter one.
+        </p>
+        <ul class="plan-features">
+          <!-- TODO: Update features with actual programme contents -->
+          <li><!-- e.g. --> XX-week hypertrophy &amp; strength block</li>
+          <li>Structural balance work</li>
+          <li>Aerobic base building</li>
+          <li>Injury prevention protocols</li>
+          <li>Video guide for every exercise</li>
+          <li><!-- Add feature --></li>
+        </ul>
+        <div class="plan-price-row">
+          <div class="plan-price">€XX <span style="font-size:1rem;font-weight:400;color:var(--muted)">one-off</span></div>
+        </div>
+        <!-- TODO: Replace href with actual payment link -->
+        <a href="#" class="buy-btn buy-btn--fill">
+          Buy Off-Season Plan
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <section class="testi-bg">
+    <div class="section">
+      <p class="section-label">What Athletes Say</p>
+      <h2 class="section-title">Results from the Off-Season Plan</h2>
+      <div class="testi-grid">
+
+        <div class="testi-card">
+          <div class="testi-video">
+            <div class="testi-placeholder">
+              <div class="play-btn"><svg width="19" height="19" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+              <span class="testi-placeholder__note">Video testimonial<br>Upload to YouTube &amp; embed here</span>
+            </div>
+          </div>
+          <div class="testi-body">
+            <p class="testi-quote">"<!-- TODO: Quote -->"</p>
+            <div class="testi-name">Name — Club/County</div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-video">
+            <div class="testi-placeholder">
+              <div class="play-btn"><svg width="19" height="19" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+              <span class="testi-placeholder__note">Video testimonial<br>Upload to YouTube &amp; embed here</span>
+            </div>
+          </div>
+          <div class="testi-body">
+            <p class="testi-quote">"<!-- TODO: Quote -->"</p>
+            <div class="testi-name">Name — Club/County</div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-video">
+            <div class="testi-placeholder">
+              <div class="play-btn"><svg width="19" height="19" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+              <span class="testi-placeholder__note">Video testimonial<br>Upload to YouTube &amp; embed here</span>
+            </div>
+          </div>
+          <div class="testi-body">
+            <p class="testi-quote">"<!-- TODO: Quote -->"</p>
+            <div class="testi-name">Name — Club/County</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>© 2025 PB Performance Coaching · <a href="pb-home.html" style="color:inherit;">pbperformancecoaching.com</a></footer>
+
+<script>
+  function showPlan(id, btn) {
+    document.querySelectorAll('.plan-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.plan-nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('plan-' + id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1-on-1 Coaching | PB Performance</title>
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #07090a;
+  --surface: #0d1214;
+  --card: #111618;
+  --border: #1e2a2d;
+  --teal: #3a8fa2;
+  --teal-bright: #4db8d0;
+  --teal-dim: #2D6E7E;
+  --text: #e8eaeb;
+  --muted: #8a9ea3;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2rem;
+  background: rgba(7,9,10,.9);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav__logo {
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: .06em;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav__logo span { color: var(--teal); }
+
+.nav__back {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .15s;
+}
+.nav__back:hover { color: var(--text); }
+
+.nav__cta {
+  padding: .55rem 1.3rem;
+  background: var(--teal);
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 800;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background .2s;
+}
+.nav__cta:hover { background: var(--teal-bright); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 80svh;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('images/hurling-portrait.jpg');
+  background-size: cover;
+  background-position: center 20%;
+  filter: saturate(.7) contrast(1.15) brightness(.5);
+}
+
+.hero__gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(7,9,10,.15) 0%,
+    rgba(7,9,10,.3) 40%,
+    rgba(7,9,10,.9) 75%,
+    rgba(7,9,10,1) 100%
+  );
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+  width: 100%;
+}
+
+.hero__eyebrow {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1rem;
+}
+
+.hero__headline {
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: -.03em;
+  line-height: .95;
+  margin-bottom: 1.2rem;
+  max-width: 18ch;
+}
+
+.hero__headline em {
+  font-style: normal;
+  color: var(--teal-bright);
+}
+
+.hero__sub {
+  font-size: clamp(.95rem, 1.8vw, 1.1rem);
+  color: var(--muted);
+  max-width: 50ch;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.hero__ctas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: .9rem 2rem;
+  background: var(--teal);
+  color: #fff;
+  font-weight: 800;
+  font-size: .9rem;
+  letter-spacing: .05em;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background .2s;
+}
+.btn-primary:hover { background: var(--teal-bright); }
+
+.btn-ghost {
+  display: inline-block;
+  padding: .9rem 2rem;
+  border: 1.5px solid rgba(255,255,255,.15);
+  color: var(--muted);
+  font-weight: 600;
+  font-size: .9rem;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: border-color .2s, color .2s;
+}
+.btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
+
+/* ── SECTION ── */
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.section-label {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: .7rem;
+}
+
+.section-title {
+  font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+  font-weight: 900;
+  letter-spacing: -.025em;
+  line-height: 1.08;
+  margin-bottom: 1rem;
+  text-wrap: balance;
+}
+
+.section-body {
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 55ch;
+  line-height: 1.75;
+  margin-bottom: 3rem;
+}
+
+/* ── INCLUDES ── */
+.includes-bg { background: var(--surface); border-top: 1px solid var(--border); }
+
+.includes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.include-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.4rem 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.include-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(58,143,162,.1);
+  border: 1px solid rgba(58,143,162,.2);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--teal);
+}
+
+.include-title {
+  font-size: .9rem;
+  font-weight: 800;
+  margin-bottom: .25rem;
+}
+
+.include-desc {
+  font-size: .8rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ── PROCESS ── */
+.process-bg { background: var(--bg); border-top: 1px solid var(--border); }
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  counter-reset: step;
+}
+
+.step {
+  counter-increment: step;
+  padding-top: 3rem;
+  position: relative;
+}
+
+.step::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--teal-dim);
+  opacity: .5;
+  letter-spacing: -.03em;
+  line-height: 1;
+}
+
+.step__title {
+  font-size: .95rem;
+  font-weight: 800;
+  margin-bottom: .4rem;
+}
+
+.step__body {
+  font-size: .85rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── TESTIMONIALS ── */
+.testi-bg { background: var(--surface); border-top: 1px solid var(--border); }
+
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.testi-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.testi-card:hover { border-color: var(--teal-dim); }
+
+.testi-video {
+  position: relative;
+  aspect-ratio: 9/16;
+  background: #0a0f11;
+  overflow: hidden;
+}
+
+.testi-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.testi-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .9rem;
+  background: linear-gradient(160deg, #0d1a1e, #07090a);
+}
+
+.testi-placeholder__note {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--border);
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.play-btn {
+  width: 54px;
+  height: 54px;
+  background: rgba(58,143,162,.15);
+  border: 1.5px solid var(--teal-dim);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--teal);
+}
+
+.testi-body {
+  padding: 1.2rem 1.4rem 1.5rem;
+}
+
+.testi-quote {
+  font-size: .88rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: .8rem;
+  font-style: italic;
+}
+
+.testi-name {
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+/* ── PRICING ── */
+.pricing-bg { background: var(--bg); border-top: 1px solid var(--border); }
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.price-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 2rem;
+  position: relative;
+  transition: border-color .2s, transform .2s;
+}
+.price-card:hover { border-color: var(--teal-dim); transform: translateY(-3px); }
+.price-card.featured { border-color: var(--teal); background: linear-gradient(160deg,#0e1a1e,var(--card) 60%); }
+
+.price-badge {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--teal);
+  color: #fff;
+  font-size: .65rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  padding: .28rem .85rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.price-name { font-size: 1.05rem; font-weight: 800; margin-bottom: .3rem; }
+.price-tag  { font-size: .82rem; color: var(--muted); line-height: 1.5; margin-bottom: 1.4rem; }
+
+.price-amount {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: -.03em;
+  line-height: 1;
+}
+
+.price-period {
+  font-size: .8rem;
+  color: var(--muted);
+  margin-left: .3rem;
+}
+
+.price-divider { height: 1px; background: var(--border); margin: 1.4rem 0; }
+
+.price-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+  margin-bottom: 1.8rem;
+}
+
+.price-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: .65rem;
+  font-size: .87rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.price-features li::before {
+  content: '✓';
+  color: var(--teal);
+  font-weight: 800;
+  font-size: .82rem;
+  flex-shrink: 0;
+}
+
+/* BUY BUTTON PLACEHOLDER */
+.buy-btn {
+  display: block;
+  width: 100%;
+  padding: .9rem;
+  text-align: center;
+  font-weight: 800;
+  font-size: .88rem;
+  letter-spacing: .05em;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .2s, border-color .2s;
+}
+
+.buy-btn--fill {
+  background: var(--teal);
+  color: #fff;
+  border: 1.5px solid var(--teal);
+}
+.buy-btn--fill:hover { background: var(--teal-bright); border-color: var(--teal-bright); }
+
+.buy-btn--outline {
+  background: transparent;
+  color: var(--teal);
+  border: 1.5px solid var(--teal-dim);
+}
+.buy-btn--outline:hover { border-color: var(--teal); background: rgba(58,143,162,.07); }
+
+/* ── APPLY ── */
+.apply-bg {
+  background: linear-gradient(135deg,#0a1518,var(--bg));
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.apply__inner {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+}
+
+.apply__avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--teal);
+  margin: 0 auto 1.4rem;
+  display: block;
+  filter: saturate(.9);
+}
+
+.apply__title {
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  font-weight: 900;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  margin-bottom: .9rem;
+}
+
+.apply__body {
+  font-size: .96rem;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 2rem;
+}
+
+/* ── APPLY FORM ── */
+.apply-form {
+  display: flex;
+  flex-direction: column;
+  gap: .9rem;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+
+.form-field label {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: .75rem 1rem;
+  color: var(--text);
+  font-size: .92rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color .15s;
+  width: 100%;
+}
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus { border-color: var(--teal); }
+.form-field select { appearance: none; cursor: pointer; }
+.form-field textarea { resize: vertical; min-height: 90px; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
+
+.form-submit {
+  width: 100%;
+  padding: 1rem;
+  background: var(--teal);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background .2s;
+  margin-top: .3rem;
+}
+.form-submit:hover { background: var(--teal-bright); }
+
+.form-note {
+  font-size: .75rem;
+  color: var(--muted);
+  text-align: center;
+  opacity: .7;
+  margin-top: .5rem;
+}
+
+.form-msg {
+  text-align: center;
+  color: var(--teal-bright);
+  font-size: .88rem;
+  min-height: 1.2em;
+  margin-top: .4rem;
+}
+
+footer {
+  padding: 2rem;
+  text-align: center;
+  font-size: .75rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  opacity: .6;
+}
+
+@media (max-width: 640px) {
+  .form-row { grid-template-columns: 1fr; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .testi-video { aspect-ratio: 16/9; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav__logo" href="pb-home.html"><span>PB</span> Performance</a>
+  <a class="nav__back" href="pb-home.html">
+    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+    Back
+  </a>
+  <a class="nav__cta" href="#apply">Apply Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__gradient"></div>
+  <div class="hero__content">
+    <div class="hero__eyebrow">1-on-1 Coaching</div>
+    <h1 class="hero__headline">Your Programme.<br><em>Your Results.</em></h1>
+    <p class="hero__sub">Full coaching relationship with Paddy. Custom training plan, weekly check-ins, WhatsApp support — built around your schedule, your goals, and your game.</p>
+    <div class="hero__ctas">
+      <a href="#apply" class="btn-primary">Apply Now — Free Call First</a>
+      <a href="#what-you-get" class="btn-ghost">What's Included</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section class="includes-bg" id="what-you-get">
+  <div class="section">
+    <p class="section-label">What's Included</p>
+    <h2 class="section-title">Everything You Need to Perform</h2>
+    <div class="includes-grid">
+
+      <div class="include-item">
+        <div class="include-icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        </div>
+        <div>
+          <div class="include-title">Personalised Programme</div>
+          <div class="include-desc">Built around your position, schedule, strengths and weaknesses. Updated monthly.</div>
+        </div>
+      </div>
+
+      <div class="include-item">
+        <div class="include-icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+        </div>
+        <div>
+          <div class="include-title">WhatsApp Support</div>
+          <div class="include-desc">Message Paddy directly. Never more than 24hr response. No question too small.</div>
+        </div>
+      </div>
+
+      <div class="include-item">
+        <div class="include-icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.361a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+        </div>
+        <div>
+          <div class="include-title">Weekly Check-ins</div>
+          <div class="include-desc">Regular calls to review progress, adjust the plan, and keep you accountable.</div>
+        </div>
+      </div>
+
+      <div class="include-item">
+        <div class="include-icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <div>
+          <div class="include-title">GAA Periodisation</div>
+          <div class="include-desc">Pre-season, in-season, championship — training that moves with the GAA calendar.</div>
+        </div>
+      </div>
+
+      <div class="include-item">
+        <div class="include-icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3"/></svg>
+        </div>
+        <div>
+          <div class="include-title">Recovery Protocols</div>
+          <div class="include-desc">Sleep, nutrition guidance, and load management so you perform when it matters most.</div>
+        </div>
+      </div>
+
+      <div class="include-item">
+        <div class="include-icon">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        </div>
+        <div>
+          <div class="include-title">Movement Assessment</div>
+          <div class="include-desc">Initial screen to identify imbalances and build your programme from solid foundations.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="process-bg">
+  <div class="section">
+    <p class="section-label">The Process</p>
+    <h2 class="section-title">Simple. No Messing.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step__title">Apply Below</div>
+        <div class="step__body">Short form. Tell me where you're at and what you're working towards. Takes 2 minutes.</div>
+      </div>
+      <div class="step">
+        <div class="step__title">Free Call</div>
+        <div class="step__body">We talk it through. If I can help you, great. If not, I'll tell you. No hard sell.</div>
+      </div>
+      <div class="step">
+        <div class="step__title">Your Plan Delivered</div>
+        <div class="step__body">Programme in your hands within 48 hours. Benchmarks set. We get to work.</div>
+      </div>
+      <div class="step">
+        <div class="step__title">Train &amp; Progress</div>
+        <div class="step__body">Weekly coaching, ongoing adjustments, real accountability — every week.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-bg" id="pricing">
+  <div class="section">
+    <p class="section-label">Investment</p>
+    <h2 class="section-title">Choose Your Level</h2>
+    <p class="section-body">All plans include a free discovery call first. Spots are limited each month.</p>
+
+    <div class="pricing-grid">
+
+      <div class="price-card">
+        <div class="price-name">Foundation</div>
+        <div class="price-tag">For athletes starting out or returning from time off.</div>
+        <div><span class="price-amount">€XX</span><span class="price-period">/ month</span></div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Personalised programme</li>
+          <li>Weekly check-in call</li>
+          <li>WhatsApp support</li>
+          <li>Movement assessment</li>
+          <!-- TODO: Add features -->
+        </ul>
+        <!-- TODO: Replace href with payment/booking link -->
+        <a href="#apply" class="buy-btn buy-btn--outline">Apply — Free Call First</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-name">Performance</div>
+        <div class="price-tag">Full coaching — for athletes serious about getting to the next level.</div>
+        <div><span class="price-amount">€XX</span><span class="price-period">/ month</span></div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Everything in Foundation</li>
+          <li>Bi-weekly video analysis</li>
+          <li>Nutrition guidance</li>
+          <li>Recovery protocol</li>
+          <li>Priority WhatsApp support</li>
+          <li>Monthly programme refresh</li>
+          <!-- TODO: Add features -->
+        </ul>
+        <!-- TODO: Replace href with payment/booking link -->
+        <a href="#apply" class="buy-btn buy-btn--fill">Apply Now</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">Elite</div>
+        <div class="price-tag">For county-level athletes or those pushing for elite performance.</div>
+        <div><span class="price-amount">€XX</span><span class="price-period">/ month</span></div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Everything in Performance</li>
+          <li>Weekly 1-on-1 video call</li>
+          <li>Full GAA periodisation</li>
+          <li>Unlimited messaging</li>
+          <li>In-person session (where available)</li>
+          <!-- TODO: Add features -->
+        </ul>
+        <!-- TODO: Replace href with payment/booking link -->
+        <a href="#apply" class="buy-btn buy-btn--outline">Apply</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-bg" id="testimonials">
+  <div class="section">
+    <p class="section-label">Results</p>
+    <h2 class="section-title">Hear from the Athletes</h2>
+    <p class="section-body">Real words from real GAA players. No scripts.</p>
+
+    <div class="testi-grid">
+
+      <!-- VIDEO SLOT: Michael -->
+      <div class="testi-card">
+        <div class="testi-video">
+          <!-- TODO: Replace this placeholder with YouTube embed:
+               <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+          -->
+          <div class="testi-placeholder">
+            <div class="play-btn">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <span class="testi-placeholder__note">Video — Michael<br>Upload to YouTube &amp; paste embed here</span>
+          </div>
+        </div>
+        <div class="testi-body">
+          <p class="testi-quote">"<!-- TODO: Pull quote from Michael's video -->"</p>
+          <div class="testi-name">Michael — <!-- Club/County --></div>
+        </div>
+      </div>
+
+      <!-- VIDEO SLOT: Eoin -->
+      <div class="testi-card">
+        <div class="testi-video">
+          <div class="testi-placeholder">
+            <div class="play-btn">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <span class="testi-placeholder__note">Video — Eoin<br>Upload to YouTube &amp; paste embed here</span>
+          </div>
+        </div>
+        <div class="testi-body">
+          <p class="testi-quote">"<!-- TODO: Pull quote from Eoin's video -->"</p>
+          <div class="testi-name">Eoin — <!-- Club/County --></div>
+        </div>
+      </div>
+
+      <!-- VIDEO SLOT: Kieran -->
+      <div class="testi-card">
+        <div class="testi-video">
+          <div class="testi-placeholder">
+            <div class="play-btn">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <span class="testi-placeholder__note">Video — Kieran<br>Upload to YouTube &amp; paste embed here</span>
+          </div>
+        </div>
+        <div class="testi-body">
+          <p class="testi-quote">"<!-- TODO: Pull quote from Kieran's video -->"</p>
+          <div class="testi-name">Kieran — <!-- Club/County --></div>
+        </div>
+      </div>
+
+      <!-- VIDEO SLOT: Luca -->
+      <div class="testi-card">
+        <div class="testi-video">
+          <div class="testi-placeholder">
+            <div class="play-btn">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <span class="testi-placeholder__note">Video — Luca<br>Upload to YouTube &amp; paste embed here</span>
+          </div>
+        </div>
+        <div class="testi-body">
+          <p class="testi-quote">"<!-- TODO: Pull quote from Luca's video -->"</p>
+          <div class="testi-name">Luca — <!-- Club/County --></div>
+        </div>
+      </div>
+
+      <!-- VIDEO SLOT: Aidan -->
+      <div class="testi-card">
+        <div class="testi-video">
+          <div class="testi-placeholder">
+            <div class="play-btn">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <span class="testi-placeholder__note">Video — Aidan<br>Upload to YouTube &amp; paste embed here</span>
+          </div>
+        </div>
+        <div class="testi-body">
+          <p class="testi-quote">"<!-- TODO: Pull quote from Aidan's video -->"</p>
+          <div class="testi-name">Aidan — <!-- Club/County --></div>
+        </div>
+      </div>
+
+      <!-- VIDEO SLOT: Burito -->
+      <div class="testi-card">
+        <div class="testi-video">
+          <div class="testi-placeholder">
+            <div class="play-btn">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <span class="testi-placeholder__note">Video — Burito<br>Upload to YouTube &amp; paste embed here</span>
+          </div>
+        </div>
+        <div class="testi-body">
+          <p class="testi-quote">"<!-- TODO: Pull quote from Burito's video -->"</p>
+          <div class="testi-name">Burito — <!-- Club/County --></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- APPLY -->
+<section class="apply-bg" id="apply">
+  <div class="apply__inner">
+    <img src="images/paddy-bench.jpg" alt="Paddy Burke" class="apply__avatar">
+    <h2 class="apply__title">Ready to level up?</h2>
+    <p class="apply__body">Fill in the form below. I'll be in touch within 24 hours to set up a free call — no commitment, no hard sell.</p>
+
+    <form class="apply-form" id="applyForm" onsubmit="submitForm(event)">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="aName">Full Name</label>
+          <input type="text" id="aName" placeholder="Your name" required>
+        </div>
+        <div class="form-field">
+          <label for="aAge">Age</label>
+          <input type="number" id="aAge" placeholder="e.g. 22" min="14" max="60">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="aEmail">Email</label>
+          <input type="email" id="aEmail" placeholder="your@email.com" required>
+        </div>
+        <div class="form-field">
+          <label for="aPhone">Phone</label>
+          <input type="tel" id="aPhone" placeholder="+353...">
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="aCounty">County / Club</label>
+        <input type="text" id="aCounty" placeholder="e.g. Antrim / St. Paul's">
+      </div>
+      <div class="form-field">
+        <label for="aGoal">What's your main goal?</label>
+        <textarea id="aGoal" placeholder="Tell me where you're at and what you want to achieve..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send Application →</button>
+      <p class="form-note">No commitment. I'll reply within 24 hours.</p>
+    </form>
+    <p class="form-msg" id="applyMsg"></p>
+  </div>
+</section>
+
+<footer>© 2025 PB Performance Coaching · <a href="pb-home.html" style="color:inherit;">pbperformancecoaching.com</a></footer>
+
+<script>
+async function submitForm(e) {
+  e.preventDefault();
+  const name   = document.getElementById('aName').value.trim();
+  const age    = document.getElementById('aAge').value.trim();
+  const email  = document.getElementById('aEmail').value.trim();
+  const phone  = document.getElementById('aPhone').value.trim();
+  const county = document.getElementById('aCounty').value.trim();
+  const goal   = document.getElementById('aGoal').value.trim();
+  const msg    = document.getElementById('applyMsg');
+
+  // ── GOOGLE FORM SUBMISSION ──
+  // TODO: Replace FORM_ID and entry IDs below
+  // Full form URL needed: https://docs.google.com/forms/d/e/FORM_ID/formResponse
+  const FORM_ACTION = 'https://docs.google.com/forms/d/e/FORM_ID_HERE/formResponse';
+  const fd = new URLSearchParams();
+  fd.append('entry.XXXXXXXXX', name);    // TODO: Name entry ID
+  fd.append('entry.XXXXXXXXX', email);   // TODO: Email entry ID
+  fd.append('entry.XXXXXXXXX', phone);   // TODO: Phone entry ID
+  fd.append('entry.XXXXXXXXX', age);     // TODO: Age entry ID
+  fd.append('entry.XXXXXXXXX', county);  // TODO: County entry ID
+  fd.append('entry.XXXXXXXXX', goal);    // TODO: Goal/message entry ID
+
+  try {
+    await fetch(FORM_ACTION, {
+      method: 'POST', mode: 'no-cors', body: fd,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    });
+  } catch (_) {}
+
+  document.getElementById('applyForm').style.display = 'none';
+  msg.textContent = '✓ Application received — I\'ll be in touch within 24 hours!';
+}
+</script>
+</body>
+</html>
