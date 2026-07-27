@@ -141,6 +141,18 @@ nav{
   .hero__ctas{flex-direction:column;align-items:stretch;max-width:300px;margin:0 auto}
   .btn-fill,.btn-ghost{justify-content:center}
 }
+.hero__scroll{
+  display:flex;justify-content:center;margin-top:2.2rem;
+  animation:fadeUp .9s .55s ease both;
+}
+.hero__scroll svg{
+  color:var(--dim);
+  animation:scrollBounce 2.2s ease infinite;
+}
+@keyframes scrollBounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(7px)}
+}
 
 /* ── WORK SECTION WRAPPER ── */
 .work{padding:5rem 1.5rem 6rem}
@@ -348,6 +360,9 @@ footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);
         <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
       </a>
       <a href="#work" class="btn-ghost">See What I Offer</a>
+    </div>
+    <div class="hero__scroll" aria-hidden="true">
+      <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
     </div>
   </div>
 </section>

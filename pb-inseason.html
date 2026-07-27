@@ -98,6 +98,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .upsell a{display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;color:var(--teal);text-decoration:none;transition:gap .2s}
 .upsell a:hover{gap:.8rem}
 
+.plan-chain{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-top:1px solid var(--border)}
+.plan-chain__card{display:flex;align-items:center;gap:.85rem;padding:1.5rem 1.4rem;background:var(--card);text-decoration:none;color:var(--text);transition:background .15s;-webkit-tap-highlight-color:transparent}
+.plan-chain__card:hover{background:var(--card-h)}
+.plan-chain__card--next{justify-content:flex-end;text-align:right}
+.plan-chain__tag{font-size:.54rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.18rem}
+.plan-chain__name{font-size:.88rem;font-weight:800;color:var(--text)}
+.plan-chain__icon{color:var(--dim);flex-shrink:0;transition:color .15s,transform .2s}
+.plan-chain__card:hover .plan-chain__icon{color:var(--teal)}
+.plan-chain__card:not(.plan-chain__card--next):hover .plan-chain__icon{transform:translateX(-3px)}
+.plan-chain__card--next:hover .plan-chain__icon{transform:translateX(3px)}
+
 footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);border-top:1px solid var(--border)}
 </style>
 </head>
@@ -253,6 +264,23 @@ footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);
   <a href="pb-one-to-one.html">
     Learn about 1-on-1 Coaching
     <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+  </a>
+</div>
+
+<div class="plan-chain">
+  <a href="pb-preseason.html" class="plan-chain__card">
+    <svg class="plan-chain__icon" width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+    <div>
+      <div class="plan-chain__tag">Pre-Season</div>
+      <div class="plan-chain__name">Build the Base</div>
+    </div>
+  </a>
+  <a href="pb-offseason.html" class="plan-chain__card plan-chain__card--next">
+    <div>
+      <div class="plan-chain__tag">Off-Season</div>
+      <div class="plan-chain__name">Rebuild &amp; Grow</div>
+    </div>
+    <svg class="plan-chain__icon" width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
   </a>
 </div>
 
