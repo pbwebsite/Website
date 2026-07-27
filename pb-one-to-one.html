@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1-on-1 Coaching | PB Performance</title>
+<meta name="description" content="Full 1-on-1 GAA S&C coaching with Paddy Burke. Custom programme, weekly check-ins, WhatsApp support.">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#07090a;--surface:#0d1214;--card:#111618;--border:#1e2a2d;--teal:#3a8fa2;--teal-b:#4db8d0;--teal-d:#2D6E7E;--text:#e8eaeb;--muted:#8a9ea3}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ── SCROLL REVEAL ── */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+.rv.vis{opacity:1;transform:translateY(0)}
+.rv-l{opacity:0;transform:translateX(-22px);transition:opacity .65s ease,transform .65s ease}
+.rv-l.vis{opacity:1;transform:translateX(0)}
+.rv-r{opacity:0;transform:translateX(22px);transition:opacity .65s ease,transform .65s ease}
+.rv-r.vis{opacity:1;transform:translateX(0)}
+@media(prefers-reduced-motion:reduce){.rv,.rv-l,.rv-r{opacity:1;transform:none;transition:none}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2rem;background:rgba(7,9,10,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav__logo{font-size:1.05rem;font-weight:900;letter-spacing:.06em;color:var(--text);text-decoration:none}
+.nav__logo span{color:var(--teal)}
+.nav__back{display:flex;align-items:center;gap:.45rem;font-size:.8rem;font-weight:700;color:var(--muted);text-decoration:none;transition:color .15s}
+.nav__back:hover{color:var(--text)}
+.nav__cta{padding:.55rem 1.3rem;background:var(--teal);color:#fff;font-size:.8rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;border-radius:4px;transition:background .2s}
+.nav__cta:hover{background:var(--teal-b)}
+
+/* HERO */
+.hero{min-height:82svh;position:relative;display:flex;align-items:flex-end;overflow:hidden}
+.hero__bg{position:absolute;inset:0;background:url('images/hurling-portrait.jpg') center 18% / cover no-repeat;filter:saturate(.7) contrast(1.15) brightness(.48)}
+.hero__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,9,10,.1) 0%,rgba(7,9,10,.35) 45%,rgba(7,9,10,.92) 78%,#07090a 100%)}
+.hero__c{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:0 2rem 4.5rem;width:100%}
+.eyebrow{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem}
+.hero__h{font-size:clamp(2.5rem,7vw,5.5rem);font-weight:900;letter-spacing:-.03em;line-height:.95;margin-bottom:1.1rem;max-width:16ch}
+.hero__h em{font-style:normal;color:var(--teal-b)}
+.hero__s{font-size:clamp(.93rem,1.8vw,1.08rem);color:var(--muted);max-width:50ch;line-height:1.75;margin-bottom:2rem}
+.hero__ctas{display:flex;gap:.9rem;flex-wrap:wrap}
+.btn-fill{display:inline-block;padding:.88rem 2rem;background:var(--teal);color:#fff;font-weight:800;font-size:.9rem;letter-spacing:.04em;text-decoration:none;border-radius:5px;transition:background .2s,transform .15s}
+.btn-fill:hover{background:var(--teal-b);transform:translateY(-1px)}
+.btn-ghost{display:inline-block;padding:.88rem 2rem;border:1.5px solid rgba(255,255,255,.14);color:var(--muted);font-weight:600;font-size:.9rem;text-decoration:none;border-radius:5px;transition:border-color .2s,color .2s}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+
+/* SECTIONS */
+.w{max-width:1100px;margin:0 auto;padding:5rem 2rem}
+.s-label{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:.7rem}
+.s-title{font-size:clamp(1.7rem,3.5vw,2.6rem);font-weight:900;letter-spacing:-.025em;line-height:1.08;margin-bottom:.9rem;text-wrap:balance}
+.s-body{font-size:.98rem;color:var(--muted);max-width:54ch;line-height:1.75;margin-bottom:2.8rem}
+
+/* INCLUDES */
+.inc-bg{background:var(--surface);border-top:1px solid var(--border)}
+.inc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem}
+.inc-item{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.4rem 1.5rem;display:flex;gap:.9rem;align-items:flex-start;transition:border-color .2s}
+.inc-item:hover{border-color:var(--teal-d)}
+.inc-icon{width:36px;height:36px;background:rgba(58,143,162,.1);border:1px solid rgba(58,143,162,.2);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--teal)}
+.inc-title{font-size:.9rem;font-weight:800;margin-bottom:.22rem}
+.inc-desc{font-size:.8rem;color:var(--muted);line-height:1.55}
+
+/* STEPS */
+.steps-bg{background:var(--bg);border-top:1px solid var(--border)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;counter-reset:step}
+.step{counter-increment:step;padding-top:2.8rem;position:relative}
+.step::before{content:counter(step,decimal-leading-zero);position:absolute;top:0;left:0;font-size:1.75rem;font-weight:900;color:var(--teal-d);opacity:.5;letter-spacing:-.03em;line-height:1}
+.step__title{font-size:.95rem;font-weight:800;margin-bottom:.4rem}
+.step__body{font-size:.85rem;color:var(--muted);line-height:1.65}
+
+/* TESTIMONIALS */
+.testi-bg{background:var(--surface);border-top:1px solid var(--border)}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.4rem}
+.testi-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .2s}
+.testi-card:hover{border-color:var(--teal-d)}
+
+/* Video slot — replace vid-placeholder with YouTube iframe when ready */
+.testi-video{position:relative;aspect-ratio:9/16;background:#0a0f11;overflow:hidden}
+.testi-video iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.vid-placeholder{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;
+  background:linear-gradient(160deg,#0c1a1e,#07090a);
+  border:1px dashed rgba(45,110,126,.35);
+}
+.vid-placeholder__icon{width:54px;height:54px;border-radius:50%;background:rgba(58,143,162,.08);border:1.5px solid var(--teal-d);display:flex;align-items:center;justify-content:center;color:var(--teal-d)}
+.vid-placeholder__label{font-size:.68rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--teal-d);opacity:.6;text-align:center;padding:0 .8rem;line-height:1.6}
+
+.testi-body{padding:1.2rem 1.4rem 1.5rem}
+.testi-name{font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+
+/* APPLY */
+.apply-bg{background:linear-gradient(135deg,#0a1518,var(--bg));border-top:1px solid var(--border);text-align:center}
+.apply__inner{max-width:580px;margin:0 auto;padding:6rem 2rem}
+.apply__avatar{width:74px;height:74px;border-radius:50%;object-fit:cover;border:2px solid var(--teal);margin:0 auto 1.4rem;display:block;filter:saturate(.9)}
+.apply__title{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:900;letter-spacing:-.02em;line-height:1.1;margin-bottom:.9rem}
+.apply__body{font-size:.96rem;color:var(--muted);line-height:1.75;margin-bottom:2rem}
+
+.aform{display:flex;flex-direction:column;gap:.85rem;text-align:left;margin-bottom:.5rem}
+.ff{display:flex;flex-direction:column;gap:.28rem}
+.ff label{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ff input,.ff select,.ff textarea{background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:.72rem 1rem;color:var(--text);font-size:.9rem;font-family:inherit;outline:none;transition:border-color .15s;width:100%}
+.ff input:focus,.ff select:focus,.ff textarea:focus{border-color:var(--teal)}
+.ff select{appearance:none;cursor:pointer}
+.ff textarea{resize:vertical;min-height:88px}
+.ff-row{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.aform-submit{width:100%;padding:.95rem;background:var(--teal);color:#fff;font-size:.95rem;font-weight:800;letter-spacing:.04em;border:none;border-radius:5px;cursor:pointer;transition:background .2s;margin-top:.2rem}
+.aform-submit:hover{background:var(--teal-b)}
+.aform-note{font-size:.74rem;color:var(--muted);text-align:center;opacity:.65;margin-top:.5rem}
+.aform-msg{text-align:center;color:var(--teal-b);font-size:.88rem;min-height:1.2em;margin-top:.5rem}
+
+footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border-top:1px solid var(--border);opacity:.55}
+@media(max-width:640px){.ff-row{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr}.testi-video{aspect-ratio:16/9}.hero__ctas{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav__logo" href="index.html"><span>PB</span> Performance</a>
+  <a class="nav__back" href="index.html">
+    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+    Back
+  </a>
+  <a class="nav__cta" href="#apply">Apply Now</a>
+</nav>
+
+<section class="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__g"></div>
+  <div class="hero__c">
+    <div class="eyebrow">1-on-1 Coaching</div>
+    <h1 class="hero__h">Your Programme.<br><em>Your Results.</em></h1>
+    <p class="hero__s">A full coaching relationship with Paddy. Custom S&C plan, nutrition guidance, weekly check-ins — everything built around you, your position, and your season.</p>
+    <div class="hero__ctas">
+      <a href="#apply" class="btn-fill">Apply — Free Call First</a>
+      <a href="#includes" class="btn-ghost">What's Included</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section class="inc-bg" id="includes">
+  <div class="w rv">
+    <p class="s-label">What's Included</p>
+    <h2 class="s-title">Everything You Need to Perform</h2>
+    <div class="inc-grid">
+
+      <div class="inc-item rv" style="transition-delay:.04s">
+        <div class="inc-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+        <div><div class="inc-title">Fully Personalised S&amp;C Plan</div><div class="inc-desc">Built around your position, schedule, and goals. Updated every month based on your progress.</div></div>
+      </div>
+
+      <div class="inc-item rv" style="transition-delay:.08s">
+        <div class="inc-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></div>
+        <div><div class="inc-title">WhatsApp Support</div><div class="inc-desc">Direct access to Paddy. Never more than 24 hours for a response. No question too small.</div></div>
+      </div>
+
+      <div class="inc-item rv" style="transition-delay:.12s">
+        <div class="inc-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.361a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg></div>
+        <div><div class="inc-title">Weekly Check-ins</div><div class="inc-desc">Regular calls to review progress, adjust the plan, and keep you on track every week.</div></div>
+      </div>
+
+      <div class="inc-item rv" style="transition-delay:.16s">
+        <div class="inc-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg></div>
+        <div><div class="inc-title">Individual Nutrition Coaching</div><div class="inc-desc">Calorie and macro targets built around your training load. Game-day, recovery, and daily plans.</div></div>
+      </div>
+
+      <div class="inc-item rv" style="transition-delay:.20s">
+        <div class="inc-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+        <div><div class="inc-title">GAA Periodisation</div><div class="inc-desc">Pre-season, in-season, championship — training that moves with the actual GAA calendar.</div></div>
+      </div>
+
+      <div class="inc-item rv" style="transition-delay:.24s">
+        <div class="inc-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+        <div><div class="inc-title">Movement Assessment</div><div class="inc-desc">Initial screen to identify imbalances so your programme is built on solid foundations from day one.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="steps-bg">
+  <div class="w rv">
+    <p class="s-label">The Process</p>
+    <h2 class="s-title">Simple. No Messing.</h2>
+    <div class="steps">
+      <div class="step rv" style="transition-delay:.04s"><div class="step__title">Apply Below</div><div class="step__body">Short form. Tell me where you're at and what you want to achieve. Takes 2 minutes.</div></div>
+      <div class="step rv" style="transition-delay:.1s"><div class="step__title">Free Call</div><div class="step__body">We jump on a quick call. If I can help, great. If not, I'll tell you straight. No hard sell.</div></div>
+      <div class="step rv" style="transition-delay:.16s"><div class="step__title">Plan Delivered</div><div class="step__body">Your custom programme is in your hands within 48 hours. Benchmarks set and we get to work.</div></div>
+      <div class="step rv" style="transition-delay:.22s"><div class="step__title">Train &amp; Progress</div><div class="step__body">Weekly coaching, ongoing adjustments, real accountability — every single week.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-bg" id="testimonials">
+  <div class="w rv">
+    <p class="s-label">Results</p>
+    <h2 class="s-title">Hear from the Athletes</h2>
+    <p class="s-body">Real words from real GAA players. No scripts, no filters.</p>
+    <div class="testi-grid">
+
+      <!-- ── VIDEO SLOT: Michael ─────────────────────────────────────────
+           Replace the vid-placeholder div with:
+           <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen loading="lazy"></iframe>
+      ──────────────────────────────────────────────────────────────── -->
+      <div class="testi-card">
+        <div class="testi-video">
+          <div class="vid-placeholder">
+            <div class="vid-placeholder__icon"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="vid-placeholder__label">Michael<br>Video Coming Soon</span>
+          </div>
+        </div>
+        <div class="testi-body">
+          <div class="testi-name">Michael</div>
+        </div>
+      </div>
+
+      <!-- ── VIDEO SLOT: Eoin ──────────────────────────────────────────── -->
+      <div class="testi-card">
+        <div class="testi-video">
+          <div class="vid-placeholder">
+            <div class="vid-placeholder__icon"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="vid-placeholder__label">Eoin<br>Video Coming Soon</span>
+          </div>
+        </div>
+        <div class="testi-body">
+          <div class="testi-name">Eoin</div>
+        </div>
+      </div>
+
+      <!-- ── VIDEO SLOT: Kieran ────────────────────────────────────────── -->
+      <div class="testi-card">
+        <div class="testi-video">
+          <div class="vid-placeholder">
+            <div class="vid-placeholder__icon"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="vid-placeholder__label">Kieran<br>Video Coming Soon</span>
+          </div>
+        </div>
+        <div class="testi-body">
+          <div class="testi-name">Kieran</div>
+        </div>
+      </div>
+
+      <!-- ── VIDEO SLOT: Luca ──────────────────────────────────────────── -->
+      <div class="testi-card">
+        <div class="testi-video">
+          <div class="vid-placeholder">
+            <div class="vid-placeholder__icon"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="vid-placeholder__label">Luca<br>Video Coming Soon</span>
+          </div>
+        </div>
+        <div class="testi-body">
+          <div class="testi-name">Luca</div>
+        </div>
+      </div>
+
+      <!-- ── VIDEO SLOT: Aidan ─────────────────────────────────────────── -->
+      <div class="testi-card">
+        <div class="testi-video">
+          <div class="vid-placeholder">
+            <div class="vid-placeholder__icon"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="vid-placeholder__label">Aidan<br>Video Coming Soon</span>
+          </div>
+        </div>
+        <div class="testi-body">
+          <div class="testi-name">Aidan</div>
+        </div>
+      </div>
+
+      <!-- ── VIDEO SLOT: Burito ────────────────────────────────────────── -->
+      <div class="testi-card">
+        <div class="testi-video">
+          <div class="vid-placeholder">
+            <div class="vid-placeholder__icon"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="vid-placeholder__label">Burito<br>Video Coming Soon</span>
+          </div>
+        </div>
+        <div class="testi-body">
+          <div class="testi-name">Burito</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- APPLY -->
+<section class="apply-bg" id="apply">
+  <div class="apply__inner rv">
+    <img src="images/paddy-bench.jpg" alt="Paddy Burke" class="apply__avatar">
+    <h2 class="apply__title">Ready to level up your game?</h2>
+    <p class="apply__body">Fill in the form below. Paddy reviews every application and gets back to you within 24 hours to set up a free call — no commitment, no hard sell.</p>
+
+    <form class="aform" id="applyForm" onsubmit="submitForm(event)">
+      <div class="ff-row">
+        <div class="ff"><label for="aName">Full Name</label><input type="text" id="aName" placeholder="Your name" required></div>
+        <div class="ff"><label for="aAge">Age</label><input type="number" id="aAge" placeholder="e.g. 22" min="14" max="60"></div>
+      </div>
+      <div class="ff-row">
+        <div class="ff"><label for="aEmail">Email</label><input type="email" id="aEmail" placeholder="your@email.com" required></div>
+        <div class="ff"><label for="aPhone">Phone</label><input type="tel" id="aPhone" placeholder="+353..."></div>
+      </div>
+      <div class="ff"><label for="aClub">County / Club</label><input type="text" id="aClub" placeholder="e.g. Antrim / St. Paul's"></div>
+      <div class="ff"><label for="aGoal">What's your main goal?</label><textarea id="aGoal" placeholder="Tell me where you're at and what you want to achieve..."></textarea></div>
+      <button type="submit" class="aform-submit">Send Application →</button>
+      <p class="aform-note">No commitment. I'll reply within 24 hours.</p>
+    </form>
+    <p class="aform-msg" id="applyMsg"></p>
+  </div>
+</section>
+
+<footer>© 2026 PB Performance Coaching &nbsp;·&nbsp; <a href="index.html" style="color:inherit">pbperformancecoaching.com</a></footer>
+
+<script>
+async function submitForm(e) {
+  e.preventDefault();
+  const vals = {
+    name:  document.getElementById('aName').value.trim(),
+    age:   document.getElementById('aAge').value.trim(),
+    email: document.getElementById('aEmail').value.trim(),
+    phone: document.getElementById('aPhone').value.trim(),
+    club:  document.getElementById('aClub').value.trim(),
+    goal:  document.getElementById('aGoal').value.trim(),
+  };
+
+  /* ── Google Form submission ──────────────────────────────────────────
+     To wire up: open the Google Form → right-click each input → Inspect
+     → find name="entry.XXXXXXXXXX" for each field → replace below.
+     Replace FORM_ID_HERE with the ID from the form's full URL.
+  ─────────────────────────────────────────────────────────────────── */
+  const fd = new URLSearchParams();
+  fd.append('entry.REPLACE_NAME_ID',  vals.name);
+  fd.append('entry.REPLACE_EMAIL_ID', vals.email);
+  fd.append('entry.REPLACE_PHONE_ID', vals.phone);
+  fd.append('entry.REPLACE_AGE_ID',   vals.age);
+  fd.append('entry.REPLACE_CLUB_ID',  vals.club);
+  fd.append('entry.REPLACE_GOAL_ID',  vals.goal);
+  try {
+    await fetch('https://docs.google.com/forms/d/e/FORM_ID_HERE/formResponse', {
+      method:'POST', mode:'no-cors', body:fd,
+      headers:{'Content-Type':'application/x-www-form-urlencoded'}
+    });
+  } catch(_) {}
+
+  document.getElementById('applyForm').style.display = 'none';
+  document.getElementById('applyMsg').textContent = "✓ Application received — Paddy will be in touch within 24 hours.";
+}
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+}, {threshold: 0.08});
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
