@@ -3,575 +3,220 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PB Performance Coaching</title>
+<title>PB Performance Coaching | GAA S&C</title>
+<meta name="description" content="Online GAA Strength & Conditioning coaching from Paddy Burke — Antrim Senior Hurler and MSc Performance Coach.">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --bg: #07090a;
-  --surface: #0d1214;
-  --card: #111618;
-  --border: #1e2a2d;
-  --teal: #3a8fa2;
-  --teal-bright: #4db8d0;
-  --teal-dim: #2D6E7E;
-  --text: #e8eaeb;
-  --muted: #8a9ea3;
+  --bg:#07090a; --surface:#0d1214; --card:#111618; --border:#1e2a2d;
+  --teal:#3a8fa2; --teal-b:#4db8d0; --teal-d:#2D6E7E;
+  --text:#e8eaeb; --muted:#8a9ea3;
 }
+html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--text); font-family:'Helvetica Neue',Arial,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
 
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-
-/* ── POPUP OVERLAY ── */
+/* ── POPUP ── */
 .popup-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(7,9,10,.88);
-  backdrop-filter: blur(6px);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  animation: fadeIn .3s ease;
+  position:fixed; inset:0; background:rgba(7,9,10,.88); backdrop-filter:blur(6px);
+  z-index:9999; display:flex; align-items:center; justify-content:center; padding:1.5rem;
+  animation:fIn .3s ease;
 }
-
-.popup-overlay.hidden { display: none; }
-
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.popup-overlay.hidden { display:none; }
+@keyframes fIn { from{opacity:0} to{opacity:1} }
 
 .popup {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-top: 3px solid var(--teal);
-  border-radius: 10px;
-  padding: 2.4rem 2rem;
-  width: 100%;
-  max-width: 420px;
-  position: relative;
-  animation: slideUp .35s cubic-bezier(.16,1,.3,1);
+  background:var(--card); border:1px solid var(--border); border-top:3px solid var(--teal);
+  border-radius:10px; padding:2.4rem 2rem; width:100%; max-width:420px; position:relative;
+  animation:sUp .35s cubic-bezier(.16,1,.3,1);
 }
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+@keyframes sUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
 
 .popup__close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 28px;
-  height: 28px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  transition: color .15s, background .15s;
+  position:absolute; top:1rem; right:1rem; width:28px; height:28px;
+  background:none; border:none; cursor:pointer; color:var(--muted);
+  display:flex; align-items:center; justify-content:center; border-radius:4px; transition:color .15s,background .15s;
 }
-.popup__close:hover { color: var(--text); background: rgba(255,255,255,.06); }
+.popup__close:hover { color:var(--text); background:rgba(255,255,255,.06); }
+.popup__label { font-size:.7rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--teal); margin-bottom:.7rem; }
+.popup__title { font-size:1.5rem; font-weight:900; letter-spacing:-.02em; line-height:1.15; margin-bottom:.55rem; }
+.popup__sub { font-size:.87rem; color:var(--muted); line-height:1.65; margin-bottom:1.5rem; }
 
-.popup__label {
-  font-size: .7rem;
-  font-weight: 700;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--teal);
-  margin-bottom: .7rem;
+.pf-field { display:flex; flex-direction:column; gap:.3rem; margin-bottom:.9rem; }
+.pf-field label { font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+.pf-field input {
+  background:var(--surface); border:1px solid var(--border); border-radius:5px;
+  padding:.72rem 1rem; color:var(--text); font-size:.93rem; font-family:inherit; outline:none;
+  transition:border-color .15s; width:100%;
 }
-
-.popup__title {
-  font-size: 1.55rem;
-  font-weight: 900;
-  letter-spacing: -.02em;
-  line-height: 1.15;
-  margin-bottom: .6rem;
-}
-
-.popup__sub {
-  font-size: .88rem;
-  color: var(--muted);
-  line-height: 1.6;
-  margin-bottom: 1.6rem;
-}
-
-.form-field {
-  display: flex;
-  flex-direction: column;
-  gap: .35rem;
-  margin-bottom: 1rem;
-}
-
-.form-field label {
-  font-size: .75rem;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.form-field input {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  padding: .75rem 1rem;
-  color: var(--text);
-  font-size: .95rem;
-  font-family: inherit;
-  outline: none;
-  transition: border-color .15s;
-  width: 100%;
-}
-
-.form-field input:focus { border-color: var(--teal); }
-
+.pf-field input:focus { border-color:var(--teal); }
 .popup__submit {
-  width: 100%;
-  padding: .9rem;
-  background: var(--teal);
-  color: #fff;
-  font-size: .95rem;
-  font-weight: 800;
-  letter-spacing: .04em;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: .5rem;
-  transition: background .2s;
+  width:100%; padding:.88rem; background:var(--teal); color:#fff; font-size:.93rem;
+  font-weight:800; letter-spacing:.04em; border:none; border-radius:5px; cursor:pointer;
+  margin-top:.4rem; transition:background .2s;
 }
-.popup__submit:hover { background: var(--teal-bright); }
-
+.popup__submit:hover { background:var(--teal-b); }
 .popup__skip {
-  display: block;
-  text-align: center;
-  margin-top: .9rem;
-  font-size: .78rem;
-  color: var(--muted);
-  cursor: pointer;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  transition: color .15s, text-decoration-color .15s;
-  background: none;
-  border: none;
-  width: 100%;
+  display:block; text-align:center; margin-top:.9rem; font-size:.78rem; color:var(--muted);
+  cursor:pointer; background:none; border:none; width:100%; transition:color .15s;
 }
-.popup__skip:hover { color: var(--text); text-decoration-color: var(--muted); }
-
-.popup__msg {
-  text-align: center;
-  font-size: .88rem;
-  color: var(--teal-bright);
-  margin-top: .8rem;
-  min-height: 1.2em;
-}
+.popup__skip:hover { color:var(--text); }
+.popup__msg { text-align:center; font-size:.88rem; color:var(--teal-b); margin-top:.75rem; min-height:1.2em; }
 
 /* ── NAV ── */
 nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.1rem 2rem;
-  background: rgba(7,9,10,.9);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border);
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between; padding:1.1rem 2rem;
+  background:rgba(7,9,10,.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--border);
 }
-
-.nav__logo {
-  font-size: 1.05rem;
-  font-weight: 900;
-  letter-spacing: .06em;
-  color: var(--text);
-  text-decoration: none;
-}
-.nav__logo span { color: var(--teal); }
-
+.nav__logo { font-size:1.05rem; font-weight:900; letter-spacing:.06em; color:var(--text); text-decoration:none; }
+.nav__logo span { color:var(--teal); }
 .nav__cta {
-  padding: .55rem 1.3rem;
-  background: var(--teal);
-  color: #fff;
-  font-size: .8rem;
-  font-weight: 800;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background .2s;
+  padding:.55rem 1.3rem; background:var(--teal); color:#fff; font-size:.8rem;
+  font-weight:800; letter-spacing:.07em; text-transform:uppercase; text-decoration:none;
+  border-radius:4px; transition:background .2s;
 }
-.nav__cta:hover { background: var(--teal-bright); }
+.nav__cta:hover { background:var(--teal-b); }
 
 /* ── HERO ── */
-.hero {
-  min-height: 100svh;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  overflow: hidden;
-}
-
+.hero { min-height:100svh; position:relative; display:flex; align-items:flex-end; overflow:hidden; }
 .hero__bg {
-  position: absolute;
-  inset: 0;
-  background-image: url('images/hurling-action.jpg');
-  background-size: cover;
-  background-position: center 25%;
-  filter: saturate(.7) contrast(1.2) brightness(.55);
+  position:absolute; inset:0;
+  background:url('images/hurling-action.jpg') center 25% / cover no-repeat;
+  filter:saturate(.7) contrast(1.2) brightness(.52);
 }
-
 .hero__gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(7,9,10,.1) 0%,
-    rgba(7,9,10,.2) 40%,
-    rgba(7,9,10,.85) 75%,
-    rgba(7,9,10,1) 100%
-  );
+  position:absolute; inset:0;
+  background:linear-gradient(to bottom, rgba(7,9,10,.05) 0%, rgba(7,9,10,.25) 45%, rgba(7,9,10,.9) 78%, #07090a 100%);
 }
-
 .hero__content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem 5rem;
-  text-align: center;
+  position:relative; z-index:2; width:100%; max-width:1200px;
+  margin:0 auto; padding:0 2rem 5rem; text-align:center;
+}
+.hero__eyebrow { display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--teal); margin-bottom:1.1rem; }
+.hero__headline { font-size:clamp(3rem,9.5vw,6.8rem); font-weight:900; letter-spacing:-.035em; line-height:.93; margin-bottom:1.1rem; text-wrap:balance; }
+.hero__headline em { font-style:normal; color:var(--teal-b); }
+.hero__sub { font-size:clamp(.95rem,2vw,1.15rem); color:var(--muted); max-width:46ch; margin:0 auto 2.8rem; line-height:1.7; }
+.hero__arrows { display:flex; flex-direction:column; align-items:center; gap:.2rem; animation:bob 2s ease-in-out infinite; }
+@keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+.hero__arrows svg { color:var(--teal-d); }
+
+/* ── CHOOSE ── */
+.choose { padding:5rem 2rem 6rem; }
+.choose__inner { max-width:980px; margin:0 auto; }
+.s-label { font-size:.7rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--teal); margin-bottom:.7rem; text-align:center; }
+.s-title { font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900; letter-spacing:-.025em; line-height:1.05; margin-bottom:.7rem; text-align:center; text-wrap:balance; }
+.s-body { font-size:.98rem; color:var(--muted); max-width:48ch; margin:0 auto 3.5rem; line-height:1.75; text-align:center; }
+
+.choose__grid { display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; }
+
+.c-card {
+  position:relative; border-radius:10px; overflow:hidden; text-decoration:none;
+  display:block; aspect-ratio:3/4; transition:transform .3s cubic-bezier(.16,1,.3,1);
+}
+.c-card:hover { transform:translateY(-5px); }
+.c-card__bg {
+  position:absolute; inset:0; background-size:cover; background-position:center;
+  filter:saturate(.7) brightness(.52) contrast(1.1); transition:filter .4s,transform .5s;
+}
+.c-card:hover .c-card__bg { filter:saturate(.88) brightness(.62) contrast(1.1); transform:scale(1.04); }
+.c-card__veil {
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(7,9,10,.97) 0%, rgba(7,9,10,.45) 55%, rgba(7,9,10,.05) 100%);
+}
+.c-card--primary .c-card__veil { background:linear-gradient(to top, rgba(8,22,26,.98) 0%, rgba(8,22,26,.5) 55%, rgba(7,9,10,.05) 100%); }
+.c-card__body { position:absolute; bottom:0; left:0; right:0; padding:2rem; }
+.c-card__tag {
+  display:inline-block; font-size:.65rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--teal); background:rgba(58,143,162,.1); border:1px solid rgba(58,143,162,.28);
+  padding:.28rem .75rem; border-radius:20px; margin-bottom:.85rem;
+}
+.c-card__title { font-size:clamp(1.5rem,3.5vw,2.2rem); font-weight:900; letter-spacing:-.025em; line-height:1.05; margin-bottom:.55rem; }
+.c-card__desc { font-size:.87rem; color:var(--muted); line-height:1.6; margin-bottom:1.3rem; }
+.c-card__btn {
+  display:inline-flex; align-items:center; gap:.6rem; padding:.7rem 1.4rem;
+  font-size:.82rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
+  border-radius:4px; transition:gap .2s;
+}
+.c-card--primary .c-card__btn { background:var(--teal); color:#fff; }
+.c-card--secondary .c-card__btn { background:rgba(255,255,255,.08); color:var(--text); border:1px solid rgba(255,255,255,.14); }
+.c-card:hover .c-card__btn { gap:.9rem; }
+
+/* ── CREDENTIALS ── */
+.creds { background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:1.3rem 2rem; }
+.creds__inner {
+  max-width:1000px; margin:0 auto; display:flex; align-items:center; gap:2.5rem;
+  flex-wrap:wrap; justify-content:center;
+}
+.cred-item {
+  display:flex; align-items:center; gap:.6rem; font-size:.8rem; font-weight:700;
+  letter-spacing:.07em; text-transform:uppercase; color:var(--muted);
+}
+.cred-item svg { color:var(--teal); flex-shrink:0; }
+
+/* ── ABOUT ── */
+.about { padding:5rem 2rem; }
+.about__inner { max-width:900px; margin:0 auto; display:grid; grid-template-columns:auto 1fr; gap:3rem; align-items:center; }
+.about__avatar { width:115px; height:115px; border-radius:50%; object-fit:cover; border:2px solid var(--teal); filter:saturate(.9); flex-shrink:0; }
+.about__role { font-size:.72rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--teal); margin-bottom:.3rem; }
+.about__name { font-size:1.2rem; font-weight:900; letter-spacing:-.01em; margin-bottom:.65rem; }
+.about__bio { font-size:.93rem; color:var(--muted); line-height:1.75; margin-bottom:1rem; }
+.about__pills { display:flex; flex-wrap:wrap; gap:.5rem; }
+.pill {
+  font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--teal); background:rgba(58,143,162,.08); border:1px solid rgba(58,143,162,.22);
+  padding:.28rem .75rem; border-radius:20px;
 }
 
-.hero__eyebrow {
-  display: inline-block;
-  font-size: .7rem;
-  font-weight: 700;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--teal);
-  margin-bottom: 1.2rem;
-}
+footer { padding:2rem; text-align:center; font-size:.75rem; color:var(--muted); border-top:1px solid var(--border); opacity:.55; }
 
-.hero__headline {
-  font-size: clamp(2.8rem, 9vw, 6.5rem);
-  font-weight: 900;
-  letter-spacing: -.03em;
-  line-height: .95;
-  margin-bottom: 1.2rem;
-  text-wrap: balance;
-}
-
-.hero__headline em {
-  font-style: normal;
-  color: var(--teal-bright);
-}
-
-.hero__sub {
-  font-size: clamp(.95rem, 2vw, 1.15rem);
-  color: var(--muted);
-  max-width: 48ch;
-  margin: 0 auto 2.5rem;
-  line-height: 1.7;
-}
-
-.hero__scroll {
-  font-size: .75rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: .5rem;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: .5; } 50% { opacity: 1; }
-}
-
-/* ── CHOOSE SECTION ── */
-.choose {
-  background: var(--bg);
-  padding: 5rem 2rem 6rem;
-}
-
-.choose__inner {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.section-label {
-  font-size: .7rem;
-  font-weight: 700;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--teal);
-  margin-bottom: .7rem;
-  text-align: center;
-}
-
-.section-title {
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: 900;
-  letter-spacing: -.025em;
-  line-height: 1.05;
-  margin-bottom: .8rem;
-  text-align: center;
-  text-wrap: balance;
-}
-
-.section-body {
-  font-size: 1rem;
-  color: var(--muted);
-  max-width: 50ch;
-  margin: 0 auto 3.5rem;
-  line-height: 1.75;
-  text-align: center;
-}
-
-.choose__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-}
-
-.choose-card {
-  position: relative;
-  border-radius: 10px;
-  overflow: hidden;
-  text-decoration: none;
-  display: block;
-  aspect-ratio: 3/4;
-  group: card;
-  transition: transform .3s cubic-bezier(.16,1,.3,1);
-}
-
-.choose-card:hover { transform: translateY(-6px); }
-
-.choose-card__bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  filter: saturate(.75) brightness(.55) contrast(1.1);
-  transition: filter .4s ease, transform .5s ease;
-}
-
-.choose-card:hover .choose-card__bg {
-  filter: saturate(.9) brightness(.65) contrast(1.1);
-  transform: scale(1.04);
-}
-
-.choose-card__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(7,9,10,.96) 0%,
-    rgba(7,9,10,.4) 50%,
-    rgba(7,9,10,.05) 100%
-  );
-}
-
-.choose-card--primary .choose-card__overlay {
-  background: linear-gradient(
-    to top,
-    rgba(13,26,30,.98) 0%,
-    rgba(13,26,30,.55) 50%,
-    rgba(7,9,10,.05) 100%
-  );
-}
-
-.choose-card__content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 2rem;
-}
-
-.choose-card__tag {
-  display: inline-block;
-  font-size: .65rem;
-  font-weight: 800;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--teal);
-  background: rgba(58,143,162,.12);
-  border: 1px solid rgba(58,143,162,.3);
-  padding: .3rem .75rem;
-  border-radius: 20px;
-  margin-bottom: .9rem;
-}
-
-.choose-card--primary .choose-card__tag {
-  background: rgba(58,143,162,.2);
-  border-color: rgba(58,143,162,.5);
-}
-
-.choose-card__title {
-  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
-  font-weight: 900;
-  letter-spacing: -.025em;
-  line-height: 1.05;
-  margin-bottom: .6rem;
-  color: var(--text);
-}
-
-.choose-card__desc {
-  font-size: .88rem;
-  color: var(--muted);
-  line-height: 1.6;
-  margin-bottom: 1.4rem;
-}
-
-.choose-card__btn {
-  display: inline-flex;
-  align-items: center;
-  gap: .6rem;
-  padding: .7rem 1.4rem;
-  font-size: .82rem;
-  font-weight: 800;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  border-radius: 4px;
-  transition: background .2s, gap .2s;
-  text-decoration: none;
-}
-
-.choose-card--primary .choose-card__btn {
-  background: var(--teal);
-  color: #fff;
-}
-
-.choose-card--secondary .choose-card__btn {
-  background: rgba(255,255,255,.08);
-  color: var(--text);
-  border: 1px solid rgba(255,255,255,.15);
-}
-
-.choose-card:hover .choose-card__btn { gap: .9rem; }
-
-/* ── ABOUT STRIP ── */
-.about {
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 4rem 2rem;
-}
-
-.about__inner {
-  max-width: 900px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 3rem;
-  align-items: center;
-}
-
-.about__avatar {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--teal);
-  filter: saturate(.9);
-  flex-shrink: 0;
-}
-
-.about__name {
-  font-size: 1.15rem;
-  font-weight: 900;
-  letter-spacing: -.01em;
-  margin-bottom: .3rem;
-}
-
-.about__role {
-  font-size: .75rem;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--teal);
-  margin-bottom: .8rem;
-}
-
-.about__bio {
-  font-size: .92rem;
-  color: var(--muted);
-  line-height: 1.7;
-}
-
-/* ── FOOTER ── */
-footer {
-  padding: 2rem;
-  text-align: center;
-  font-size: .75rem;
-  color: var(--muted);
-  border-top: 1px solid var(--border);
-  opacity: .6;
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 640px) {
-  .choose__grid { grid-template-columns: 1fr; }
-  .choose-card { aspect-ratio: 4/3; }
-  .about__inner { grid-template-columns: 1fr; text-align: center; }
-  .about__avatar { margin: 0 auto; }
+@media (max-width:640px) {
+  .choose__grid { grid-template-columns:1fr; }
+  .c-card { aspect-ratio:4/3; }
+  .about__inner { grid-template-columns:1fr; text-align:center; }
+  .about__avatar { margin:0 auto; }
+  .about__pills { justify-content:center; }
 }
 </style>
 </head>
 <body>
 
-<!-- POPUP -->
+<!-- ── POPUP ── -->
 <div class="popup-overlay" id="popupOverlay">
   <div class="popup">
     <button class="popup__close" onclick="closePopup()" aria-label="Close">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
-    <p class="popup__label">Free Access</p>
-    <h2 class="popup__title">Get Paddy's Free Training Guide</h2>
-    <p class="popup__sub">Drop your details and I'll send you a free GAA S&C training guide — plus be first to hear about new programmes.</p>
-
+    <p class="popup__label">Free Resource</p>
+    <h2 class="popup__title">Get Paddy's Free GAA S&C Starter Guide</h2>
+    <p class="popup__sub">Drop your details below and I'll send you a free training guide — plus be first to hear about new programmes and spots opening up.</p>
     <form id="popupForm" onsubmit="submitPopup(event)">
-      <div class="form-field">
-        <label for="popupName">Full Name</label>
-        <input type="text" id="popupName" placeholder="Your name" required autocomplete="name">
+      <div class="pf-field">
+        <label for="pName">Full Name</label>
+        <input type="text" id="pName" placeholder="Your name" required autocomplete="name">
       </div>
-      <div class="form-field">
-        <label for="popupEmail">Email Address</label>
-        <input type="email" id="popupEmail" placeholder="your@email.com" required autocomplete="email">
+      <div class="pf-field">
+        <label for="pEmail">Email Address</label>
+        <input type="email" id="pEmail" placeholder="your@email.com" required autocomplete="email">
       </div>
-      <div class="form-field">
-        <label for="popupPhone">Phone Number</label>
-        <input type="tel" id="popupPhone" placeholder="+353..." autocomplete="tel">
+      <div class="pf-field">
+        <label for="pPhone">Phone Number</label>
+        <input type="tel" id="pPhone" placeholder="+353..." autocomplete="tel">
       </div>
       <button type="submit" class="popup__submit">Send Me the Guide →</button>
     </form>
-
     <p class="popup__msg" id="popupMsg"></p>
     <button class="popup__skip" onclick="closePopup()">No thanks, skip for now</button>
   </div>
 </div>
 
-<!-- NAV -->
+<!-- ── NAV ── -->
 <nav>
   <a class="nav__logo" href="pb-home.html"><span>PB</span> Performance</a>
   <a class="nav__cta" href="#choose">Get Started</a>
 </nav>
 
-<!-- HERO -->
+<!-- ── HERO ── -->
 <section class="hero">
   <div class="hero__bg"></div>
   <div class="hero__gradient"></div>
@@ -579,46 +224,66 @@ footer {
     <div class="hero__eyebrow">GAA Strength &amp; Conditioning</div>
     <h1 class="hero__headline">Built for <em>GAA.</em><br>Built for You.</h1>
     <p class="hero__sub">Online S&C coaching from a coach who's still in the arena. Choose the programme that fits your season.</p>
-    <div class="hero__scroll">
-      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-      Choose your path
+    <div class="hero__arrows">
+      <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="opacity:.4"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
     </div>
   </div>
 </section>
 
-<!-- CHOOSE -->
+<!-- ── CREDENTIALS BAR ── -->
+<div class="creds">
+  <div class="creds__inner">
+    <div class="cred-item">
+      <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+      MSc Performance Coaching
+    </div>
+    <div class="cred-item">
+      <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      Antrim Senior Hurler
+    </div>
+    <div class="cred-item">
+      <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      S&amp;C Specialist
+    </div>
+    <div class="cred-item">
+      <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3"/></svg>
+      Nutrition Coach
+    </div>
+  </div>
+</div>
+
+<!-- ── CHOOSE ── -->
 <section class="choose" id="choose">
   <div class="choose__inner">
-    <p class="section-label">Where Do You Want to Go?</p>
-    <h2 class="section-title">Two Ways to Work With Me</h2>
-    <p class="section-body">Full 1-on-1 coaching or structured programmes you can run yourself. Both built for GAA.</p>
+    <p class="s-label">Where Do You Want to Go?</p>
+    <h2 class="s-title">Two Ways to Work With Me</h2>
+    <p class="s-body">Full 1-on-1 coaching or standalone programmes you follow yourself — both built specifically for GAA.</p>
 
     <div class="choose__grid">
 
-      <!-- 1-ON-1 -->
-      <a href="pb-one-to-one.html" class="choose-card choose-card--primary">
-        <div class="choose-card__bg" style="background-image: url('images/paddy-bench.jpg');"></div>
-        <div class="choose-card__overlay"></div>
-        <div class="choose-card__content">
-          <div class="choose-card__tag">Main Offer</div>
-          <h3 class="choose-card__title">1-on-1 Coaching</h3>
-          <p class="choose-card__desc">Full coaching relationship. Custom programme, weekly check-ins, WhatsApp support — everything tailored to you.</p>
-          <span class="choose-card__btn">
+      <a href="pb-one-to-one.html" class="c-card c-card--primary">
+        <div class="c-card__bg" style="background-image:url('images/paddy-bench.jpg')"></div>
+        <div class="c-card__veil"></div>
+        <div class="c-card__body">
+          <div class="c-card__tag">Main Offer</div>
+          <h3 class="c-card__title">1-on-1 Coaching</h3>
+          <p class="c-card__desc">A full coaching relationship with Paddy. Custom programme, weekly check-ins, WhatsApp support — everything tailored to you and your season.</p>
+          <span class="c-card__btn">
             Find Out More
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
           </span>
         </div>
       </a>
 
-      <!-- PLANS -->
-      <a href="pb-plans.html" class="choose-card choose-card--secondary">
-        <div class="choose-card__bg" style="background-image: url('images/training-lunge.jpg');"></div>
-        <div class="choose-card__overlay"></div>
-        <div class="choose-card__content">
-          <div class="choose-card__tag">Training Plans</div>
-          <h3 class="choose-card__title">Buy a Programme</h3>
-          <p class="choose-card__desc">Structured GAA S&C plans you can follow independently. Championship prep, in-season, off-season — pick your phase.</p>
-          <span class="choose-card__btn">
+      <a href="pb-plans.html" class="c-card c-card--secondary">
+        <div class="c-card__bg" style="background-image:url('images/training-lunge.jpg')"></div>
+        <div class="c-card__veil"></div>
+        <div class="c-card__body">
+          <div class="c-card__tag">Training Plans</div>
+          <h3 class="c-card__title">Buy a Programme</h3>
+          <p class="c-card__desc">Structured GAA S&C plans built for every phase of the season — pre-season, in-season, and off-season. Train independently with a proven system.</p>
+          <span class="c-card__btn">
             View Programmes
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
           </span>
@@ -629,65 +294,66 @@ footer {
   </div>
 </section>
 
-<!-- ABOUT STRIP -->
-<section class="about">
-  <div class="about__inner">
-    <img src="images/paddy-bench.jpg" alt="Paddy Burke" class="about__avatar">
-    <div>
-      <div class="about__role">Your Coach</div>
-      <div class="about__name">Paddy Burke</div>
-      <p class="about__bio">
-        GAA S&C coach and senior inter-county hurler. Every programme I build is grounded in what actually works for GAA players — because I'm still doing it myself.
-        <!-- PLACEHOLDER: Add 1–2 sentences about Paddy's background, county, qualifications -->
-      </p>
+<!-- ── ABOUT ── -->
+<section style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="about">
+    <div class="about__inner">
+      <img src="images/paddy-bench.jpg" alt="Paddy Burke" class="about__avatar">
+      <div>
+        <div class="about__role">Your Coach</div>
+        <div class="about__name">Paddy Burke</div>
+        <p class="about__bio">GAA S&C coach and Antrim Senior Hurler. I help GAA players become stronger, fitter, and faster — so they can perform at their best on the field. Every programme I build is grounded in what actually works, because I'm still doing it myself.</p>
+        <div class="about__pills">
+          <span class="pill">MSc Performance Coaching</span>
+          <span class="pill">Antrim Senior Hurler</span>
+          <span class="pill">S&amp;C Specialist</span>
+          <span class="pill">Nutrition Coach</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<footer>© 2025 PB Performance Coaching · pbperformancecoaching.com</footer>
+<footer>© 2025 PB Performance Coaching &nbsp;·&nbsp; <a href="https://www.instagram.com/pbperformancecoaching" target="_blank" rel="noopener" style="color:inherit;">@pbperformancecoaching</a></footer>
 
 <script>
-  /* ── POPUP ── */
-  // Show popup after 1.5s unless previously dismissed
-  if (!sessionStorage.getItem('pbPopupDismissed')) {
-    setTimeout(() => {
-      document.getElementById('popupOverlay').classList.remove('hidden');
-    }, 1500);
+  if (!sessionStorage.getItem('pbDismissed')) {
+    setTimeout(() => document.getElementById('popupOverlay').classList.remove('hidden'), 2000);
   }
 
   function closePopup() {
     document.getElementById('popupOverlay').classList.add('hidden');
-    sessionStorage.setItem('pbPopupDismissed', '1');
+    sessionStorage.setItem('pbDismissed', '1');
   }
 
   async function submitPopup(e) {
     e.preventDefault();
-    const name  = document.getElementById('popupName').value.trim();
-    const email = document.getElementById('popupEmail').value.trim();
-    const phone = document.getElementById('popupPhone').value.trim();
-    const msg   = document.getElementById('popupMsg');
+    const name  = document.getElementById('pName').value.trim();
+    const email = document.getElementById('pEmail').value.trim();
+    const phone = document.getElementById('pPhone').value.trim();
 
-    // ── GOOGLE FORM SUBMISSION ──
-    // TODO: Replace FORM_ID and entry IDs below with values from your Google Form
-    // To find entry IDs: open the form → right-click each field → Inspect → look for name="entry.XXXXXXXX"
-    const FORM_ACTION = 'https://docs.google.com/forms/d/e/FORM_ID_HERE/formResponse';
+    /* ── Google Form submission ──────────────────────────────────────────
+       To wire this up: open the form → right-click each field → Inspect
+       → find name="entry.XXXXXXXXXX" → replace the values below.
+       Also replace FORM_ID_HERE in the URL with the actual form ID.
+    ─────────────────────────────────────────────────────────────────── */
     const fd = new URLSearchParams();
-    fd.append('entry.XXXXXXXXX', name);   // TODO: replace with Name entry ID
-    fd.append('entry.XXXXXXXXX', email);  // TODO: replace with Email entry ID
-    fd.append('entry.XXXXXXXXX', phone);  // TODO: replace with Phone entry ID
-
+    fd.append('entry.REPLACE_NAME_ID',  name);
+    fd.append('entry.REPLACE_EMAIL_ID', email);
+    fd.append('entry.REPLACE_PHONE_ID', phone);
     try {
-      await fetch(FORM_ACTION, { method: 'POST', mode: 'no-cors', body: fd,
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
-    } catch (_) {}
+      await fetch('https://docs.google.com/forms/d/e/FORM_ID_HERE/formResponse', {
+        method:'POST', mode:'no-cors', body:fd,
+        headers:{'Content-Type':'application/x-www-form-urlencoded'}
+      });
+    } catch(_) {}
 
-    msg.textContent = '✓ Got it — check your inbox shortly!';
     document.getElementById('popupForm').style.display = 'none';
-    sessionStorage.setItem('pbPopupDismissed', '1');
-    setTimeout(closePopup, 2000);
+    document.getElementById('popupMsg').textContent = '✓ Done — check your inbox shortly!';
+    sessionStorage.setItem('pbDismissed', '1');
+    setTimeout(closePopup, 2200);
   }
 
-  // Close on overlay click
   document.getElementById('popupOverlay').addEventListener('click', function(e) {
     if (e.target === this) closePopup();
   });
