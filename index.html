@@ -64,8 +64,8 @@ nav{
 .nav__links{display:flex;align-items:center;gap:.25rem}
 .nav__link{font-size:.74rem;font-weight:700;color:var(--muted);text-decoration:none;padding:.42rem .8rem;border-radius:5px;letter-spacing:.03em;transition:color .15s,background .15s}
 .nav__link:hover{color:var(--text);background:rgba(255,255,255,.04)}
-.nav__cta{padding:.5rem 1.1rem;background:var(--teal);color:#fff;font-size:.74rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;border-radius:6px;transition:background .2s}
-.nav__cta:hover{background:var(--teal-b)}
+.nav__cta{padding:.5rem 1.2rem;background:linear-gradient(135deg,#3e9db1,#25768a);color:#fff;font-size:.74rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;border-radius:6px;box-shadow:0 2px 10px rgba(58,143,162,.34);transition:background .2s,box-shadow .2s,transform .15s}
+.nav__cta:hover{background:linear-gradient(135deg,#52c1d8,#3a8fa2);box-shadow:0 4px 18px rgba(58,143,162,.52);transform:translateY(-1px)}
 /* hide wordmark on very small screens */
 @media(max-width:380px){.logo-text{display:none}}
 
@@ -124,19 +124,26 @@ nav{
 /* ── BUTTONS ── */
 .btn-fill{
   display:inline-flex;align-items:center;gap:.55rem;
-  padding:.88rem 1.9rem;background:var(--teal);color:#fff;
-  font-weight:800;font-size:.88rem;letter-spacing:.04em;
+  padding:.88rem 1.9rem;
+  background:linear-gradient(135deg,#3e9db1 0%,#25768a 100%);
+  color:#fff;font-weight:800;font-size:.88rem;letter-spacing:.04em;
   text-decoration:none;border-radius:8px;
-  transition:background .2s,transform .15s;
+  box-shadow:0 4px 16px rgba(58,143,162,.3),0 1px 3px rgba(0,0,0,.3);
+  transition:background .2s,transform .15s,box-shadow .2s;
+  position:relative;overflow:hidden;
 }
-.btn-fill:hover{background:var(--teal-b);transform:translateY(-1px)}
+.btn-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.13) 0%,transparent 55%);pointer-events:none}
+.btn-fill:hover{background:linear-gradient(135deg,#52c1d8 0%,#3a8fa2 100%);transform:translateY(-2px);box-shadow:0 8px 28px rgba(58,143,162,.46),0 2px 6px rgba(0,0,0,.3)}
+.btn-fill:active{transform:translateY(0);box-shadow:0 2px 8px rgba(58,143,162,.2)}
 .btn-ghost{
   display:inline-flex;align-items:center;gap:.5rem;
-  padding:.88rem 1.9rem;border:1.5px solid rgba(255,255,255,.11);
+  padding:.88rem 1.9rem;border:1.5px solid rgba(255,255,255,.12);
   color:var(--muted);font-weight:600;font-size:.88rem;
-  text-decoration:none;border-radius:8px;transition:border-color .2s,color .2s;
+  text-decoration:none;border-radius:8px;
+  background:rgba(255,255,255,.025);
+  transition:border-color .2s,color .2s,background .2s,box-shadow .2s,transform .15s;
 }
-.btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+.btn-ghost:hover{border-color:rgba(58,143,162,.55);color:var(--teal-b);background:rgba(58,143,162,.07);box-shadow:0 0 0 1px rgba(58,143,162,.15),0 4px 14px rgba(0,0,0,.2);transform:translateY(-1px)}
 @media(max-width:480px){
   .hero__ctas{flex-direction:column;align-items:stretch;max-width:300px;margin:0 auto}
   .btn-fill,.btn-ghost{justify-content:center}
@@ -171,7 +178,7 @@ nav{
   transition:transform .4s var(--ease),border-color .3s,box-shadow .3s;
   margin-bottom:1rem;
 }
-.offer-main:hover{transform:translateY(-4px);border-color:var(--teal-d);box-shadow:0 22px 50px rgba(0,0,0,.5)}
+.offer-main:hover{transform:translateY(-4px);border-color:rgba(58,143,162,.4);box-shadow:0 22px 50px rgba(0,0,0,.5),0 0 0 1px rgba(58,143,162,.18),0 0 40px rgba(58,143,162,.07)}
 .offer-main__bg{
   position:absolute;inset:0;
   background-size:cover;background-position:center 20%;
@@ -197,11 +204,15 @@ nav{
 .offer-chip{font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,.05);border:1px solid var(--border-s);padding:.26rem .65rem;border-radius:5px}
 .offer-cta{
   display:inline-flex;align-items:center;gap:.6rem;
-  padding:.88rem 1.8rem;background:var(--teal);color:#fff;
-  font-size:.88rem;font-weight:800;letter-spacing:.04em;border-radius:8px;
-  transition:background .2s,gap .2s;
+  padding:.88rem 1.8rem;
+  background:linear-gradient(135deg,#3e9db1 0%,#25768a 100%);
+  color:#fff;font-size:.88rem;font-weight:800;letter-spacing:.04em;border-radius:8px;
+  box-shadow:0 4px 16px rgba(58,143,162,.32);
+  transition:background .2s,gap .2s,box-shadow .2s;
+  position:relative;overflow:hidden;
 }
-.offer-main:hover .offer-cta{background:var(--teal-b);gap:.85rem}
+.offer-cta::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.13) 0%,transparent 55%);pointer-events:none}
+.offer-main:hover .offer-cta{background:linear-gradient(135deg,#52c1d8 0%,#3a8fa2 100%);gap:.85rem;box-shadow:0 6px 22px rgba(58,143,162,.52)}
 .offer-note{font-size:.65rem;color:var(--dim);margin-top:.65rem;letter-spacing:.04em}
 
 /* PLANS GROUPED LIST (iOS-style) */
@@ -222,7 +233,7 @@ nav{
   -webkit-tap-highlight-color:transparent;
 }
 .plan-row:first-child{border-top:none}
-.plan-row:active,.plan-row:hover{background:var(--card-h)}
+.plan-row:active,.plan-row:hover{background:var(--card-h);box-shadow:inset 3px 0 0 var(--teal-d)}
 .plan-row__tag{font-size:.56rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.22rem}
 .plan-row__name{font-size:.95rem;font-weight:800;color:var(--text);line-height:1.2;margin-bottom:.18rem}
 .plan-row__desc{font-size:.75rem;color:var(--muted);line-height:1.4;display:none} /* shown on desktop */
@@ -270,7 +281,7 @@ nav{
 .testi-grid{display:grid;grid-template-columns:1fr;gap:1rem}
 @media(min-width:560px){.testi-grid{grid-template-columns:repeat(3,1fr)}}
 .testi-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s,transform .3s var(--ease)}
-.testi-card:hover{border-color:var(--teal-d);transform:translateY(-4px)}
+.testi-card:hover{border-color:rgba(58,143,162,.42);transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.38),0 0 0 1px rgba(58,143,162,.12)}
 .testi-video{position:relative;aspect-ratio:9/16;background:#0a0f11;overflow:hidden}
 @media(max-width:559px){.testi-video{aspect-ratio:16/9}}
 .testi-video iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
