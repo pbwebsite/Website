@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Off-Season Programme | PB Performance Coaching</title>
+<meta name="description" content="GAA off-season S&C programme from Paddy Burke. Build serious strength, address imbalances, and come back a different athlete.">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07090a;--surface:#0d1214;--card:#111618;--card-h:#131d21;
+  --border:#1e2a2d;--border-s:#263438;
+  --teal:#3a8fa2;--teal-b:#4db8d0;--teal-d:#2D6E7E;
+  --text:#e8eaeb;--muted:#8a9ea3;--dim:#4a6268;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+.rv.vis{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;background:rgba(7,9,10,.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav__logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--text)}
+.logo-name{font-size:.74rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;line-height:1.1}
+.logo-sub{font-size:.52rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);line-height:1.3}
+.nav__right{display:flex;align-items:center;gap:.6rem}
+.nav__back{display:flex;align-items:center;gap:.4rem;font-size:.74rem;font-weight:700;color:var(--muted);text-decoration:none;transition:color .15s}
+.nav__back:hover{color:var(--text)}
+.nav__cta{padding:.5rem 1.1rem;background:var(--teal);color:#fff;font-size:.74rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;border-radius:6px;transition:background .2s}
+.nav__cta:hover{background:var(--teal-b)}
+@media(max-width:380px){.logo-sub{display:none}}
+
+.hero{min-height:80svh;position:relative;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.hero__bg{position:absolute;inset:0;background-size:cover;background-position:center 30%;filter:saturate(.62) contrast(1.22) brightness(.44)}
+.hero__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,9,10,.06) 0%,rgba(7,9,10,.25) 40%,rgba(7,9,10,.9) 72%,#07090a 100%)}
+.hero__c{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:0 1.5rem 4.5rem;width:100%}
+.hero__phase{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.9rem;animation:fadeUp .8s ease both}
+.hero__h{font-size:clamp(2.8rem,9vw,6.5rem);font-weight:900;letter-spacing:-.04em;line-height:.92;margin-bottom:1rem;text-wrap:balance;animation:fadeUp .8s .08s ease both}
+.hero__h em{font-style:normal;color:var(--teal-b)}
+.hero__sub{font-size:clamp(.9rem,2vw,1.06rem);color:var(--muted);max-width:52ch;line-height:1.75;margin-bottom:2rem;animation:fadeUp .8s .15s ease both}
+.hero__btns{display:flex;gap:.7rem;flex-wrap:wrap;animation:fadeUp .8s .22s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.btn-fill{display:inline-flex;align-items:center;gap:.55rem;padding:.88rem 1.9rem;background:var(--teal);color:#fff;font-weight:800;font-size:.88rem;letter-spacing:.04em;text-decoration:none;border-radius:8px;transition:background .2s,transform .15s}
+.btn-fill:hover{background:var(--teal-b);transform:translateY(-1px)}
+.btn-ghost{display:inline-flex;align-items:center;padding:.88rem 1.9rem;border:1.5px solid rgba(255,255,255,.11);color:var(--muted);font-weight:600;font-size:.88rem;text-decoration:none;border-radius:8px;transition:border-color .2s,color .2s}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+@media(max-width:480px){.hero__btns{flex-direction:column;align-items:flex-start}}
+
+.stats-bar{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.5rem 1.5rem}
+.stats-bar__inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:.75rem 2.5rem}
+.stat-item{display:flex;flex-direction:column;gap:.2rem}
+.stat-item__label{font-size:.56rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.stat-item__value{font-size:.92rem;font-weight:800;color:var(--text)}
+
+.section{padding:5rem 1.5rem}
+.w{max-width:1100px;margin:0 auto}
+.section--surface{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.s-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.65rem}
+.s-title{font-size:clamp(1.65rem,3.5vw,2.5rem);font-weight:900;letter-spacing:-.028em;line-height:1.06;margin-bottom:.75rem;text-wrap:balance}
+.s-body{font-size:.95rem;color:var(--muted);line-height:1.8;margin-bottom:2rem}
+.s-body + .s-body{margin-top:-1rem}
+
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem;margin-top:2rem}
+.feature-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.4rem;display:flex;gap:.9rem;align-items:flex-start;transition:border-color .2s}
+.feature-item:hover{border-color:var(--border-s)}
+.f-icon{width:34px;height:34px;background:rgba(58,143,162,.08);border:1px solid rgba(58,143,162,.18);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--teal)}
+.f-title{font-size:.88rem;font-weight:800;margin-bottom:.2rem}
+.f-desc{font-size:.78rem;color:var(--muted);line-height:1.55}
+
+.breakdown{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;margin-top:1.8rem}
+.breakdown-block{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.3rem 1.4rem}
+.breakdown-block__week{font-size:.58rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-d);margin-bottom:.4rem}
+.breakdown-block__title{font-size:.95rem;font-weight:800;margin-bottom:.35rem}
+.breakdown-block__body{font-size:.78rem;color:var(--muted);line-height:1.55}
+
+.testi-wrap{max-width:460px;margin:0 auto}
+.testi-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.testi-video{position:relative;aspect-ratio:9/16;background:#0a0f11;overflow:hidden}
+@media(max-width:480px){.testi-video{aspect-ratio:4/5}}
+.testi-video iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.vid-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;background:linear-gradient(160deg,#0c1a1e,#07090a);border:1px dashed rgba(45,110,126,.28)}
+.vid-ph__icon{width:52px;height:52px;border-radius:50%;background:rgba(58,143,162,.07);border:1.5px solid var(--teal-d);display:flex;align-items:center;justify-content:center;color:var(--teal-d)}
+.vid-ph__label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-d);opacity:.5;text-align:center;padding:0 .8rem;line-height:1.65}
+.testi-body{padding:1.2rem 1.4rem 1.5rem}
+.testi-name{font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+
+.get-plan{background:linear-gradient(160deg,#091316,var(--bg));border-top:1px solid var(--border);padding:5.5rem 1.5rem;text-align:center}
+.get-plan__inner{max-width:500px;margin:0 auto}
+.get-plan__eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.65rem}
+.get-plan__title{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:900;letter-spacing:-.028em;line-height:1.1;margin-bottom:.8rem}
+.get-plan__body{font-size:.92rem;color:var(--muted);line-height:1.75;margin-bottom:1.8rem}
+.get-plan__note{font-size:.68rem;color:var(--dim);margin-top:.8rem;letter-spacing:.04em}
+
+.upsell{border-top:1px solid var(--border);padding:3.5rem 1.5rem;text-align:center;background:var(--surface)}
+.upsell p{font-size:.88rem;color:var(--muted);margin-bottom:1rem}
+.upsell a{display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;color:var(--teal);text-decoration:none;transition:gap .2s}
+.upsell a:hover{gap:.8rem}
+
+footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav__logo" href="index.html">
+    <svg viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><rect width="36" height="36" rx="7" fill="#111618"/><rect x="1.5" y="1.5" width="33" height="33" rx="5.5" fill="none" stroke="#3a8fa2" stroke-width="1.5"/><text x="18" y="25" font-family="Arial Black,Helvetica,sans-serif" font-size="16" font-weight="900" fill="#4db8d0" text-anchor="middle" letter-spacing="-0.8">PB</text></svg>
+    <div style="display:flex;flex-direction:column;gap:0">
+      <span class="logo-name">PB Performance</span>
+      <span class="logo-sub">Coaching</span>
+    </div>
+  </a>
+  <div class="nav__right">
+    <a class="nav__back" href="pb-plans.html">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      Plans
+    </a>
+    <a class="nav__cta" href="pb-one-to-one.html#apply">Apply Now</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero__bg" style="background-image:url('images/hero-coaching.jpg')"></div>
+  <div class="hero__g"></div>
+  <div class="hero__c">
+    <div class="hero__phase">Phase 3 · Off-Season Programme</div>
+    <h1 class="hero__h">Rebuild.<br><em>Grow. Return.</em></h1>
+    <p class="hero__sub">The off-season is where real gains happen. Build serious strength, address imbalances, and lay the physical foundation for your best season yet.</p>
+    <div class="hero__btns">
+      <a href="#get" class="btn-fill">Get This Programme</a>
+      <a href="#detail" class="btn-ghost">What's Inside ↓</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar rv">
+  <div class="stats-bar__inner">
+    <div class="stat-item"><span class="stat-item__label">Duration</span><span class="stat-item__value">8–10 Weeks</span></div>
+    <div class="stat-item"><span class="stat-item__label">Sessions / Week</span><span class="stat-item__value">4–5</span></div>
+    <div class="stat-item"><span class="stat-item__label">Phase</span><span class="stat-item__value">Off-Season Build</span></div>
+    <div class="stat-item"><span class="stat-item__label">Format</span><span class="stat-item__value">PDF + Video Guides</span></div>
+    <div class="stat-item"><span class="stat-item__label">Goal</span><span class="stat-item__value">Strength Foundation</span></div>
+  </div>
+</div>
+
+<section class="section" id="detail">
+  <div class="w">
+    <div class="rv">
+      <p class="s-eyebrow">The Programme</p>
+      <h2 class="s-title">This Is Where the Work Gets Done</h2>
+      <p class="s-body">The season's over. Club commitments are minimal. Your body has recovered. This is the window that separates the players who make real progress from those who tread water year after year — and most players waste it.</p>
+      <p class="s-body">This programme uses the quiet months to build serious muscle mass, correct structural imbalances that built up through the season, and develop the aerobic base that everything else runs on. When pre-season comes around, you'll be starting from a higher base than you've ever had.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-item rv" style="transition-delay:.04s">
+        <div class="f-icon"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg></div>
+        <div><div class="f-title">Hypertrophy &amp; Strength Blocks</div><div class="f-desc">Higher volume, more frequency. Build the muscle mass that translates directly into more power on the pitch.</div></div>
+      </div>
+      <div class="feature-item rv" style="transition-delay:.08s">
+        <div class="f-icon"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+        <div><div class="f-title">Structural Balance Work</div><div class="f-desc">Targeted work to address the imbalances and asymmetries that accumulate through a full season. Bulletproof before the next campaign.</div></div>
+      </div>
+      <div class="feature-item rv" style="transition-delay:.12s">
+        <div class="f-icon"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg></div>
+        <div><div class="f-title">Aerobic Base Development</div><div class="f-desc">Build the engine. A strong aerobic foundation means you recover faster between sprints and last longer at high intensity.</div></div>
+      </div>
+      <div class="feature-item rv" style="transition-delay:.16s">
+        <div class="f-icon"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg></div>
+        <div><div class="f-title">Foundation for Pre-Season</div><div class="f-desc">The programme ends at the exact point where the Pre-Season Programme picks up. Chain them together for maximum effect.</div></div>
+      </div>
+      <div class="feature-item rv" style="transition-delay:.20s">
+        <div class="f-icon"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.361a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg></div>
+        <div><div class="f-title">Video Guide for Every Exercise</div><div class="f-desc">Technique matters more in the off-season when volume is high. Every movement is fully demonstrated.</div></div>
+      </div>
+      <div class="feature-item rv" style="transition-delay:.24s">
+        <div class="f-icon"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg></div>
+        <div><div class="f-title">Printer-Friendly PDF</div><div class="f-desc">Take it to the gym. No app, no subscription — yours for as long as you need it.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--surface">
+  <div class="w rv">
+    <p class="s-eyebrow">Programme Structure</p>
+    <h2 class="s-title">How the 10 Weeks Break Down</h2>
+    <p class="s-body">Two distinct blocks — hypertrophy first, strength second — followed by a transition into pre-season readiness.</p>
+    <div class="breakdown">
+      <div class="breakdown-block">
+        <div class="breakdown-block__week">Weeks 1–4</div>
+        <div class="breakdown-block__title">Hypertrophy</div>
+        <div class="breakdown-block__body">Higher reps, more volume. Build the muscle mass. Fix the imbalances. Establish movement quality across the key patterns.</div>
+      </div>
+      <div class="breakdown-block">
+        <div class="breakdown-block__week">Weeks 5–8</div>
+        <div class="breakdown-block__title">Strength</div>
+        <div class="breakdown-block__body">Convert the mass into strength. Progressive overload on the main compound lifts. Aerobic base work runs parallel throughout.</div>
+      </div>
+      <div class="breakdown-block">
+        <div class="breakdown-block__week">Weeks 9–10</div>
+        <div class="breakdown-block__title">Transition</div>
+        <div class="breakdown-block__body">Bridge into pre-season. Volume reduces, intensity stays high. You're ready to hit the Pre-Season Programme at full tilt.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="w">
+    <div class="rv" style="margin-bottom:2rem">
+      <p class="s-eyebrow">Results</p>
+      <h2 class="s-title">From an Athlete Who Did It</h2>
+    </div>
+    <div class="testi-wrap rv">
+      <div class="testi-card">
+        <div class="testi-video">
+          <!-- ── VIDEO SLOT: Kieran ──────────────────────────────────────────
+               Replace vid-ph with:
+               <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen loading="lazy"></iframe>
+          ──────────────────────────────────────────────────────────────── -->
+          <div class="vid-ph">
+            <div class="vid-ph__icon"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="vid-ph__label">Kieran<br>Video Coming Soon</span>
+          </div>
+        </div>
+        <div class="testi-body"><div class="testi-name">Kieran</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="get-plan" id="get">
+  <div class="get-plan__inner rv">
+    <p class="get-plan__eyebrow">Off-Season Programme</p>
+    <h2 class="get-plan__title">Make This Off-Season Count</h2>
+    <p class="get-plan__body">Get the full 10-week programme and come back next season a genuinely different athlete — stronger, more powerful, more durable.</p>
+    <a href="pb-one-to-one.html#apply" class="btn-fill">
+      Get This Programme
+      <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </a>
+    <p class="get-plan__note">Payment link coming soon — contact Paddy directly to get started</p>
+  </div>
+</section>
+
+<div class="upsell">
+  <p>Want Paddy to build you a fully personalised off-season plan?</p>
+  <a href="pb-one-to-one.html">
+    Learn about 1-on-1 Coaching
+    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+  </a>
+</div>
+
+<footer>© 2026 PB Performance Coaching &nbsp;·&nbsp; <a href="index.html" style="color:inherit">pbperformancecoaching.com</a></footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+}, {threshold: 0.06});
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

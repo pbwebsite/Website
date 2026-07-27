@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>In-Season Programme | PB Performance Coaching</title>
+<meta name="description" content="GAA in-season S&C programme from Paddy Burke. Stay strong and explosive through the season without burning out.">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07090a;--surface:#0d1214;--card:#111618;--card-h:#131d21;
+  --border:#1e2a2d;--border-s:#263438;
+  --teal:#3a8fa2;--teal-b:#4db8d0;--teal-d:#2D6E7E;
+  --text:#e8eaeb;--muted:#8a9ea3;--dim:#4a6268;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+.rv.vis{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;background:rgba(7,9,10,.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav__logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--text)}
+.logo-name{font-size:.74rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;line-height:1.1}
+.logo-sub{font-size:.52rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);line-height:1.3}
+.nav__right{display:flex;align-items:center;gap:.6rem}
+.nav__back{display:flex;align-items:center;gap:.4rem;font-size:.74rem;font-weight:700;color:var(--muted);text-decoration:none;transition:color .15s}
+.nav__back:hover{color:var(--text)}
+.nav__cta{padding:.5rem 1.1rem;background:var(--teal);color:#fff;font-size:.74rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;border-radius:6px;transition:background .2s}
+.nav__cta:hover{background:var(--teal-b)}
+@media(max-width:380px){.logo-sub{display:none}}
+
+.hero{min-height:80svh;position:relative;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.hero__bg{position:absolute;inset:0;background-size:cover;background-position:center 20%;filter:saturate(.62) contrast(1.22) brightness(.44)}
+.hero__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,9,10,.06) 0%,rgba(7,9,10,.25) 40%,rgba(7,9,10,.9) 72%,#07090a 100%)}
+.hero__c{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:0 1.5rem 4.5rem;width:100%}
+.hero__phase{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.9rem;animation:fadeUp .8s ease both}
+.hero__h{font-size:clamp(2.8rem,9vw,6.5rem);font-weight:900;letter-spacing:-.04em;line-height:.92;margin-bottom:1rem;text-wrap:balance;animation:fadeUp .8s .08s ease both}
+.hero__h em{font-style:normal;color:var(--teal-b)}
+.hero__sub{font-size:clamp(.9rem,2vw,1.06rem);color:var(--muted);max-width:52ch;line-height:1.75;margin-bottom:2rem;animation:fadeUp .8s .15s ease both}
+.hero__btns{display:flex;gap:.7rem;flex-wrap:wrap;animation:fadeUp .8s .22s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.btn-fill{display:inline-flex;align-items:center;gap:.55rem;padding:.88rem 1.9rem;background:var(--teal);color:#fff;font-weight:800;font-size:.88rem;letter-spacing:.04em;text-decoration:none;border-radius:8px;transition:background .2s,transform .15s}
+.btn-fill:hover{background:var(--teal-b);transform:translateY(-1px)}
+.btn-ghost{display:inline-flex;align-items:center;padding:.88rem 1.9rem;border:1.5px solid rgba(255,255,255,.11);color:var(--muted);font-weight:600;font-size:.88rem;text-decoration:none;border-radius:8px;transition:border-color .2s,color .2s}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+@media(max-width:480px){.hero__btns{flex-direction:column;align-items:flex-start}}
+
+.stats-bar{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.5rem 1.5rem}
+.stats-bar__inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:.75rem 2.5rem}
+.stat-item{display:flex;flex-direction:column;gap:.2rem}
+.stat-item__label{font-size:.56rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.stat-item__value{font-size:.92rem;font-weight:800;color:var(--text)}
+
+.section{padding:5rem 1.5rem}
+.w{max-width:1100px;margin:0 auto}
+.section--surface{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.s-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.65rem}
+.s-title{font-size:clamp(1.65rem,3.5vw,2.5rem);font-weight:900;letter-spacing:-.028em;line-height:1.06;margin-bottom:.75rem;text-wrap:balance}
+.s-body{font-size:.95rem;color:var(--muted);line-height:1.8;margin-bottom:2rem}
+.s-body + .s-body{margin-top:-1rem}
+
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem;margin-top:2rem}
+.feature-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.4rem;display:flex;gap:.9rem;align-items:flex-start;transition:border-color .2s}
+.feature-item:hover{border-color:var(--border-s)}
+.f-icon{width:34px;height:34px;background:rgba(58,143,162,.08);border:1px solid rgba(58,143,162,.18);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--teal)}
+.f-title{font-size:.88rem;font-weight:800;margin-bottom:.2rem}
+.f-desc{font-size:.78rem;color:var(--muted);line-height:1.55}
+
+.breakdown{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;margin-top:1.8rem}
+.breakdown-block{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.3rem 1.4rem}
+.breakdown-block__week{font-size:.58rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-d);margin-bottom:.4rem}
+.breakdown-block__title{font-size:.95rem;font-weight:800;margin-bottom:.35rem}
+.breakdown-block__body{font-size:.78rem;color:var(--muted);line-height:1.55}
+
+.testi-wrap{max-width:460px;margin:0 auto}
+.testi-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.testi-video{position:relative;aspect-ratio:9/16;background:#0a0f11;overflow:hidden}
+@media(max-width:480px){.testi-video{aspect-ratio:4/5}}
+.testi-video iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.vid-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;background:linear-gradient(160deg,#0c1a1e,#07090a);border:1px dashed rgba(45,110,126,.28)}
+.vid-ph__icon{width:52px;height:52px;border-radius:50%;background:rgba(58,143,162,.07);border:1.5px solid var(--teal-d);display:flex;align-items:center;justify-content:center;color:var(--teal-d)}
+.vid-ph__label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-d);opacity:.5;text-align:center;padding:0 .8rem;line-height:1.65}
+.testi-body{padding:1.2rem 1.4rem 1.5rem}
+.testi-name{font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+
+.get-plan{background:linear-gradient(160deg,#091316,var(--bg));border-top:1px solid var(--border);padding:5.5rem 1.5rem;text-align:center}
+.get-plan__inner{max-width:500px;margin:0 auto}
+.get-plan__eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.65rem}
+.get-plan__title{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:900;letter-spacing:-.028em;line-height:1.1;margin-bottom:.8rem}
+.get-plan__body{font-size:.92rem;color:var(--muted);line-height:1.75;margin-bottom:1.8rem}
+.get-plan__note{font-size:.68rem;color:var(--dim);margin-top:.8rem;letter-spacing:.04em}
+
+.upsell{border-top:1px solid var(--border);padding:3.5rem 1.5rem;text-align:center;background:var(--surface)}
+.upsell p{font-size:.88rem;color:var(--muted);margin-bottom:1rem}
+.upsell a{display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;color:var(--teal);text-decoration:none;transition:gap .2s}
+.upsell a:hover{gap:.8rem}
+
+footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav__logo" href="index.html">
+    <svg viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><rect width="36" height="36" rx="7" fill="#111618"/><rect x="1.5" y="1.5" width="33" height="33" rx="5.5" fill="none" stroke="#3a8fa2" stroke-width="1.5"/><text x="18" y="25" font-family="Arial Black,Helvetica,sans-serif" font-size="16" font-weight="900" fill="#4db8d0" text-anchor="middle" letter-spacing="-0.8">PB</text></svg>
+    <div style="display:flex;flex-direction:column;gap:0">
+      <span class="logo-name">PB Performance</span>
+      <span class="logo-sub">Coaching</span>
+    </div>
+  </a>
+  <div class="nav__right">
+    <a class="nav__back" href="pb-plans.html">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      Plans
+    </a>
+    <a class="nav__cta" href="pb-one-to-one.html#apply">Apply Now</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero__bg" style="background-image:url('images/hurling-portrait.jpg')"></div>
+  <div class="hero__g"></div>
+  <div class="hero__c">
+    <div class="hero__phase">Phase 2 · In-Season Programme</div>
+    <h1 class="hero__h">Stay Strong.<br><em>All Season.</em></h1>
+    <p class="hero__sub">Built to sit around your training and match schedule — keeping you powerful and explosive through the full competitive season without burning out.</p>
+    <div class="hero__btns">
+      <a href="#get" class="btn-fill">Get This Programme</a>
+      <a href="#detail" class="btn-ghost">What's Inside ↓</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar rv">
+  <div class="stats-bar__inner">
+    <div class="stat-item"><span class="stat-item__label">Duration</span><span class="stat-item__value">Full Season</span></div>
+    <div class="stat-item"><span class="stat-item__label">Sessions / Week</span><span class="stat-item__value">2–3</span></div>
+    <div class="stat-item"><span class="stat-item__label">Phase</span><span class="stat-item__value">Competition</span></div>
+    <div class="stat-item"><span class="stat-item__label">Format</span><span class="stat-item__value">PDF + Video Guides</span></div>
+    <div class="stat-item"><span class="stat-item__label">Fits Around</span><span class="stat-item__value">Club Training &amp; Matches</span></div>
+  </div>
+</div>
+
+<section class="section" id="detail">
+  <div class="w">
+    <div class="rv">
+      <p class="s-eyebrow">The Programme</p>
+      <h2 class="s-title">Perform at Your Best — Every Weekend</h2>
+      <p class="s-body">Most players lose the physical gains they built in pre-season within the first 6 weeks of the competitive season. Training volume goes up, gym time disappears, and by the time championship comes around they're running on empty.</p>
+      <p class="s-body">This programme solves that. Two or three targeted gym sessions per week — fitted strategically around your club schedule — that maintain your strength and power without piling on fatigue. You show up to every training session and every match in the best physical condition you can be.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-item rv" style="transition-delay:.04s">
+        <div class="f-icon"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+        <div><div class="f-title">Fits Your Match Schedule</div><div class="f-desc">Sessions are structured around match days — heavier work earlier in the week, lighter as the game approaches.</div></div>
+      </div>
+      <div class="feature-item rv" style="transition-delay:.08s">
+        <div class="f-icon"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+        <div><div class="f-title">Maintain Power &amp; Strength</div><div class="f-desc">Enough stimulus to keep your physical qualities sharp without overloading a body already carrying a training and match load.</div></div>
+      </div>
+      <div class="feature-item rv" style="transition-delay:.12s">
+        <div class="f-icon"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg></div>
+        <div><div class="f-title">Recovery Protocols</div><div class="f-desc">Built-in guidance on managing training load, sleep, and nutrition to stay sharp through the long competitive season.</div></div>
+      </div>
+      <div class="feature-item rv" style="transition-delay:.16s">
+        <div class="f-icon"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+        <div><div class="f-title">Injury Prevention Focus</div><div class="f-desc">Targeted accessory work to reduce the common injury risks that appear mid-season when fatigue accumulates.</div></div>
+      </div>
+      <div class="feature-item rv" style="transition-delay:.20s">
+        <div class="f-icon"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.361a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg></div>
+        <div><div class="f-title">Video Guide for Every Exercise</div><div class="f-desc">Every movement is demoed on video — get it right from the start and stay consistent all season.</div></div>
+      </div>
+      <div class="feature-item rv" style="transition-delay:.24s">
+        <div class="f-icon"><svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg></div>
+        <div><div class="f-title">Printer-Friendly PDF</div><div class="f-desc">Download it once, keep it forever. No app, no subscription, no faff.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--surface">
+  <div class="w rv">
+    <p class="s-eyebrow">How It Works</p>
+    <h2 class="s-title">A Typical Week</h2>
+    <p class="s-body">The programme adapts around your fixture list. Here's a sample week with a Saturday match.</p>
+    <div class="breakdown">
+      <div class="breakdown-block">
+        <div class="breakdown-block__week">Monday</div>
+        <div class="breakdown-block__title">Lower Body Strength</div>
+        <div class="breakdown-block__body">Main strength session — squat and hinge patterns with enough intensity to keep adaptations. Recovery from the weekend.</div>
+      </div>
+      <div class="breakdown-block">
+        <div class="breakdown-block__week">Wednesday</div>
+        <div class="breakdown-block__title">Upper Body + Power</div>
+        <div class="breakdown-block__body">Upper body push/pull work plus explosive power development. High quality, moderate volume.</div>
+      </div>
+      <div class="breakdown-block">
+        <div class="breakdown-block__week">Thursday</div>
+        <div class="breakdown-block__title">Club Training</div>
+        <div class="breakdown-block__body">No gym on heavy training days. Let the pitch work do its job.</div>
+      </div>
+      <div class="breakdown-block">
+        <div class="breakdown-block__week">Friday</div>
+        <div class="breakdown-block__title">Activation &amp; Prep</div>
+        <div class="breakdown-block__body">Short, sharp session — CNS activation, mobility, priming for match day.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="w">
+    <div class="rv" style="margin-bottom:2rem">
+      <p class="s-eyebrow">Results</p>
+      <h2 class="s-title">From an Athlete Who Did It</h2>
+    </div>
+    <div class="testi-wrap rv">
+      <div class="testi-card">
+        <div class="testi-video">
+          <!-- ── VIDEO SLOT: Eoin ────────────────────────────────────────────
+               Replace vid-ph with:
+               <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen loading="lazy"></iframe>
+          ──────────────────────────────────────────────────────────────── -->
+          <div class="vid-ph">
+            <div class="vid-ph__icon"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="vid-ph__label">Eoin<br>Video Coming Soon</span>
+          </div>
+        </div>
+        <div class="testi-body"><div class="testi-name">Eoin</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="get-plan" id="get">
+  <div class="get-plan__inner rv">
+    <p class="get-plan__eyebrow">In-Season Programme</p>
+    <h2 class="get-plan__title">Stay Sharp All Season</h2>
+    <p class="get-plan__body">Get the full in-season programme — PDF guide, video library, and weekly schedule built around your match calendar.</p>
+    <a href="pb-one-to-one.html#apply" class="btn-fill">
+      Get This Programme
+      <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </a>
+    <p class="get-plan__note">Payment link coming soon — contact Paddy directly to get started</p>
+  </div>
+</section>
+
+<div class="upsell">
+  <p>Want a fully personalised version built around your specific schedule?</p>
+  <a href="pb-one-to-one.html">
+    Learn about 1-on-1 Coaching
+    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+  </a>
+</div>
+
+<footer>© 2026 PB Performance Coaching &nbsp;·&nbsp; <a href="index.html" style="color:inherit">pbperformancecoaching.com</a></footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+}, {threshold: 0.06});
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
