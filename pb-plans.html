@@ -10,7 +10,16 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#07090a;--surface:#0d1214;--card:#111618;--border:#1e2a2d;--teal:#3a8fa2;--teal-b:#4db8d0;--teal-d:#2D6E7E;--text:#e8eaeb;--muted:#8a9ea3}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ── SCROLL REVEAL ── */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+.rv.vis{opacity:1;transform:translateY(0)}
+.rv-l{opacity:0;transform:translateX(-22px);transition:opacity .65s ease,transform .65s ease}
+.rv-l.vis{opacity:1;transform:translateX(0)}
+.rv-r{opacity:0;transform:translateX(22px);transition:opacity .65s ease,transform .65s ease}
+.rv-r.vis{opacity:1;transform:translateX(0)}
+@media(prefers-reduced-motion:reduce){.rv,.rv-l,.rv-r{opacity:1;transform:none;transition:none}}
 
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2rem;background:rgba(7,9,10,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
 .nav__logo{font-size:1.05rem;font-weight:900;letter-spacing:.06em;color:var(--text);text-decoration:none}
@@ -25,10 +34,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .hero__bg{position:absolute;inset:0;background:url('images/training-lunge.jpg') center 30% / cover no-repeat;filter:saturate(.65) contrast(1.2) brightness(.48)}
 .hero__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,9,10,.08) 0%,rgba(7,9,10,.4) 50%,rgba(7,9,10,.95) 80%,#07090a 100%)}
 .hero__c{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:0 2rem 4rem;width:100%}
-.eyebrow{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem}
-.hero__h{font-size:clamp(2.2rem,6vw,4.8rem);font-weight:900;letter-spacing:-.03em;line-height:.95;margin-bottom:1rem}
+.eyebrow{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;animation:fadeUp .8s ease both}
+.hero__h{font-size:clamp(2.2rem,6vw,4.8rem);font-weight:900;letter-spacing:-.03em;line-height:.95;margin-bottom:1rem;animation:fadeUp .8s .08s ease both}
 .hero__h em{font-style:normal;color:var(--teal-b)}
-.hero__s{font-size:clamp(.9rem,1.8vw,1.05rem);color:var(--muted);max-width:54ch;line-height:1.75}
+.hero__s{font-size:clamp(.9rem,1.8vw,1.05rem);color:var(--muted);max-width:54ch;line-height:1.75;animation:fadeUp .8s .16s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 
 /* PLAN NAV */
 .plan-nav{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:57px;z-index:50}
@@ -57,8 +67,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .plan-features{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem}
 .plan-features li{display:flex;align-items:flex-start;gap:.65rem;font-size:.88rem;color:var(--muted);line-height:1.4}
 .plan-features li::before{content:'✓';color:var(--teal);font-weight:800;font-size:.82rem;flex-shrink:0}
-.plan-price{font-size:2.6rem;font-weight:900;letter-spacing:-.03em;line-height:1;margin-bottom:1.4rem}
-.plan-price span{font-size:.9rem;font-weight:400;color:var(--muted);margin-left:.3rem}
 
 /* BUY BUTTON — replace href with payment link when ready */
 .buy-btn{
@@ -75,7 +83,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .testi-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .2s}
 .testi-card:hover{border-color:var(--teal-d)}
 
-/* Video slot — styled placeholder, replace inner div with YouTube iframe when ready */
+/* Video slot — replace inner div with YouTube iframe when ready */
 .testi-video{position:relative;aspect-ratio:9/16;background:#0a0f11;overflow:hidden}
 .testi-video iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
 .vid-placeholder{
@@ -86,7 +94,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .vid-placeholder__label{font-size:.68rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--teal-d);opacity:.6;text-align:center;padding:0 .8rem;line-height:1.6}
 
 .testi-body{padding:1.1rem 1.4rem 1.4rem}
-.testi-quote{font-size:.87rem;color:var(--muted);line-height:1.65;margin-bottom:.75rem;font-style:italic}
 .testi-name{font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
 
 footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border-top:1px solid var(--border);opacity:.55}
@@ -103,8 +110,8 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
 <body>
 
 <nav>
-  <a class="nav__logo" href="pb-home.html"><span>PB</span> Performance</a>
-  <a class="nav__back" href="pb-home.html">
+  <a class="nav__logo" href="index.html"><span>PB</span> Performance</a>
+  <a class="nav__back" href="index.html">
     <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
     Back
   </a>
@@ -122,7 +129,7 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
 </section>
 
 <!-- STICKY PLAN NAV -->
-<div class="plan-nav">
+<div class="plan-nav" id="planNav">
   <div class="plan-nav__inner">
     <button class="pnav-btn active" onclick="showPlan('pre',this)">Pre-Season</button>
     <button class="pnav-btn" onclick="showPlan('in',this)">In-Season</button>
@@ -133,9 +140,9 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
 <!-- ════════════════════════ PRE-SEASON ════════════════════════ -->
 <div class="plan-panel active" id="panel-pre">
   <div class="w">
-    <div class="plan-card">
-      <div class="plan-card__img"><img src="images/hurling-action.jpg" alt="Pre-Season Training"></div>
-      <div>
+    <div class="plan-card rv">
+      <div class="plan-card__img rv-l"><img src="images/hurling-action.jpg" alt="Pre-Season Training"></div>
+      <div class="rv-r">
         <div class="plan-phase">Phase 1 — Build the Base</div>
         <h2 class="plan-title">Pre-Season Programme</h2>
         <p class="plan-desc">Arrive to the season ready — not hoping to get fit during it. This programme builds the strength, power, and conditioning base that everything else relies on. Structured, progressive, and built around the GAA pre-season block.</p>
@@ -147,11 +154,9 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
           <li>Weekly training schedule</li>
           <li>Printer-friendly PDF included</li>
         </ul>
-        <!-- Price: replace €XX with actual price -->
-        <div class="plan-price">€XX <span>one-off</span></div>
-        <!-- Buy button: replace href="#" with payment link (Stripe, Gumroad, etc.) -->
-        <a href="#" class="buy-btn">
-          Buy Pre-Season Plan
+        <!-- Buy button: replace href with payment link (Stripe, Gumroad, etc.) when ready -->
+        <a href="pb-one-to-one.html#apply" class="buy-btn">
+          Get This Plan
           <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
         </a>
       </div>
@@ -159,7 +164,7 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
   </div>
 
   <section class="testi-bg">
-    <div class="w">
+    <div class="w rv">
       <p class="s-label">What Athletes Say</p>
       <h2 class="s-title">Results from the Pre-Season Plan</h2>
       <div class="testi-grid">
@@ -176,8 +181,7 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
             </div>
           </div>
           <div class="testi-body">
-            <p class="testi-quote">"Coming soon."</p>
-            <div class="testi-name">Athlete Name</div>
+            <div class="testi-name">GAA Player</div>
           </div>
         </div>
 
@@ -190,8 +194,7 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
             </div>
           </div>
           <div class="testi-body">
-            <p class="testi-quote">"Coming soon."</p>
-            <div class="testi-name">Athlete Name</div>
+            <div class="testi-name">GAA Player</div>
           </div>
         </div>
 
@@ -204,8 +207,7 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
             </div>
           </div>
           <div class="testi-body">
-            <p class="testi-quote">"Coming soon."</p>
-            <div class="testi-name">Athlete Name</div>
+            <div class="testi-name">GAA Player</div>
           </div>
         </div>
 
@@ -231,11 +233,9 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
           <li>Video guide for every exercise</li>
           <li>Printer-friendly PDF included</li>
         </ul>
-        <!-- Price: replace €XX with actual price -->
-        <div class="plan-price">€XX <span>one-off</span></div>
-        <!-- Buy button: replace href="#" with payment link -->
-        <a href="#" class="buy-btn">
-          Buy In-Season Plan
+        <!-- Buy button: replace href with payment link when ready -->
+        <a href="pb-one-to-one.html#apply" class="buy-btn">
+          Get This Plan
           <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
         </a>
       </div>
@@ -257,8 +257,7 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
             </div>
           </div>
           <div class="testi-body">
-            <p class="testi-quote">"Coming soon."</p>
-            <div class="testi-name">Athlete Name</div>
+            <div class="testi-name">GAA Player</div>
           </div>
         </div>
 
@@ -271,8 +270,7 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
             </div>
           </div>
           <div class="testi-body">
-            <p class="testi-quote">"Coming soon."</p>
-            <div class="testi-name">Athlete Name</div>
+            <div class="testi-name">GAA Player</div>
           </div>
         </div>
 
@@ -285,8 +283,7 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
             </div>
           </div>
           <div class="testi-body">
-            <p class="testi-quote">"Coming soon."</p>
-            <div class="testi-name">Athlete Name</div>
+            <div class="testi-name">GAA Player</div>
           </div>
         </div>
 
@@ -312,11 +309,9 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
           <li>Video guide for every exercise</li>
           <li>Printer-friendly PDF included</li>
         </ul>
-        <!-- Price: replace €XX with actual price -->
-        <div class="plan-price">€XX <span>one-off</span></div>
-        <!-- Buy button: replace href="#" with payment link -->
-        <a href="#" class="buy-btn">
-          Buy Off-Season Plan
+        <!-- Buy button: replace href with payment link when ready -->
+        <a href="pb-one-to-one.html#apply" class="buy-btn">
+          Get This Plan
           <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
         </a>
       </div>
@@ -338,8 +333,7 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
             </div>
           </div>
           <div class="testi-body">
-            <p class="testi-quote">"Coming soon."</p>
-            <div class="testi-name">Athlete Name</div>
+            <div class="testi-name">GAA Player</div>
           </div>
         </div>
 
@@ -352,8 +346,7 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
             </div>
           </div>
           <div class="testi-body">
-            <p class="testi-quote">"Coming soon."</p>
-            <div class="testi-name">Athlete Name</div>
+            <div class="testi-name">GAA Player</div>
           </div>
         </div>
 
@@ -366,8 +359,7 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
             </div>
           </div>
           <div class="testi-body">
-            <p class="testi-quote">"Coming soon."</p>
-            <div class="testi-name">Athlete Name</div>
+            <div class="testi-name">GAA Player</div>
           </div>
         </div>
 
@@ -376,7 +368,7 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
   </section>
 </div>
 
-<footer>© 2025 PB Performance Coaching &nbsp;·&nbsp; <a href="pb-home.html" style="color:inherit">pbperformancecoaching.com</a></footer>
+<footer>© 2026 PB Performance Coaching &nbsp;·&nbsp; <a href="index.html" style="color:inherit">pbperformancecoaching.com</a></footer>
 
 <script>
 function showPlan(id, btn) {
@@ -384,8 +376,17 @@ function showPlan(id, btn) {
   document.querySelectorAll('.pnav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('panel-' + id).classList.add('active');
   btn.classList.add('active');
-  window.scrollTo({top: 0, behavior:'smooth'});
+  // Scroll to just below the sticky plan nav instead of jumping to top
+  const nav = document.getElementById('planNav');
+  const y = nav.getBoundingClientRect().bottom + window.scrollY;
+  window.scrollTo({top: y, behavior: 'smooth'});
 }
+
+// Scroll reveal (hero elements only — panel content is swap-shown)
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+}, {threshold: 0.08});
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
