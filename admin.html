@@ -18,7 +18,7 @@
 html,body{height:100%}
 body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased}
 
-/* ── SETUP SCREEN ── */
+/* ── LOGIN SCREEN ── */
 .setup{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem}
 .setup.hidden{display:none}
 .setup-card{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--teal);border-radius:16px;padding:2.8rem 2.4rem;width:100%;max-width:420px}
@@ -28,14 +28,13 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .setup-logo-sub{font-size:.55rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 .setup-title{font-size:1.5rem;font-weight:900;letter-spacing:-.025em;margin-bottom:.4rem}
 .setup-sub{font-size:.85rem;color:var(--muted);line-height:1.65;margin-bottom:1.8rem}
-.setup-sub a{color:var(--teal-b);text-decoration:none}
-.setup-sub a:hover{text-decoration:underline}
 .field{display:flex;flex-direction:column;gap:.3rem;margin-bottom:1rem}
 .field label{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
 .field input{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;color:var(--text);font-size:.92rem;font-family:inherit;outline:none;transition:border-color .15s}
 .field input:focus{border-color:var(--teal)}
 .setup-btn{width:100%;padding:.9rem;background:linear-gradient(135deg,#3e9db1,#25768a);color:#fff;font-size:.9rem;font-weight:800;letter-spacing:.04em;border:none;border-radius:8px;cursor:pointer;margin-top:.5rem;transition:background .2s}
-.setup-btn:hover{background:linear-gradient(135deg,#52c1d8,#3a8fa2)}
+.setup-btn:hover:not(:disabled){background:linear-gradient(135deg,#52c1d8,#3a8fa2)}
+.setup-btn:disabled{opacity:.6;cursor:not-allowed}
 .setup-error{font-size:.78rem;color:var(--danger);margin-top:.6rem;min-height:1.1em}
 
 /* ── EDITOR LAYOUT ── */
@@ -173,31 +172,6 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 </head>
 <body>
 
-<!-- DEVELOPER SETUP SCREEN (admin.html?setup=1) -->
-<div class="setup hidden" id="setupScreen">
-  <div class="setup-card">
-    <div class="setup-logo">
-      <img src="images/logo.jpg" alt="PB Performance Coaching">
-      <div>
-        <div class="setup-logo-name">PB Performance</div>
-        <div class="setup-logo-sub">Developer Setup</div>
-      </div>
-    </div>
-    <h1 class="setup-title">One-Time Setup</h1>
-    <p class="setup-sub">Enter the GitHub PAT and choose a password for Paddy. This will update the page automatically — you only do this once.</p>
-    <div class="field">
-      <label>GitHub PAT (repo scope)</label>
-      <input type="password" id="setupPat" placeholder="ghp_…" autocomplete="off" spellcheck="false">
-    </div>
-    <div class="field">
-      <label>Password for Paddy</label>
-      <input type="password" id="setupPassword" placeholder="Choose a password" autocomplete="new-password">
-    </div>
-    <button class="setup-btn" id="setupApplyBtn" onclick="applySetup()">Apply Setup →</button>
-    <p class="setup-error" id="setupError"></p>
-  </div>
-</div>
-
 <!-- LOGIN SCREEN -->
 <div class="setup" id="setup">
   <div class="setup-card">
@@ -214,7 +188,7 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
       <label>Password</label>
       <input type="password" id="passwordInput" placeholder="••••••••" autocomplete="current-password">
     </div>
-    <button class="setup-btn" onclick="checkPassword()">Sign In →</button>
+    <button class="setup-btn" id="loginBtn" onclick="checkPassword()">Sign In →</button>
     <p class="setup-error" id="loginError"></p>
   </div>
 </div>
@@ -294,59 +268,23 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 <div class="toast" id="toast"></div>
 
 <script>
-const REPO = 'pbwebsite/Website';
-const LABEL = 'article';
-const LS_AUTH = 'pb_admin_auth';
+// ── AUTH ──────────────────────────────────────────────────────────────────────
 
-// ── PAT encrypted with AES-256-GCM — safe to commit ─────────────────────────
-// Generate this blob by running in your browser console (on any page):
-//   encryptForSetup('ghp_YOUR_PAT', 'paddys_password').then(console.log)
-// Then paste the output below and commit.
-const ENCRYPTED_PAT = 'REPLACE_WITH_ENCRYPTED_BLOB';
-// ─────────────────────────────────────────────────────────────────────────────
-
-// Developer helper — run once in console to generate ENCRYPTED_PAT
-async function encryptForSetup(pat, password) {
-  const enc = new TextEncoder();
-  const salt = crypto.getRandomValues(new Uint8Array(16));
-  const iv   = crypto.getRandomValues(new Uint8Array(12));
-  const km   = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
-  const key  = await crypto.subtle.deriveKey(
-    {name:'PBKDF2', salt, iterations:100000, hash:'SHA-256'},
-    km, {name:'AES-GCM', length:256}, false, ['encrypt']
-  );
-  const ct  = await crypto.subtle.encrypt({name:'AES-GCM', iv}, key, enc.encode(pat));
-  const out = new Uint8Array(16 + 12 + ct.byteLength);
-  out.set(salt); out.set(iv, 16); out.set(new Uint8Array(ct), 28);
-  return btoa(String.fromCharCode(...out));
-}
-
-async function decryptPAT(blob, password) {
-  const data = Uint8Array.from(atob(blob), c => c.charCodeAt(0));
-  const salt = data.slice(0, 16), iv = data.slice(16, 28), ct = data.slice(28);
-  const enc  = new TextEncoder();
-  const km   = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
-  const key  = await crypto.subtle.deriveKey(
-    {name:'PBKDF2', salt, iterations:100000, hash:'SHA-256'},
-    km, {name:'AES-GCM', length:256}, false, ['decrypt']
-  );
-  const pt = await crypto.subtle.decrypt({name:'AES-GCM', iv}, key, ct);
-  return new TextDecoder().decode(pt);
-}
-
-function getToken() { return sessionStorage.getItem('pb_pat') || ''; }
+function getPassword() { return sessionStorage.getItem('pb_pw') || ''; }
 
 async function checkPassword() {
   const pwd = document.getElementById('passwordInput').value;
-  if (!pwd) { showError('Please enter your password.'); return; }
-  const btn = document.querySelector('.setup-btn');
+  if (!pwd) { showLoginError('Please enter your password.'); return; }
+  const btn = document.getElementById('loginBtn');
   btn.textContent = 'Checking…'; btn.disabled = true;
   try {
-    const token = await decryptPAT(ENCRYPTED_PAT, pwd);
-    sessionStorage.setItem('pb_pat', token);
+    const res = await api('/api/check', 'GET', null, pwd);
+    if (res.status === 401) { showLoginError('Incorrect password — try again.'); return; }
+    if (!res.ok) { showLoginError('Server error — try again.'); return; }
+    sessionStorage.setItem('pb_pw', pwd);
     showEditor();
   } catch(e) {
-    showError('Incorrect password — try again.');
+    showLoginError('Could not connect — try again.');
   } finally {
     btn.textContent = 'Sign In →'; btn.disabled = false;
   }
@@ -354,7 +292,7 @@ async function checkPassword() {
 
 function logout() {
   if (!confirm('Log out?')) return;
-  sessionStorage.removeItem('pb_pat');
+  sessionStorage.removeItem('pb_pw');
   location.reload();
 }
 
@@ -365,112 +303,22 @@ function showEditor() {
   ensureLabel();
 }
 
-function showError(msg) {
+function showLoginError(msg) {
   document.getElementById('loginError').textContent = msg;
 }
 
-async function applySetup() {
-  const pat = document.getElementById('setupPat').value.trim();
-  const pwd = document.getElementById('setupPassword').value.trim();
-  const errEl = document.getElementById('setupError');
-  errEl.textContent = '';
-  if (!pat || !pwd) { errEl.textContent = 'Fill in both fields.'; return; }
+// ── API HELPER ────────────────────────────────────────────────────────────────
 
-  const btn = document.getElementById('setupApplyBtn');
-  btn.textContent = 'Applying…'; btn.disabled = true;
-
-  try {
-    // 1. Encrypt the PAT with the chosen password
-    const encrypted = await encryptForSetup(pat, pwd);
-
-    // 2. Fetch current admin.html from GitHub to get its SHA
-    const getRes = await fetch(`https://api.github.com/repos/${REPO}/contents/admin.html`, {
-      headers: { 'Authorization': `token ${pat}`, 'Accept': 'application/vnd.github.v3+json' }
-    });
-    if (!getRes.ok) {
-      const d = await getRes.json().catch(() => ({}));
-      throw new Error(d.message || `Could not read admin.html (${getRes.status}) — check the PAT has repo access`);
+async function api(path, method = 'GET', body = null, pw = null) {
+  const opts = {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Admin-Password': pw || getPassword(),
     }
-    const fileData = await getRes.json();
-
-    // 3. Decode content, replace the blob placeholder (or previous blob)
-    const current = new TextDecoder().decode(Uint8Array.from(atob(fileData.content.replace(/\n/g,'')), c => c.charCodeAt(0)));
-    const updated = current.replace(/const ENCRYPTED_PAT = '[^']*'/, `const ENCRYPTED_PAT = '${encrypted}'`);
-    if (updated === current) throw new Error('Placeholder not found in admin.html — has the file been modified?');
-
-    // 4. Push the updated file back to GitHub
-    const enc = new TextEncoder();
-    const bytes = enc.encode(updated);
-    const b64 = btoa(String.fromCharCode(...bytes));
-    const putRes = await fetch(`https://api.github.com/repos/${REPO}/contents/admin.html`, {
-      method: 'PUT',
-      headers: { 'Authorization': `token ${pat}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: 'Admin: update encrypted credentials', content: b64, sha: fileData.sha })
-    });
-    if (!putRes.ok) {
-      const d = await putRes.json().catch(() => ({}));
-      throw new Error(d.message || `Could not update admin.html (${putRes.status})`);
-    }
-
-    btn.textContent = 'Done! Reloading in 5 s…';
-    errEl.style.color = 'var(--teal-b)';
-    errEl.textContent = 'Setup complete. Paddy can now log in with the password you set.';
-    setTimeout(() => location.href = location.pathname, 5000);
-  } catch(e) {
-    errEl.textContent = e.message;
-    btn.textContent = 'Apply Setup →'; btn.disabled = false;
-  }
-}
-
-function showUploadError(msg) {
-  console.error('[Admin] Upload error:', msg);
-  // Show error in a persistent banner above the toolbar
-  let banner = document.getElementById('uploadErrorBanner');
-  if (!banner) {
-    banner = document.createElement('div');
-    banner.id = 'uploadErrorBanner';
-    banner.style.cssText = 'background:rgba(224,82,82,.12);border-bottom:1px solid rgba(224,82,82,.3);color:#e05252;font-size:.75rem;font-weight:700;padding:.55rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-shrink:0';
-    const toolbar = document.querySelector('.toolbar');
-    toolbar.parentNode.insertBefore(banner, toolbar);
-  }
-  banner.innerHTML = `<span>⚠ ${msg}</span><button onclick="this.parentNode.remove()" style="background:none;border:none;color:inherit;cursor:pointer;font-size:1rem;line-height:1;padding:0">✕</button>`;
-}
-
-// ── INIT ──────────────────────────────────────────────────────────────────────
-
-window.addEventListener('DOMContentLoaded', () => {
-  if (new URLSearchParams(location.search).has('setup')) {
-    document.getElementById('setup').classList.add('hidden');
-    document.getElementById('setupScreen').classList.remove('hidden');
-    return;
-  }
-  if (sessionStorage.getItem('pb_pat')) { showEditor(); return; }
-  document.getElementById('passwordInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') checkPassword();
-  });
-});
-
-// ── TOOLBAR HELPERS ───────────────────────────────────────────────────────────
-
-function wrap(before, after) {
-  const ta = document.getElementById('bodyTextarea');
-  const start = ta.selectionStart, end = ta.selectionEnd;
-  const sel = ta.value.substring(start, end) || 'text';
-  const replacement = before + sel + after;
-  ta.setRangeText(replacement, start, end, 'end');
-  ta.focus();
-  updatePreview();
-}
-
-function insertLine(prefix) {
-  const ta = document.getElementById('bodyTextarea');
-  const pos = ta.selectionStart;
-  const before = ta.value.lastIndexOf('\n', pos - 1) + 1;
-  const lineStart = ta.value.substring(before, pos);
-  const insertion = (pos === 0 || ta.value[pos-1] === '\n' ? '' : '\n') + prefix;
-  ta.setRangeText(insertion, pos, pos, 'end');
-  ta.focus();
-  updatePreview();
+  };
+  if (body) opts.body = JSON.stringify(body);
+  return fetch(path, opts);
 }
 
 // ── IMAGE UPLOAD ──────────────────────────────────────────────────────────────
@@ -483,20 +331,13 @@ async function uploadImage(input) {
 
   try {
     const base64 = await toBase64(file);
-    const name = `articles/${Date.now()}-${file.name.replace(/[^a-z0-9.]/gi, '-').toLowerCase()}`;
-    const res = await ghFetch(
-      `https://api.github.com/repos/${REPO}/contents/images/${name}`,
-      getToken(),
-      'PUT',
-      { message: `Upload image: ${file.name}`, content: base64.split(',')[1] }
-    );
+    const res = await api('/api/upload-image', 'POST', {
+      content: base64.split(',')[1],
+      filename: file.name
+    });
     if (!res.ok) {
-      let msg = `HTTP ${res.status}`;
-      try { const d = await res.json(); if (d.message) msg = d.message; } catch(_) {}
-      if (res.status === 404) msg = 'No repo write access — token must be from a GitHub account with write access to pbwebsite/Website';
-      if (res.status === 401) msg = 'Invalid token — log out and re-enter your GitHub token';
-      if (res.status === 403) msg = 'Token needs "repo" scope — log out and generate a new token';
-      throw new Error(msg);
+      const d = await res.json().catch(() => ({}));
+      throw new Error(d.error || `Upload failed (${res.status})`);
     }
     const data = await res.json();
     const url = data.content?.download_url;
@@ -508,7 +349,6 @@ async function uploadImage(input) {
     updatePreview();
     toast('Image uploaded ✓', 'success');
   } catch(e) {
-    console.error('[Admin] Image upload failed:', e.message);
     showUploadError(e.message);
   } finally {
     label.classList.remove('tb-img-uploading');
@@ -525,6 +365,18 @@ function toBase64(file) {
   });
 }
 
+function showUploadError(msg) {
+  let banner = document.getElementById('uploadErrorBanner');
+  if (!banner) {
+    banner = document.createElement('div');
+    banner.id = 'uploadErrorBanner';
+    banner.style.cssText = 'background:rgba(224,82,82,.12);border-bottom:1px solid rgba(224,82,82,.3);color:#e05252;font-size:.75rem;font-weight:700;padding:.55rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-shrink:0';
+    const toolbar = document.querySelector('.toolbar');
+    toolbar.parentNode.insertBefore(banner, toolbar);
+  }
+  banner.innerHTML = `<span>⚠ ${msg}</span><button onclick="this.parentNode.remove()" style="background:none;border:none;color:inherit;cursor:pointer;font-size:1rem;line-height:1;padding:0">✕</button>`;
+}
+
 // ── PUBLISH ───────────────────────────────────────────────────────────────────
 
 async function publishArticle() {
@@ -538,20 +390,12 @@ async function publishArticle() {
   btn.disabled = true;
 
   try {
-    const res = await ghFetch(
-      `https://api.github.com/repos/${REPO}/issues`,
-      getToken(), 'POST',
-      { title, body, labels: [LABEL] }
-    );
+    const res = await api('/api/publish', 'POST', { title, body });
     if (!res.ok) {
-      let msg = `HTTP ${res.status}`;
-      try { const d = await res.json(); if (d.message) msg = d.message; } catch(_) {}
-      if (res.status === 404) msg = 'No write access — log out and use a token from an account with write access to pbwebsite/Website';
-      if (res.status === 401) msg = 'Invalid or expired token — log out and re-enter your GitHub token';
-      throw new Error(msg);
+      const d = await res.json().catch(() => ({}));
+      throw new Error(d.error || `Publish failed (${res.status})`);
     }
     const issue = await res.json();
-
     toast('Article published! ✓', 'success');
     setTimeout(() => {
       if (confirm('Article is live!\n\nOpen it on the site?')) {
@@ -567,6 +411,10 @@ async function publishArticle() {
     btn.classList.remove('publish-btn--loading');
     btn.disabled = false;
   }
+}
+
+async function ensureLabel() {
+  try { await api('/api/ensure-label', 'POST'); } catch(_) {}
 }
 
 // ── PREVIEW ───────────────────────────────────────────────────────────────────
@@ -644,30 +492,25 @@ function parseMarkdown(md) {
   return out.join('\n');
 }
 
-// ── GITHUB FETCH ──────────────────────────────────────────────────────────────
+// ── TOOLBAR HELPERS ───────────────────────────────────────────────────────────
 
-async function ghFetch(url, token, method='GET', body=null) {
-  const opts = {
-    method,
-    headers: {
-      'Authorization': `token ${token || getToken()}`,
-      'Accept': 'application/vnd.github.v3+json',
-      'Content-Type': 'application/json',
-    }
-  };
-  if (body) opts.body = JSON.stringify(body);
-  return fetch(url, opts);
+function wrap(before, after) {
+  const ta = document.getElementById('bodyTextarea');
+  const start = ta.selectionStart, end = ta.selectionEnd;
+  const sel = ta.value.substring(start, end) || 'text';
+  const replacement = before + sel + after;
+  ta.setRangeText(replacement, start, end, 'end');
+  ta.focus();
+  updatePreview();
 }
 
-async function ensureLabel() {
-  try {
-    const res = await ghFetch(`https://api.github.com/repos/${REPO}/labels/${LABEL}`);
-    if (res.status === 404) {
-      await ghFetch(`https://api.github.com/repos/${REPO}/labels`, getToken(), 'POST', {
-        name: LABEL, color: '3a8fa2', description: 'Published article'
-      });
-    }
-  } catch(_) {}
+function insertLine(prefix) {
+  const ta = document.getElementById('bodyTextarea');
+  const pos = ta.selectionStart;
+  const insertion = (pos === 0 || ta.value[pos-1] === '\n' ? '' : '\n') + prefix;
+  ta.setRangeText(insertion, pos, pos, 'end');
+  ta.focus();
+  updatePreview();
 }
 
 // ── TOAST ─────────────────────────────────────────────────────────────────────
@@ -680,6 +523,15 @@ function toast(msg, type='success') {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => { el.classList.remove('show'); }, 3200);
 }
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (getPassword()) { showEditor(); return; }
+  document.getElementById('passwordInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') checkPassword();
+  });
+});
 </script>
 </body>
 </html>
