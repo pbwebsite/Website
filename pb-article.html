@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article | PB Performance Coaching</title>
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1c20;--surface:#121f25;--card:#182630;--card-h:#1d3039;
+  --border:#25383f;--border-s:#2e4650;
+  --teal:#3a8fa2;--teal-b:#4db8d0;--teal-d:#2D6E7E;
+  --text:#dde8ea;--muted:#7dabb4;--dim:#3d6470;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;background:rgba(13,28,32,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav__logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--text)}
+.logo-text{display:flex;flex-direction:column;gap:0}
+.logo-name{font-size:.74rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;line-height:1.1}
+.logo-sub{font-size:.52rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);line-height:1.3}
+.nav__right{display:flex;align-items:center;gap:.6rem}
+.nav__back{display:flex;align-items:center;gap:.4rem;font-size:.74rem;font-weight:700;color:var(--muted);text-decoration:none;transition:color .15s}
+.nav__back:hover{color:var(--text)}
+.nav__cta{padding:.5rem 1.2rem;background:linear-gradient(135deg,#3e9db1,#25768a);color:#fff;font-size:.74rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;border-radius:6px;box-shadow:0 2px 10px rgba(58,143,162,.34);transition:background .2s,box-shadow .2s,transform .15s}
+.nav__cta:hover{background:linear-gradient(135deg,#52c1d8,#3a8fa2);box-shadow:0 4px 18px rgba(58,143,162,.52);transform:translateY(-1px)}
+@media(max-width:380px){.logo-text{display:none}}
+
+/* COVER IMAGE */
+.art-cover{
+  position:relative;min-height:48svh;
+  background-size:cover;background-position:center;
+  display:flex;align-items:flex-end;
+  margin-top:0;
+}
+.art-cover__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,28,32,.1) 0%,rgba(13,28,32,.3) 50%,rgba(13,28,32,.92) 90%,#0d1c20 100%)}
+
+/* ARTICLE HEADER */
+.art-header{padding:5.5rem 1.5rem 2.5rem;background:var(--surface);border-bottom:1px solid var(--border)}
+.art-header--with-cover{padding:2.5rem 1.5rem 2.5rem;background:transparent;border-bottom:1px solid var(--border);margin-top:-1px}
+.art-header__inner{max-width:720px;margin:0 auto}
+.art-back{display:inline-flex;align-items:center;gap:.4rem;font-size:.72rem;font-weight:700;color:var(--dim);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.4rem;transition:color .15s}
+.art-back:hover{color:var(--teal-b)}
+.art-date{font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.75rem}
+.art-title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:1.4rem;text-wrap:balance}
+.art-author{display:flex;align-items:center;gap:.9rem}
+.art-author__img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:1.5px solid var(--teal);filter:saturate(.88);flex-shrink:0}
+.art-author__name{font-size:.82rem;font-weight:800;letter-spacing:-.01em}
+.art-author__role{font-size:.62rem;color:var(--dim);letter-spacing:.04em;margin-top:.1rem}
+
+/* ARTICLE BODY */
+.art-body-section{padding:3rem 1.5rem 5rem}
+.art-body-inner{max-width:720px;margin:0 auto}
+.art-body{font-size:1rem;color:var(--muted);line-height:1.85}
+.art-body p{margin:.9rem 0}
+.art-body h2{font-size:1.35rem;font-weight:900;color:var(--text);letter-spacing:-.025em;margin:2.2rem 0 .65rem;line-height:1.2}
+.art-body h3{font-size:1.1rem;font-weight:800;color:var(--text);letter-spacing:-.015em;margin:1.8rem 0 .5rem}
+.art-body strong{color:var(--text);font-weight:700}
+.art-body em{font-style:italic}
+.art-body a{color:var(--teal-b);text-decoration:underline;text-underline-offset:3px}
+.art-body ul,.art-body ol{padding-left:1.4rem;margin:.8rem 0;display:flex;flex-direction:column;gap:.35rem}
+.art-body li{line-height:1.7}
+.art-body blockquote{border-left:3px solid var(--teal);padding:.5rem 1.1rem;color:var(--muted);font-style:italic;margin:1.4rem 0;background:rgba(58,143,162,.05);border-radius:0 8px 8px 0}
+.art-body hr{border:none;border-top:1px solid var(--border);margin:2rem 0}
+.art-body img{max-width:100%;border-radius:10px;margin:1.5rem 0;display:block}
+.art-body pre{background:rgba(0,0,0,.35);border:1px solid var(--border);border-radius:8px;padding:1.2rem;overflow-x:auto;margin:1.2rem 0;font-size:.84rem}
+.art-body code{background:rgba(255,255,255,.06);padding:.15em .4em;border-radius:4px;font-size:.87em}
+.art-body pre code{background:none;padding:0;font-size:inherit}
+
+/* AUTHOR BIO */
+.art-bio{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2.5rem 1.5rem}
+.art-bio__inner{max-width:720px;margin:0 auto;display:flex;gap:1.4rem;align-items:flex-start}
+.art-bio__img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--teal);filter:saturate(.88);flex-shrink:0}
+.art-bio__name{font-size:.92rem;font-weight:900;letter-spacing:-.01em;margin-bottom:.15rem}
+.art-bio__role{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:.6rem}
+.art-bio__text{font-size:.82rem;color:var(--muted);line-height:1.72}
+@media(max-width:480px){.art-bio__inner{flex-direction:column}}
+
+/* APPLY CTA */
+.apply-cta{background:linear-gradient(160deg,#091316,var(--bg));border-top:1px solid var(--border);padding:5rem 1.5rem;text-align:center}
+.apply-cta__inner{max-width:500px;margin:0 auto}
+.apply-cta__eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.65rem}
+.apply-cta__title{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:.8rem}
+.apply-cta__body{font-size:.9rem;color:var(--muted);line-height:1.75;margin-bottom:1.8rem}
+.btn-fill{display:inline-flex;align-items:center;gap:.55rem;padding:.88rem 1.9rem;background:linear-gradient(135deg,#3e9db1 0%,#25768a 100%);color:#fff;font-weight:800;font-size:.88rem;letter-spacing:.04em;text-decoration:none;border-radius:8px;box-shadow:0 4px 16px rgba(58,143,162,.3),0 1px 3px rgba(0,0,0,.3);transition:background .2s,transform .15s,box-shadow .2s;position:relative;overflow:hidden}
+.btn-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.13) 0%,transparent 55%);pointer-events:none}
+.btn-fill:hover{background:linear-gradient(135deg,#52c1d8 0%,#3a8fa2 100%);transform:translateY(-2px);box-shadow:0 8px 28px rgba(58,143,162,.46)}
+
+/* LOADING / ERROR */
+.art-state{text-align:center;padding:6rem 1.5rem;color:var(--muted)}
+.spinner{width:28px;height:28px;border:2.5px solid var(--border);border-top-color:var(--teal);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 1rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav__logo" href="index.html">
+    <img src="images/logo.jpg" width="46" height="46" alt="PB Performance Coaching">
+    <div class="logo-text">
+      <span class="logo-name">PB Performance</span>
+      <span class="logo-sub">Coaching</span>
+    </div>
+  </a>
+  <div class="nav__right">
+    <a class="nav__back" href="pb-articles.html">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      Articles
+    </a>
+    <a class="nav__cta" href="pb-one-to-one.html#apply">Apply Now</a>
+  </div>
+</nav>
+
+<div id="art-cover-slot"></div>
+<div id="art-header-slot">
+  <div style="margin-top:4rem" class="art-state">
+    <div class="spinner"></div>
+    <p>Loading article…</p>
+  </div>
+</div>
+<div id="art-body-slot"></div>
+<div id="art-bio-slot"></div>
+<div id="art-cta-slot"></div>
+
+<footer>© 2026 PB Performance Coaching &nbsp;·&nbsp; <a href="index.html" style="color:inherit">pbperformancecoaching.com</a></footer>
+
+<script>
+const REPO = 'pbwebsite/Website';
+
+function parseMarkdown(md) {
+  if (!md) return '';
+  const lines = md.split('\n');
+  const out = [];
+  let inUl = false, inOl = false, inCode = false, codeBuf = [], codeLang = '';
+
+  function closeList() {
+    if (inUl) { out.push('</ul>'); inUl = false; }
+    if (inOl) { out.push('</ol>'); inOl = false; }
+  }
+
+  function inline(text) {
+    return text
+      .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" loading="lazy">')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+      .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>');
+  }
+
+  for (let i = 0; i < lines.length; i++) {
+    const raw = lines[i];
+
+    if (raw.startsWith('```')) {
+      if (!inCode) {
+        closeList();
+        inCode = true;
+        codeLang = raw.slice(3).trim();
+        codeBuf = [];
+      } else {
+        inCode = false;
+        out.push(`<pre><code>${codeBuf.join('\n')}</code></pre>`);
+      }
+      continue;
+    }
+
+    if (inCode) {
+      codeBuf.push(raw.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'));
+      continue;
+    }
+
+    const esc = raw.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+    if (esc.trim() === '') { closeList(); continue; }
+    if (/^---+$/.test(raw)) { closeList(); out.push('<hr>'); continue; }
+
+    if (/^> /.test(raw)) {
+      closeList();
+      out.push(`<blockquote>${inline(esc.replace(/^&gt; /,''))}</blockquote>`);
+    } else if (/^### /.test(raw)) {
+      closeList();
+      out.push(`<h3>${inline(esc.replace(/^### /,''))}</h3>`);
+    } else if (/^## /.test(raw)) {
+      closeList();
+      out.push(`<h2>${inline(esc.replace(/^## /,''))}</h2>`);
+    } else if (/^# /.test(raw)) {
+      closeList();
+      out.push(`<h2>${inline(esc.replace(/^# /,''))}</h2>`);
+    } else if (/^[-*] /.test(raw)) {
+      if (inOl) { out.push('</ol>'); inOl = false; }
+      if (!inUl) { out.push('<ul>'); inUl = true; }
+      out.push(`<li>${inline(esc.replace(/^[-*] /,''))}</li>`);
+    } else if (/^\d+\. /.test(raw)) {
+      if (inUl) { out.push('</ul>'); inUl = false; }
+      if (!inOl) { out.push('<ol>'); inOl = true; }
+      out.push(`<li>${inline(esc.replace(/^\d+\. /,''))}</li>`);
+    } else {
+      closeList();
+      out.push(`<p>${inline(esc)}</p>`);
+    }
+  }
+
+  closeList();
+  if (inCode) out.push(`<pre><code>${codeBuf.join('\n')}</code></pre>`);
+  return out.join('\n');
+}
+
+function extractFirstImage(body) {
+  if (!body) return null;
+  const m = body.match(/!\[.*?\]\((https?:\/\/[^)]+)\)/);
+  return m ? m[1] : null;
+}
+
+function formatDate(iso) {
+  return new Date(iso).toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
+}
+
+async function loadArticle() {
+  const id = new URLSearchParams(location.search).get('id');
+  if (!id) { location.href = 'pb-articles.html'; return; }
+
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${REPO}/issues/${id}`,
+      {headers: {'Accept': 'application/vnd.github.v3+json'}}
+    );
+    if (!res.ok) throw new Error(res.status);
+    const issue = await res.json();
+    renderArticle(issue);
+  } catch(err) {
+    document.getElementById('art-header-slot').innerHTML =
+      '<div class="art-state"><p>Article not found.<br><a href="pb-articles.html" style="color:var(--teal-b)">Back to Articles</a></p></div>';
+  }
+}
+
+function renderArticle(issue) {
+  const coverImg = extractFirstImage(issue.body);
+  const date = formatDate(issue.created_at);
+  const html = parseMarkdown(issue.body || '');
+
+  document.title = `${issue.title} | PB Performance Coaching`;
+
+  if (coverImg) {
+    document.getElementById('art-cover-slot').innerHTML =
+      `<div class="art-cover" style="background-image:url('${coverImg}');margin-top:4rem">
+         <div class="art-cover__g"></div>
+       </div>`;
+  }
+
+  const headerClass = coverImg ? 'art-header--with-cover' : 'art-header';
+  document.getElementById('art-header-slot').innerHTML = `
+    <div class="${headerClass}">
+      <div class="art-header__inner">
+        <a href="pb-articles.html" class="art-back">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          All Articles
+        </a>
+        <div class="art-date">${date}</div>
+        <h1 class="art-title">${issue.title}</h1>
+        <div class="art-author">
+          <img src="images/paddy-bench.jpg" alt="Paddy Burke" class="art-author__img">
+          <div>
+            <div class="art-author__name">Paddy Burke</div>
+            <div class="art-author__role">MSc Performance Coaching · Antrim Senior Hurler</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  document.getElementById('art-body-slot').innerHTML = `
+    <section class="art-body-section">
+      <div class="art-body-inner">
+        <div class="art-body">${html}</div>
+      </div>
+    </section>`;
+
+  document.getElementById('art-bio-slot').innerHTML = `
+    <div class="art-bio">
+      <div class="art-bio__inner">
+        <img src="images/hurling-portrait.jpg" alt="Paddy Burke" class="art-bio__img">
+        <div>
+          <div class="art-bio__name">Paddy Burke</div>
+          <div class="art-bio__role">MSc Performance Coaching · Antrim Senior Hurler</div>
+          <p class="art-bio__text">Paddy graduated with an MSc in Performance Coaching from Setanta College while on the Antrim Senior Hurling panel. Every programme and article comes from what actually works for GAA players — not generic gym theory.</p>
+        </div>
+      </div>
+    </div>`;
+
+  document.getElementById('art-cta-slot').innerHTML = `
+    <section class="apply-cta">
+      <div class="apply-cta__inner">
+        <p class="apply-cta__eyebrow">1-on-1 Coaching</p>
+        <h2 class="apply-cta__title">Want Paddy to Coach You Directly?</h2>
+        <p class="apply-cta__body">Apply below and Paddy will get back to you within 24 hours to set up a free call.</p>
+        <a href="pb-one-to-one.html#apply" class="btn-fill">
+          Apply Now — Free Call First
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </section>`;
+}
+
+loadArticle();
+</script>
+</body>
+</html>

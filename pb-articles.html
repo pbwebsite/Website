@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Articles | PB Performance Coaching</title>
+<meta name="description" content="Training tips, GAA insights, and performance coaching articles from Paddy Burke — Antrim Senior Hurler and MSc Performance Coach.">
+<link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1c20;--surface:#121f25;--card:#182630;--card-h:#1d3039;
+  --border:#25383f;--border-s:#2e4650;
+  --teal:#3a8fa2;--teal-b:#4db8d0;--teal-d:#2D6E7E;
+  --text:#dde8ea;--muted:#7dabb4;--dim:#3d6470;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;background:rgba(13,28,32,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav__logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--text)}
+.logo-text{display:flex;flex-direction:column;gap:0}
+.logo-name{font-size:.74rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;line-height:1.1}
+.logo-sub{font-size:.52rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);line-height:1.3}
+.nav__links{display:flex;align-items:center;gap:.25rem}
+.nav__link{font-size:.74rem;font-weight:700;color:var(--text);text-decoration:none;padding:.42rem .8rem;border-radius:5px;letter-spacing:.03em;transition:color .15s,background .15s}
+.nav__link:hover{color:#fff;background:rgba(255,255,255,.07)}
+.nav__link--active{color:var(--teal-b)}
+.nav__cta{padding:.5rem 1.2rem;background:linear-gradient(135deg,#3e9db1,#25768a);color:#fff;font-size:.74rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;border-radius:6px;box-shadow:0 2px 10px rgba(58,143,162,.34);transition:background .2s,box-shadow .2s,transform .15s}
+.nav__cta:hover{background:linear-gradient(135deg,#52c1d8,#3a8fa2);box-shadow:0 4px 18px rgba(58,143,162,.52);transform:translateY(-1px)}
+@media(max-width:380px){.logo-text{display:none}}
+@media(max-width:600px){.nav__link{display:none}}
+
+/* PAGE HERO */
+.page-hero{padding:7rem 1.5rem 3.5rem;background:var(--surface);border-bottom:1px solid var(--border)}
+.page-hero__inner{max-width:960px;margin:0 auto}
+.s-eyebrow{font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.6rem}
+.page-hero__h{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:900;letter-spacing:-.03em;line-height:1;margin-bottom:.7rem;text-wrap:balance}
+.page-hero__sub{font-size:.95rem;color:var(--muted);line-height:1.78;max-width:48ch}
+
+/* ARTICLES SECTION */
+.articles-section{padding:3.5rem 1.5rem 6rem}
+.articles-inner{max-width:960px;margin:0 auto}
+
+/* GRID */
+.articles-grid{display:grid;grid-template-columns:1fr;gap:1.5rem}
+@media(min-width:560px){.articles-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:860px){.articles-grid{grid-template-columns:repeat(3,1fr)}}
+
+/* ARTICLE CARD */
+.article-card{
+  display:flex;flex-direction:column;
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  text-decoration:none;color:var(--text);overflow:hidden;
+  transition:border-color .25s,transform .3s var(--ease),box-shadow .25s;
+}
+.article-card:hover{
+  border-color:rgba(58,143,162,.4);
+  transform:translateY(-4px);
+  box-shadow:0 14px 40px rgba(0,0,0,.45),0 0 0 1px rgba(58,143,162,.12);
+}
+.article-card__img{
+  width:100%;aspect-ratio:16/9;background-size:cover;background-position:center;
+  filter:saturate(.82) brightness(.78);
+  transition:filter .4s;
+}
+.article-card:hover .article-card__img{filter:saturate(.92) brightness(.88)}
+.article-card__img--placeholder{
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#0c1a20,var(--card));
+  color:var(--dim);
+}
+.article-card__body{padding:1.3rem 1.4rem 1.5rem;display:flex;flex-direction:column;flex:1}
+.article-card__date{font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:.55rem}
+.article-card__title{font-size:1.02rem;font-weight:900;letter-spacing:-.02em;line-height:1.25;margin-bottom:.55rem;text-wrap:balance}
+.article-card__excerpt{font-size:.8rem;color:var(--muted);line-height:1.65;flex:1;margin-bottom:1rem}
+.article-card__cta{font-size:.68rem;font-weight:800;color:var(--teal-b);letter-spacing:.06em;display:flex;align-items:center;gap:.35rem;transition:gap .2s;margin-top:auto}
+.article-card:hover .article-card__cta{gap:.6rem}
+
+/* STATES */
+.articles-state{text-align:center;padding:5rem 1rem;color:var(--muted)}
+.articles-state p{font-size:.9rem;line-height:1.7}
+.spinner{width:28px;height:28px;border:2.5px solid var(--border);border-top-color:var(--teal);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 1rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav__logo" href="index.html">
+    <img src="images/logo.jpg" width="46" height="46" alt="PB Performance Coaching">
+    <div class="logo-text">
+      <span class="logo-name">PB Performance</span>
+      <span class="logo-sub">Coaching</span>
+    </div>
+  </a>
+  <div class="nav__links">
+    <a class="nav__link" href="pb-one-to-one.html">1-on-1</a>
+    <a class="nav__link" href="pb-plans.html">Plans</a>
+    <a class="nav__link nav__link--active" href="pb-articles.html">Articles</a>
+    <a class="nav__cta" href="pb-one-to-one.html#apply">Apply Now</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero__inner">
+    <p class="s-eyebrow">From Paddy</p>
+    <h1 class="page-hero__h">Articles</h1>
+    <p class="page-hero__sub">Training tips, GAA insights, and notes from the field — written by Paddy.</p>
+  </div>
+</section>
+
+<section class="articles-section">
+  <div class="articles-inner">
+    <div id="articles-grid" class="articles-grid">
+      <div class="articles-state" style="grid-column:1/-1">
+        <div class="spinner"></div>
+        <p>Loading articles…</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 PB Performance Coaching &nbsp;·&nbsp; <a href="index.html" style="color:inherit">pbperformancecoaching.com</a></footer>
+
+<script>
+const REPO = 'pbwebsite/Website';
+
+function extractFirstImage(body) {
+  if (!body) return null;
+  const m = body.match(/!\[.*?\]\((https?:\/\/[^)]+)\)/);
+  return m ? m[1] : null;
+}
+
+function getExcerpt(body) {
+  if (!body) return '';
+  return body
+    .replace(/!\[.*?\]\(.*?\)/g, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/#{1,6} /g, '')
+    .replace(/[*`_>~]/g, '')
+    .replace(/\r?\n+/g, ' ')
+    .trim()
+    .substring(0, 180)
+    .trim() + '…';
+}
+
+function formatDate(iso) {
+  return new Date(iso).toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
+}
+
+async function loadArticles() {
+  const grid = document.getElementById('articles-grid');
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${REPO}/issues?labels=article&state=open&per_page=50&sort=created&direction=desc`,
+      {headers: {'Accept': 'application/vnd.github.v3+json'}}
+    );
+    if (!res.ok) throw new Error(`${res.status}`);
+    const issues = await res.json();
+
+    if (!issues.length) {
+      grid.innerHTML = '<div class="articles-state" style="grid-column:1/-1"><p>No articles yet — check back soon.</p></div>';
+      return;
+    }
+
+    grid.innerHTML = issues.map(issue => {
+      const img = extractFirstImage(issue.body);
+      const excerpt = getExcerpt(issue.body);
+      const date = formatDate(issue.created_at);
+      const imgHtml = img
+        ? `<div class="article-card__img" style="background-image:url('${img}')"></div>`
+        : `<div class="article-card__img article-card__img--placeholder">
+             <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.3">
+               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+             </svg>
+           </div>`;
+      return `
+        <a href="pb-article.html?id=${issue.number}" class="article-card">
+          ${imgHtml}
+          <div class="article-card__body">
+            <div class="article-card__date">${date}</div>
+            <h2 class="article-card__title">${issue.title}</h2>
+            <p class="article-card__excerpt">${excerpt}</p>
+            <span class="article-card__cta">Read Article
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </a>`;
+    }).join('');
+  } catch(err) {
+    grid.innerHTML = `<div class="articles-state" style="grid-column:1/-1"><p>Couldn't load articles right now.<br>Try refreshing the page.</p></div>`;
+  }
+}
+
+loadArticles();
+</script>
+</body>
+</html>
