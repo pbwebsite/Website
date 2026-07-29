@@ -6,6 +6,8 @@
 <title>PB Performance Coaching | GAA S&C</title>
 <meta name="description" content="Online GAA Strength & Conditioning coaching from Paddy Burke — Antrim Senior Hurler and MSc Performance Coach.">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -77,16 +79,14 @@ nav{
 }
 .hero__bg{
   position:absolute;inset:0;
-  background:url('images/hurling-portrait.jpg') center 15%/cover no-repeat;
-  filter:saturate(.75) contrast(1.1) brightness(.55);
+  background:url('images/hurling-portrait.jpg') center 12%/cover no-repeat;
+  filter:saturate(.82) contrast(1.08) brightness(.72);
   transform:scale(1.03);transition:transform 12s ease;
 }
 .hero:hover .hero__bg{transform:scale(1)}
 .hero__g{
   position:absolute;inset:0;
-  background:
-    linear-gradient(to right,rgba(13,28,32,.96) 0%,rgba(13,28,32,.82) 42%,rgba(13,28,32,.32) 72%,rgba(13,28,32,.1) 100%),
-    linear-gradient(to bottom,rgba(13,28,32,.06) 0%,rgba(13,28,32,.14) 40%,rgba(13,28,32,.82) 80%,#0d1c20 100%);
+  background:linear-gradient(to bottom,rgba(13,28,32,.08) 0%,rgba(13,28,32,.18) 35%,rgba(13,28,32,.78) 68%,#0d1c20 100%);
 }
 .hero__c{
   position:relative;z-index:2;width:100%;
@@ -100,8 +100,9 @@ nav{
   margin-bottom:1rem;animation:fadeUp .9s ease both;
 }
 .hero__h{
-  font-size:clamp(2rem,5.5vw,3.8rem);font-weight:900;
-  letter-spacing:-.032em;line-height:1.0;
+  font-family:'Bebas Neue',Arial,sans-serif;
+  font-size:clamp(4rem,10vw,8rem);font-weight:400;
+  letter-spacing:.04em;line-height:.95;
   margin-bottom:.85rem;text-wrap:balance;
   animation:fadeUp .9s .07s ease both;
 }
@@ -125,10 +126,10 @@ nav{
   animation:fadeUp .9s .27s ease both;
 }
 @media(min-width:700px){
-  .hero__c{text-align:left;margin-left:4vw;max-width:520px}
-  .hero__sub{margin:0 0 1.3rem;max-width:40ch}
-  .hero__cred{justify-content:flex-start}
-  .hero__ctas{justify-content:flex-start}
+  .hero__c{text-align:center;max-width:800px}
+  .hero__sub{margin:0 auto 1.3rem;max-width:46ch}
+  .hero__cred{justify-content:center}
+  .hero__ctas{justify-content:center}
 }
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 
@@ -176,7 +177,7 @@ nav{
 .work{padding:5rem 1.5rem 6rem}
 .work-inner{max-width:1160px;margin:0 auto}
 .s-eyebrow{font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.65rem}
-.s-title{font-size:clamp(1.75rem,4vw,2.8rem);font-weight:900;letter-spacing:-.03em;line-height:1.06;margin-bottom:.7rem;text-wrap:balance}
+.s-title{font-family:'Bebas Neue',Arial,sans-serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:400;letter-spacing:.04em;line-height:1;margin-bottom:.7rem;text-wrap:balance}
 .s-body{font-size:.95rem;color:var(--muted);max-width:50ch;line-height:1.78;margin-bottom:2.5rem}
 
 /* ── OFFER LAYOUT: mobile-first ── */
@@ -192,11 +193,11 @@ nav{
 .offer-main:hover{transform:translateY(-4px);border-color:rgba(58,143,162,.4);box-shadow:0 22px 50px rgba(0,0,0,.5),0 0 0 1px rgba(58,143,162,.18),0 0 40px rgba(58,143,162,.07)}
 .offer-main__bg{
   position:absolute;inset:0;
-  background-size:cover;background-position:center 20%;
-  filter:saturate(.72) brightness(.44) contrast(1.18);
+  background-size:cover;background-position:center 8%;
+  filter:saturate(.78) brightness(.65) contrast(1.12);
   transition:filter .5s,transform .6s;
 }
-.offer-main:hover .offer-main__bg{filter:saturate(.82) brightness(.54) contrast(1.15);transform:scale(1.04)}
+.offer-main:hover .offer-main__bg{filter:saturate(.88) brightness(.75) contrast(1.1);transform:scale(1.04)}
 .offer-main__veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,28,32,.98) 0%,rgba(13,28,32,.52) 50%,rgba(13,28,32,.04) 100%)}
 .offer-main__body{position:relative;z-index:2;padding:1.8rem}
 
@@ -209,7 +210,7 @@ nav{
 }
 .badge-dot{width:5px;height:5px;border-radius:50%;background:var(--teal-b);animation:pulse 2.5s ease infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-.offer-title{font-size:clamp(1.65rem,5vw,2.4rem);font-weight:900;letter-spacing:-.03em;line-height:1;margin-bottom:.6rem}
+.offer-title{font-family:'Bebas Neue',Arial,sans-serif;font-size:clamp(2.2rem,5vw,3.2rem);font-weight:400;letter-spacing:.04em;line-height:1;margin-bottom:.6rem}
 .offer-desc{font-size:.85rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem;max-width:44ch}
 .offer-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.4rem}
 .offer-chip{font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,.05);border:1px solid var(--border-s);padding:.26rem .65rem;border-radius:5px}
@@ -231,8 +232,8 @@ nav{
 @media(min-width:600px){.prog-cards{grid-template-columns:repeat(3,1fr)}}
 .prog-card{position:relative;border-radius:14px;overflow:hidden;text-decoration:none;color:var(--text);min-height:220px;border:1px solid var(--border);display:flex;flex-direction:column;justify-content:flex-end;transition:border-color .3s,transform .3s var(--ease),box-shadow .3s;-webkit-tap-highlight-color:transparent}
 .prog-card:hover{border-color:rgba(58,143,162,.4);transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.48),0 0 0 1px rgba(58,143,162,.14)}
-.prog-card__bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:saturate(.6) brightness(.44) contrast(1.2);transition:filter .4s,transform .5s}
-.prog-card:hover .prog-card__bg{filter:saturate(.7) brightness(.52) contrast(1.15);transform:scale(1.03)}
+.prog-card__bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:saturate(.82) brightness(.72) contrast(1.08);transition:filter .4s,transform .5s}
+.prog-card:hover .prog-card__bg{filter:saturate(.9) brightness(.85) contrast(1.05);transform:scale(1.03)}
 .prog-card__veil{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,28,32,.04) 0%,rgba(13,28,32,.82) 60%,rgba(13,28,32,.97) 100%)}
 .prog-card__body{position:relative;z-index:2;padding:1.2rem 1.3rem}
 .prog-card__tag{font-size:.56rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:.25rem}
