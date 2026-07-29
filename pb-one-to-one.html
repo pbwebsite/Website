@@ -25,6 +25,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav__logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--text)}
 .logo-name{font-size:.74rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;line-height:1.1}
 .logo-sub{font-size:.52rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);line-height:1.3}
+.logo-text{display:flex;flex-direction:column;gap:0}
 .nav__right{display:flex;align-items:center;gap:.6rem}
 .nav__back{display:flex;align-items:center;gap:.4rem;font-size:.74rem;font-weight:700;color:var(--muted);text-decoration:none;transition:color .15s}
 .nav__back:hover{color:var(--text)}
@@ -132,6 +133,10 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
 <nav>
   <a class="nav__logo" href="index.html">
     <img src="images/logo.jpg" width="46" height="46" alt="PB Performance Coaching">
+    <div class="logo-text">
+      <span class="logo-name">PB Performance</span>
+      <span class="logo-sub">Coaching</span>
+    </div>
   </a>
   <div class="nav__right">
     <a class="nav__back" href="pb-plans.html">
