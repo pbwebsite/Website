@@ -302,6 +302,13 @@ footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);
 /* hide nav links on mobile */
 @media(max-width:600px){.nav__link{display:none}}
 
+/* mobile hero cleanup — less text, heading sits lower */
+@media(max-width:700px){
+  .hero__cred{display:none}
+  .hero__scroll{display:none}
+  .hero__c{padding-bottom:3rem}
+}
+
 /* ── CREDENTIALS SECTION ── */
 .creds{background:var(--surface);border-bottom:1px solid var(--border);padding:2.5rem 1.5rem 3rem}
 .creds__inner{max-width:960px;margin:0 auto}
@@ -334,12 +341,19 @@ footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);
     </button>
     <p class="popup__eyebrow">Free Resource</p>
     <h2 class="popup__title">Get Paddy's Free GAA Training Guide</h2>
-    <p class="popup__sub">Drop your details and get a free S&C starter guide — plus be first to hear about new coaching spots.</p>
-    <form id="popupForm" onsubmit="submitPopup(event)">
-      <div class="pf"><label for="pName">Full Name</label><input type="text" id="pName" placeholder="Your name" required autocomplete="name"></div>
-      <div class="pf"><label for="pEmail">Email</label><input type="email" id="pEmail" placeholder="your@email.com" required autocomplete="email"></div>
-      <div class="pf"><label for="pPhone">Phone</label><input type="tel" id="pPhone" placeholder="+353..." autocomplete="tel"></div>
-      <button type="submit" class="popup__btn">Send Me the Guide →</button>
+    <p class="popup__sub">Drop your email and get a free S&C starter guide — plus be first to hear about new coaching spots.</p>
+    <!-- Mailchimp signup form — paste your Mailchimp form action URL into the action attribute below -->
+    <!-- Find it in Mailchimp → Audience → Signup forms → Embedded forms → copy the form action URL -->
+    <form id="mc-embedded-subscribe-form"
+          action="REPLACE_WITH_YOUR_MAILCHIMP_ACTION_URL"
+          method="post" novalidate onsubmit="submitMailchimp(event)">
+      <div class="pf"><label for="mce-FNAME">Name</label><input type="text" name="FNAME" id="mce-FNAME" placeholder="Your name" autocomplete="given-name"></div>
+      <div class="pf"><label for="mce-EMAIL">Email</label><input type="email" name="EMAIL" id="mce-EMAIL" placeholder="your@email.com" required autocomplete="email"></div>
+      <!-- Mailchimp bot-protection field — do not remove -->
+      <div style="position:absolute;left:-5000px" aria-hidden="true">
+        <input type="text" name="b_REPLACE_U_REPLACE_LIST_ID" tabindex="-1" value="">
+      </div>
+      <button type="submit" name="subscribe" class="popup__btn">Get the Free Guide →</button>
     </form>
     <p class="popup__msg" id="popupMsg"></p>
     <button class="popup__skip" onclick="closePopup()">No thanks, skip for now</button>
@@ -604,14 +618,18 @@ function closePopup() {
   document.getElementById('popupOverlay').classList.add('hidden');
   sessionStorage.setItem('pbDismissed', '1');
 }
-async function submitPopup(e) {
+async function submitMailchimp(e) {
   e.preventDefault();
+  const form = document.getElementById('mc-embedded-subscribe-form');
   const fd = new URLSearchParams();
-  fd.append('entry.REPLACE_NAME_ID',  document.getElementById('pName').value.trim());
-  fd.append('entry.REPLACE_EMAIL_ID', document.getElementById('pEmail').value.trim());
-  fd.append('entry.REPLACE_PHONE_ID', document.getElementById('pPhone').value.trim());
-  try { await fetch('https://docs.google.com/forms/d/e/FORM_ID_HERE/formResponse',{method:'POST',mode:'no-cors',body:fd,headers:{'Content-Type':'application/x-www-form-urlencoded'}}); } catch(_) {}
-  document.getElementById('popupForm').style.display = 'none';
+  fd.append('EMAIL', document.getElementById('mce-EMAIL').value.trim());
+  fd.append('FNAME', document.getElementById('mce-FNAME').value.trim());
+  const honeypot = form.querySelector('[name^="b_"]');
+  if (honeypot) fd.append(honeypot.name, honeypot.value);
+  try {
+    await fetch(form.action, {method:'POST',mode:'no-cors',body:fd,headers:{'Content-Type':'application/x-www-form-urlencoded'}});
+  } catch(_) {}
+  form.style.display = 'none';
   document.getElementById('popupMsg').textContent = '✓ Done — check your inbox shortly!';
   sessionStorage.setItem('pbDismissed', '1');
   setTimeout(closePopup, 2200);
