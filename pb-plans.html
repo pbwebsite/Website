@@ -100,6 +100,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .btn-fill:active{transform:translateY(0);box-shadow:0 2px 8px rgba(58,143,162,.2)}
 
 footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);border-top:1px solid var(--border);margin-top:4rem}
+
+/* HERO BADGES */
+.hero__badges{display:flex;align-items:center;gap:1.25rem 2rem;flex-wrap:wrap;margin-top:1.6rem}
+.hero__badge{height:46px;width:auto;mix-blend-mode:screen;opacity:.5;transition:opacity .25s,transform .25s}
+.hero__badge:hover{opacity:.88;transform:scale(1.08)}
+@media(max-width:480px){.hero__badge{height:36px}.hero__badges{gap:1rem 1.5rem}}
 </style>
 </head>
 <body>
@@ -126,6 +132,12 @@ footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);
     <div class="hero__eye">Training Programmes</div>
     <h1 class="hero__h">A Plan for<br><em>Every Phase.</em></h1>
     <p class="hero__sub">Three structured programmes built around the GAA calendar. Choose the one that matches where you are in your season.</p>
+    <div class="hero__badges">
+      <img class="hero__badge" src="images/aontroim-crest-big.webp" alt="Antrim GAA" loading="lazy">
+      <img class="hero__badge" src="images/Ruair%C3%AD-%C3%93g-cushendall.webp" alt="Ruairí Óg GAC" loading="lazy">
+      <img class="hero__badge" src="images/Logo_of_GAA.svg.webp" alt="GAA" loading="lazy">
+      <img class="hero__badge" src="images/images.png" alt="Setanta College" loading="lazy">
+    </div>
   </div>
 </div>
 

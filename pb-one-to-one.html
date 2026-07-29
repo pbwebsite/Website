@@ -116,6 +116,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border-top:1px solid var(--border);opacity:.55}
 @media(max-width:640px){.ff-row{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr}.testi-video{aspect-ratio:16/9}.hero__ctas{flex-direction:column}}
+
+/* TRUST STRIP */
+.trust-strip{background:var(--surface);border-bottom:1px solid var(--border);padding:1.8rem 2rem}
+.trust-strip__inner{max-width:800px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:.9rem}
+.trust-strip__label{font-size:.54rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+.trust-strip__logos{display:flex;align-items:center;justify-content:center;gap:1.75rem 2.5rem;flex-wrap:wrap}
+.trust-logo{height:48px;width:auto;mix-blend-mode:screen;opacity:.65;transition:opacity .25s,transform .25s}
+.trust-logo:hover{opacity:1;transform:scale(1.08)}
+@media(max-width:480px){.trust-logo{height:38px}.trust-strip__logos{gap:1.25rem 2rem}}
 </style>
 </head>
 <body>
@@ -146,6 +155,19 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--muted);border
     </div>
   </div>
 </section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-strip__inner rv">
+    <p class="trust-strip__label">Coached by one of their own</p>
+    <div class="trust-strip__logos">
+      <img class="trust-logo" src="images/aontroim-crest-big.webp" alt="Antrim GAA" loading="lazy">
+      <img class="trust-logo" src="images/Ruair%C3%AD-%C3%93g-cushendall.webp" alt="Ruairí Óg GAC" loading="lazy">
+      <img class="trust-logo" src="images/Logo_of_GAA.svg.webp" alt="GAA" loading="lazy">
+      <img class="trust-logo" src="images/images.png" alt="Setanta College" loading="lazy">
+    </div>
+  </div>
+</div>
 
 <!-- WHAT'S INCLUDED -->
 <section class="inc-bg" id="includes">
