@@ -35,7 +35,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* HERO */
 .hero{min-height:52svh;position:relative;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
-.hero__bg{position:absolute;inset:0;background:url('images/hero-coaching.jpg') center 30% / cover no-repeat;filter:saturate(.55) contrast(1.2) brightness(.38)}
+.hero__bg{position:absolute;inset:0;background:url('images/hero-coaching.jpg') center 12% / cover no-repeat;filter:saturate(.6) contrast(1.1) brightness(.52)}
 .hero__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,28,32,.1) 0%,rgba(13,28,32,.4) 45%,rgba(13,28,32,.94) 75%,#0d1c20 100%)}
 .hero__c{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:0 1.5rem 4rem;width:100%}
 .hero__eye{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.9rem;animation:fadeUp .8s ease both}
@@ -50,29 +50,44 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .plans-grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
 @media(min-width:760px){.plans-grid{grid-template-columns:repeat(3,1fr)}}
 
-/* PLAN CARD */
-.plan-card{display:block;text-decoration:none;border-radius:14px;overflow:hidden;background:var(--card);border:1px solid var(--border);position:relative;transition:border-color .2s,transform .2s;-webkit-tap-highlight-color:transparent}
+/* PLAN CARD — mobile: full-bleed overlay (iOS-style) */
+.plan-card{display:block;text-decoration:none;border-radius:18px;overflow:hidden;background:var(--card);border:1px solid rgba(37,56,63,.8);position:relative;transition:border-color .2s,transform .2s,box-shadow .2s;-webkit-tap-highlight-color:transparent;aspect-ratio:4/3}
 .plan-card:hover{border-color:rgba(58,143,162,.38);transform:translateY(-5px);box-shadow:0 18px 44px rgba(0,0,0,.48),0 0 0 1px rgba(58,143,162,.14)}
-.plan-card:active{transform:translateY(0)}
+.plan-card:active{transform:scale(.97);transition:transform .1s}
 
-.plan-card__hero{position:relative;height:200px;overflow:hidden}
-@media(min-width:760px){.plan-card__hero{height:240px}}
-.plan-card__img{position:absolute;inset:0;background-size:cover;background-position:center 25%;filter:saturate(.6) contrast(1.2) brightness(.5);transition:filter .4s,transform .5s}
-.plan-card:hover .plan-card__img{filter:saturate(.7) contrast(1.2) brightness(.55);transform:scale(1.03)}
-.plan-card__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,28,32,.05) 0%,rgba(13,28,32,.7) 100%)}
-.plan-card__phase{position:absolute;bottom:1rem;left:1.25rem;font-size:.58rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-b)}
+.plan-card__hero{position:absolute;inset:0;overflow:hidden}
+.plan-card__img{position:absolute;inset:0;background-size:cover;background-position:center 25%;filter:saturate(.88) contrast(1.05) brightness(.92);transition:filter .4s,transform .5s}
+.plan-card:hover .plan-card__img{filter:saturate(.95) contrast(1.05) brightness(1.0);transform:scale(1.04)}
+.plan-card__g{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,rgba(13,28,32,.04) 20%,rgba(13,28,32,.55) 45%,rgba(13,28,32,.9) 65%,rgba(13,28,32,.97) 100%)}
+.plan-card__phase{position:absolute;top:.9rem;left:.9rem;font-size:.52rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--teal-b);background:rgba(13,28,32,.5);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);padding:.25rem .65rem;border-radius:20px;border:1px solid rgba(77,184,208,.22);z-index:3}
 
-.plan-card__body{padding:1.4rem 1.4rem 1.75rem}
-.plan-card__title{font-size:1.35rem;font-weight:900;letter-spacing:-.025em;line-height:1.1;margin-bottom:.45rem;color:var(--text)}
-.plan-card__tagline{font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:1.2rem}
-.plan-card__stats{display:flex;flex-wrap:wrap;gap:.5rem .9rem;margin-bottom:1.35rem}
-.plan-card__stat{font-size:.68rem;font-weight:700;color:var(--dim);letter-spacing:.04em;display:flex;align-items:center;gap:.35rem}
-.plan-card__stat::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--teal-d);flex-shrink:0}
-.plan-card__cta{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1rem;background:rgba(58,143,162,.07);border:1px solid rgba(58,143,162,.14);border-radius:8px;transition:background .2s,border-color .2s}
-.plan-card:hover .plan-card__cta{background:rgba(58,143,162,.15);border-color:rgba(58,143,162,.44)}
-.plan-card__cta-text{font-size:.78rem;font-weight:800;color:var(--teal);letter-spacing:.04em}
-.plan-card__chevron{color:var(--teal-d);transition:transform .2s}
+.plan-card__body{position:absolute;bottom:0;left:0;right:0;padding:.9rem 1.1rem 1.15rem;z-index:2}
+.plan-card__title{font-size:1.3rem;font-weight:900;letter-spacing:-.03em;line-height:1.05;margin-bottom:.3rem;color:#fff;text-shadow:0 1px 12px rgba(0,0,0,.55)}
+.plan-card__tagline{font-size:.75rem;color:rgba(221,232,234,.82);line-height:1.5;margin-bottom:.8rem;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+.plan-card__stats{display:none}
+.plan-card__cta{display:flex;align-items:center;justify-content:space-between;padding:.65rem .9rem;background:rgba(58,143,162,.14);border:1px solid rgba(58,143,162,.3);border-radius:9px;transition:background .2s,border-color .2s;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.plan-card:hover .plan-card__cta{background:rgba(58,143,162,.24);border-color:rgba(58,143,162,.52)}
+.plan-card__cta-text{font-size:.75rem;font-weight:800;color:var(--teal-b);letter-spacing:.04em}
+.plan-card__chevron{color:var(--teal-b);transition:transform .2s}
 .plan-card:hover .plan-card__chevron{transform:translateX(4px)}
+
+@media(min-width:760px){
+  .plan-card{aspect-ratio:auto;border-radius:14px}
+  .plan-card:active{transform:translateY(0);transition:transform .15s}
+  .plan-card__hero{position:relative;height:240px;inset:auto;overflow:hidden}
+  .plan-card__g{background:linear-gradient(to bottom,rgba(13,28,32,.05) 0%,rgba(13,28,32,.62) 100%)}
+  .plan-card__phase{top:auto;bottom:1rem;left:1.25rem;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;padding:0;border:none;border-radius:0;font-size:.58rem}
+  .plan-card__body{position:static;padding:1.4rem 1.4rem 1.75rem;z-index:auto}
+  .plan-card__title{font-size:1.35rem;margin-bottom:.45rem;color:var(--text);text-shadow:none}
+  .plan-card__tagline{display:block;font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:1.2rem;text-shadow:none}
+  .plan-card__stats{display:flex;flex-wrap:wrap;gap:.5rem .9rem;margin-bottom:1.35rem}
+  .plan-card__stat{font-size:.68rem;font-weight:700;color:var(--dim);letter-spacing:.04em;display:flex;align-items:center;gap:.35rem}
+  .plan-card__stat::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--teal-d);flex-shrink:0}
+  .plan-card__cta{padding:.85rem 1rem;background:rgba(58,143,162,.07);border-color:rgba(58,143,162,.14);border-radius:8px;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .plan-card:hover .plan-card__cta{background:rgba(58,143,162,.15);border-color:rgba(58,143,162,.44)}
+  .plan-card__cta-text{color:var(--teal)}
+  .plan-card__chevron{color:var(--teal-d)}
+}
 
 /* UPSELL BANNER */
 .upsell{margin-top:3rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:2.5rem 2rem;text-align:center}
@@ -110,7 +125,7 @@ footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);
   <div class="hero__c">
     <div class="hero__eye">Training Programmes</div>
     <h1 class="hero__h">A Plan for<br><em>Every Phase.</em></h1>
-    <p class="hero__sub">Three structured programmes built around the GAA calendar — choose the one that matches where you are in your season.</p>
+    <p class="hero__sub">Three structured programmes built around the GAA calendar. Choose the one that matches where you are in your season.</p>
   </div>
 </div>
 
