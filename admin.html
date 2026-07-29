@@ -173,7 +173,7 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 </head>
 <body>
 
-<!-- SETUP SCREEN -->
+<!-- LOGIN SCREEN -->
 <div class="setup" id="setup">
   <div class="setup-card">
     <div class="setup-logo">
@@ -184,16 +184,12 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
       </div>
     </div>
     <h1 class="setup-title">Write an Article</h1>
-    <p class="setup-sub">
-      Enter a GitHub token from an account that has <strong style="color:var(--text)">write access</strong> to pbwebsite/Website.<br>
-      You only need to do this once per device.<br>
-      <a href="https://github.com/settings/tokens/new?scopes=repo&description=PB+Articles" target="_blank" rel="noopener">Generate a token (needs "repo" scope) →</a>
-    </p>
+    <p class="setup-sub">Enter your password to start writing.</p>
     <div class="field">
-      <label>GitHub Access Token</label>
-      <input type="password" id="tokenInput" placeholder="ghp_..." autocomplete="off" spellcheck="false">
+      <label>Password</label>
+      <input type="password" id="passwordInput" placeholder="••••••••" autocomplete="current-password">
     </div>
-    <button class="setup-btn" onclick="saveToken()">Save &amp; Start Writing →</button>
+    <button class="setup-btn" onclick="checkPassword()">Sign In →</button>
     <p class="setup-error" id="setupError"></p>
   </div>
 </div>
@@ -275,53 +271,26 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 <script>
 const REPO = 'pbwebsite/Website';
 const LABEL = 'article';
-const LS_TOKEN = 'pb_gh_token';
+const LS_AUTH = 'pb_admin_auth';
 
-// ── AUTH ──────────────────────────────────────────────────────────────────────
+// ── CONFIGURE THESE TWO VALUES (do not commit real values to GitHub) ──────────
+const GITHUB_TOKEN = 'REPLACE_WITH_GITHUB_PAT'; // ghp_ token with repo scope
+const ADMIN_PASSWORD = 'REPLACE_WITH_PASSWORD';  // Paddy's login password
+// ─────────────────────────────────────────────────────────────────────────────
 
-function getToken() { return localStorage.getItem(LS_TOKEN) || ''; }
+function getToken() { return GITHUB_TOKEN; }
 
-async function saveToken() {
-  const tok = document.getElementById('tokenInput').value.trim();
-  if (!tok) { showError('Please paste your GitHub token above.'); return; }
-  if (!tok.startsWith('ghp_') && !tok.startsWith('github_pat_')) {
-    showError('Token should start with ghp_ or github_pat_ — make sure you copied the full token.');
-    return;
-  }
-
-  const btn = document.querySelector('.setup-btn');
-  btn.textContent = 'Checking access…'; btn.disabled = true;
-
-  try {
-    const res = await fetch(`https://api.github.com/repos/${REPO}`, {
-      headers: { 'Authorization': `token ${tok}`, 'Accept': 'application/vnd.github.v3+json' }
-    });
-
-    if (res.status === 401) {
-      showError('Token is invalid or expired — generate a new one from GitHub and try again.');
-      return;
-    }
-
-    const data = await res.json();
-    if (!data.permissions?.push) {
-      showError('This GitHub account doesn\'t have write access to pbwebsite/Website. Ask the repo owner to add you as a collaborator first.');
-      return;
-    }
-
-    localStorage.setItem(LS_TOKEN, tok);
-    showEditor();
-  } catch(e) {
-    // Network error — save anyway and let them try
-    localStorage.setItem(LS_TOKEN, tok);
-    showEditor();
-  } finally {
-    btn.textContent = 'Save & Start Writing →'; btn.disabled = false;
-  }
+function checkPassword() {
+  const pwd = document.getElementById('passwordInput').value;
+  if (!pwd) { showError('Please enter your password.'); return; }
+  if (pwd !== ADMIN_PASSWORD) { showError('Incorrect password — try again.'); return; }
+  localStorage.setItem(LS_AUTH, '1');
+  showEditor();
 }
 
 function logout() {
-  if (!confirm('Log out? You\'ll need to enter your token again on this device.')) return;
-  localStorage.removeItem(LS_TOKEN);
+  if (!confirm('Log out?')) return;
+  localStorage.removeItem(LS_AUTH);
   location.reload();
 }
 
@@ -353,9 +322,9 @@ function showUploadError(msg) {
 // ── INIT ──────────────────────────────────────────────────────────────────────
 
 window.addEventListener('DOMContentLoaded', () => {
-  if (getToken()) showEditor();
-  document.getElementById('tokenInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') saveToken();
+  if (localStorage.getItem(LS_AUTH)) showEditor();
+  document.getElementById('passwordInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') checkPassword();
   });
 });
 
