@@ -185,9 +185,9 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
     </div>
     <h1 class="setup-title">Write an Article</h1>
     <p class="setup-sub">
-      Enter your GitHub access token to start writing.<br>
+      Enter a GitHub token from an account that has <strong style="color:var(--text)">write access</strong> to pbwebsite/Website.<br>
       You only need to do this once per device.<br>
-      <a href="https://github.com/settings/tokens/new?scopes=repo&description=PB+Articles" target="_blank" rel="noopener">Get a token from GitHub →</a>
+      <a href="https://github.com/settings/tokens/new?scopes=repo&description=PB+Articles" target="_blank" rel="noopener">Generate a token (needs "repo" scope) →</a>
     </p>
     <div class="field">
       <label>GitHub Access Token</label>
@@ -281,15 +281,42 @@ const LS_TOKEN = 'pb_gh_token';
 
 function getToken() { return localStorage.getItem(LS_TOKEN) || ''; }
 
-function saveToken() {
+async function saveToken() {
   const tok = document.getElementById('tokenInput').value.trim();
   if (!tok) { showError('Please paste your GitHub token above.'); return; }
   if (!tok.startsWith('ghp_') && !tok.startsWith('github_pat_')) {
-    showError('Token should start with ghp_ or github_pat_');
+    showError('Token should start with ghp_ or github_pat_ — make sure you copied the full token.');
     return;
   }
-  localStorage.setItem(LS_TOKEN, tok);
-  showEditor();
+
+  const btn = document.querySelector('.setup-btn');
+  btn.textContent = 'Checking access…'; btn.disabled = true;
+
+  try {
+    const res = await fetch(`https://api.github.com/repos/${REPO}`, {
+      headers: { 'Authorization': `token ${tok}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+
+    if (res.status === 401) {
+      showError('Token is invalid or expired — generate a new one from GitHub and try again.');
+      return;
+    }
+
+    const data = await res.json();
+    if (!data.permissions?.push) {
+      showError('This GitHub account doesn\'t have write access to pbwebsite/Website. Ask the repo owner to add you as a collaborator first.');
+      return;
+    }
+
+    localStorage.setItem(LS_TOKEN, tok);
+    showEditor();
+  } catch(e) {
+    // Network error — save anyway and let them try
+    localStorage.setItem(LS_TOKEN, tok);
+    showEditor();
+  } finally {
+    btn.textContent = 'Save & Start Writing →'; btn.disabled = false;
+  }
 }
 
 function logout() {
@@ -307,6 +334,20 @@ function showEditor() {
 
 function showError(msg) {
   document.getElementById('setupError').textContent = msg;
+}
+
+function showUploadError(msg) {
+  console.error('[Admin] Upload error:', msg);
+  // Show error in a persistent banner above the toolbar
+  let banner = document.getElementById('uploadErrorBanner');
+  if (!banner) {
+    banner = document.createElement('div');
+    banner.id = 'uploadErrorBanner';
+    banner.style.cssText = 'background:rgba(224,82,82,.12);border-bottom:1px solid rgba(224,82,82,.3);color:#e05252;font-size:.75rem;font-weight:700;padding:.55rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-shrink:0';
+    const toolbar = document.querySelector('.toolbar');
+    toolbar.parentNode.insertBefore(banner, toolbar);
+  }
+  banner.innerHTML = `<span>⚠ ${msg}</span><button onclick="this.parentNode.remove()" style="background:none;border:none;color:inherit;cursor:pointer;font-size:1rem;line-height:1;padding:0">✕</button>`;
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
@@ -361,6 +402,9 @@ async function uploadImage(input) {
     if (!res.ok) {
       let msg = `HTTP ${res.status}`;
       try { const d = await res.json(); if (d.message) msg = d.message; } catch(_) {}
+      if (res.status === 404) msg = 'No repo write access — token must be from a GitHub account with write access to pbwebsite/Website';
+      if (res.status === 401) msg = 'Invalid token — log out and re-enter your GitHub token';
+      if (res.status === 403) msg = 'Token needs "repo" scope — log out and generate a new token';
       throw new Error(msg);
     }
     const data = await res.json();
@@ -373,7 +417,8 @@ async function uploadImage(input) {
     updatePreview();
     toast('Image uploaded ✓', 'success');
   } catch(e) {
-    toast(`Upload failed: ${e.message}`, 'error');
+    console.error('[Admin] Image upload failed:', e.message);
+    showUploadError(e.message);
   } finally {
     label.classList.remove('tb-img-uploading');
     input.value = '';
@@ -410,6 +455,8 @@ async function publishArticle() {
     if (!res.ok) {
       let msg = `HTTP ${res.status}`;
       try { const d = await res.json(); if (d.message) msg = d.message; } catch(_) {}
+      if (res.status === 404) msg = 'No write access — log out and use a token from an account with write access to pbwebsite/Website';
+      if (res.status === 401) msg = 'Invalid or expired token — log out and re-enter your GitHub token';
       throw new Error(msg);
     }
     const issue = await res.json();
