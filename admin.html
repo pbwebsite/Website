@@ -265,22 +265,15 @@ const LS_TOKEN = 'pb_gh_token';
 
 function getToken() { return localStorage.getItem(LS_TOKEN) || ''; }
 
-async function saveToken() {
+function saveToken() {
   const tok = document.getElementById('tokenInput').value.trim();
-  if (!tok) { showError('Please enter your token.'); return; }
-
-  const btn = document.querySelector('.setup-btn');
-  btn.textContent = 'Checking…'; btn.disabled = true;
-
-  try {
-    const res = await ghFetch(`https://api.github.com/repos/${REPO}`, tok);
-    if (!res.ok) throw new Error('Invalid token or no repo access');
-    localStorage.setItem(LS_TOKEN, tok);
-    showEditor();
-  } catch(e) {
-    showError('Could not connect. Check the token has "repo" access.');
-    btn.textContent = 'Save & Start Writing →'; btn.disabled = false;
+  if (!tok) { showError('Please paste your GitHub token above.'); return; }
+  if (!tok.startsWith('ghp_') && !tok.startsWith('github_pat_')) {
+    showError('Token should start with ghp_ or github_pat_');
+    return;
   }
+  localStorage.setItem(LS_TOKEN, tok);
+  showEditor();
 }
 
 function logout() {
