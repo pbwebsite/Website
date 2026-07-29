@@ -273,24 +273,63 @@ const REPO = 'pbwebsite/Website';
 const LABEL = 'article';
 const LS_AUTH = 'pb_admin_auth';
 
-// ── CONFIGURE THESE TWO VALUES (do not commit real values to GitHub) ──────────
-const GITHUB_TOKEN = 'REPLACE_WITH_GITHUB_PAT'; // ghp_ token with repo scope
-const ADMIN_PASSWORD = 'REPLACE_WITH_PASSWORD';  // Paddy's login password
+// ── PAT encrypted with AES-256-GCM — safe to commit ─────────────────────────
+// Generate this blob by running in your browser console (on any page):
+//   encryptForSetup('ghp_YOUR_PAT', 'paddys_password').then(console.log)
+// Then paste the output below and commit.
+const ENCRYPTED_PAT = 'REPLACE_WITH_ENCRYPTED_BLOB';
 // ─────────────────────────────────────────────────────────────────────────────
 
-function getToken() { return GITHUB_TOKEN; }
+// Developer helper — run once in console to generate ENCRYPTED_PAT
+async function encryptForSetup(pat, password) {
+  const enc = new TextEncoder();
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const iv   = crypto.getRandomValues(new Uint8Array(12));
+  const km   = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+  const key  = await crypto.subtle.deriveKey(
+    {name:'PBKDF2', salt, iterations:100000, hash:'SHA-256'},
+    km, {name:'AES-GCM', length:256}, false, ['encrypt']
+  );
+  const ct  = await crypto.subtle.encrypt({name:'AES-GCM', iv}, key, enc.encode(pat));
+  const out = new Uint8Array(16 + 12 + ct.byteLength);
+  out.set(salt); out.set(iv, 16); out.set(new Uint8Array(ct), 28);
+  return btoa(String.fromCharCode(...out));
+}
 
-function checkPassword() {
+async function decryptPAT(blob, password) {
+  const data = Uint8Array.from(atob(blob), c => c.charCodeAt(0));
+  const salt = data.slice(0, 16), iv = data.slice(16, 28), ct = data.slice(28);
+  const enc  = new TextEncoder();
+  const km   = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+  const key  = await crypto.subtle.deriveKey(
+    {name:'PBKDF2', salt, iterations:100000, hash:'SHA-256'},
+    km, {name:'AES-GCM', length:256}, false, ['decrypt']
+  );
+  const pt = await crypto.subtle.decrypt({name:'AES-GCM', iv}, key, ct);
+  return new TextDecoder().decode(pt);
+}
+
+function getToken() { return sessionStorage.getItem('pb_pat') || ''; }
+
+async function checkPassword() {
   const pwd = document.getElementById('passwordInput').value;
   if (!pwd) { showError('Please enter your password.'); return; }
-  if (pwd !== ADMIN_PASSWORD) { showError('Incorrect password — try again.'); return; }
-  localStorage.setItem(LS_AUTH, '1');
-  showEditor();
+  const btn = document.querySelector('.setup-btn');
+  btn.textContent = 'Checking…'; btn.disabled = true;
+  try {
+    const token = await decryptPAT(ENCRYPTED_PAT, pwd);
+    sessionStorage.setItem('pb_pat', token);
+    showEditor();
+  } catch(e) {
+    showError('Incorrect password — try again.');
+  } finally {
+    btn.textContent = 'Sign In →'; btn.disabled = false;
+  }
 }
 
 function logout() {
   if (!confirm('Log out?')) return;
-  localStorage.removeItem(LS_AUTH);
+  sessionStorage.removeItem('pb_pat');
   location.reload();
 }
 
@@ -322,7 +361,7 @@ function showUploadError(msg) {
 // ── INIT ──────────────────────────────────────────────────────────────────────
 
 window.addEventListener('DOMContentLoaded', () => {
-  if (localStorage.getItem(LS_AUTH)) showEditor();
+  if (sessionStorage.getItem('pb_pat')) { showEditor(); return; }
   document.getElementById('passwordInput').addEventListener('keydown', e => {
     if (e.key === 'Enter') checkPassword();
   });
