@@ -9,10 +9,10 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#07090a;--surface:#0d1214;--card:#111618;--card-h:#131d21;
-  --border:#1e2a2d;--border-s:#263438;
+  --bg:#0d1c20;--surface:#121f25;--card:#182630;--card-h:#1d3039;
+  --border:#25383f;--border-s:#2e4650;
   --teal:#3a8fa2;--teal-b:#4db8d0;--teal-d:#2D6E7E;
-  --text:#e8eaeb;--muted:#8a9ea3;--dim:#4a6268;
+  --text:#dde8ea;--muted:#7dabb4;--dim:#3d6470;
   --ease:cubic-bezier(.16,1,.3,1);
 }
 html{scroll-behavior:smooth}
@@ -21,7 +21,7 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 .rv.vis{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;background:rgba(7,9,10,.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;background:rgba(13,28,32,.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .nav__logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--text)}
 .logo-name{font-size:.74rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;line-height:1.1}
 .logo-sub{font-size:.52rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);line-height:1.3}
@@ -32,9 +32,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav__cta:hover{background:linear-gradient(135deg,#52c1d8,#3a8fa2);box-shadow:0 4px 18px rgba(58,143,162,.52);transform:translateY(-1px)}
 @media(max-width:380px){.logo-sub{display:none}}
 
-.hero{min-height:80svh;position:relative;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.hero{min-height:40svh;position:relative;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
 .hero__bg{position:absolute;inset:0;background-size:cover;background-position:center 30%;filter:saturate(.62) contrast(1.22) brightness(.44)}
-.hero__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,9,10,.06) 0%,rgba(7,9,10,.25) 40%,rgba(7,9,10,.9) 72%,#07090a 100%)}
+.hero__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,28,32,.06) 0%,rgba(13,28,32,.25) 40%,rgba(13,28,32,.9) 72%,#0d1c20 100%)}
 .hero__c{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:0 1.5rem 4.5rem;width:100%}
 .hero__phase{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.9rem;animation:fadeUp .8s ease both}
 .hero__h{font-size:clamp(2.8rem,9vw,6.5rem);font-weight:900;letter-spacing:-.04em;line-height:.92;margin-bottom:1rem;text-wrap:balance;animation:fadeUp .8s .08s ease both}
@@ -82,7 +82,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .testi-video{position:relative;aspect-ratio:9/16;background:#0a0f11;overflow:hidden}
 @media(max-width:480px){.testi-video{aspect-ratio:4/5}}
 .testi-video iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
-.vid-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;background:linear-gradient(160deg,#0c1a1e,#07090a);border:1px dashed rgba(45,110,126,.28)}
+.vid-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;background:linear-gradient(160deg,#0c1a1e,#0d1c20);border:1px dashed rgba(45,110,126,.28)}
 .vid-ph__icon{width:52px;height:52px;border-radius:50%;background:rgba(58,143,162,.07);border:1.5px solid var(--teal-d);display:flex;align-items:center;justify-content:center;color:var(--teal-d)}
 .vid-ph__label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-d);opacity:.5;text-align:center;padding:0 .8rem;line-height:1.65}
 .testi-body{padding:1.2rem 1.4rem 1.5rem}
@@ -111,6 +111,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .plan-chain__card:not(.plan-chain__card--next):hover .plan-chain__icon{transform:translateX(-3px)}
 .plan-chain__card--next:hover .plan-chain__icon{transform:translateX(3px)}
 
+/* VIDEO FIRST */
+.video-first{padding:2rem 1.5rem 3rem;background:var(--surface);border-bottom:1px solid var(--border)}
+.video-first__inner{max-width:440px;margin:0 auto}
+.video-first__eyebrow{font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:1.1rem;text-align:center}
+
 footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);border-top:1px solid var(--border)}
 </style>
 </head>
@@ -118,7 +123,7 @@ footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);
 
 <nav>
   <a class="nav__logo" href="index.html">
-    <svg viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><rect width="36" height="36" rx="7" fill="#111618"/><rect x="1.5" y="1.5" width="33" height="33" rx="5.5" fill="none" stroke="#3a8fa2" stroke-width="1.5"/><text x="18" y="25" font-family="Arial Black,Helvetica,sans-serif" font-size="16" font-weight="900" fill="#4db8d0" text-anchor="middle" letter-spacing="-0.8">PB</text></svg>
+    <svg viewBox="0 0 44 44" width="36" height="36" aria-hidden="true"><circle cx="22" cy="22" r="21" fill="#0d1c20"/><circle cx="22" cy="22" r="20.5" fill="none" stroke="#3a8fa2" stroke-width="1.5"/><circle cx="22" cy="22" r="14.5" fill="none" stroke="#2D6E7E" stroke-width="1"/><g transform="translate(22,22) rotate(-42)" fill="#4db8d0"><rect x="-18.5" y="-5.5" width="5" height="11" rx="1.5"/><rect x="-14" y="-8" width="3.5" height="16" rx="1.5"/><rect x="-10.5" y="-3.5" width="21" height="7" rx="2.5"/><rect x="10.5" y="-8" width="3.5" height="16" rx="1.5"/><rect x="14" y="-5.5" width="5" height="11" rx="1.5"/></g></svg>
     <div style="display:flex;flex-direction:column;gap:0">
       <span class="logo-name">PB Performance</span>
       <span class="logo-sub">Coaching</span>
@@ -142,7 +147,23 @@ footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);
     <p class="hero__sub">The off-season is where real gains happen. Build serious strength, address imbalances, and lay the physical foundation for your best season yet.</p>
     <div class="hero__btns">
       <a href="#get" class="btn-fill">Get This Programme</a>
-      <a href="#detail" class="btn-ghost">What's Inside ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="video-first rv">
+  <div class="video-first__inner">
+    <p class="video-first__eyebrow">What Athletes Say</p>
+    <div class="testi-card">
+      <div class="testi-video">
+        <!-- Replace vid-ph with <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen loading="lazy"></iframe> when ready -->
+        <div class="vid-ph">
+          <div class="vid-ph__icon"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="vid-ph__label">Kieran<br>Video Coming Soon</span>
+        </div>
+      </div>
+      <div class="testi-body"><div class="testi-name">Kieran</div></div>
     </div>
   </div>
 </section>
@@ -214,30 +235,6 @@ footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);
         <div class="breakdown-block__week">Weeks 9–10</div>
         <div class="breakdown-block__title">Transition</div>
         <div class="breakdown-block__body">Bridge into pre-season. Volume reduces, intensity stays high. You're ready to hit the Pre-Season Programme at full tilt.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="w">
-    <div class="rv" style="margin-bottom:2rem">
-      <p class="s-eyebrow">Results</p>
-      <h2 class="s-title">From an Athlete Who Did It</h2>
-    </div>
-    <div class="testi-wrap rv">
-      <div class="testi-card">
-        <div class="testi-video">
-          <!-- ── VIDEO SLOT: Kieran ──────────────────────────────────────────
-               Replace vid-ph with:
-               <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen loading="lazy"></iframe>
-          ──────────────────────────────────────────────────────────────── -->
-          <div class="vid-ph">
-            <div class="vid-ph__icon"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-            <span class="vid-ph__label">Kieran<br>Video Coming Soon</span>
-          </div>
-        </div>
-        <div class="testi-body"><div class="testi-name">Kieran</div></div>
       </div>
     </div>
   </div>

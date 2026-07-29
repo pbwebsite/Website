@@ -9,10 +9,10 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#07090a;--surface:#0d1214;--card:#111618;--card-h:#131d21;
-  --border:#1e2a2d;--border-s:#263438;
+  --bg:#0d1c20;--surface:#121f25;--card:#182630;--card-h:#1d3039;
+  --border:#25383f;--border-s:#2e4650;
   --teal:#3a8fa2;--teal-b:#4db8d0;--teal-d:#2D6E7E;
-  --text:#e8eaeb;--muted:#8a9ea3;--dim:#4a6268;
+  --text:#dde8ea;--muted:#7dabb4;--dim:#3d6470;
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -22,7 +22,7 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;background:rgba(7,9,10,.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;background:rgba(13,28,32,.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .nav__logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--text)}
 .logo-name{font-size:.74rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;line-height:1.1}
 .logo-sub{font-size:.52rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);line-height:1.3}
@@ -36,7 +36,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 /* HERO */
 .hero{min-height:52svh;position:relative;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
 .hero__bg{position:absolute;inset:0;background:url('images/hero-coaching.jpg') center 30% / cover no-repeat;filter:saturate(.55) contrast(1.2) brightness(.38)}
-.hero__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,9,10,.1) 0%,rgba(7,9,10,.4) 45%,rgba(7,9,10,.94) 75%,#07090a 100%)}
+.hero__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,28,32,.1) 0%,rgba(13,28,32,.4) 45%,rgba(13,28,32,.94) 75%,#0d1c20 100%)}
 .hero__c{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:0 1.5rem 4rem;width:100%}
 .hero__eye{display:inline-block;font-size:.6rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.9rem;animation:fadeUp .8s ease both}
 .hero__h{font-size:clamp(2.4rem,7vw,5rem);font-weight:900;letter-spacing:-.04em;line-height:.93;margin-bottom:1rem;text-wrap:balance;animation:fadeUp .8s .08s ease both}
@@ -59,7 +59,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 @media(min-width:760px){.plan-card__hero{height:240px}}
 .plan-card__img{position:absolute;inset:0;background-size:cover;background-position:center 25%;filter:saturate(.6) contrast(1.2) brightness(.5);transition:filter .4s,transform .5s}
 .plan-card:hover .plan-card__img{filter:saturate(.7) contrast(1.2) brightness(.55);transform:scale(1.03)}
-.plan-card__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,9,10,.05) 0%,rgba(7,9,10,.7) 100%)}
+.plan-card__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,28,32,.05) 0%,rgba(13,28,32,.7) 100%)}
 .plan-card__phase{position:absolute;bottom:1rem;left:1.25rem;font-size:.58rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-b)}
 
 .plan-card__body{padding:1.4rem 1.4rem 1.75rem}
@@ -92,7 +92,7 @@ footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);
 <!-- NAV -->
 <nav>
   <a class="nav__logo" href="index.html">
-    <svg viewBox="0 0 36 36" width="32" height="32" aria-hidden="true"><rect width="36" height="36" rx="7" fill="#111618"/><rect x="1.5" y="1.5" width="33" height="33" rx="5.5" fill="none" stroke="#3a8fa2" stroke-width="1.5"/><text x="18" y="25" font-family="Arial Black,Helvetica,sans-serif" font-size="16" font-weight="900" fill="#4db8d0" text-anchor="middle" letter-spacing="-0.8">PB</text></svg>
+    <svg viewBox="0 0 44 44" width="36" height="36" aria-hidden="true"><circle cx="22" cy="22" r="21" fill="#0d1c20"/><circle cx="22" cy="22" r="20.5" fill="none" stroke="#3a8fa2" stroke-width="1.5"/><circle cx="22" cy="22" r="14.5" fill="none" stroke="#2D6E7E" stroke-width="1"/><g transform="translate(22,22) rotate(-42)" fill="#4db8d0"><rect x="-18.5" y="-5.5" width="5" height="11" rx="1.5"/><rect x="-14" y="-8" width="3.5" height="16" rx="1.5"/><rect x="-10.5" y="-3.5" width="21" height="7" rx="2.5"/><rect x="10.5" y="-8" width="3.5" height="16" rx="1.5"/><rect x="14" y="-5.5" width="5" height="11" rx="1.5"/></g></svg>
     <span>
       <div class="logo-name">PB Performance</div>
       <div class="logo-sub">Coaching</div>

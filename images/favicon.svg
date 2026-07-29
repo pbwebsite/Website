@@ -1,5 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="10" fill="#07090a"/>
-  <rect x="2" y="2" width="60" height="60" rx="8" fill="none" stroke="#2D6E7E" stroke-width="2"/>
-  <text x="32" y="44" font-family="Arial Black, Helvetica, sans-serif" font-size="28" font-weight="900" fill="#3a8fa2" text-anchor="middle" letter-spacing="-1.5">PB</text>
+  <circle cx="32" cy="32" r="31" fill="#0d1c20"/>
+  <circle cx="32" cy="32" r="30" fill="none" stroke="#3a8fa2" stroke-width="2.5"/>
+  <circle cx="32" cy="32" r="21" fill="none" stroke="#2D6E7E" stroke-width="1.5"/>
+  <g transform="translate(32,32) rotate(-42)" fill="#4db8d0">
+    <rect x="-27" y="-8" width="7" height="16" rx="2"/>
+    <rect x="-20" y="-12" width="5" height="24" rx="2"/>
+    <rect x="-15" y="-5" width="30" height="10" rx="3"/>
+    <rect x="15" y="-12" width="5" height="24" rx="2"/>
+    <rect x="20" y="-8" width="7" height="16" rx="2"/>
+  </g>
 </svg>

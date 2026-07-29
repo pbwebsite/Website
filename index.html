@@ -9,10 +9,10 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#07090a;--surface:#0d1214;--card:#111618;--card-h:#131d21;
-  --border:#1e2a2d;--border-s:#263438;
+  --bg:#0d1c20;--surface:#121f25;--card:#182630;--card-h:#1d3039;
+  --border:#25383f;--border-s:#2e4650;
   --teal:#3a8fa2;--teal-b:#4db8d0;--teal-d:#2D6E7E;
-  --text:#e8eaeb;--muted:#8a9ea3;--dim:#4a6268;
+  --text:#dde8ea;--muted:#7dabb4;--dim:#3d6470;
   --ease:cubic-bezier(.16,1,.3,1);
 }
 html{scroll-behavior:smooth}
@@ -28,7 +28,7 @@ body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,s
 @media(prefers-reduced-motion:reduce){.rv,.rv-l,.rv-r{opacity:1;transform:none;transition:none}}
 
 /* ── POPUP ── */
-.popup-overlay{position:fixed;inset:0;background:rgba(7,9,10,.88);backdrop-filter:blur(8px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1.5rem;animation:fIn .3s ease}
+.popup-overlay{position:fixed;inset:0;background:rgba(13,28,32,.88);backdrop-filter:blur(8px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1.5rem;animation:fIn .3s ease}
 .popup-overlay.hidden{display:none}
 @keyframes fIn{from{opacity:0}to{opacity:1}}
 .popup{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--teal);border-radius:14px;padding:2.4rem 2rem;width:100%;max-width:400px;position:relative;animation:sUp .35s var(--ease)}
@@ -53,7 +53,7 @@ nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
   padding:.85rem 1.25rem;
-  background:rgba(7,9,10,.92);backdrop-filter:blur(20px);
+  background:rgba(13,28,32,.92);backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);
 }
 .nav__logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--text)}
@@ -82,7 +82,7 @@ nav{
   transform:scale(1.03);transition:transform 12s ease;
 }
 .hero:hover .hero__bg{transform:scale(1)}
-.hero__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,9,10,.06) 0%,rgba(7,9,10,.22) 38%,rgba(7,9,10,.88) 70%,#07090a 100%)}
+.hero__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,28,32,.06) 0%,rgba(13,28,32,.22) 38%,rgba(13,28,32,.88) 70%,#0d1c20 100%)}
 .hero__c{
   position:relative;z-index:2;width:100%;
   max-width:1160px;margin:0 auto;
@@ -186,7 +186,7 @@ nav{
   transition:filter .5s,transform .6s;
 }
 .offer-main:hover .offer-main__bg{filter:saturate(.82) brightness(.54) contrast(1.15);transform:scale(1.04)}
-.offer-main__veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,9,10,.98) 0%,rgba(7,9,10,.52) 50%,rgba(7,9,10,.04) 100%)}
+.offer-main__veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,28,32,.98) 0%,rgba(13,28,32,.52) 50%,rgba(13,28,32,.04) 100%)}
 .offer-main__body{position:relative;z-index:2;padding:1.8rem}
 
 .offer-badge{
@@ -285,7 +285,7 @@ nav{
 .testi-video{position:relative;aspect-ratio:9/16;background:#0a0f11;overflow:hidden}
 @media(max-width:559px){.testi-video{aspect-ratio:16/9}}
 .testi-video iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
-.vid-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;background:linear-gradient(160deg,#0c1a1e,#07090a);border:1px dashed rgba(45,110,126,.28)}
+.vid-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;background:linear-gradient(160deg,#0c1a1e,#0d1c20);border:1px dashed rgba(45,110,126,.28)}
 .vid-ph__icon{width:48px;height:48px;border-radius:50%;background:rgba(58,143,162,.07);border:1.5px solid var(--teal-d);display:flex;align-items:center;justify-content:center;color:var(--teal-d)}
 .vid-ph__label{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-d);opacity:.5;text-align:center;padding:0 .8rem;line-height:1.6}
 .testi-body{padding:1rem 1.2rem 1.3rem}
@@ -335,11 +335,7 @@ footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);
 <!-- NAV -->
 <nav>
   <a class="nav__logo" href="index.html">
-    <svg class="logo-mark" viewBox="0 0 36 36" width="34" height="34" aria-hidden="true">
-      <rect width="36" height="36" rx="7" fill="#111618"/>
-      <rect x="1.5" y="1.5" width="33" height="33" rx="5.5" fill="none" stroke="#3a8fa2" stroke-width="1.5"/>
-      <text x="18" y="25" font-family="Arial Black,Helvetica,sans-serif" font-size="16" font-weight="900" fill="#4db8d0" text-anchor="middle" letter-spacing="-0.8">PB</text>
-    </svg>
+    <svg class="logo-mark" viewBox="0 0 44 44" width="36" height="36" aria-hidden="true"><circle cx="22" cy="22" r="21" fill="#0d1c20"/><circle cx="22" cy="22" r="20.5" fill="none" stroke="#3a8fa2" stroke-width="1.5"/><circle cx="22" cy="22" r="14.5" fill="none" stroke="#2D6E7E" stroke-width="1"/><g transform="translate(22,22) rotate(-42)" fill="#4db8d0"><rect x="-18.5" y="-5.5" width="5" height="11" rx="1.5"/><rect x="-14" y="-8" width="3.5" height="16" rx="1.5"/><rect x="-10.5" y="-3.5" width="21" height="7" rx="2.5"/><rect x="10.5" y="-8" width="3.5" height="16" rx="1.5"/><rect x="14" y="-5.5" width="5" height="11" rx="1.5"/></g></svg>
     <div class="logo-text">
       <span class="logo-name">PB Performance</span>
       <span class="logo-sub">Coaching</span>
