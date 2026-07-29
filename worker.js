@@ -1,82 +1,56 @@
 const REPO = 'pbwebsite/Website';
-const LABEL = 'article';
 
 export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
-    if (url.pathname.startsWith('/api/')) {
-      return handleAPI(request, env, url.pathname);
+  async fetch(req, env) {
+    if (new URL(req.url).pathname === '/api' && req.method === 'POST') {
+      return handle(req, env);
     }
-    return env.ASSETS.fetch(request);
+    return env.ASSETS.fetch(req);
   }
 };
 
-function json(data, status = 200) {
-  return new Response(JSON.stringify(data), {
-    status,
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
+async function handle(req, env) {
+  const body = await req.json().catch(() => null);
+  if (!body || body.password !== env.ADMIN_PASSWORD) {
+    return r({ error: 'Unauthorized' }, 401);
+  }
+
+  const gh = (path, method = 'GET', data) => fetch(
+    `https://api.github.com/repos/${REPO}${path}`,
+    {
+      method,
+      headers: {
+        Authorization: `token ${env.GITHUB_PAT}`,
+        Accept: 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+        'User-Agent': 'pbwebsite',
+      },
+      body: data ? JSON.stringify(data) : undefined,
     }
-  });
-}
+  );
 
-async function gh(env, endpoint, method = 'GET', body = null) {
-  const opts = {
-    method,
-    headers: {
-      'Authorization': `token ${env.GITHUB_PAT}`,
-      'Accept': 'application/vnd.github.v3+json',
-      'Content-Type': 'application/json',
-      'User-Agent': 'pbwebsite-admin',
+  if (body.action === 'publish') {
+    // Create the 'article' label if it doesn't exist yet
+    const check = await gh('/labels/article');
+    if (check.status === 404) {
+      await gh('/labels', 'POST', { name: 'article', color: '3a8fa2', description: 'Published article' });
     }
-  };
-  if (body) opts.body = JSON.stringify(body);
-  return fetch(`https://api.github.com/repos/${REPO}${endpoint}`, opts);
-}
-
-async function handleAPI(request, env, path) {
-  if (request.method === 'OPTIONS') {
-    return new Response(null, { headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Content-Type,X-Admin-Password', 'Access-Control-Allow-Methods': 'GET,POST,OPTIONS' } });
+    const res = await gh('/issues', 'POST', { title: body.title, body: body.content, labels: ['article'] });
+    return r(await res.json(), res.status);
   }
 
-  const pw = request.headers.get('X-Admin-Password');
-  if (!pw || pw !== env.ADMIN_PASSWORD) {
-    return json({ error: 'Unauthorized' }, 401);
-  }
-
-  if (path === '/api/check' && request.method === 'GET') {
-    return json({ ok: true });
-  }
-
-  if (path === '/api/publish' && request.method === 'POST') {
-    const { title, body } = await request.json();
-    if (!title || !body) return json({ error: 'title and body required' }, 400);
-    const res = await gh(env, '/issues', 'POST', { title, body, labels: [LABEL] });
-    const data = await res.json();
-    return json(data, res.status);
-  }
-
-  if (path === '/api/upload-image' && request.method === 'POST') {
-    const { content, filename } = await request.json();
-    if (!content || !filename) return json({ error: 'content and filename required' }, 400);
-    const safeName = filename.replace(/[^a-z0-9.]/gi, '-').toLowerCase();
-    const filePath = `/contents/images/articles/${Date.now()}-${safeName}`;
-    const res = await gh(env, filePath, 'PUT', {
-      message: `Upload article image: ${filename}`,
-      content
+  if (body.action === 'upload') {
+    const name = body.filename.replace(/[^a-z0-9.]/gi, '-').toLowerCase();
+    const res = await gh(`/contents/images/articles/${Date.now()}-${name}`, 'PUT', {
+      message: `Upload: ${body.filename}`,
+      content: body.content,
     });
-    const data = await res.json();
-    return json(data, res.status);
+    return r(await res.json(), res.status);
   }
 
-  if (path === '/api/ensure-label' && request.method === 'POST') {
-    const res = await gh(env, `/labels/${LABEL}`);
-    if (res.status === 404) {
-      await gh(env, '/labels', 'POST', { name: LABEL, color: '3a8fa2', description: 'Published article' });
-    }
-    return json({ ok: true });
-  }
-
-  return json({ error: 'Not found' }, 404);
+  // No action = password check only
+  return r({ ok: true });
 }
+
+const r = (data, status = 200) =>
+  new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json' } });
