@@ -302,8 +302,12 @@ nav{
 .insta a:hover{border-color:var(--teal);color:var(--teal)}
 footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);border-top:1px solid var(--border)}
 
-/* hide nav links on mobile */
-@media(max-width:600px){.nav__link{display:none}}
+/* compact nav links on mobile — never fully hidden */
+@media(max-width:600px){
+  .nav__link{font-size:.65rem;padding:.35rem .55rem;letter-spacing:0}
+  .nav__cta{font-size:.65rem;padding:.42rem .85rem;letter-spacing:.04em}
+}
+@media(max-width:360px){.nav__link{display:none}}
 
 /* mobile hero cleanup — less text, heading sits lower */
 @media(max-width:700px){
