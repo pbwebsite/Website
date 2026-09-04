@@ -34,15 +34,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 @media(max-width:600px){.nav__cta{font-size:.65rem;padding:.42rem .85rem;letter-spacing:.04em}}
 
 /* ── SECTION 1: HERO ── */
-.hero{min-height:88svh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;text-align:center}
-.hero__bg{position:absolute;inset:0;background:url('images/hurling-portrait.jpg') 60% 12%/cover no-repeat;filter:saturate(.65) contrast(1.1) brightness(.32)}
-.hero__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,28,32,.05) 0%,rgba(13,28,32,.45) 50%,rgba(13,28,32,.94) 80%,#0d1c20 100%)}
-.hero__c{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:6rem 2rem 5rem;width:100%}
-.hero__tag{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--teal);background:rgba(13,28,32,.72);padding:.28rem .85rem;border-radius:100px;backdrop-filter:blur(10px);margin-bottom:1.2rem}
-.hero__h{font-size:clamp(1.5rem,3vw,2.6rem);font-weight:900;letter-spacing:-.025em;line-height:1.1;margin-bottom:.7rem;text-wrap:balance;white-space:nowrap}
-.hero__s{font-size:clamp(1rem,2vw,1.25rem);color:var(--text);font-weight:700;max-width:62ch;line-height:1.55;margin:0 auto .9rem}
-.hero__credit{font-size:.76rem;color:var(--dim);margin-bottom:2rem;font-style:italic;line-height:1.6}
-@media(max-width:700px){.hero__h{white-space:normal}}
+.hero{min-height:88svh;position:relative;display:flex;align-items:flex-end;overflow:hidden}
+.hero__bg{position:absolute;inset:0;background:url('images/hurling-portrait.jpg') 60% 12%/cover no-repeat;filter:saturate(.65) contrast(1.1) brightness(.38)}
+.hero__g{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,rgba(13,28,32,.3) 45%,rgba(13,28,32,.88) 72%,#0d1c20 100%)}
+.hero__c{position:relative;z-index:2;max-width:820px;padding:0 2rem 5rem;width:100%}
+.hero__tag{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);background:rgba(13,28,32,.72);padding:.28rem .85rem;border-radius:100px;backdrop-filter:blur(10px);margin-bottom:1rem}
+.hero__h{font-size:clamp(1.9rem,3.8vw,3rem);font-weight:900;letter-spacing:-.03em;line-height:1.08;margin-bottom:.8rem;text-wrap:balance}
+.hero__s{font-size:clamp(.95rem,1.6vw,1.08rem);color:var(--text);font-weight:600;max-width:52ch;line-height:1.6;margin-bottom:.6rem}
+.hero__credit{font-size:.74rem;color:var(--dim);margin-bottom:2rem;font-style:italic;line-height:1.5;max-width:52ch}
 
 /* CTA */
 .btn-fill{display:inline-flex;align-items:center;padding:.9rem 2.2rem;background:linear-gradient(135deg,#3e9db1,#25768a);color:#fff;font-weight:800;font-size:.88rem;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border-radius:8px;box-shadow:0 4px 18px rgba(58,143,162,.35);transition:background .2s,transform .15s,box-shadow .2s}
@@ -181,8 +180,8 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
     <span class="hero__tag">Individual 1:1 Online Coaching</span>
     <h1 class="hero__h">Physical performance coaching for ambitious GAA players</h1>
     <p class="hero__s">Your work ethic has got you this far. Now you need a plan that can take you further.</p>
-    <p class="hero__credit">Become stronger, fitter, faster and better prepared to improve your performance on the pitch, with individual coaching built around your needs, your team schedule and the stage of the season. Coached by Paddy Burke — Antrim Senior Hurler, Strength &amp; Conditioning Coach and MSc Performance Coaching graduate.</p>
-    <div class="cta-group cta-center">
+    <p class="hero__credit">Become stronger, fitter, faster and better prepared to improve your performance on the pitch — with individual coaching built around your needs, your team schedule and the stage of the season.</p>
+    <div class="cta-group">
       <a href="https://forms.gle/bQ3gywgc1xEoW6SE8" target="_blank" rel="noopener" class="btn-fill">Apply for 1:1 Coaching</a>
       <span class="cta-note">Complete the short application form and I'll contact you personally to discuss the next step.</span>
     </div>
