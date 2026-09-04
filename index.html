@@ -27,21 +27,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .logo-text{display:flex;flex-direction:column}
 .logo-name{font-size:.74rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;line-height:1.1}
 .logo-sub{font-size:.52rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);line-height:1.3}
-.nav__right{display:flex;align-items:center;gap:.6rem}
+.nav__right{display:flex;align-items:center}
 .nav__cta{padding:.5rem 1.2rem;background:linear-gradient(135deg,#3e9db1,#25768a);color:#fff;font-size:.74rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;border-radius:6px;box-shadow:0 2px 10px rgba(58,143,162,.34);transition:background .2s,transform .15s;white-space:nowrap}
 .nav__cta:hover{background:linear-gradient(135deg,#52c1d8,#3a8fa2);transform:translateY(-1px)}
 @media(max-width:480px){.logo-text{display:none}}
 @media(max-width:600px){.nav__cta{font-size:.65rem;padding:.42rem .85rem;letter-spacing:.04em}}
 
-/* HERO */
+/* ── SECTION 1: HERO ── */
 .hero{min-height:92svh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;text-align:center}
 .hero__bg{position:absolute;inset:0;background:url('images/hurling-portrait.jpg') 60% 12%/cover no-repeat;filter:saturate(.65) contrast(1.1) brightness(.35)}
 .hero__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,28,32,.1) 0%,rgba(13,28,32,.4) 40%,rgba(13,28,32,.92) 80%,#0d1c20 100%)}
 .hero__c{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:6rem 2rem 5rem;width:100%}
-.hero__tag{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);background:rgba(13,28,32,.72);padding:.3rem .9rem;border-radius:100px;backdrop-filter:blur(10px);margin-bottom:.6rem}
-.hero__sub-tag{display:block;font-size:.7rem;font-weight:600;letter-spacing:.1em;color:var(--muted);margin-bottom:1.6rem}
+.hero__tag{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);background:rgba(13,28,32,.72);padding:.3rem .9rem;border-radius:100px;backdrop-filter:blur(10px);margin-bottom:.5rem}
+.hero__sub-tag{display:block;font-size:.7rem;font-weight:600;letter-spacing:.08em;color:var(--muted);margin-bottom:1.6rem}
 .hero__h{font-size:clamp(2rem,5vw,3.8rem);font-weight:900;letter-spacing:-.03em;line-height:1.06;margin-bottom:1.2rem;text-wrap:balance}
-.hero__s{font-size:clamp(.9rem,1.6vw,1.02rem);color:var(--muted);max-width:54ch;line-height:1.8;margin:0 auto .7rem}
+.hero__s{font-size:clamp(.9rem,1.6vw,1rem);color:var(--muted);max-width:54ch;line-height:1.8;margin:0 auto .7rem}
 .hero__credit{font-size:.78rem;color:var(--dim);margin-bottom:2.2rem;font-style:italic}
 
 /* CTA */
@@ -51,7 +51,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .cta-note{font-size:.72rem;color:var(--dim);font-style:italic}
 .cta-center{align-items:center;text-align:center}
 
-/* VSL */
+/* ── VSL ── */
 .s-vsl{background:var(--bg);padding:5rem 2rem;text-align:center;border-top:1px solid var(--border)}
 .vsl-intro{font-size:.95rem;color:var(--muted);margin:0 auto 2.2rem;line-height:1.7;max-width:52ch}
 .vsl-wrap{max-width:820px;margin:0 auto 2.4rem;border-radius:14px;overflow:hidden;box-shadow:0 0 0 1px rgba(77,184,208,.22),0 0 48px rgba(77,184,208,.10),0 24px 60px rgba(0,0,0,.55)}
@@ -62,79 +62,68 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .vsl-play svg{margin-left:4px}
 .vsl-note{font-size:.78rem;color:var(--muted)}
 
-/* SECTIONS */
+/* SHARED SECTION STYLES */
 .w{max-width:860px;margin:0 auto;padding:5.5rem 2rem}
 .w--wide{max-width:1060px}
 .s-eyebrow{font-size:.64rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.7rem}
 .s-h{font-size:clamp(1.6rem,3.2vw,2.4rem);font-weight:900;letter-spacing:-.025em;line-height:1.1;margin-bottom:1.2rem;text-wrap:balance}
 .s-body{font-size:.97rem;color:var(--muted);line-height:1.82;margin-bottom:1.4rem;max-width:58ch}
+.s-strong{font-size:.97rem;color:var(--text);font-weight:700;line-height:1.7;border-left:3px solid var(--teal);padding-left:1.2rem;margin-bottom:1.8rem}
 
-/* PROOF NUMBERS */
-.proof-numbers{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--border);border-radius:10px;overflow:hidden;margin:1.6rem 0 2rem}
+/* ── SECTION 2: PRIMARY PROOF ── */
+.proof-numbers{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--border);border-radius:10px;overflow:hidden;margin:1.6rem 0 2rem}
 .proof-num{background:var(--card);padding:1.4rem 1.2rem;text-align:center}
 .proof-num__val{font-size:1.3rem;font-weight:900;color:var(--text);letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
 .proof-num__label{font-size:.67rem;color:var(--muted);margin-top:.35rem;line-height:1.4}
+.proof-list{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin:0 0 2rem}
+.proof-list li{font-size:.95rem;color:var(--muted);line-height:1.6;padding-left:1.5rem;position:relative}
+.proof-list li::before{content:'✓';position:absolute;left:0;color:var(--teal);font-weight:700}
 
-/* PULL QUOTE */
-.pull-quote{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:1.5rem 1.8rem;margin:2rem 0}
-.pull-quote__text{font-size:1rem;color:var(--text);font-style:italic;line-height:1.74;margin-bottom:.6rem;position:relative;padding-left:1.2rem}
-.pull-quote__text::before{content:'"';position:absolute;left:0;top:-.1em;font-size:1.8rem;color:var(--teal);font-style:normal;line-height:1}
-.pull-quote__attr{font-size:.74rem;color:var(--dim);padding-left:1.2rem}
-
-/* CHECKLIST */
+/* ── SECTION 3: FAMILIAR CHECKLIST ── */
 .checklist{list-style:none;display:flex;flex-direction:column;gap:.8rem;margin:1.6rem 0 2.2rem}
 .checklist li{font-size:.96rem;color:var(--muted);line-height:1.6;padding-left:1.5rem;position:relative}
 .checklist--dot li::before{content:'';width:6px;height:6px;background:var(--teal-d);border-radius:50%;position:absolute;left:0;top:.65em;display:block}
-.checklist--x li::before{content:'✕';position:absolute;left:0;color:var(--dim)}
 .checklist--tick li::before{content:'✓';position:absolute;left:0;color:var(--teal);font-weight:700}
+.checklist--x li::before{content:'✕';position:absolute;left:0;color:var(--dim)}
 
-/* HOW IT WORKS */
-.how-bg{background:var(--surface);border-top:1px solid var(--border)}
+/* ── SECTION 5: HOW IT WORKS ── */
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.4rem;margin-bottom:2.4rem}
 .step{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.6rem 1.5rem}
 .step__num{font-size:2.2rem;font-weight:900;color:var(--teal-d);opacity:.4;line-height:1;margin-bottom:.5rem;letter-spacing:-.04em}
 .step__title{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-b);margin-bottom:.6rem}
 .step__body{font-size:.84rem;color:var(--muted);line-height:1.65}
 
-/* INCLUDED */
-.inc-bg{background:var(--bg);border-top:1px solid var(--border)}
+/* ── SECTION 6: INCLUDED ── */
 .inc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;margin-bottom:1.4rem}
 .inc-item{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.4rem 1.5rem;display:flex;gap:.9rem;align-items:center}
 .inc-icon{width:34px;height:34px;background:rgba(58,143,162,.1);border:1px solid rgba(58,143,162,.18);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--teal)}
 .inc-title{font-size:.88rem;font-weight:800}
 .inc-note{font-size:.88rem;color:var(--muted);line-height:1.75;font-style:italic;margin-top:.6rem}
 
-/* RESULTS */
-.results-bg{background:var(--surface);border-top:1px solid var(--border)}
-.proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-bottom:2rem}
-.proof-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.8rem}
-.proof-card__label{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.7rem}
-.proof-card__quote{font-size:.9rem;color:var(--text);font-style:italic;line-height:1.72;margin-bottom:.8rem;position:relative;padding-left:1.1rem}
-.proof-card__quote::before{content:'"';position:absolute;left:0;top:-.1em;font-size:1.6rem;color:var(--teal);font-style:normal;line-height:1}
-.proof-card__attr{font-size:.72rem;color:var(--dim)}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-bottom:2rem}
-.stat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.8rem}
-.stat-card__heading{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-b);margin-bottom:1rem}
-.stat-card__rows{display:flex;flex-direction:column;gap:.5rem}
-.stat-row{font-size:.85rem;color:var(--muted);line-height:1.5}
-.stat-row strong{color:var(--text);font-variant-numeric:tabular-nums}
+/* ── SECTION 7: RESULTS ── */
+.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem;margin-bottom:2rem}
+.result-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.8rem}
+.result-card__heading{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-b);margin-bottom:1rem}
+.result-card__stats{display:flex;flex-direction:column;gap:.45rem;margin-bottom:0}
+.result-stat{font-size:.88rem;color:var(--muted);line-height:1.5;font-variant-numeric:tabular-nums}
+.result-stat strong{color:var(--text)}
+.result-card__quote{font-size:.9rem;color:var(--text);font-style:italic;line-height:1.72;position:relative;padding-left:1.1rem;margin-bottom:.8rem}
+.result-card__quote::before{content:'"';position:absolute;left:0;top:-.1em;font-size:1.6rem;color:var(--teal);font-style:normal;line-height:1}
+.result-card__attr{font-size:.72rem;color:var(--dim)}
 
-/* FIT FILTER */
-.fit-bg{background:var(--bg);border-top:1px solid var(--border)}
+/* ── SECTION 8: FIT FILTER ── */
 .fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:10px;overflow:hidden}
 .fit-col{background:var(--card);padding:1.8rem}
 .fit-head{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.2rem}
 .fit-head--yes{color:var(--teal-b)}
 .fit-head--no{color:var(--dim)}
 
-/* ABOUT */
-.about-bg{background:var(--surface);border-top:1px solid var(--border)}
+/* ── SECTION 9: ABOUT ── */
 .about-inner{display:grid;grid-template-columns:auto 1fr;gap:2.5rem;align-items:flex-start}
 .about-photo{width:100px;height:100px;border-radius:50%;object-fit:cover;border:2px solid var(--teal);filter:saturate(.88);flex-shrink:0}
 
-/* FAQ */
-.faq-bg{background:var(--bg);border-top:1px solid var(--border)}
-.faq-list{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:2.8rem}
+/* ── SECTION 10: FAQ ── */
+.faq-list{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:0}
 details.faq{border-bottom:1px solid var(--border)}
 details.faq:last-child{border-bottom:none}
 details.faq summary{padding:1.2rem 1.5rem;font-size:.9rem;font-weight:700;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;list-style:none;user-select:none;transition:background .15s}
@@ -143,19 +132,14 @@ details.faq summary::after{content:'+';font-size:1.1rem;font-weight:300;color:va
 details.faq[open] summary::after{transform:rotate(45deg)}
 details.faq .faq-body{padding:.2rem 1.5rem 1.3rem;font-size:.87rem;color:var(--muted);line-height:1.72}
 
-/* FINAL CTA */
-.final-bg{background:linear-gradient(160deg,#091417,var(--bg));border-top:1px solid var(--border);text-align:center}
-.cost-close{font-size:.97rem;color:var(--text);font-weight:700;line-height:1.7;border-left:3px solid var(--teal);padding-left:1.2rem;margin-top:1rem;margin-bottom:1.8rem}
-
-/* APPLY FORM */
-.apply-bg{background:var(--surface);border-top:1px solid var(--border);text-align:center}
+/* ── APPLY FORM ── */
 .apply__inner{max-width:560px;margin:0 auto}
 .apply__avatar{width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid var(--teal);margin:0 auto 1.4rem;display:block;filter:saturate(.88)}
 .aform{display:flex;flex-direction:column;gap:.85rem;text-align:left;margin-bottom:.5rem}
 .ff{display:flex;flex-direction:column;gap:.28rem}
 .ff label{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.ff input,.ff select,.ff textarea{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:.72rem 1rem;color:var(--text);font-size:.9rem;font-family:inherit;outline:none;transition:border-color .15s;width:100%}
-.ff input:focus,.ff select:focus,.ff textarea:focus{border-color:var(--teal)}
+.ff input,.ff textarea{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:.72rem 1rem;color:var(--text);font-size:.9rem;font-family:inherit;outline:none;transition:border-color .15s;width:100%}
+.ff input:focus,.ff textarea:focus{border-color:var(--teal)}
 .ff textarea{resize:vertical;min-height:88px}
 .ff-row{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
 .submit-btn{width:100%;padding:.95rem;background:linear-gradient(135deg,#3e9db1,#25768a);color:#fff;font-size:.95rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;border:none;border-radius:8px;cursor:pointer;box-shadow:0 4px 16px rgba(58,143,162,.32);transition:background .2s,transform .15s;margin-top:.2rem}
@@ -166,8 +150,7 @@ details.faq .faq-body{padding:.2rem 1.5rem 1.3rem;font-size:.87rem;color:var(--m
 footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-top:1px solid var(--border)}
 
 @media(max-width:680px){
-  .proof-grid{grid-template-columns:1fr}
-  .stat-grid{grid-template-columns:1fr}
+  .results-grid{grid-template-columns:1fr}
   .fit-grid{grid-template-columns:1fr}
   .fit-col:first-child{border-bottom:1px solid var(--border)}
   .about-inner{grid-template-columns:1fr}
@@ -186,11 +169,11 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
     </div>
   </a>
   <div class="nav__right">
-    <a class="nav__cta" href="#apply">Apply Now</a>
+    <a class="nav__cta" href="https://forms.gle/bQ3gywgc1xEoW6SE8" target="_blank" rel="noopener">Apply Now</a>
   </div>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- ── SECTION 1: HERO ── -->
 <section class="hero">
   <div class="hero__bg"></div>
   <div class="hero__g"></div>
@@ -201,7 +184,7 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
     <p class="hero__s">Become stronger, fitter, faster and better prepared to improve your performance on the pitch, with individual coaching built around your needs, your team schedule and the stage of the season.</p>
     <p class="hero__credit">Coached by Paddy Burke — Antrim Senior Hurler, Strength &amp; Conditioning Coach and MSc Performance Coaching graduate.</p>
     <div class="cta-group cta-center">
-      <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
+      <a href="https://forms.gle/bQ3gywgc1xEoW6SE8" target="_blank" rel="noopener" class="btn-fill">Apply for 1:1 Coaching</a>
       <span class="cta-note">Complete the short application form and I'll contact you personally to discuss the next step.</span>
     </div>
   </div>
@@ -222,32 +205,28 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
     </div>
   </div>
   <div class="cta-group cta-center">
-    <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
+    <a href="https://forms.gle/bQ3gywgc1xEoW6SE8" target="_blank" rel="noopener" class="btn-fill">Apply for 1:1 Coaching</a>
     <span class="cta-note">Complete the short application form and I'll contact you personally to discuss the next step.</span>
   </div>
 </section>
 
-<!-- ── PRIMARY PROOF — OWEN KENNEDY ── -->
+<!-- ── SECTION 2: PRIMARY PROOF ── -->
 <section style="background:var(--surface);border-top:1px solid var(--border)">
   <div class="w w--wide rv">
     <p class="s-eyebrow">Primary Proof</p>
     <h2 class="s-h">From reserve player to established starter</h2>
-    <p class="s-body" style="margin-bottom:1.4rem">Over 14 months, this player:</p>
-    <div class="proof-numbers">
-      <div class="proof-num"><div class="proof-num__val">86 → 80 kg</div><div class="proof-num__label">Reduced bodyweight</div></div>
-      <div class="proof-num"><div class="proof-num__val">125 → 140 kg</div><div class="proof-num__label">Squat increased</div></div>
-      <div class="proof-num"><div class="proof-num__val">70 → 95 kg</div><div class="proof-num__label">Bench press increased</div></div>
-      <div class="proof-num"><div class="proof-num__val">6 → 12</div><div class="proof-num__label">Chin-ups improved</div></div>
-    </div>
-    <p class="s-body" style="margin-bottom:1.6rem">Progressed from the reserves to becoming an established starter.</p>
-    <div class="pull-quote">
-      <p class="pull-quote__text">I went from being a reserve player who wasn't getting selected for the senior team to becoming a regular league starter and featuring in the Championship. I also hit a 140 kg squat in testing. The levels I reached were unbelievable.</p>
-      <p class="pull-quote__attr">— Owen</p>
-    </div>
+    <p class="s-body">Over 14 months, this player:</p>
+    <ul class="proof-list">
+      <li>Reduced bodyweight from 86kg to 80kg</li>
+      <li>Increased his squat from 125kg to 140kg</li>
+      <li>Increased his bench press from 70kg to 95kg</li>
+      <li>Improved chin-ups from 6 to 12</li>
+      <li>Progressed from the reserves to becoming an established starter</li>
+    </ul>
   </div>
 </section>
 
-<!-- ── DOES THIS SOUND FAMILIAR? ── -->
+<!-- ── SECTION 3: DOES THIS SOUND FAMILIAR? ── -->
 <section style="background:var(--bg);border-top:1px solid var(--border)">
   <div class="w rv">
     <p class="s-eyebrow">Does This Sound Familiar?</p>
@@ -261,31 +240,27 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
       <li>You know you have more potential but don't have a clear plan for reaching it.</li>
     </ul>
     <div class="cta-group">
-      <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
+      <a href="https://forms.gle/bQ3gywgc1xEoW6SE8" target="_blank" rel="noopener" class="btn-fill">Apply for 1:1 Coaching</a>
       <span class="cta-note">Complete the short application form and I'll contact you personally to discuss the next step.</span>
     </div>
   </div>
 </section>
 
-<!-- ── THE CORE PROBLEM ── -->
+<!-- ── SECTION 4: THE CORE PROBLEM ── -->
 <section style="background:var(--surface);border-top:1px solid var(--border)">
   <div class="w rv">
     <p class="s-eyebrow">The Core Problem</p>
     <h2 class="s-h">Hard work will only take you so far</h2>
     <p class="s-body">At the start, simply going to the gym and training harder may have helped you improve.</p>
     <p class="s-body">But once you reach a certain level, more work is not always the answer. You need to know what qualities you need to improve, what your team training already covers and how everything fits together across the season.</p>
-    <p class="cost-close">The problem isn't your work ethic. It's not having a plan you trust.</p>
-    <div class="pull-quote">
-      <p class="pull-quote__text">Before joining, I struggled with consistency and wasn't sure if I was training in the most effective way for my goals. Having everything planned out took the guesswork away. I became fitter, stronger and more consistent than I'd ever been, was covering the pitch better and felt far more prepared for matches.</p>
-      <p class="pull-quote__attr">— Ronan</p>
-    </div>
+    <p class="s-strong">The problem isn't your work ethic. It's not having a plan you trust.</p>
   </div>
 </section>
 
-<!-- ── HOW IT WORKS ── -->
-<section class="how-bg">
+<!-- ── SECTION 5: HOW IT WORKS ── -->
+<section style="background:var(--bg);border-top:1px solid var(--border)">
   <div class="w w--wide rv">
-    <p class="s-eyebrow">How It Works</p>
+    <p class="s-eyebrow">How 1:1 Coaching Works</p>
     <h2 class="s-h">A clear process built around you</h2>
     <div class="steps">
       <div class="step rv" style="transition-delay:.05s">
@@ -304,19 +279,15 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
         <p class="step__body">We measure your strength, speed, fitness and training, then adjust the plan based on what is working and what you need next.</p>
       </div>
     </div>
-    <div class="cta-group rv" style="margin-bottom:2.4rem">
-      <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
+    <div class="cta-group rv">
+      <a href="https://forms.gle/bQ3gywgc1xEoW6SE8" target="_blank" rel="noopener" class="btn-fill">Apply for 1:1 Coaching</a>
       <span class="cta-note">Complete the short application form and I'll contact you personally to discuss the next step.</span>
-    </div>
-    <div class="pull-quote rv">
-      <p class="pull-quote__text">This is the fastest I have ever progressed in the gym and the highest weights I have hit. The programme pushed me without leaving me fatigued for the next session, and any changes I needed were made quickly.</p>
-      <p class="pull-quote__attr">— Kieran</p>
     </div>
   </div>
 </section>
 
-<!-- ── WHAT'S INCLUDED ── -->
-<section class="inc-bg">
+<!-- ── SECTION 6: WHAT'S INCLUDED ── -->
+<section style="background:var(--surface);border-top:1px solid var(--border)">
   <div class="w w--wide rv">
     <p class="s-eyebrow">What's Included</p>
     <h2 class="s-h">Everything you need to take control of your physical preparation</h2>
@@ -350,67 +321,47 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
   </div>
 </section>
 
-<!-- ── PLAYER RESULTS ── -->
-<section class="results-bg">
+<!-- ── SECTION 7: PLAYER RESULTS ── -->
+<section style="background:var(--bg);border-top:1px solid var(--border)">
   <div class="w w--wide rv">
     <p class="s-eyebrow">Player Results</p>
     <h2 class="s-h">Three months of measurable progress</h2>
-
-    <div class="stat-grid">
-      <div class="stat-card rv">
-        <p class="stat-card__heading">Three months of measurable progress</p>
-        <div class="stat-card__rows">
-          <div class="stat-row"><strong>3RM squat:</strong> 125 kg → 175 kg</div>
-          <div class="stat-row"><strong>Bench press:</strong> 90 kg → 120 kg</div>
-          <div class="stat-row"><strong>Chin-ups:</strong> 17 → 25</div>
-          <div class="stat-row"><strong>5RM deadlift:</strong> 150 kg → 170 kg</div>
+    <div class="results-grid">
+      <div class="result-card rv">
+        <p class="result-card__heading">Three months of measurable progress</p>
+        <div class="result-card__stats">
+          <div class="result-stat"><strong>3RM squat:</strong> 125kg → 175kg</div>
+          <div class="result-stat"><strong>Bench press:</strong> 90kg → 120kg</div>
+          <div class="result-stat"><strong>Chin-ups:</strong> 17 → 25</div>
+          <div class="result-stat"><strong>5RM deadlift:</strong> 150kg → 170kg</div>
         </div>
       </div>
-      <div class="stat-card rv" style="transition-delay:.07s">
-        <p class="stat-card__heading">A stronger and faster camogie player in 12 weeks</p>
-        <div class="stat-card__rows">
-          <div class="stat-row"><strong>Maximum speed:</strong> 5.5 m/s → 6.7 m/s</div>
-          <div class="stat-row"><strong>Squat:</strong> 60 kg → 77 kg</div>
-          <div class="stat-row"><strong>Bench press:</strong> 39 kg → 52.5 kg</div>
-          <div class="stat-row"><strong>Chin-ups:</strong> 0 → multiple reps</div>
+      <div class="result-card rv" style="transition-delay:.07s">
+        <p class="result-card__heading">A stronger and faster camogie player in 12 weeks</p>
+        <div class="result-card__stats">
+          <div class="result-stat"><strong>Maximum speed:</strong> 5.5m/s → 6.7m/s</div>
+          <div class="result-stat"><strong>Squat:</strong> 60kg → 77kg</div>
+          <div class="result-stat"><strong>Bench press:</strong> 39kg → 52.5kg</div>
+          <div class="result-stat"><strong>Chin-ups:</strong> 0 → multiple reps</div>
         </div>
       </div>
-    </div>
-
-    <div class="proof-grid">
-      <div class="proof-card rv">
-        <p class="proof-card__label">Padraic</p>
-        <p class="proof-card__quote">I noticed multiple weights going up in the gym and managed to get into the senior Championship squad for the first time. The sessions fitted nicely around my training schedule, and Paddy understands the load that is on GAA players.</p>
-        <p class="proof-card__attr">— Padraic</p>
-      </div>
-      <div class="proof-card rv" style="transition-delay:.06s">
-        <p class="proof-card__label">Maria</p>
-        <p class="proof-card__quote">My back squat went from 45kg to 67.5kg, my bent-over row from 30kg to 57.5kg, and I achieved my first unassisted chin-ups. My 40m sprint improved from 8 seconds to 6 seconds. The work I put in for the season ahead boosted my confidence on the pitch, and I could feel it paying off during team training.</p>
-        <p class="proof-card__attr">— Maria</p>
-      </div>
-      <div class="proof-card rv" style="transition-delay:.10s">
-        <p class="proof-card__label">Aimon</p>
-        <p class="proof-card__quote">I feel physically stronger on the pitch and more powerful in every aspect. I reached a 100kg bench press and a 150kg squat. The attention to detail and the way the programme was built around my goals were top drawer.</p>
-        <p class="proof-card__attr">— Aimon</p>
-      </div>
-      <div class="proof-card rv" style="transition-delay:.14s">
-        <p class="proof-card__label">Niamh</p>
-        <p class="proof-card__quote">I noticed a big difference in my strength, especially when taking the ball through a tackle - I can carry it much better. The structured programme took all the guesswork out of the gym, and I could build it around my lifestyle and busy schedule.</p>
-        <p class="proof-card__attr">— Niamh</p>
+      <div class="result-card rv" style="transition-delay:.14s">
+        <p class="result-card__heading">The fastest I have ever progressed in the gym</p>
+        <p class="result-card__quote">The programme is well designed to push you but not leave you fatigued for the next session. Paddy is quick to make any necessary changes to accommodate.</p>
+        <p class="result-card__attr">— PB Performance client</p>
       </div>
     </div>
-
     <div class="cta-group cta-center rv">
-      <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
+      <a href="https://forms.gle/bQ3gywgc1xEoW6SE8" target="_blank" rel="noopener" class="btn-fill">Apply for 1:1 Coaching</a>
       <span class="cta-note">Complete the short application form and I'll contact you personally to discuss the next step.</span>
     </div>
   </div>
 </section>
 
-<!-- ── WHO IT'S FOR ── -->
-<section class="fit-bg">
+<!-- ── SECTION 8: WHO IT'S FOR ── -->
+<section style="background:var(--surface);border-top:1px solid var(--border)">
   <div class="w rv">
-    <p class="s-eyebrow">Is This Right for You?</p>
+    <p class="s-eyebrow">Who the Coaching Is For</p>
     <h2 class="s-h" style="margin-bottom:1.8rem">Be honest with yourself.</h2>
     <div class="fit-grid">
       <div class="fit-col">
@@ -436,19 +387,18 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
   </div>
 </section>
 
-<!-- ── MEET PADDY ── -->
-<section class="about-bg">
+<!-- ── SECTION 9: MEET PADDY ── -->
+<section style="background:var(--bg);border-top:1px solid var(--border)">
   <div class="w rv">
-    <p class="s-eyebrow">Meet Paddy</p>
+    <h2 class="s-h" style="margin-bottom:1.6rem">Meet Paddy</h2>
     <div class="about-inner">
       <img src="images/paddy-bench.jpg" alt="Paddy Burke" class="about-photo" onerror="this.style.display='none'">
       <div>
-        <h2 class="s-h" style="margin-bottom:1rem">I'm not only coaching this. I'm still living it.</h2>
         <p class="s-body">I'm Paddy Burke, an Antrim Senior Hurler with more than ten years of intercounty experience, a Strength &amp; Conditioning Coach and an MSc Performance Coaching graduate.</p>
         <p class="s-body">I know what it is like to take your game seriously and still question whether your preparation is good enough. I created PB Performance Coaching to give ambitious GAA players the direction, individual support and accountability that I know can make such a difference.</p>
         <p class="s-body" style="margin-bottom:1.8rem">I believe every player must take responsibility for their own level of preparation. My role is to give you the plan, feedback and support to do that properly.</p>
         <div class="cta-group">
-          <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
+          <a href="https://forms.gle/bQ3gywgc1xEoW6SE8" target="_blank" rel="noopener" class="btn-fill">Apply for 1:1 Coaching</a>
           <span class="cta-note">Complete the short application form and I'll contact you personally to discuss the next step.</span>
         </div>
       </div>
@@ -456,8 +406,8 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
   </div>
 </section>
 
-<!-- ── FAQs ── -->
-<section class="faq-bg">
+<!-- ── SECTION 10: FAQs ── -->
+<section style="background:var(--surface);border-top:1px solid var(--border)">
   <div class="w rv">
     <p class="s-eyebrow">Common Questions</p>
     <h2 class="s-h" style="margin-bottom:2rem">FAQs</h2>
@@ -468,7 +418,7 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
       </details>
       <details class="faq">
         <summary>How many sessions will I complete?</summary>
-        <div class="faq-body">That depends on your team schedule, goals and stage of the season. Your plan is built around the time you realistically have. More sessions are not automatically better.<br><br><em>"After a season ravaged by injuries, I wanted to put on size and set myself up properly. I gained around 3kg of muscle and improved my strength massively. The short, simple sessions meant I could still tick every box, even with limited time." — Eamonn</em></div>
+        <div class="faq-body">That depends on your team schedule, goals and stage of the season. Your plan is built around the time you realistically have. More sessions are not automatically better.</div>
       </details>
       <details class="faq">
         <summary>Will the gym work leave me tired for matches?</summary>
@@ -490,85 +440,23 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
   </div>
 </section>
 
-<!-- ── CLOSING QUOTE — DARA RODGERS ── -->
-<section style="background:var(--surface);border-top:1px solid var(--border)">
-  <div class="w rv" style="padding-bottom:4rem">
-    <div class="pull-quote" style="margin:0">
-      <p class="pull-quote__text">I felt faster, stronger and more complete on the pitch, and I got my rewards both individually and with the team. Realising that more wasn't always better was a game changer. Having a coach reassure me that I was on the right path changed how I approached training.</p>
-      <p class="pull-quote__attr">— Dara</p>
-    </div>
-  </div>
-</section>
-
-<!-- ── FINAL CTA ── -->
-<section class="final-bg">
-  <div class="w rv" style="text-align:center">
+<!-- ── SECTION 11: FINAL CTA ── -->
+<section style="background:linear-gradient(160deg,#091417,var(--bg));border-top:1px solid var(--border);text-align:center">
+  <div class="w rv">
     <p class="s-eyebrow" style="display:block">Your Next Move</p>
     <h2 class="s-h" style="max-width:26ch;margin:0 auto 1.2rem">Your work ethic has got you this far. Now give it the right direction.</h2>
     <p class="s-body" style="max-width:52ch;margin:0 auto 1rem">If you want to become stronger, fitter, faster and better prepared to improve your performance on the pitch, complete the short application form below.</p>
     <p class="s-body" style="max-width:52ch;margin:0 auto 2.4rem">I'll review it personally, reach out to have a chat and we'll see whether the coaching is the right fit for you.</p>
     <div class="cta-group cta-center">
-      <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
+      <a href="https://forms.gle/bQ3gywgc1xEoW6SE8" target="_blank" rel="noopener" class="btn-fill">Apply for 1:1 Coaching</a>
       <span class="cta-note">Complete the short application form and I'll contact you personally to discuss the next step.</span>
     </div>
-  </div>
-</section>
-
-<!-- ── APPLY FORM ── -->
-<section class="apply-bg" id="apply">
-  <div class="w apply__inner rv">
-    <img src="images/paddy-bench.jpg" alt="Paddy Burke" class="apply__avatar" onerror="this.style.display='none'">
-    <p class="s-eyebrow" style="display:block;text-align:center">Apply for 1:1 Coaching</p>
-    <h2 class="s-h" style="text-align:center;margin-bottom:.8rem">Ready to build a stronger, fitter, faster version of yourself?</h2>
-    <p class="s-body" style="text-align:center;max-width:46ch;margin:0 auto 2rem">Fill in the form below. Paddy reviews every application personally and gets back within 24 hours — no commitment, no hard sell.</p>
-    <form class="aform" id="applyForm" onsubmit="submitForm(event)">
-      <div class="ff-row">
-        <div class="ff"><label for="aName">Full Name</label><input type="text" id="aName" placeholder="Your name" required></div>
-        <div class="ff"><label for="aAge">Age</label><input type="number" id="aAge" placeholder="e.g. 22" min="14" max="60"></div>
-      </div>
-      <div class="ff-row">
-        <div class="ff"><label for="aEmail">Email</label><input type="email" id="aEmail" placeholder="your@email.com" required></div>
-        <div class="ff"><label for="aPhone">Phone</label><input type="tel" id="aPhone" placeholder="+353..."></div>
-      </div>
-      <div class="ff"><label for="aClub">County / Club</label><input type="text" id="aClub" placeholder="e.g. Antrim / St. Paul's"></div>
-      <div class="ff"><label for="aGoal">What's your main goal?</label><textarea id="aGoal" placeholder="Tell me where you're at and what you want to achieve…"></textarea></div>
-      <button type="submit" class="submit-btn">Apply for 1:1 Coaching →</button>
-      <p class="form-note">No commitment. Paddy will reply personally within 24 hours.</p>
-    </form>
-    <p class="form-msg" id="applyMsg"></p>
   </div>
 </section>
 
 <footer>© 2026 PB Performance Coaching &nbsp;·&nbsp; <a href="index.html" style="color:inherit">pbperformancecoaching.com</a></footer>
 
 <script>
-async function submitForm(e) {
-  e.preventDefault();
-  const vals = {
-    name:  document.getElementById('aName').value.trim(),
-    age:   document.getElementById('aAge').value.trim(),
-    email: document.getElementById('aEmail').value.trim(),
-    phone: document.getElementById('aPhone').value.trim(),
-    club:  document.getElementById('aClub').value.trim(),
-    goal:  document.getElementById('aGoal').value.trim(),
-  };
-  const fd = new URLSearchParams();
-  fd.append('entry.REPLACE_NAME_ID',  vals.name);
-  fd.append('entry.REPLACE_EMAIL_ID', vals.email);
-  fd.append('entry.REPLACE_PHONE_ID', vals.phone);
-  fd.append('entry.REPLACE_AGE_ID',   vals.age);
-  fd.append('entry.REPLACE_CLUB_ID',  vals.club);
-  fd.append('entry.REPLACE_GOAL_ID',  vals.goal);
-  try {
-    await fetch('https://docs.google.com/forms/d/e/FORM_ID_HERE/formResponse', {
-      method: 'POST', mode: 'no-cors', body: fd,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    });
-  } catch(_) {}
-  document.getElementById('applyForm').style.display = 'none';
-  document.getElementById('applyMsg').textContent = '✓ Application received — Paddy will be in touch within 24 hours.';
-}
-
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
 }, { threshold: 0.07 });
