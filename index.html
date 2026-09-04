@@ -3,368 +3,213 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PB Performance Coaching | GAA S&C</title>
-<meta name="description" content="Online GAA Strength & Conditioning coaching from Paddy Burke — Antrim Senior Hurler and MSc Performance Coach.">
+<title>1:1 Online Coaching | PB Performance Coaching</title>
+<meta name="description" content="Individual 1:1 online coaching for ambitious GAA players. Become stronger, fitter, faster and better prepared to perform on the pitch.">
 <link rel="icon" type="image/svg+xml" href="images/logo.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0d1c20;--surface:#121f25;--card:#182630;--card-h:#1d3039;
-  --border:#25383f;--border-s:#2e4650;
-  --teal:#3a8fa2;--teal-b:#4db8d0;--teal-d:#2D6E7E;
+  --bg:#0d1c20;--surface:#121f25;--card:#182630;
+  --border:#25383f;--teal:#3a8fa2;--teal-b:#4db8d0;--teal-d:#2D6E7E;
   --text:#dde8ea;--muted:#7dabb4;--dim:#3d6470;
-  --ease:cubic-bezier(.16,1,.3,1);
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
-/* ── SCROLL REVEAL ── */
-.rv{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 .rv.vis{opacity:1;transform:none}
-.rv-l{opacity:0;transform:translateX(-20px);transition:opacity .65s ease,transform .65s ease}
-.rv-l.vis{opacity:1;transform:none}
-.rv-r{opacity:0;transform:translateX(20px);transition:opacity .65s ease,transform .65s ease}
-.rv-r.vis{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.rv,.rv-l,.rv-r{opacity:1;transform:none;transition:none}}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 
-/* ── POPUP ── */
-.popup-overlay{position:fixed;inset:0;background:rgba(13,28,32,.88);backdrop-filter:blur(8px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1.5rem;animation:fIn .3s ease}
-.popup-overlay.hidden{display:none}
-@keyframes fIn{from{opacity:0}to{opacity:1}}
-.popup{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--teal);border-radius:14px;padding:2.4rem 2rem;width:100%;max-width:400px;position:relative;animation:sUp .35s var(--ease)}
-@keyframes sUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-.popup__close{position:absolute;top:1rem;right:1rem;width:28px;height:28px;background:none;border:none;cursor:pointer;color:var(--dim);display:flex;align-items:center;justify-content:center;border-radius:4px;transition:color .15s,background .15s}
-.popup__close:hover{color:var(--text);background:rgba(255,255,255,.06)}
-.popup__eyebrow{font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.55rem}
-.popup__title{font-size:1.45rem;font-weight:900;letter-spacing:-.025em;line-height:1.15;margin-bottom:.5rem}
-.popup__sub{font-size:.85rem;color:var(--muted);line-height:1.65;margin-bottom:1.4rem}
-.pf{display:flex;flex-direction:column;gap:.25rem;margin-bottom:.7rem}
-.pf label{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
-.pf input{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:.72rem 1rem;color:var(--text);font-size:.92rem;font-family:inherit;outline:none;transition:border-color .15s;width:100%}
-.pf input:focus{border-color:var(--teal)}
-.popup__btn{width:100%;padding:.9rem;background:var(--teal);color:#fff;font-size:.9rem;font-weight:800;letter-spacing:.04em;border:none;border-radius:7px;cursor:pointer;margin-top:.3rem;transition:background .2s}
-.popup__btn:hover{background:var(--teal-b)}
-.popup__skip{display:block;text-align:center;margin-top:.85rem;font-size:.76rem;color:var(--dim);cursor:pointer;background:none;border:none;width:100%;transition:color .15s}
-.popup__skip:hover{color:var(--muted)}
-.popup__msg{text-align:center;font-size:.85rem;color:var(--teal-b);margin-top:.7rem;min-height:1.2em}
-
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:.85rem 1.25rem;
-  background:rgba(13,28,32,.92);backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;background:rgba(13,28,32,.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .nav__logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--text)}
-.logo-mark{display:block;flex-shrink:0}
-.logo-text{display:flex;flex-direction:column;gap:0}
+.nav__logo img{width:46px;height:46px;border-radius:8px}
+.logo-text{display:flex;flex-direction:column}
 .logo-name{font-size:.74rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;line-height:1.1}
 .logo-sub{font-size:.52rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);line-height:1.3}
-.nav__links{display:flex;align-items:center;gap:.25rem}
-.nav__link{font-size:.74rem;font-weight:700;color:var(--text);text-decoration:none;padding:.42rem .8rem;border-radius:5px;letter-spacing:.03em;white-space:nowrap;transition:color .15s,background .15s}
-.nav__link:hover{color:#fff;background:rgba(255,255,255,.07)}
-.nav__cta{padding:.5rem 1.2rem;background:linear-gradient(135deg,#3e9db1,#25768a);color:#fff;font-size:.74rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;border-radius:6px;white-space:nowrap;box-shadow:0 2px 10px rgba(58,143,162,.34);transition:background .2s,box-shadow .2s,transform .15s}
-.nav__cta:hover{background:linear-gradient(135deg,#52c1d8,#3a8fa2);box-shadow:0 4px 18px rgba(58,143,162,.52);transform:translateY(-1px)}
-/* hide wordmark when nav is tight — logo icon alone is sufficient */
+.nav__right{display:flex;align-items:center;gap:.6rem}
+.nav__cta{padding:.5rem 1.2rem;background:linear-gradient(135deg,#3e9db1,#25768a);color:#fff;font-size:.74rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;border-radius:6px;box-shadow:0 2px 10px rgba(58,143,162,.34);transition:background .2s,transform .15s;white-space:nowrap}
+.nav__cta:hover{background:linear-gradient(135deg,#52c1d8,#3a8fa2);transform:translateY(-1px)}
 @media(max-width:480px){.logo-text{display:none}}
-
-/* ── HERO ── */
-.hero{
-  min-height:88svh;position:relative;
-  display:flex;flex-direction:column;justify-content:flex-end;
-  overflow:hidden;
-}
-.hero__bg{
-  position:absolute;inset:0;
-  background:url('images/hurling-portrait.jpg') center 12%/cover no-repeat;
-  filter:saturate(.82) contrast(1.08) brightness(.72);
-  transform:scale(1.03);transition:transform 12s ease;
-}
-.hero:hover .hero__bg{transform:scale(1)}
-.hero__g{
-  position:absolute;inset:0;
-  background:linear-gradient(to bottom,rgba(13,28,32,.08) 0%,rgba(13,28,32,.18) 35%,rgba(13,28,32,.78) 68%,#0d1c20 100%);
-}
-.hero__c{
-  position:relative;z-index:2;width:100%;
-  max-width:1160px;margin:0 auto;
-  padding:0 1.5rem 4.5rem;
-  text-align:center;
-}
-.hero__eyebrow{
-  display:inline-block;font-size:.62rem;font-weight:700;
-  letter-spacing:.26em;text-transform:uppercase;color:var(--teal);
-  margin-bottom:1rem;animation:fadeUp .9s ease both;
-}
-.hero__h{
-  font-family:'Bebas Neue',Arial,sans-serif;
-  font-size:clamp(3rem,7vw,5.5rem);font-weight:400;
-  letter-spacing:.05em;line-height:.95;
-  margin-bottom:.85rem;text-wrap:balance;
-  animation:fadeUp .9s .07s ease both;
-}
-.hero__h em{font-style:normal;color:var(--teal-b)}
-.hero__sub{
-  font-size:clamp(.9rem,2vw,1.05rem);color:var(--muted);
-  max-width:44ch;margin:0 auto 1.3rem;line-height:1.72;
-  animation:fadeUp .9s .14s ease both;
-}
-.hero__cred{
-  display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem .9rem;
-  margin-bottom:2rem;animation:fadeUp .9s .2s ease both;
-}
-.hero__cred-item{
-  font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--dim);display:flex;align-items:center;gap:.45rem;
-}
-.hero__cred-item::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--teal-d);flex-shrink:0}
-.hero__ctas{
-  display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;
-  animation:fadeUp .9s .27s ease both;
-}
-@media(min-width:700px){
-  .hero__c{text-align:center;max-width:800px}
-  .hero__sub{margin:0 auto 1.3rem;max-width:46ch}
-  .hero__cred{justify-content:center}
-  .hero__ctas{justify-content:center}
-}
-@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-
-/* ── BUTTONS ── */
-.btn-fill{
-  display:inline-flex;align-items:center;gap:.55rem;
-  padding:.88rem 1.9rem;
-  background:linear-gradient(135deg,#3e9db1 0%,#25768a 100%);
-  color:#fff;font-weight:800;font-size:.88rem;letter-spacing:.04em;
-  text-decoration:none;border-radius:8px;
-  box-shadow:0 4px 16px rgba(58,143,162,.3),0 1px 3px rgba(0,0,0,.3);
-  transition:background .2s,transform .15s,box-shadow .2s;
-  position:relative;overflow:hidden;
-}
-.btn-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.13) 0%,transparent 55%);pointer-events:none}
-.btn-fill:hover{background:linear-gradient(135deg,#52c1d8 0%,#3a8fa2 100%);transform:translateY(-2px);box-shadow:0 8px 28px rgba(58,143,162,.46),0 2px 6px rgba(0,0,0,.3)}
-.btn-fill:active{transform:translateY(0);box-shadow:0 2px 8px rgba(58,143,162,.2)}
-.btn-ghost{
-  display:inline-flex;align-items:center;gap:.5rem;
-  padding:.88rem 1.9rem;border:1.5px solid rgba(255,255,255,.12);
-  color:var(--muted);font-weight:600;font-size:.88rem;
-  text-decoration:none;border-radius:8px;
-  background:rgba(255,255,255,.025);
-  transition:border-color .2s,color .2s,background .2s,box-shadow .2s,transform .15s;
-}
-.btn-ghost:hover{border-color:rgba(58,143,162,.55);color:var(--teal-b);background:rgba(58,143,162,.07);box-shadow:0 0 0 1px rgba(58,143,162,.15),0 4px 14px rgba(0,0,0,.2);transform:translateY(-1px)}
-@media(max-width:480px){
-  .hero__ctas{flex-direction:column;align-items:stretch;max-width:300px;margin:0 auto}
-  .btn-fill,.btn-ghost{justify-content:center}
-}
-.hero__scroll{
-  display:flex;justify-content:center;margin-top:2.2rem;
-  animation:fadeUp .9s .55s ease both;
-}
-.hero__scroll svg{
-  color:var(--dim);
-  animation:scrollBounce 2.2s ease infinite;
-}
-@keyframes scrollBounce{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(7px)}
-}
-
-/* ── WORK SECTION WRAPPER ── */
-.work{padding:5rem 1.5rem 6rem}
-.work-inner{max-width:1160px;margin:0 auto}
-.s-eyebrow{font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.65rem}
-.s-title{font-family:'Bebas Neue',Arial,sans-serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:400;letter-spacing:.04em;line-height:1;margin-bottom:.7rem;text-wrap:balance}
-.s-body{font-size:.95rem;color:var(--muted);max-width:50ch;line-height:1.78;margin-bottom:2.5rem}
-
-/* ── OFFER LAYOUT: mobile-first ── */
-
-/* 1-on-1 FEATURED CARD */
-.offer-main{
-  position:relative;border-radius:18px;overflow:hidden;
-  text-decoration:none;color:var(--text);display:flex;flex-direction:column;justify-content:flex-end;
-  min-height:340px;border:1px solid var(--border);
-  transition:transform .4s var(--ease),border-color .3s,box-shadow .3s;
-  margin-bottom:1rem;
-}
-.offer-main:hover{transform:translateY(-4px);border-color:rgba(58,143,162,.4);box-shadow:0 22px 50px rgba(0,0,0,.5),0 0 0 1px rgba(58,143,162,.18),0 0 40px rgba(58,143,162,.07)}
-.offer-main__bg{
-  position:absolute;inset:0;
-  background-size:cover;background-position:center 8%;
-  filter:saturate(.78) brightness(.65) contrast(1.12);
-  transition:filter .5s,transform .6s;
-}
-.offer-main:hover .offer-main__bg{filter:saturate(.88) brightness(.75) contrast(1.1);transform:scale(1.04)}
-.offer-main__veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,28,32,.98) 0%,rgba(13,28,32,.52) 50%,rgba(13,28,32,.04) 100%)}
-.offer-main__body{position:relative;z-index:2;padding:1.8rem}
-
-.offer-badge{
-  display:inline-flex;align-items:center;gap:.45rem;
-  font-size:.58rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--teal-b);background:rgba(77,184,208,.08);
-  border:1px solid rgba(77,184,208,.22);
-  padding:.3rem .85rem .3rem .65rem;border-radius:20px;margin-bottom:.9rem;
-}
-.badge-dot{width:5px;height:5px;border-radius:50%;background:var(--teal-b);animation:pulse 2.5s ease infinite;flex-shrink:0}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-.offer-title{font-family:'Bebas Neue',Arial,sans-serif;font-size:clamp(2.2rem,5vw,3.2rem);font-weight:400;letter-spacing:.04em;line-height:1;margin-bottom:.6rem}
-.offer-desc{font-size:.85rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem;max-width:44ch}
-.offer-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.4rem}
-.offer-chip{font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,.05);border:1px solid var(--border-s);padding:.26rem .65rem;border-radius:5px}
-.offer-cta{
-  display:inline-flex;align-items:center;gap:.6rem;
-  padding:.88rem 1.8rem;
-  background:linear-gradient(135deg,#3e9db1 0%,#25768a 100%);
-  color:#fff;font-size:.88rem;font-weight:800;letter-spacing:.04em;border-radius:8px;
-  box-shadow:0 4px 16px rgba(58,143,162,.32);
-  transition:background .2s,gap .2s,box-shadow .2s;
-  position:relative;overflow:hidden;
-}
-.offer-cta::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.13) 0%,transparent 55%);pointer-events:none}
-.offer-main:hover .offer-cta{background:linear-gradient(135deg,#52c1d8 0%,#3a8fa2 100%);gap:.85rem;box-shadow:0 6px 22px rgba(58,143,162,.52)}
-.offer-note{font-size:.65rem;color:var(--dim);margin-top:.65rem;letter-spacing:.04em}
-
-/* ── PROGRAMME CARDS ── */
-.prog-cards{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1.2rem}
-@media(min-width:600px){.prog-cards{grid-template-columns:repeat(3,1fr)}}
-.prog-card{position:relative;border-radius:14px;overflow:hidden;text-decoration:none;color:var(--text);min-height:220px;border:1px solid var(--border);display:flex;flex-direction:column;justify-content:flex-end;transition:border-color .3s,transform .3s var(--ease),box-shadow .3s;-webkit-tap-highlight-color:transparent}
-.prog-card:hover{border-color:rgba(58,143,162,.4);transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.48),0 0 0 1px rgba(58,143,162,.14)}
-.prog-card__bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:saturate(.82) brightness(.72) contrast(1.08);transition:filter .4s,transform .5s}
-.prog-card:hover .prog-card__bg{filter:saturate(.9) brightness(.85) contrast(1.05);transform:scale(1.03)}
-.prog-card__veil{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,28,32,.04) 0%,rgba(13,28,32,.82) 60%,rgba(13,28,32,.97) 100%)}
-.prog-card__body{position:relative;z-index:2;padding:1.2rem 1.3rem}
-.prog-card__tag{font-size:.56rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:.25rem}
-.prog-card__title{font-size:1rem;font-weight:900;letter-spacing:-.02em;line-height:1.1;margin-bottom:.3rem}
-.prog-card__desc{font-size:.74rem;color:var(--muted);line-height:1.5;margin-bottom:.8rem}
-.prog-card__cta{font-size:.68rem;font-weight:800;color:var(--teal-b);letter-spacing:.06em;display:flex;align-items:center;gap:.35rem;transition:gap .2s}
-.prog-card:hover .prog-card__cta{gap:.6rem}
-
-/* ── DESKTOP ── */
-@media(min-width:880px){
-  .offer-main{min-height:460px}
-  .offer-main__body{padding:2.2rem}
-  .offer-desc{margin-bottom:1.4rem}
-  .offer-chips{margin-bottom:1.8rem}
-  .prog-cards{margin-top:1.4rem}
-  .prog-card{min-height:250px}
-}
-
-/* ── ABOUT ── */
-.about{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:5rem 1.5rem}
-.about__inner{max-width:960px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:3.5rem;align-items:center}
-.about__img{width:152px;height:152px;border-radius:50%;object-fit:cover;border:2px solid var(--teal);filter:saturate(.88);display:block}
-.about__name{font-size:1.3rem;font-weight:900;letter-spacing:-.02em;margin-bottom:.2rem}
-.about__role{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem}
-.about__quote{font-size:1.05rem;font-weight:600;line-height:1.58;border-left:3px solid var(--teal);padding-left:1rem;margin-bottom:.9rem;font-style:italic}
-.about__bio{font-size:.9rem;color:var(--muted);line-height:1.82;margin-bottom:1.2rem}
-.pills{display:flex;flex-wrap:wrap;gap:.45rem}
-.pill{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);background:rgba(58,143,162,.07);border:1px solid rgba(58,143,162,.2);padding:.28rem .75rem;border-radius:20px}
-@media(max-width:640px){
-  .about__inner{grid-template-columns:1fr;text-align:center;gap:2rem}
-  .about__img{margin:0 auto}
-  .about__quote{text-align:left}
-  .pills{justify-content:center}
-}
-
-/* ── TESTIMONIALS ── */
-.testi{padding:5rem 1.5rem}
-.testi-grid{display:grid;grid-template-columns:1fr;gap:1rem}
-@media(min-width:560px){.testi-grid{grid-template-columns:repeat(3,1fr)}}
-.testi-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s,transform .3s var(--ease)}
-.testi-card:hover{border-color:rgba(58,143,162,.42);transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.38),0 0 0 1px rgba(58,143,162,.12)}
-.testi-video{position:relative;aspect-ratio:9/16;background:#0a0f11;overflow:hidden}
-@media(max-width:559px){.testi-video{aspect-ratio:16/9}}
-.testi-video iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
-.vid-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;background:linear-gradient(160deg,#0c1a1e,#0d1c20);border:1px dashed rgba(45,110,126,.28)}
-.vid-ph__icon{width:48px;height:48px;border-radius:50%;background:rgba(58,143,162,.07);border:1.5px solid var(--teal-d);display:flex;align-items:center;justify-content:center;color:var(--teal-d)}
-.vid-ph__label{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-d);opacity:.5;text-align:center;padding:0 .8rem;line-height:1.6}
-.testi-body{padding:1rem 1.2rem 1.3rem}
-.testi-name{font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
-
-/* ── APPLY CTA ── */
-.apply-cta{background:linear-gradient(160deg,#091316,var(--bg));border-top:1px solid var(--border);padding:6rem 1.5rem;text-align:center}
-.apply-cta__inner{max-width:520px;margin:0 auto}
-.apply-cta__avatar{width:76px;height:76px;border-radius:50%;object-fit:cover;border:2px solid var(--teal);display:block;margin:0 auto 1.4rem;filter:saturate(.9)}
-.apply-cta__eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.65rem}
-.apply-cta__title{font-size:clamp(1.5rem,4vw,2.3rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:.85rem}
-.apply-cta__body{font-size:.93rem;color:var(--muted);line-height:1.75;margin-bottom:2rem}
-.apply-cta__note{font-size:.68rem;color:var(--dim);margin-top:.85rem;letter-spacing:.04em}
-
-/* ── INSTAGRAM + FOOTER ── */
-.insta{padding:3rem 1.5rem;text-align:center;border-top:1px solid var(--border)}
-.insta a{display:inline-flex;align-items:center;gap:.55rem;font-size:.82rem;font-weight:700;color:var(--muted);text-decoration:none;border:1px solid var(--border);padding:.68rem 1.4rem;border-radius:7px;transition:border-color .2s,color .2s}
-.insta a:hover{border-color:var(--teal);color:var(--teal)}
-footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);border-top:1px solid var(--border)}
-
-/* compact nav links on mobile — never fully hidden */
 @media(max-width:600px){
-  .nav__link{font-size:.65rem;padding:.35rem .55rem;letter-spacing:0}
   .nav__cta{font-size:.65rem;padding:.42rem .85rem;letter-spacing:.04em}
 }
-@media(max-width:360px){.nav__link{display:none}}
 
-/* mobile hero cleanup — less text, heading sits lower */
-@media(max-width:700px){
-  .hero__cred{display:none}
-  .hero__scroll{display:none}
-  .hero__c{padding-bottom:3rem}
+/* HERO */
+.hero{min-height:88svh;position:relative;display:flex;align-items:flex-end;overflow:hidden}
+.hero__bg{position:absolute;inset:0;background:url('images/hurling-portrait.jpg') center 18%/cover no-repeat;filter:saturate(.65) contrast(1.1) brightness(.42)}
+.hero__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,28,32,.05) 0%,rgba(13,28,32,.3) 40%,rgba(13,28,32,.9) 75%,#0d1c20 100%)}
+.hero__c{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:0 2rem 5rem;width:100%}
+.eyebrow{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem}
+.hero__h{font-size:clamp(2rem,4.8vw,3.8rem);font-weight:900;letter-spacing:-.03em;line-height:1.05;margin-bottom:1.2rem;max-width:22ch;text-wrap:balance}
+.hero__s{font-size:clamp(.9rem,1.6vw,1.02rem);color:var(--muted);max-width:52ch;line-height:1.8;margin-bottom:2.2rem}
+
+/* CTA BUTTON + GROUP */
+.btn-fill{display:inline-flex;align-items:center;padding:.9rem 2.2rem;background:linear-gradient(135deg,#3e9db1,#25768a);color:#fff;font-weight:800;font-size:.9rem;letter-spacing:.04em;text-decoration:none;border-radius:8px;box-shadow:0 4px 18px rgba(58,143,162,.35);transition:background .2s,transform .15s,box-shadow .2s}
+.btn-fill:hover{background:linear-gradient(135deg,#52c1d8,#3a8fa2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(58,143,162,.48)}
+.cta-group{display:flex;flex-direction:column;align-items:flex-start;gap:.6rem}
+.cta-note{font-size:.72rem;color:var(--dim);font-style:italic}
+.cta-center{align-items:center;text-align:center}
+
+/* TRUST STRIP */
+.trust-strip{background:var(--surface);border-bottom:1px solid var(--border);padding:1.8rem 2rem}
+.trust-strip__inner{max-width:800px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:.9rem}
+.trust-label{font-size:.54rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+.trust-logos{display:flex;align-items:center;justify-content:center;gap:1.75rem 2.5rem;flex-wrap:wrap}
+.trust-logo{height:46px;width:auto;mix-blend-mode:screen;opacity:.6;transition:opacity .2s}
+.trust-logo:hover{opacity:1}
+
+/* VSL */
+.s-vsl{background:var(--bg);padding:5.5rem 2rem;text-align:center;border-top:1px solid var(--border)}
+.vsl-heading{font-size:clamp(1.4rem,2.8vw,2rem);font-weight:900;letter-spacing:-.025em;line-height:1.15;margin-bottom:.7rem;text-wrap:balance}
+.vsl-sub{font-size:.95rem;color:var(--muted);margin-bottom:2.4rem;line-height:1.7}
+.vsl-wrap{max-width:820px;margin:0 auto;border-radius:14px;overflow:hidden;box-shadow:0 0 0 1px rgba(77,184,208,.22),0 0 48px rgba(77,184,208,.10),0 24px 60px rgba(0,0,0,.55);position:relative}
+.vsl-aspect{position:relative;padding-top:56.25%}
+.vsl-aspect iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vsl-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#101e24;gap:1.2rem;cursor:default}
+.vsl-play{width:72px;height:72px;background:var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 12px rgba(58,143,162,.15),0 0 0 24px rgba(58,143,162,.07)}
+.vsl-play svg{margin-left:4px}
+.vsl-label{font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+
+/* SECTIONS */
+.w{max-width:860px;margin:0 auto;padding:5.5rem 2rem}
+.w--wide{max-width:1060px}
+.s-eyebrow{font-size:.64rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:.7rem}
+.s-h{font-size:clamp(1.6rem,3.2vw,2.4rem);font-weight:900;letter-spacing:-.025em;line-height:1.1;margin-bottom:1.2rem;text-wrap:balance}
+.s-body{font-size:.97rem;color:var(--muted);line-height:1.82;margin-bottom:1.4rem;max-width:58ch}
+.divider{border:none;border-top:1px solid var(--border);margin:0}
+
+/* REALITY */
+.reality-bg{background:var(--surface);border-top:1px solid var(--border)}
+
+/* COST */
+.cost-bg{background:var(--bg);border-top:1px solid var(--border)}
+.cost-list{list-style:none;display:flex;flex-direction:column;gap:.9rem;margin:1.8rem 0 2.2rem}
+.cost-list li{padding-left:1.5rem;position:relative;font-size:.96rem;color:var(--muted);line-height:1.7}
+.cost-list li::before{content:'';position:absolute;left:0;top:.65em;width:6px;height:6px;background:var(--teal-d);border-radius:50%}
+.cost-close{font-size:.97rem;color:var(--text);font-weight:700;line-height:1.7;border-left:3px solid var(--teal);padding-left:1.2rem;margin-top:1rem}
+
+/* HOW IT WORKS */
+.how-bg{background:var(--surface);border-top:1px solid var(--border)}
+.stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.4rem;margin-bottom:2.4rem}
+.stage{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.6rem 1.5rem;position:relative}
+.stage__num{font-size:2.2rem;font-weight:900;color:var(--teal-d);opacity:.4;line-height:1;margin-bottom:.5rem;letter-spacing:-.04em}
+.stage__title{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-b);margin-bottom:.25rem}
+.stage__sub{font-size:.72rem;color:var(--dim);margin-bottom:.7rem;font-weight:700}
+.stage__body{font-size:.83rem;color:var(--muted);line-height:1.65}
+
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:2.8rem}
+.compare__col{background:var(--card);padding:1.8rem}
+.compare__head{font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.2rem}
+.compare__head--without{color:var(--dim)}
+.compare__head--with{color:var(--teal-b)}
+.compare__list{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+.compare__list li{font-size:.85rem;color:var(--muted);line-height:1.5;padding-left:1.2rem;position:relative}
+.compare__list li::before{content:'—';position:absolute;left:0;color:var(--dim)}
+.compare__list--with li::before{content:'✓';color:var(--teal);font-weight:700}
+
+/* PULL QUOTE */
+.pull-quote{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:1.5rem 1.8rem;margin:2rem 0}
+.pull-quote__text{font-size:1.05rem;color:var(--text);font-style:italic;line-height:1.72;margin-bottom:.6rem;position:relative;padding-left:1.2rem}
+.pull-quote__text::before{content:'"';position:absolute;left:0;top:-.1em;font-size:1.8rem;color:var(--teal);font-style:normal;line-height:1}
+.pull-quote__attr{font-size:.75rem;color:var(--dim);padding-left:1.2rem}
+
+/* PROOF BLOCKS */
+.proof-bg{background:var(--bg);border-top:1px solid var(--border)}
+.proof-bg--alt{background:var(--surface);border-top:1px solid var(--border)}
+.proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+.proof-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.8rem}
+.proof-card__label{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.8rem}
+.proof-card__title{font-size:1rem;font-weight:900;letter-spacing:-.02em;line-height:1.2;margin-bottom:1rem;color:var(--text)}
+.proof-card__body{font-size:.83rem;color:var(--muted);line-height:1.68}
+.proof-card__body p+p{margin-top:.7rem}
+.proof-card__quote{font-size:.9rem;color:var(--text);font-style:italic;line-height:1.7;margin-bottom:.9rem;position:relative;padding-left:1.1rem}
+.proof-card__quote::before{content:'"';position:absolute;left:0;top:-.1em;font-size:1.6rem;color:var(--teal);font-style:normal;line-height:1}
+.proof-card__attr{font-size:.72rem;color:var(--dim);font-style:normal}
+.proof-numbers{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:2rem}
+.proof-num{background:var(--card);padding:1.4rem 1.2rem;text-align:center}
+.proof-num__val{font-size:1.5rem;font-weight:900;color:var(--text);letter-spacing:-.03em;line-height:1}
+.proof-num__label{font-size:.67rem;color:var(--muted);margin-top:.3rem;line-height:1.4}
+
+/* DIFFERENT APPROACH */
+.diff-bg{background:var(--bg);border-top:1px solid var(--border)}
+
+/* INCLUDED */
+.inc-bg{background:var(--surface);border-top:1px solid var(--border)}
+.inc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;margin-bottom:2.8rem}
+.inc-item{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.4rem 1.5rem;display:flex;gap:.9rem}
+.inc-icon{width:34px;height:34px;background:rgba(58,143,162,.1);border:1px solid rgba(58,143,162,.18);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--teal)}
+.inc-title{font-size:.88rem;font-weight:800;margin-bottom:.2rem}
+.inc-desc{font-size:.79rem;color:var(--muted);line-height:1.55}
+
+/* ABOUT */
+.about-bg{background:var(--bg);border-top:1px solid var(--border)}
+.about-inner{display:grid;grid-template-columns:auto 1fr;gap:2.5rem;align-items:flex-start}
+.about-photo{width:100px;height:100px;border-radius:50%;object-fit:cover;border:2px solid var(--teal);filter:saturate(.88);flex-shrink:0}
+
+/* FIT FILTER */
+.fit-bg{background:var(--surface);border-top:1px solid var(--border)}
+.fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:10px;overflow:hidden}
+.fit-col{background:var(--card);padding:1.8rem}
+.fit-head{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.2rem}
+.fit-head--yes{color:var(--teal-b)}
+.fit-head--no{color:var(--dim)}
+.fit-list{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+.fit-list li{font-size:.84rem;color:var(--muted);line-height:1.5;padding-left:1.2rem;position:relative}
+.fit-list--yes li::before{content:'✓';position:absolute;left:0;color:var(--teal);font-weight:700}
+.fit-list--no li::before{content:'✕';position:absolute;left:0;color:var(--dim)}
+
+/* NEXT STEP */
+.next-bg{background:var(--bg);border-top:1px solid var(--border)}
+.next-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin:1.2rem 0 2rem}
+.next-list li{font-size:.88rem;color:var(--muted);line-height:1.6;padding-left:1.3rem;position:relative}
+.next-list li::before{content:'•';position:absolute;left:0;color:var(--teal)}
+
+/* FAQ */
+.faq-bg{background:var(--surface);border-top:1px solid var(--border)}
+.faq-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:2.8rem}
+details.faq{border-bottom:1px solid var(--border)}
+details.faq:last-child{border-bottom:none}
+details.faq summary{padding:1.2rem 1.5rem;font-size:.9rem;font-weight:700;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;list-style:none;user-select:none;transition:background .15s}
+details.faq summary:hover{background:var(--card)}
+details.faq summary::after{content:'+';font-size:1.1rem;font-weight:300;color:var(--teal);flex-shrink:0;transition:transform .2s}
+details.faq[open] summary::after{transform:rotate(45deg)}
+details.faq .faq-body{padding:.2rem 1.5rem 1.3rem;font-size:.87rem;color:var(--muted);line-height:1.72}
+
+/* FINAL CTA */
+.final-bg{background:linear-gradient(160deg,#091417,var(--bg));border-top:1px solid var(--border);text-align:center}
+
+/* APPLY FORM */
+.apply-bg{background:var(--surface);border-top:1px solid var(--border);text-align:center}
+.apply__inner{max-width:560px;margin:0 auto}
+.apply__avatar{width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid var(--teal);margin:0 auto 1.4rem;display:block;filter:saturate(.88)}
+.aform{display:flex;flex-direction:column;gap:.85rem;text-align:left;margin-bottom:.5rem}
+.ff{display:flex;flex-direction:column;gap:.28rem}
+.ff label{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ff input,.ff select,.ff textarea{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:.72rem 1rem;color:var(--text);font-size:.9rem;font-family:inherit;outline:none;transition:border-color .15s;width:100%}
+.ff input:focus,.ff select:focus,.ff textarea:focus{border-color:var(--teal)}
+.ff textarea{resize:vertical;min-height:88px}
+.ff-row{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.submit-btn{width:100%;padding:.95rem;background:linear-gradient(135deg,#3e9db1,#25768a);color:#fff;font-size:.95rem;font-weight:800;letter-spacing:.04em;border:none;border-radius:8px;cursor:pointer;box-shadow:0 4px 16px rgba(58,143,162,.32);transition:background .2s,transform .15s;margin-top:.2rem}
+.submit-btn:hover{background:linear-gradient(135deg,#52c1d8,#3a8fa2);transform:translateY(-1px)}
+.form-note{font-size:.73rem;color:var(--dim);text-align:center;margin-top:.5rem}
+.form-msg{text-align:center;color:var(--teal-b);font-size:.88rem;min-height:1.2em;margin-top:.5rem}
+
+footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-top:1px solid var(--border)}
+
+@media(max-width:680px){
+  .proof-grid{grid-template-columns:1fr}
+  .compare{grid-template-columns:1fr}
+  .compare__col:first-child{border-bottom:1px solid var(--border)}
+  .fit-grid{grid-template-columns:1fr}
+  .fit-col:first-child{border-bottom:1px solid var(--border)}
+  .about-inner{grid-template-columns:1fr}
+  .ff-row{grid-template-columns:1fr}
 }
-
-/* ── CREDENTIALS SECTION ── */
-.creds{background:var(--surface);border-bottom:1px solid var(--border);padding:2.5rem 1.5rem 3rem}
-.creds__inner{max-width:960px;margin:0 auto}
-.creds__badge-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1.75rem 2.75rem;margin-bottom:2.5rem;padding-bottom:2.25rem;border-bottom:1px solid var(--border)}
-.creds__badge-label{width:100%;text-align:center;font-size:.55rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:.7rem}
-.creds__badge{height:50px;width:auto;mix-blend-mode:screen;opacity:.68;transition:opacity .3s,transform .3s}
-.creds__badge:hover{opacity:1;transform:scale(1.1)}
-.creds__stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
-@media(min-width:600px){.creds__stats{grid-template-columns:repeat(4,1fr)}}
-.cred-stat{text-align:center;padding:1.4rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:12px;transition:border-color .2s,background .2s}
-.cred-stat:hover{border-color:rgba(58,143,162,.35);background:var(--card-h)}
-.cred-stat__val{font-size:2rem;font-weight:900;letter-spacing:-.04em;line-height:1;color:var(--text);margin-bottom:.3rem}
-.cred-stat__val em{font-size:1rem;font-style:normal;color:var(--teal-b);font-weight:900}
-.cred-stat__lbl{font-size:.58rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);line-height:1.55}
-@media(max-width:480px){.creds__badge{height:40px}.creds__badge-row{gap:1.25rem 2rem}}
-
-/* ── ABOUT BADGES ── */
-.about-badges{display:flex;align-items:center;gap:1rem 1.4rem;margin-top:1.1rem;flex-wrap:wrap}
-.about-badge{height:36px;width:auto;mix-blend-mode:screen;opacity:.55;transition:opacity .25s,transform .25s}
-.about-badge:hover{opacity:.9;transform:scale(1.1)}
 </style>
 </head>
 <body>
 
-<!-- POPUP -->
-<div class="popup-overlay hidden" id="popupOverlay">
-  <div class="popup">
-    <button class="popup__close" onclick="closePopup()" aria-label="Close">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
-    <p class="popup__eyebrow">Free Resource</p>
-    <h2 class="popup__title">Get Paddy's Free GAA Training Guide</h2>
-    <p class="popup__sub">Drop your email and get a free S&C starter guide — plus be first to hear about new coaching spots.</p>
-    <!-- Mailchimp signup form — paste your Mailchimp form action URL into the action attribute below -->
-    <!-- Find it in Mailchimp → Audience → Signup forms → Embedded forms → copy the form action URL -->
-    <form id="mc-embedded-subscribe-form"
-          action="REPLACE_WITH_YOUR_MAILCHIMP_ACTION_URL"
-          method="post" novalidate onsubmit="submitMailchimp(event)">
-      <div class="pf"><label for="mce-FNAME">Name</label><input type="text" name="FNAME" id="mce-FNAME" placeholder="Your name" autocomplete="given-name"></div>
-      <div class="pf"><label for="mce-EMAIL">Email</label><input type="email" name="EMAIL" id="mce-EMAIL" placeholder="your@email.com" required autocomplete="email"></div>
-      <!-- Mailchimp bot-protection field — do not remove -->
-      <div style="position:absolute;left:-5000px" aria-hidden="true">
-        <input type="text" name="b_REPLACE_U_REPLACE_LIST_ID" tabindex="-1" value="">
-      </div>
-      <button type="submit" name="subscribe" class="popup__btn">Get the Free Guide →</button>
-    </form>
-    <p class="popup__msg" id="popupMsg"></p>
-    <button class="popup__skip" onclick="closePopup()">No thanks, skip for now</button>
-  </div>
-</div>
-
-<!-- NAV -->
 <nav>
   <a class="nav__logo" href="index.html">
     <img src="images/logo.jpg" width="46" height="46" alt="PB Performance Coaching">
@@ -373,278 +218,442 @@ footer{padding:1.6rem 1.5rem;text-align:center;font-size:.7rem;color:var(--dim);
       <span class="logo-sub">Coaching</span>
     </div>
   </a>
-  <div class="nav__links">
-    <a class="nav__link" href="pb-one-to-one.html">1-on-1</a>
-    <a class="nav__link" href="pb-plans.html">Plans</a>
-    <a class="nav__link" href="pb-articles.html">Articles</a>
-    <a class="nav__cta" href="pb-one-to-one.html#apply">Apply Now</a>
+  <div class="nav__right">
+    <a class="nav__cta" href="#apply">Apply Now</a>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ── HERO ── -->
 <section class="hero">
   <div class="hero__bg"></div>
   <div class="hero__g"></div>
   <div class="hero__c">
-    <div class="hero__eyebrow">S&amp;C Coaching for GAA Players</div>
-    <h1 class="hero__h">Stronger.<br>Faster. <em>More Robust.</em></h1>
-    <p class="hero__sub">Online S&C coaching built specifically for GAA — by a coach who's still competing at inter-county level every week.</p>
-    <div class="hero__cred">
-      <span class="hero__cred-item">MSc Performance Coaching</span>
-      <span class="hero__cred-item">Antrim Senior Hurler</span>
-      <span class="hero__cred-item">50+ GAA Athletes</span>
-    </div>
-    <div class="hero__ctas">
-      <a href="pb-one-to-one.html#apply" class="btn-fill">
-        Apply for 1-on-1
-        <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-      </a>
-      <a href="#work" class="btn-ghost">See What I Offer</a>
-    </div>
-    <div class="hero__scroll" aria-hidden="true">
-      <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+    <div class="eyebrow">Individual 1:1 Online Coaching for Ambitious GAA Players</div>
+    <h1 class="hero__h">Your work ethic has got you this far. Now you need a plan that can take you further.</h1>
+    <p class="hero__s">You train. You show up. But without a clear, individual plan, more effort doesn't always mean more progress. It's time to change that.</p>
+    <div class="cta-group">
+      <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
+      <span class="cta-note">Complete the short application form. Paddy replies personally within 24 hours.</span>
     </div>
   </div>
 </section>
 
-<!-- CREDENTIALS -->
-<section class="creds">
-  <div class="creds__inner">
-    <div class="creds__badge-row rv">
-      <p class="creds__badge-label">Where Paddy Plays and Trained</p>
-      <img class="creds__badge" src="images/aontroim-crest-big.webp" alt="Antrim GAA" loading="lazy">
-      <img class="creds__badge" src="images/Ruair%C3%AD-%C3%93g-cushendall.webp" alt="Ruairí Óg GAC" loading="lazy">
-      <img class="creds__badge" src="images/Logo_of_GAA.svg.webp" alt="GAA" loading="lazy">
-      <img class="creds__badge" src="images/images.png" alt="Setanta College" loading="lazy">
-    </div>
-    <div class="creds__stats rv" style="transition-delay:.1s">
-      <div class="cred-stat">
-        <div class="cred-stat__val">50<em>+</em></div>
-        <div class="cred-stat__lbl">GAA Athletes<br>Coached</div>
-      </div>
-      <div class="cred-stat">
-        <div class="cred-stat__val" style="font-size:1.5rem;letter-spacing:-.02em">MSc</div>
-        <div class="cred-stat__lbl">Performance<br>Coaching</div>
-      </div>
-      <div class="cred-stat">
-        <div class="cred-stat__val" style="font-size:1.3rem;line-height:1.2">Senior<br><em style="font-size:.9rem">Hurler</em></div>
-        <div class="cred-stat__lbl">Antrim<br>GAA</div>
-      </div>
-      <div class="cred-stat">
-        <div class="cred-stat__val">24<em>h</em></div>
-        <div class="cred-stat__lbl">Application<br>Response</div>
-      </div>
+<!-- ── TRUST STRIP ── -->
+<div class="trust-strip">
+  <div class="trust-strip__inner rv">
+    <p class="trust-label">Coached by one of their own</p>
+    <div class="trust-logos">
+      <img class="trust-logo" src="images/aontroim-crest-big.webp" alt="Antrim GAA" loading="lazy">
+      <img class="trust-logo" src="images/Ruair%C3%AD-%C3%93g-cushendall.webp" alt="Ruairí Óg GAC" loading="lazy">
+      <img class="trust-logo" src="images/Logo_of_GAA.svg.webp" alt="GAA" loading="lazy">
+      <img class="trust-logo" src="images/images.png" alt="Setanta College" loading="lazy">
     </div>
   </div>
-</section>
-
-<!-- WORK WITH ME -->
-<section id="work" class="work">
-  <div class="work-inner">
-
-    <p class="s-eyebrow rv">Work With Me</p>
-    <h2 class="s-title rv">What I Offer</h2>
-    <p class="s-body rv">A full 1-on-1 coaching relationship or a structured self-paced programme — both built specifically for GAA by a coach who still competes at the top level.</p>
-
-      <!-- 1-on-1 FEATURED CARD -->
-      <a href="pb-one-to-one.html" class="offer-main rv">
-        <div class="offer-main__bg" style="background-image:url('images/paddy-bench.jpg')"></div>
-        <div class="offer-main__veil"></div>
-        <div class="offer-main__body">
-          <div class="offer-badge">
-            <span class="badge-dot"></span>
-            Main Offer
-          </div>
-          <h3 class="offer-title">1-on-1 Coaching</h3>
-          <p class="offer-desc">A full coaching relationship built around you. Custom S&amp;C, nutrition, weekly check-ins, and direct WhatsApp access to Paddy.</p>
-          <div class="offer-chips">
-            <span class="offer-chip">Custom Programme</span>
-            <span class="offer-chip">WhatsApp Access</span>
-            <span class="offer-chip">Nutrition Coaching</span>
-            <span class="offer-chip">Weekly Check-ins</span>
-            <span class="offer-chip">GAA Periodisation</span>
-            <span class="offer-chip">Movement Screen</span>
-          </div>
-          <div class="offer-cta">
-            Apply Now. Free Call First
-            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-          </div>
-          <p class="offer-note">Paddy reviews every application personally. Reply within 24 hrs</p>
-        </div>
-      </a>
-
-      <!-- TRAINING PROGRAMMES — image cards -->
-      <div class="prog-cards">
-
-        <a href="pb-preseason.html" class="prog-card rv">
-          <div class="prog-card__bg" style="background-image:url('images/hurling-action.jpg')"></div>
-          <div class="prog-card__veil"></div>
-          <div class="prog-card__body">
-            <div class="prog-card__tag">Pre-Season</div>
-            <div class="prog-card__title">Build the Base</div>
-            <p class="prog-card__desc">Progressive S&amp;C for the build phase. Arrive to the season strong.</p>
-            <div class="prog-card__cta">View Programme <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
-          </div>
-        </a>
-
-        <a href="pb-inseason.html" class="prog-card rv">
-          <div class="prog-card__bg" style="background-image:url('images/hurling-portrait.jpg');background-position:center 8%"></div>
-          <div class="prog-card__veil"></div>
-          <div class="prog-card__body">
-            <div class="prog-card__tag">In-Season</div>
-            <div class="prog-card__title">Maintain and Perform</div>
-            <p class="prog-card__desc">Stay strong through the season without adding fatigue.</p>
-            <div class="prog-card__cta">View Programme <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
-          </div>
-        </a>
-
-        <a href="pb-offseason.html" class="prog-card rv">
-          <div class="prog-card__bg" style="background-image:url('images/training-lunge.jpg')"></div>
-          <div class="prog-card__veil"></div>
-          <div class="prog-card__body">
-            <div class="prog-card__tag">Off-Season</div>
-            <div class="prog-card__title">Rebuild and Grow</div>
-            <p class="prog-card__desc">Where the real gains happen. Build strength and lay the foundation.</p>
-            <div class="prog-card__cta">View Programme <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
-          </div>
-        </a>
-
-      </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="about">
-  <div class="about__inner">
-    <div class="rv-l">
-      <img src="images/hurling-portrait.jpg" alt="Paddy Burke" class="about__img">
-    </div>
-    <div class="rv-r">
-      <p class="s-eyebrow">Your Coach</p>
-      <div class="about__name">Paddy Burke</div>
-      <div class="about__role">MSc Performance Coaching · Antrim Senior Hurler</div>
-      <blockquote class="about__quote">"My focus is simple — build stronger, faster, more robust GAA players. Everything else follows from that."</blockquote>
-      <p class="about__bio">I graduated with an MSc in Performance Coaching from Setanta College while on the Antrim Senior Hurling panel — so I've been in the exact same position as the athletes I work with. I'm still training and competing every week. Every programme I write is built on what actually moves the needle for GAA players, not generic gym templates.</p>
-      <div class="pills">
-        <span class="pill">MSc Performance Coaching</span>
-        <span class="pill">Antrim Senior Hurler</span>
-        <span class="pill">S&amp;C Specialist</span>
-        <span class="pill">Nutrition Coaching</span>
-        <span class="pill">Setanta College</span>
-      </div>
-      <div class="about-badges">
-        <img class="about-badge" src="images/aontroim-crest-big.webp" alt="Antrim GAA" loading="lazy">
-        <img class="about-badge" src="images/Ruair%C3%AD-%C3%93g-cushendall.webp" alt="Ruairí Óg GAC" loading="lazy">
-        <img class="about-badge" src="images/Logo_of_GAA.svg.webp" alt="GAA" loading="lazy">
-        <img class="about-badge" src="images/images.png" alt="Setanta College" loading="lazy">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testi rv">
-  <div style="max-width:1160px;margin:0 auto">
-    <p class="s-eyebrow">Results</p>
-    <h2 class="s-title" style="margin-bottom:.65rem">What Athletes Say</h2>
-    <p style="font-size:.9rem;color:var(--muted);margin-bottom:2rem;line-height:1.7">Real words from real GAA players — no scripts, no filters.</p>
-    <div class="testi-grid">
-
-      <!-- ── VIDEO SLOT: Michael ─────────────────────────────────────────
-           Replace vid-ph with:
-           <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen loading="lazy"></iframe>
-      ──────────────────────────────────────────────────────────────── -->
-      <div class="testi-card">
-        <div class="testi-video">
-          <div class="vid-ph">
-            <div class="vid-ph__icon"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-            <span class="vid-ph__label">Michael<br>Video Coming Soon</span>
-          </div>
-        </div>
-        <div class="testi-body"><div class="testi-name">Michael</div></div>
-      </div>
-
-      <!-- ── VIDEO SLOT: Eoin ─────────────────────────────────────────── -->
-      <div class="testi-card">
-        <div class="testi-video">
-          <div class="vid-ph">
-            <div class="vid-ph__icon"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-            <span class="vid-ph__label">Eoin<br>Video Coming Soon</span>
-          </div>
-        </div>
-        <div class="testi-body"><div class="testi-name">Eoin</div></div>
-      </div>
-
-      <!-- ── VIDEO SLOT: Kieran ───────────────────────────────────────── -->
-      <div class="testi-card">
-        <div class="testi-video">
-          <div class="vid-ph">
-            <div class="vid-ph__icon"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-            <span class="vid-ph__label">Kieran<br>Video Coming Soon</span>
-          </div>
-        </div>
-        <div class="testi-body"><div class="testi-name">Kieran</div></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- APPLY CTA -->
-<section class="apply-cta">
-  <div class="apply-cta__inner rv">
-    <img src="images/paddy-bench.jpg" alt="Paddy Burke" class="apply-cta__avatar">
-    <p class="apply-cta__eyebrow">1-on-1 Coaching</p>
-    <h2 class="apply-cta__title">Ready to Level Up Your Game?</h2>
-    <p class="apply-cta__body">Apply below and Paddy will get back to you within 24 hours to set up a free call. No commitment, no hard sell.</p>
-    <a href="pb-one-to-one.html#apply" class="btn-fill">
-      Apply Now — Free Call First
-      <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-    </a>
-    <p class="apply-cta__note">Paddy reviews every application personally</p>
-  </div>
-</section>
-
-<!-- INSTAGRAM -->
-<div class="insta rv">
-  <a href="https://www.instagram.com/pbperformancecoaching" target="_blank" rel="noopener">
-    <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-    Follow @pbperformancecoaching
-  </a>
 </div>
 
-<footer>© 2026 PB Performance Coaching</footer>
+<!-- ── VSL ── -->
+<section class="s-vsl rv">
+  <p class="s-eyebrow" style="display:block;margin-bottom:.7rem">Hear From Paddy Directly</p>
+  <h2 class="vsl-heading">Before you read another word — watch this first.</h2>
+  <p class="vsl-sub">Paddy explains exactly what 1:1 coaching looks like and why it works for GAA players.</p>
+  <div class="vsl-wrap">
+    <div class="vsl-aspect">
+      <!-- Replace the div below with: <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen title="PB Performance — 1:1 Coaching"></iframe> -->
+      <div class="vsl-placeholder">
+        <div class="vsl-play">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <span class="vsl-label">Video coming soon — add YouTube embed URL to activate</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE REALITY ── -->
+<section class="reality-bg">
+  <div class="w rv">
+    <p class="s-eyebrow">The Reality</p>
+    <h2 class="s-h">You're not looking for motivation. You already have that. You're looking for a plan that actually fits your life as a GAA player.</h2>
+    <p class="s-body">You train with your team, you go to the gym and you are willing to work. But without a plan built around you, it is easy to question whether you are doing enough, doing too much or even doing the right work to become a better player.</p>
+    <p class="s-body">Your team programme cannot account for everything you need as an individual. Your gym work should not look the same every week of the year. And copying what another player does doesn't tell you what <em>you</em> need to improve next.</p>
+    <p class="s-body" style="margin-bottom:2.4rem">You need a plan that brings your gym work, speed, conditioning, recovery and nutrition together around your goals, your schedule and the current stage of your season.</p>
+    <div class="cta-group">
+      <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
+      <span class="cta-note">Complete the short application form and I'll contact you personally to discuss the next step.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="how-bg">
+  <div class="w w--wide rv">
+    <p class="s-eyebrow">How It Works</p>
+    <h2 class="s-h">Three steps from questioning your preparation to knowing your training is moving you forward</h2>
+    <p class="s-body" style="margin-bottom:2.4rem">Clear priorities. A plan that adapts. Progress you can measure.</p>
+    <div class="stages">
+      <div class="stage rv" style="transition-delay:.05s">
+        <div class="stage__num">1</div>
+        <div class="stage__title">Assess &amp; Prioritise</div>
+        <div class="stage__sub">Your first 2–4 weeks</div>
+        <p class="stage__body">We establish where you are now — your training history, schedule, goals and the biggest gaps — and decide what deserves priority first. No guessing, no generic starting point.</p>
+      </div>
+      <div class="stage rv" style="transition-delay:.1s">
+        <div class="stage__num">2</div>
+        <div class="stage__title">Build &amp; Adapt</div>
+        <div class="stage__sub">Ongoing throughout the season</div>
+        <p class="stage__body">Your plan is built around you and updated as your season changes. Match weeks, heavy training blocks, injury management and off-season phases all look different — because they should.</p>
+      </div>
+      <div class="stage rv" style="transition-delay:.15s">
+        <div class="stage__num">3</div>
+        <div class="stage__title">Track &amp; Progress</div>
+        <div class="stage__sub">Measurable and ongoing</div>
+        <p class="stage__body">We track what matters. Testing results, performance markers and weekly feedback mean you know exactly how you are progressing — and where to focus next.</p>
+      </div>
+    </div>
+
+    <div class="compare rv">
+      <div class="compare__col">
+        <p class="compare__head compare__head--without">Without individual coaching</p>
+        <ul class="compare__list">
+          <li>Unclear priorities each week</li>
+          <li>Generic or inconsistent training</li>
+          <li>Starting and stopping across the season</li>
+          <li>Working hard without knowing if it's working</li>
+          <li>Carrying unnecessary fatigue into matches</li>
+        </ul>
+      </div>
+      <div class="compare__col">
+        <p class="compare__head compare__head--with">With PB Performance Coaching</p>
+        <ul class="compare__list compare__list--with">
+          <li>A clear next step, always</li>
+          <li>Training built around your needs and season</li>
+          <li>Consistent progression across the year</li>
+          <li>Evidence that your preparation is working</li>
+          <li>Gym work that supports performance, not competes with it</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Kieran McKendry -->
+    <div class="pull-quote rv">
+      <p class="pull-quote__text">I used to arrive to training feeling wrecked from the gym. Now the plan is built around my schedule and I feel sharper — not heavier — going into matches.</p>
+      <p class="pull-quote__attr">— Kieran McKendry, PB Performance athlete</p>
+    </div>
+
+    <div class="cta-group rv">
+      <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
+      <span class="cta-note">Complete the short application form and I'll contact you personally to discuss the next step.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRIMARY PROOF — OWEN KENNEDY ── -->
+<section class="proof-bg">
+  <div class="w w--wide rv">
+    <p class="s-eyebrow">Results</p>
+    <h2 class="s-h">What changes when the plan is built around you</h2>
+    <p class="s-body" style="margin-bottom:1.6rem">From reserve panel to established starter. Owen Kennedy worked with Paddy to close the gap between his ambition and his physical preparation.</p>
+    <div class="proof-numbers">
+      <div class="proof-num"><div class="proof-num__val">86 → 80 kg</div><div class="proof-num__label">Body composition improved</div></div>
+      <div class="proof-num"><div class="proof-num__val">+15 kg</div><div class="proof-num__label">Squat (125 → 140 kg)</div></div>
+      <div class="proof-num"><div class="proof-num__val">+25 kg</div><div class="proof-num__label">Bench press (70 → 95 kg)</div></div>
+      <div class="proof-num"><div class="proof-num__val">6 → 12</div><div class="proof-num__label">Chin-ups</div></div>
+    </div>
+
+    <!-- Owen Kennedy testimonial -->
+    <div class="pull-quote rv">
+      <p class="pull-quote__text">The programme is well designed to push you but not leave you fatigued for the next session. Paddy is constantly looking to improve the service and is quick to make any necessary changes to accommodate. I would absolutely recommend PB Performance for anyone who needs structure in developing their athletic performance.</p>
+      <p class="pull-quote__attr">— Owen Kennedy, PB Performance athlete</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT'S INCLUDED ── -->
+<section class="inc-bg">
+  <div class="w w--wide rv">
+    <p class="s-eyebrow">What's Included</p>
+    <h2 class="s-h">Everything you need. Nothing you don't.</h2>
+    <div class="inc-grid">
+      <div class="inc-item rv" style="transition-delay:.04s">
+        <div class="inc-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+        <div><div class="inc-title">Individual S&amp;C Programme</div><div class="inc-desc">Built around your goals, training age, position, injury history, facilities, team schedule and stage of the season.</div></div>
+      </div>
+      <div class="inc-item rv" style="transition-delay:.07s">
+        <div class="inc-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg></div>
+        <div><div class="inc-title">Initial Assessment &amp; Roadmap</div><div class="inc-desc">We establish your starting point, identify the most important gaps and decide what deserves priority first.</div></div>
+      </div>
+      <div class="inc-item rv" style="transition-delay:.10s">
+        <div class="inc-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg></div>
+        <div><div class="inc-title">Weekly Check-ins &amp; Adjustments</div><div class="inc-desc">Each week we review training, fatigue, soreness and upcoming demands. Your plan changes when your circumstances change.</div></div>
+      </div>
+      <div class="inc-item rv" style="transition-delay:.13s">
+        <div class="inc-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></div>
+        <div><div class="inc-title">Direct Coaching Support</div><div class="inc-desc">Access through WhatsApp and the coaching app when you need clarity, feedback or an adjustment — not just at the end of a block.</div></div>
+      </div>
+      <div class="inc-item rv" style="transition-delay:.16s">
+        <div class="inc-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
+        <div><div class="inc-title">Performance Tracking</div><div class="inc-desc">Training, testing and key performance measures tracked so decisions are based on evidence rather than guesswork.</div></div>
+      </div>
+      <div class="inc-item rv" style="transition-delay:.19s">
+        <div class="inc-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
+        <div><div class="inc-title">Performance Education</div><div class="inc-desc">Practical guidance on training, recovery, match-week preparation, nutrition and the mental side of performance.</div></div>
+      </div>
+      <div class="inc-item rv" style="transition-delay:.22s">
+        <div class="inc-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg></div>
+        <div><div class="inc-title">Practical Nutrition Support</div><div class="inc-desc">Connected to your training and performance goals. Fuel training, recover and prepare for match day without cutting out every food you enjoy.</div></div>
+      </div>
+    </div>
+
+    <!-- Ronan McCollum -->
+    <div class="pull-quote rv">
+      <p class="pull-quote__text">The fastest I have ever progressed in the gym. It feels very personalised — not like a copy-and-paste plan. Paddy is constantly adapting things to fit what's happening with training and fixtures.</p>
+      <p class="pull-quote__attr">— Ronan McCollum, PB Performance athlete</p>
+    </div>
+
+    <div class="cta-group rv">
+      <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
+      <span class="cta-note">Complete the short application form and I'll contact you personally to discuss the next step.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── MORE RESULTS ── -->
+<section class="proof-bg--alt">
+  <div class="w w--wide rv">
+    <p class="s-eyebrow">More Results</p>
+    <h2 class="s-h">Numbers that show up in testing and on the pitch</h2>
+    <div class="proof-grid">
+      <div class="proof-card">
+        <p class="proof-card__label">Off-Season Block</p>
+        <h3 class="proof-card__title">+50 kg squat and +30 kg bench in one off-season block</h3>
+        <div class="proof-card__body">
+          <p>Squat from 125 kg to 175 kg. Bench press from 90 kg to 120 kg. Built during a focused off-season period with a structured progression plan tailored to the available training window.</p>
+        </div>
+      </div>
+      <div class="proof-card">
+        <p class="proof-card__label">Camogie — 12 Weeks</p>
+        <h3 class="proof-card__title">Faster and stronger in 12 weeks</h3>
+        <div class="proof-card__body">
+          <p>Maximum speed from 5.5 m/s to 6.7 m/s (+1.2 m/s). Squat from 60 kg to 77 kg. Bench press from 39 kg to 52.5 kg. Progressed from zero chin-ups to completing multiple reps.</p>
+        </div>
+      </div>
+      <div class="proof-card">
+        <p class="proof-card__label">Client Testimonial</p>
+        <p class="proof-card__quote">My strength increased across all areas, as well as having weekly aerobic sessions to make sure my fitness when returning to sport would be at a better level. I am now benching the heaviest weight I ever have. A great programme — you definitely won't regret doing it.</p>
+        <p class="proof-card__attr">— Padraic Curry, PB Performance athlete (returning after injury)</p>
+      </div>
+      <div class="proof-card">
+        <p class="proof-card__label">Client Testimonial</p>
+        <p class="proof-card__quote">I wasn't sure online coaching would feel personal enough — but it does. Everything is built around my schedule, my fixtures and what I'm actually trying to improve. The check-ins make a real difference.</p>
+        <p class="proof-card__attr">— Aimon Duffin &amp; Niamh Whyte, PB Performance athletes</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT PADDY ── -->
+<section class="about-bg">
+  <div class="w rv">
+    <p class="s-eyebrow">About Paddy</p>
+    <div class="about-inner">
+      <img src="images/paddy-bench.jpg" alt="Paddy Burke" class="about-photo" onerror="this.style.display='none'">
+      <div>
+        <h2 class="s-h" style="margin-bottom:1rem">I know what it is like to care deeply about your game and still question whether your preparation is good enough.</h2>
+        <p class="s-body">I'm Paddy Burke, a Strength &amp; Conditioning Coach, MSc Performance Coaching graduate and Antrim Senior Hurler with more than ten years of intercounty experience.</p>
+        <p class="s-body">I created PB Performance Coaching because GAA players are expected to perform at an increasingly high level inside an amateur sport. Clubs do their best, but no team programme can fully account for every player's individual needs, schedule, injury history and goals.</p>
+        <p class="s-body" style="margin-bottom:0">I believe every player must take responsibility for their own preparation. My job is to give you the plan, coaching, feedback and education to do that properly — not sessions that look impressive on paper, but preparation that makes a genuine difference on the pitch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FIT FILTER ── -->
+<section class="fit-bg">
+  <div class="w rv">
+    <p class="s-eyebrow">Is This Right for You?</p>
+    <h2 class="s-h">Be honest with yourself.</h2>
+    <div class="fit-grid">
+      <div class="fit-col">
+        <p class="fit-head fit-head--yes">This is for you if…</p>
+        <ul class="fit-list fit-list--yes">
+          <li>You are an ambitious hurling, camogie or Gaelic football player who wants to reach a higher level.</li>
+          <li>You are already trying, but lack a clear individual plan or consistent direction.</li>
+          <li>You want to improve strength, speed, fitness or body composition without compromising your performance on the pitch.</li>
+          <li>You are willing to train consistently, communicate honestly and take responsibility for your preparation.</li>
+          <li>You value individual coaching, evidence-based decisions and long-term progress.</li>
+        </ul>
+      </div>
+      <div class="fit-col">
+        <p class="fit-head fit-head--no">This is not for you if…</p>
+        <ul class="fit-list fit-list--no">
+          <li>You want a quick fix or guaranteed selection without doing the work.</li>
+          <li>You want the hardest possible sessions simply to feel you have done more.</li>
+          <li>You are unwilling to complete check-ins, communicate or follow a progressive plan.</li>
+          <li>You expect a coach to care more about your progress than you do.</li>
+          <li>You cannot currently commit the time or investment required for consistent coaching.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── NEXT STEP ── -->
+<section class="next-bg">
+  <div class="w rv">
+    <p class="s-eyebrow">What Happens Next</p>
+    <h2 class="s-h">Ready to take control of your preparation?</h2>
+    <p class="s-body">Complete the short application form first. I'll then contact you personally so we can discuss where you are now, where you want to go and what is currently holding you back.</p>
+    <p class="s-body">On the call, we'll cover:</p>
+    <ul class="next-list">
+      <li>Where your physical preparation is currently.</li>
+      <li>What you want to improve over the next 90 days and across the season.</li>
+      <li>The biggest gaps or constraints holding back your progress.</li>
+      <li>What your clearest next steps look like.</li>
+      <li>Whether 1:1 coaching is genuinely the right fit for you right now.</li>
+    </ul>
+    <p class="s-body" style="margin-bottom:2.4rem">If it is a strong fit, I'll explain exactly what working together looks like. If it's not, I'll tell you honestly.</p>
+    <div class="cta-group">
+      <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
+      <span class="cta-note">No commitment. Free initial call. Paddy replies within 24 hrs.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQs ── -->
+<section class="faq-bg">
+  <div class="w rv">
+    <p class="s-eyebrow">Common Questions</p>
+    <h2 class="s-h" style="margin-bottom:2rem">FAQs</h2>
+    <div class="faq-list">
+      <details class="faq">
+        <summary>What is PB Performance 1:1 Coaching?</summary>
+        <div class="faq-body">Individual online coaching for ambitious GAA players. Your strength, speed, conditioning, recovery and nutrition support are brought together around your needs and schedule, then supported through regular check-ins, adjustments, tracking and direct access to Paddy.</div>
+      </details>
+      <details class="faq">
+        <summary>Who is it for?</summary>
+        <div class="faq-body">Adult hurling, camogie and Gaelic football players who are willing to work but want more structure, individualisation and accountability. You do not need to be an intercounty player, but you do need to care about improving.</div>
+      </details>
+      <details class="faq">
+        <summary>How does online coaching work?</summary>
+        <div class="faq-body">After your initial assessment, your programme is delivered through the coaching app with exercise demonstrations and progress tracking. You complete a weekly check-in, receive adjustments and can contact Paddy directly when you need support.</div>
+      </details>
+      <details class="faq">
+        <summary>How long is the commitment?</summary>
+        <div class="faq-body">An initial 90-day commitment is required. This gives enough time to properly assess where you are, build real progress and see meaningful results. After 90 days, we review and decide together what the next phase looks like.</div>
+      </details>
+      <details class="faq">
+        <summary>How often will I train?</summary>
+        <div class="faq-body">That depends on your current team schedule, goals and stage of the season. Your plan is designed around the time you realistically have. More sessions are not automatically better.</div>
+      </details>
+      <details class="faq">
+        <summary>Will the gym work leave me tired for matches?</summary>
+        <div class="faq-body">The programme is planned around team training and fixtures. Volume and intensity are managed so gym work supports rather than competes with your performance on the pitch. This is one of the most important things we get right from the start.</div>
+      </details>
+      <details class="faq">
+        <summary>What is the investment?</summary>
+        <div class="faq-body">The investment and coaching details will be explained after your application, once we have discussed your situation and confirmed that coaching is the right fit for you.</div>
+      </details>
+      <details class="faq">
+        <summary>What makes this different from a generic online programme?</summary>
+        <div class="faq-body">A generic plan serves a broad type of player. This coaching is shaped around your actual training week, goals, feedback and response — and it changes as those circumstances change throughout the season.</div>
+      </details>
+      <details class="faq">
+        <summary>What happens after I apply?</summary>
+        <div class="faq-body">Paddy will review your application personally and contact you within 24 hours to arrange a free call. There is no obligation and no hard sell.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ── CLOSING QUOTE ── -->
+<section class="diff-bg">
+  <div class="w rv" style="padding-bottom:4rem">
+    <div class="pull-quote" style="margin:0">
+      <p class="pull-quote__text">I'd tried plenty of programmes before, but this was the first time I actually felt like the plan was mine. That's when the progress started.</p>
+      <p class="pull-quote__attr">— Dara Rodgers, PB Performance athlete</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="final-bg">
+  <div class="w rv" style="text-align:center">
+    <p class="s-eyebrow" style="justify-content:center;display:block">Your Next Move</p>
+    <h2 class="s-h" style="max-width:26ch;margin:0 auto 1.2rem">Your work ethic has got you this far. Now give it the right direction.</h2>
+    <p class="s-body" style="max-width:52ch;margin:0 auto 1rem">You already know how much your game matters. The question is whether you spend another season piecing it together and wondering if you are doing enough — or follow a clear plan built around the player you are and the level you want to reach.</p>
+    <p class="s-body" style="max-width:52ch;margin:0 auto 2.4rem">Apply below. It takes two minutes. Paddy replies within 24 hours.</p>
+    <div class="cta-group cta-center">
+      <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
+      <span class="cta-note">Free initial call. No commitment. No hard sell.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── APPLY FORM ── -->
+<section class="apply-bg" id="apply">
+  <div class="w apply__inner rv">
+    <img src="images/paddy-bench.jpg" alt="Paddy Burke" class="apply__avatar" onerror="this.style.display='none'">
+    <p class="s-eyebrow" style="display:block;text-align:center">Apply for 1:1 Coaching</p>
+    <h2 class="s-h" style="text-align:center;margin-bottom:.8rem">Ready to build a stronger, fitter, faster version of yourself?</h2>
+    <p class="s-body" style="text-align:center;max-width:46ch;margin:0 auto 2rem">Fill in the form below. Paddy reviews every application personally and gets back within 24 hours — no commitment, no hard sell.</p>
+    <form class="aform" id="applyForm" onsubmit="submitForm(event)">
+      <div class="ff-row">
+        <div class="ff"><label for="aName">Full Name</label><input type="text" id="aName" placeholder="Your name" required></div>
+        <div class="ff"><label for="aAge">Age</label><input type="number" id="aAge" placeholder="e.g. 22" min="14" max="60"></div>
+      </div>
+      <div class="ff-row">
+        <div class="ff"><label for="aEmail">Email</label><input type="email" id="aEmail" placeholder="your@email.com" required></div>
+        <div class="ff"><label for="aPhone">Phone</label><input type="tel" id="aPhone" placeholder="+353..."></div>
+      </div>
+      <div class="ff"><label for="aClub">County / Club</label><input type="text" id="aClub" placeholder="e.g. Antrim / St. Paul's"></div>
+      <div class="ff"><label for="aGoal">What's your main goal?</label><textarea id="aGoal" placeholder="Tell me where you're at and what you want to achieve…"></textarea></div>
+      <button type="submit" class="submit-btn">Send Application →</button>
+      <p class="form-note">No commitment. Paddy will reply personally within 24 hours.</p>
+    </form>
+    <p class="form-msg" id="applyMsg"></p>
+  </div>
+</section>
+
+<footer>© 2026 PB Performance Coaching &nbsp;·&nbsp; <a href="index.html" style="color:inherit">pbperformancecoaching.com</a></footer>
 
 <script>
-if (!sessionStorage.getItem('pbDismissed')) {
-  setTimeout(() => document.getElementById('popupOverlay').classList.remove('hidden'), 2500);
-}
-function closePopup() {
-  document.getElementById('popupOverlay').classList.add('hidden');
-  sessionStorage.setItem('pbDismissed', '1');
-}
-async function submitMailchimp(e) {
+async function submitForm(e) {
   e.preventDefault();
-  const form = document.getElementById('mc-embedded-subscribe-form');
+  const vals = {
+    name:  document.getElementById('aName').value.trim(),
+    age:   document.getElementById('aAge').value.trim(),
+    email: document.getElementById('aEmail').value.trim(),
+    phone: document.getElementById('aPhone').value.trim(),
+    club:  document.getElementById('aClub').value.trim(),
+    goal:  document.getElementById('aGoal').value.trim(),
+  };
+  /* ── Google Form submission ──────────────────────────────────────────
+     Wire up: open the Google Form → Inspect each input → find
+     name="entry.XXXXXXXXXX" → replace entry IDs below.
+     Replace FORM_ID_HERE with the ID from the form's publish URL.
+  ─────────────────────────────────────────────────────────────────── */
   const fd = new URLSearchParams();
-  fd.append('EMAIL', document.getElementById('mce-EMAIL').value.trim());
-  fd.append('FNAME', document.getElementById('mce-FNAME').value.trim());
-  const honeypot = form.querySelector('[name^="b_"]');
-  if (honeypot) fd.append(honeypot.name, honeypot.value);
+  fd.append('entry.REPLACE_NAME_ID',  vals.name);
+  fd.append('entry.REPLACE_EMAIL_ID', vals.email);
+  fd.append('entry.REPLACE_PHONE_ID', vals.phone);
+  fd.append('entry.REPLACE_AGE_ID',   vals.age);
+  fd.append('entry.REPLACE_CLUB_ID',  vals.club);
+  fd.append('entry.REPLACE_GOAL_ID',  vals.goal);
   try {
-    await fetch(form.action, {method:'POST',mode:'no-cors',body:fd,headers:{'Content-Type':'application/x-www-form-urlencoded'}});
+    await fetch('https://docs.google.com/forms/d/e/FORM_ID_HERE/formResponse', {
+      method: 'POST', mode: 'no-cors', body: fd,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    });
   } catch(_) {}
-  form.style.display = 'none';
-  document.getElementById('popupMsg').textContent = '✓ Done — check your inbox shortly!';
-  sessionStorage.setItem('pbDismissed', '1');
-  setTimeout(closePopup, 2200);
+  document.getElementById('applyForm').style.display = 'none';
+  document.getElementById('applyMsg').textContent = '✓ Application received — Paddy will be in touch within 24 hours.';
 }
-document.getElementById('popupOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closePopup(); });
 
+// Scroll reveal
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
-}, {threshold: 0.06});
-document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el => obs.observe(el));
+}, { threshold: 0.07 });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
