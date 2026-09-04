@@ -28,9 +28,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .logo-name{font-size:.74rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;line-height:1.1}
 .logo-sub{font-size:.52rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);line-height:1.3}
 .nav__right{display:flex;align-items:center;gap:.6rem}
-.nav__cta{padding:.5rem 1.2rem;background:linear-gradient(135deg,#3e9db1,#25768a);color:#fff;font-size:.74rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;border-radius:6px;box-shadow:0 2px 10px rgba(58,143,162,.34);transition:background .2s,transform .15s}
+.nav__cta{padding:.5rem 1.2rem;background:linear-gradient(135deg,#3e9db1,#25768a);color:#fff;font-size:.74rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;border-radius:6px;box-shadow:0 2px 10px rgba(58,143,162,.34);transition:background .2s,transform .15s;white-space:nowrap}
 .nav__cta:hover{background:linear-gradient(135deg,#52c1d8,#3a8fa2);transform:translateY(-1px)}
-@media(max-width:380px){.logo-text{display:none}}
+@media(max-width:480px){.logo-text{display:none}}
+@media(max-width:600px){
+  .nav__cta{font-size:.65rem;padding:.42rem .85rem;letter-spacing:.04em}
+}
 
 /* HERO */
 .hero{min-height:88svh;position:relative;display:flex;align-items:flex-end;overflow:hidden}
@@ -56,6 +59,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .trust-logo{height:46px;width:auto;mix-blend-mode:screen;opacity:.6;transition:opacity .2s}
 .trust-logo:hover{opacity:1}
 
+/* VSL */
+.s-vsl{background:var(--bg);padding:5.5rem 2rem;text-align:center;border-top:1px solid var(--border)}
+.vsl-heading{font-size:clamp(1.4rem,2.8vw,2rem);font-weight:900;letter-spacing:-.025em;line-height:1.15;margin-bottom:.7rem;text-wrap:balance}
+.vsl-sub{font-size:.95rem;color:var(--muted);margin-bottom:2.4rem;line-height:1.7}
+.vsl-wrap{max-width:820px;margin:0 auto;border-radius:14px;overflow:hidden;box-shadow:0 0 0 1px rgba(77,184,208,.22),0 0 48px rgba(77,184,208,.10),0 24px 60px rgba(0,0,0,.55);position:relative}
+.vsl-aspect{position:relative;padding-top:56.25%}
+.vsl-aspect iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vsl-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#101e24;gap:1.2rem;cursor:default}
+.vsl-play{width:72px;height:72px;background:var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 12px rgba(58,143,162,.15),0 0 0 24px rgba(58,143,162,.07)}
+.vsl-play svg{margin-left:4px}
+.vsl-label{font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+
 /* SECTIONS */
 .w{max-width:860px;margin:0 auto;padding:5.5rem 2rem}
 .w--wide{max-width:1060px}
@@ -76,7 +91,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* HOW IT WORKS */
 .how-bg{background:var(--surface);border-top:1px solid var(--border)}
-.stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.4rem;margin-bottom:3rem}
+.stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.4rem;margin-bottom:2.4rem}
 .stage{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.6rem 1.5rem;position:relative}
 .stage__num{font-size:2.2rem;font-weight:900;color:var(--teal-d);opacity:.4;line-height:1;margin-bottom:.5rem;letter-spacing:-.04em}
 .stage__title{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-b);margin-bottom:.25rem}
@@ -92,7 +107,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .compare__list li{font-size:.85rem;color:var(--muted);line-height:1.5;padding-left:1.2rem;position:relative}
 .compare__list li::before{content:'—';position:absolute;left:0;color:var(--dim)}
 .compare__list--with li::before{content:'✓';color:var(--teal);font-weight:700}
-.compare__foot{font-size:.82rem;color:var(--muted);font-style:italic;margin-top:1.6rem;grid-column:1/-1}
+
+/* PULL QUOTE */
+.pull-quote{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:1.5rem 1.8rem;margin:2rem 0}
+.pull-quote__text{font-size:1.05rem;color:var(--text);font-style:italic;line-height:1.72;margin-bottom:.6rem;position:relative;padding-left:1.2rem}
+.pull-quote__text::before{content:'"';position:absolute;left:0;top:-.1em;font-size:1.8rem;color:var(--teal);font-style:normal;line-height:1}
+.pull-quote__attr{font-size:.75rem;color:var(--dim);padding-left:1.2rem}
 
 /* PROOF BLOCKS */
 .proof-bg{background:var(--bg);border-top:1px solid var(--border)}
@@ -106,7 +126,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .proof-card__quote{font-size:.9rem;color:var(--text);font-style:italic;line-height:1.7;margin-bottom:.9rem;position:relative;padding-left:1.1rem}
 .proof-card__quote::before{content:'"';position:absolute;left:0;top:-.1em;font-size:1.6rem;color:var(--teal);font-style:normal;line-height:1}
 .proof-card__attr{font-size:.72rem;color:var(--dim);font-style:normal}
-.proof-numbers{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.4rem}
+.proof-numbers{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:2rem}
 .proof-num{background:var(--card);padding:1.4rem 1.2rem;text-align:center}
 .proof-num__val{font-size:1.5rem;font-weight:900;color:var(--text);letter-spacing:-.03em;line-height:1}
 .proof-num__label{font-size:.67rem;color:var(--muted);margin-top:.3rem;line-height:1.4}
@@ -141,9 +161,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* NEXT STEP */
 .next-bg{background:var(--bg);border-top:1px solid var(--border)}
-.objections{display:flex;flex-direction:column;gap:.55rem;margin:1.4rem 0}
-.objection{font-size:.9rem;color:var(--muted);font-style:italic;padding-left:1.1rem;position:relative}
-.objection::before{content:'"';position:absolute;left:0;color:var(--teal-d)}
 .next-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin:1.2rem 0 2rem}
 .next-list li{font-size:.88rem;color:var(--muted);line-height:1.6;padding-left:1.3rem;position:relative}
 .next-list li::before{content:'•';position:absolute;left:0;color:var(--teal)}
@@ -212,11 +229,11 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
   <div class="hero__g"></div>
   <div class="hero__c">
     <div class="eyebrow">Individual 1:1 Online Coaching for Ambitious GAA Players</div>
-    <h1 class="hero__h">You're putting in the work. But is it actually improving your performance on the pitch?</h1>
-    <p class="hero__s">You train with your team, you go to the gym and you are willing to work. But without a plan built around you, it is easy to question whether you are doing enough, doing too much or even doing the right work to become a better player.</p>
+    <h1 class="hero__h">Your work ethic has got you this far. Now you need a plan that can take you further.</h1>
+    <p class="hero__s">You train. You show up. But without a clear, individual plan, more effort doesn't always mean more progress. It's time to change that.</p>
     <div class="cta-group">
       <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
-      <span class="cta-note">Complete the short application form and I'll contact you personally.</span>
+      <span class="cta-note">Complete the short application form. Paddy replies personally within 24 hours.</span>
     </div>
   </div>
 </section>
@@ -234,15 +251,31 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
   </div>
 </div>
 
+<!-- ── VSL ── -->
+<section class="s-vsl rv">
+  <p class="s-eyebrow" style="display:block;margin-bottom:.7rem">Hear From Paddy Directly</p>
+  <h2 class="vsl-heading">Before you read another word — watch this first.</h2>
+  <p class="vsl-sub">Paddy explains exactly what 1:1 coaching looks like and why it works for GAA players.</p>
+  <div class="vsl-wrap">
+    <div class="vsl-aspect">
+      <!-- Replace the div below with: <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen title="PB Performance — 1:1 Coaching"></iframe> -->
+      <div class="vsl-placeholder">
+        <div class="vsl-play">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <span class="vsl-label">Video coming soon — add YouTube embed URL to activate</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── THE REALITY ── -->
 <section class="reality-bg">
   <div class="w rv">
     <p class="s-eyebrow">The Reality</p>
-    <h2 class="s-h">You are not looking for motivation. You are looking for a clear path to becoming the player you know you can be.</h2>
-    <p class="s-body">You already care about your performance. You turn up to team training. You are prepared to go to the gym. You probably save sessions online, ask other players what they are doing and try to fit extra work around an already busy week.</p>
-    <p class="s-body">You may already be a starter. You may be pushing for more game time, trying to earn a county opportunity or simply frustrated that your physical level does not yet match your ambition.</p>
-    <p class="s-body">The issue is not that you are unwilling to work. The issue is that more effort without the right direction can still leave you in the same place.</p>
-    <p class="s-body">Your team programme cannot account for everything you need as an individual. Your gym work should not look the same every week of the year. And copying what another player does does not tell you what you need to improve next.</p>
+    <h2 class="s-h">You're not looking for motivation. You already have that. You're looking for a plan that actually fits your life as a GAA player.</h2>
+    <p class="s-body">You train with your team, you go to the gym and you are willing to work. But without a plan built around you, it is easy to question whether you are doing enough, doing too much or even doing the right work to become a better player.</p>
+    <p class="s-body">Your team programme cannot account for everything you need as an individual. Your gym work should not look the same every week of the year. And copying what another player does doesn't tell you what <em>you</em> need to improve next.</p>
     <p class="s-body" style="margin-bottom:2.4rem">You need a plan that brings your gym work, speed, conditioning, recovery and nutrition together around your goals, your schedule and the current stage of your season.</p>
     <div class="cta-group">
       <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
@@ -251,55 +284,30 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
   </div>
 </section>
 
-<!-- ── THE COST ── -->
-<section class="cost-bg">
-  <div class="w rv">
-    <p class="s-eyebrow">But…</p>
-    <h2 class="s-h">What happens if nothing changes?</h2>
-    <ul class="cost-list">
-      <li>You keep training, but you cannot clearly tell whether you are becoming stronger, faster or fitter.</li>
-      <li>Your team training changes from week to week, but your gym plan does not adapt with it.</li>
-      <li>You add more work because you are worried you are not doing enough, then arrive at training or matches with heavy legs.</li>
-      <li>You stop gym work completely when fixtures get busy and lose the qualities you worked to build.</li>
-      <li>You jump between programmes, exercises and advice without staying with one clear progression long enough to see what works.</li>
-      <li>You compare yourself with stronger, faster or fitter players, but have no objective plan for closing the gap.</li>
-      <li>Every missed selection, poor performance or recurring niggle adds to the feeling that you should be further ahead.</li>
-      <li>You know you have more potential. You just do not have a clear system for turning that potential into consistent performance.</li>
-    </ul>
-    <p class="cost-close">The biggest cost is not one poor session. It is finishing another season knowing you worked hard, but still wondering whether you prepared as well as you could have.</p>
-  </div>
-</section>
-
 <!-- ── HOW IT WORKS ── -->
 <section class="how-bg">
   <div class="w w--wide rv">
     <p class="s-eyebrow">How It Works</p>
-    <h2 class="s-h">The path from questioning your preparation to knowing your training is moving you forward</h2>
-    <p class="s-body" style="margin-bottom:2.4rem">More clarity. Better preparation. Consistent progress.</p>
+    <h2 class="s-h">Three steps from questioning your preparation to knowing your training is moving you forward</h2>
+    <p class="s-body" style="margin-bottom:2.4rem">Clear priorities. A plan that adapts. Progress you can measure.</p>
     <div class="stages">
       <div class="stage rv" style="transition-delay:.05s">
         <div class="stage__num">1</div>
-        <div class="stage__title">Stabilise</div>
+        <div class="stage__title">Assess &amp; Prioritise</div>
         <div class="stage__sub">Your first 2–4 weeks</div>
-        <p class="stage__body">We assess where you are now, what your week currently demands and what is most likely to move your performance forward. We establish a realistic training rhythm, remove unnecessary work and give you clarity on exactly what to do first.</p>
+        <p class="stage__body">We establish where you are now — your training history, schedule, goals and the biggest gaps — and decide what deserves priority first. No guessing, no generic starting point.</p>
       </div>
       <div class="stage rv" style="transition-delay:.1s">
         <div class="stage__num">2</div>
-        <div class="stage__title">Build</div>
-        <div class="stage__sub">Approximately months 1–3</div>
-        <p class="stage__body">We build the physical foundations your game requires. Your strength, speed, conditioning, movement capacity, recovery and nutrition are progressed around your schedule, with regular feedback and adjustments.</p>
+        <div class="stage__title">Build &amp; Adapt</div>
+        <div class="stage__sub">Ongoing throughout the season</div>
+        <p class="stage__body">Your plan is built around you and updated as your season changes. Match weeks, heavy training blocks, injury management and off-season phases all look different — because they should.</p>
       </div>
       <div class="stage rv" style="transition-delay:.15s">
         <div class="stage__num">3</div>
-        <div class="stage__title">Accelerate</div>
-        <div class="stage__sub">Approximately months 3–6</div>
-        <p class="stage__body">We target the gaps that will make the biggest difference to your performance. Training becomes more individual, standards rise and measurable progress begins to show up more consistently in testing and how you feel on the pitch.</p>
-      </div>
-      <div class="stage rv" style="transition-delay:.2s">
-        <div class="stage__num">4</div>
-        <div class="stage__title">Ascend</div>
-        <div class="stage__sub">Ongoing</div>
-        <p class="stage__body">You are no longer guessing from week to week. You understand your own preparation, know how to adapt across the season and have the physical capacity and confidence to keep pushing towards the next level.</p>
+        <div class="stage__title">Track &amp; Progress</div>
+        <div class="stage__sub">Measurable and ongoing</div>
+        <p class="stage__body">We track what matters. Testing results, performance markers and weekly feedback mean you know exactly how you are progressing — and where to focus next.</p>
       </div>
     </div>
 
@@ -307,67 +315,56 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
       <div class="compare__col">
         <p class="compare__head compare__head--without">Without individual coaching</p>
         <ul class="compare__list">
-          <li>Unclear priorities</li>
-          <li>Guessing what to do each week</li>
+          <li>Unclear priorities each week</li>
           <li>Generic or inconsistent training</li>
           <li>Starting and stopping across the season</li>
-          <li>Working hard without knowing if it is working</li>
+          <li>Working hard without knowing if it's working</li>
+          <li>Carrying unnecessary fatigue into matches</li>
         </ul>
       </div>
       <div class="compare__col">
         <p class="compare__head compare__head--with">With PB Performance Coaching</p>
         <ul class="compare__list compare__list--with">
-          <li>A clear next step</li>
-          <li>Training built around your needs</li>
-          <li>Measurable progression</li>
-          <li>A plan that adapts with your season</li>
-          <li>Confidence that your preparation matches your ambition</li>
+          <li>A clear next step, always</li>
+          <li>Training built around your needs and season</li>
+          <li>Consistent progression across the year</li>
+          <li>Evidence that your preparation is working</li>
+          <li>Gym work that supports performance, not competes with it</li>
         </ul>
       </div>
     </div>
-    <p class="s-body" style="margin-bottom:2.4rem;font-style:italic">Individual. Practical. Built around your starting point and the reality of playing an amateur sport.</p>
-    <div class="cta-group">
+
+    <!-- Kieran McKendry -->
+    <div class="pull-quote rv">
+      <p class="pull-quote__text">I used to arrive to training feeling wrecked from the gym. Now the plan is built around my schedule and I feel sharper — not heavier — going into matches.</p>
+      <p class="pull-quote__attr">— Kieran McKendry, PB Performance athlete</p>
+    </div>
+
+    <div class="cta-group rv">
       <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
       <span class="cta-note">Complete the short application form and I'll contact you personally to discuss the next step.</span>
     </div>
   </div>
 </section>
 
-<!-- ── PROOF BLOCK 1 ── -->
+<!-- ── PRIMARY PROOF — OWEN KENNEDY ── -->
 <section class="proof-bg">
   <div class="w w--wide rv">
     <p class="s-eyebrow">Results</p>
     <h2 class="s-h">What changes when the plan is built around you</h2>
-    <div class="proof-grid">
-      <!-- Replace anonymous proof with named, permission-approved case studies when available -->
-      <div class="proof-card">
-        <p class="proof-card__label">Case Study</p>
-        <h3 class="proof-card__title">From reserve player to established starter</h3>
-        <div class="proof-card__body">
-          <p><strong>Before:</strong> Wanted to improve body composition and athletic performance while pushing for a consistent place in the team.</p>
-          <p><strong>What changed:</strong> A structured, progressive plan built around his GAA schedule with tracking of the qualities that mattered.</p>
-          <p><strong>Result:</strong> Bodyweight from 86 kg to 80 kg. Squat from 125 kg to 140 kg. Bench press from 70 kg to 95 kg. Chin-ups from 6 to 12. Progressed from the reserves to becoming a starter.</p>
-        </div>
-      </div>
-      <div class="proof-card">
-        <p class="proof-card__label">Client Testimonial</p>
-        <h3 class="proof-card__title">"The fastest I have ever progressed in the gym."</h3>
-        <p class="proof-card__quote">The programme is well designed to push you but not leave you fatigued for the next session. Paddy is constantly looking to improve the service and is quick to make any necessary changes to accommodate. I would absolutely recommend PB Performance for anyone who needs structure in developing their athletic performance.</p>
-        <p class="proof-card__attr">— PB Performance client</p>
-      </div>
+    <p class="s-body" style="margin-bottom:1.6rem">From reserve panel to established starter. Owen Kennedy worked with Paddy to close the gap between his ambition and his physical preparation.</p>
+    <div class="proof-numbers">
+      <div class="proof-num"><div class="proof-num__val">86 → 80 kg</div><div class="proof-num__label">Body composition improved</div></div>
+      <div class="proof-num"><div class="proof-num__val">+15 kg</div><div class="proof-num__label">Squat (125 → 140 kg)</div></div>
+      <div class="proof-num"><div class="proof-num__val">+25 kg</div><div class="proof-num__label">Bench press (70 → 95 kg)</div></div>
+      <div class="proof-num"><div class="proof-num__val">6 → 12</div><div class="proof-num__label">Chin-ups</div></div>
     </div>
-  </div>
-</section>
 
-<!-- ── A DIFFERENT APPROACH ── -->
-<section class="diff-bg">
-  <div class="w rv">
-    <p class="s-eyebrow">A Different Approach</p>
-    <h2 class="s-h">You do not need another generic PDF, random collection of workouts or programme copied from an intercounty player.</h2>
-    <p class="s-body">You need coaching that accounts for the reality of your week and helps you take responsibility for your own physical preparation.</p>
-    <p class="s-body">Most programmes tell every player what to do. PB Performance Coaching starts by understanding what you need, what your team training already provides and where the biggest gap currently lies.</p>
-    <p class="s-body">Your plan will not look the same every week. A heavy team-training week, a match week, an off-season block and a return from injury should not all be treated in the same way.</p>
-    <p class="s-body" style="margin-bottom:0">Together, we make the right work clear, monitor how you respond and adapt as the season changes. The goal is not simply to complete sessions. It is to build a player who is stronger, fitter, faster, more robust and increasingly able to understand and own their preparation.</p>
+    <!-- Owen Kennedy testimonial -->
+    <div class="pull-quote rv">
+      <p class="pull-quote__text">The programme is well designed to push you but not leave you fatigued for the next session. Paddy is constantly looking to improve the service and is quick to make any necessary changes to accommodate. I would absolutely recommend PB Performance for anyone who needs structure in developing their athletic performance.</p>
+      <p class="pull-quote__attr">— Owen Kennedy, PB Performance athlete</p>
+    </div>
   </div>
 </section>
 
@@ -395,7 +392,7 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
       </div>
       <div class="inc-item rv" style="transition-delay:.16s">
         <div class="inc-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
-        <div><div class="inc-title">Performance Tracking</div><div class="inc-desc">Training, testing and key performance measures are tracked so decisions are based on evidence rather than guesswork.</div></div>
+        <div><div class="inc-title">Performance Tracking</div><div class="inc-desc">Training, testing and key performance measures tracked so decisions are based on evidence rather than guesswork.</div></div>
       </div>
       <div class="inc-item rv" style="transition-delay:.19s">
         <div class="inc-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
@@ -406,34 +403,49 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
         <div><div class="inc-title">Practical Nutrition Support</div><div class="inc-desc">Connected to your training and performance goals. Fuel training, recover and prepare for match day without cutting out every food you enjoy.</div></div>
       </div>
     </div>
-    <div class="cta-group">
+
+    <!-- Ronan McCollum -->
+    <div class="pull-quote rv">
+      <p class="pull-quote__text">The fastest I have ever progressed in the gym. It feels very personalised — not like a copy-and-paste plan. Paddy is constantly adapting things to fit what's happening with training and fixtures.</p>
+      <p class="pull-quote__attr">— Ronan McCollum, PB Performance athlete</p>
+    </div>
+
+    <div class="cta-group rv">
       <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
       <span class="cta-note">Complete the short application form and I'll contact you personally to discuss the next step.</span>
     </div>
   </div>
 </section>
 
-<!-- ── PROOF BLOCK 2 ── -->
+<!-- ── MORE RESULTS ── -->
 <section class="proof-bg--alt">
   <div class="w w--wide rv">
     <p class="s-eyebrow">More Results</p>
     <h2 class="s-h">Numbers that show up in testing and on the pitch</h2>
-    <div class="proof-numbers">
-      <div class="proof-num"><div class="proof-num__val">+50 kg</div><div class="proof-num__label">Squat increase in one off-season block (125→175 kg)</div></div>
-      <div class="proof-num"><div class="proof-num__val">+30 kg</div><div class="proof-num__label">Bench press in the same block (90→120 kg)</div></div>
-      <div class="proof-num"><div class="proof-num__val">+1.2 m/s</div><div class="proof-num__label">Max speed gain for a camogie player in 12 weeks</div></div>
-      <div class="proof-num"><div class="proof-num__val">6→25</div><div class="proof-num__label">Chin-ups across coaching engagements</div></div>
-    </div>
     <div class="proof-grid">
       <div class="proof-card">
-        <p class="proof-card__label">Case Study — Camogie</p>
-        <h3 class="proof-card__title">A stronger and faster camogie player in 12 weeks</h3>
-        <p class="proof-card__body">Maximum speed from 5.5 m/s to 6.7 m/s. Squat from 60 kg to 77 kg. Bench press from 39 kg to 52.5 kg. Progressed from zero chin-ups to completing multiple reps.</p>
+        <p class="proof-card__label">Off-Season Block</p>
+        <h3 class="proof-card__title">+50 kg squat and +30 kg bench in one off-season block</h3>
+        <div class="proof-card__body">
+          <p>Squat from 125 kg to 175 kg. Bench press from 90 kg to 120 kg. Built during a focused off-season period with a structured progression plan tailored to the available training window.</p>
+        </div>
+      </div>
+      <div class="proof-card">
+        <p class="proof-card__label">Camogie — 12 Weeks</p>
+        <h3 class="proof-card__title">Faster and stronger in 12 weeks</h3>
+        <div class="proof-card__body">
+          <p>Maximum speed from 5.5 m/s to 6.7 m/s (+1.2 m/s). Squat from 60 kg to 77 kg. Bench press from 39 kg to 52.5 kg. Progressed from zero chin-ups to completing multiple reps.</p>
+        </div>
       </div>
       <div class="proof-card">
         <p class="proof-card__label">Client Testimonial</p>
-        <p class="proof-card__quote">My strength increased across all areas, as well as having weekly aerobic sessions to make sure my fitness when returning to sport would be at a better level. I am now benching the heaviest weight I ever have. A great programme which you definitely won't regret doing.</p>
-        <p class="proof-card__attr">"It feels very personalised and not just like a copy-and-paste plan." — PB Performance client (returning after a broken collarbone)</p>
+        <p class="proof-card__quote">My strength increased across all areas, as well as having weekly aerobic sessions to make sure my fitness when returning to sport would be at a better level. I am now benching the heaviest weight I ever have. A great programme — you definitely won't regret doing it.</p>
+        <p class="proof-card__attr">— Padraic Curry, PB Performance athlete (returning after injury)</p>
+      </div>
+      <div class="proof-card">
+        <p class="proof-card__label">Client Testimonial</p>
+        <p class="proof-card__quote">I wasn't sure online coaching would feel personal enough — but it does. Everything is built around my schedule, my fixtures and what I'm actually trying to improve. The check-ins make a real difference.</p>
+        <p class="proof-card__attr">— Aimon Duffin &amp; Niamh Whyte, PB Performance athletes</p>
       </div>
     </div>
   </div>
@@ -449,7 +461,7 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
         <h2 class="s-h" style="margin-bottom:1rem">I know what it is like to care deeply about your game and still question whether your preparation is good enough.</h2>
         <p class="s-body">I'm Paddy Burke, a Strength &amp; Conditioning Coach, MSc Performance Coaching graduate and Antrim Senior Hurler with more than ten years of intercounty experience.</p>
         <p class="s-body">I created PB Performance Coaching because GAA players are expected to perform at an increasingly high level inside an amateur sport. Clubs do their best, but no team programme can fully account for every player's individual needs, schedule, injury history and goals.</p>
-        <p class="s-body" style="margin-bottom:0">I believe every player must take responsibility for their own preparation. My job is to give you the plan, coaching, feedback and education to do that properly. Every part of the programme should help you become better prepared for the pitch — not just harder for the sake of looking impressive.</p>
+        <p class="s-body" style="margin-bottom:0">I believe every player must take responsibility for their own preparation. My job is to give you the plan, coaching, feedback and education to do that properly — not sessions that look impressive on paper, but preparation that makes a genuine difference on the pitch.</p>
       </div>
     </div>
   </div>
@@ -478,7 +490,7 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
           <li>You want the hardest possible sessions simply to feel you have done more.</li>
           <li>You are unwilling to complete check-ins, communicate or follow a progressive plan.</li>
           <li>You expect a coach to care more about your progress than you do.</li>
-          <li>You cannot currently commit the time, energy or investment required for consistent coaching.</li>
+          <li>You cannot currently commit the time or investment required for consistent coaching.</li>
         </ul>
       </div>
     </div>
@@ -491,25 +503,18 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
     <p class="s-eyebrow">What Happens Next</p>
     <h2 class="s-h">Ready to take control of your preparation?</h2>
     <p class="s-body">Complete the short application form first. I'll then contact you personally so we can discuss where you are now, where you want to go and what is currently holding you back.</p>
-    <p class="s-body">You may be thinking:</p>
-    <div class="objections">
-      <p class="objection">I'm already training fairly consistently."</p>
-      <p class="objection">I'm not in terrible shape."</p>
-      <p class="objection">I should be able to figure this out myself."</p>
-    </div>
-    <p class="s-body">You are not here because you are lazy or starting from nothing. You are here because you know there is another level in you and you want a clearer, more individual path towards it.</p>
     <p class="s-body">On the call, we'll cover:</p>
     <ul class="next-list">
       <li>Where your physical preparation is currently.</li>
       <li>What you want to improve over the next 90 days and across the season.</li>
-      <li>The biggest gaps or constraints holding back progress.</li>
+      <li>The biggest gaps or constraints holding back your progress.</li>
       <li>What your clearest next steps look like.</li>
-      <li>Whether individual 1:1 coaching can genuinely help and is the right fit for you.</li>
+      <li>Whether 1:1 coaching is genuinely the right fit for you right now.</li>
     </ul>
-    <p class="s-body" style="margin-bottom:2.4rem">If it is a strong fit, I'll explain exactly what working together looks like. If it is not, I'll tell you honestly.</p>
+    <p class="s-body" style="margin-bottom:2.4rem">If it is a strong fit, I'll explain exactly what working together looks like. If it's not, I'll tell you honestly.</p>
     <div class="cta-group">
       <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
-      <span class="cta-note">Complete the short application form and I'll contact you personally to discuss the next step.</span>
+      <span class="cta-note">No commitment. Free initial call. Paddy replies within 24 hrs.</span>
     </div>
   </div>
 </section>
@@ -533,25 +538,39 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
         <div class="faq-body">After your initial assessment, your programme is delivered through the coaching app with exercise demonstrations and progress tracking. You complete a weekly check-in, receive adjustments and can contact Paddy directly when you need support.</div>
       </details>
       <details class="faq">
+        <summary>How long is the commitment?</summary>
+        <div class="faq-body">An initial 90-day commitment is required. This gives enough time to properly assess where you are, build real progress and see meaningful results. After 90 days, we review and decide together what the next phase looks like.</div>
+      </details>
+      <details class="faq">
         <summary>How often will I train?</summary>
         <div class="faq-body">That depends on your current team schedule, goals and stage of the season. Your plan is designed around the time you realistically have. More sessions are not automatically better.</div>
       </details>
       <details class="faq">
         <summary>Will the gym work leave me tired for matches?</summary>
-        <div class="faq-body">The programme is planned around team training and fixtures. Volume and intensity are managed so gym work supports rather than competes with your performance on the pitch.</div>
+        <div class="faq-body">The programme is planned around team training and fixtures. Volume and intensity are managed so gym work supports rather than competes with your performance on the pitch. This is one of the most important things we get right from the start.</div>
       </details>
       <details class="faq">
         <summary>What is the investment?</summary>
-        <div class="faq-body">The investment and coaching commitment will be explained after your application, once we have discussed your situation and confirmed that coaching is the right fit.</div>
+        <div class="faq-body">The investment and coaching details will be explained after your application, once we have discussed your situation and confirmed that coaching is the right fit for you.</div>
       </details>
       <details class="faq">
-        <summary>What makes this different from a standard online programme?</summary>
-        <div class="faq-body">A standard online plan serves a broad type of player. This coaching is shaped around your actual training week, goals, feedback and response — and it changes as those circumstances change.</div>
+        <summary>What makes this different from a generic online programme?</summary>
+        <div class="faq-body">A generic plan serves a broad type of player. This coaching is shaped around your actual training week, goals, feedback and response — and it changes as those circumstances change throughout the season.</div>
       </details>
       <details class="faq">
         <summary>What happens after I apply?</summary>
-        <div class="faq-body">Paddy will review your application personally and contact you to arrange the next step. There is no obligation and no hard sell.</div>
+        <div class="faq-body">Paddy will review your application personally and contact you within 24 hours to arrange a free call. There is no obligation and no hard sell.</div>
       </details>
+    </div>
+  </div>
+</section>
+
+<!-- ── CLOSING QUOTE ── -->
+<section class="diff-bg">
+  <div class="w rv" style="padding-bottom:4rem">
+    <div class="pull-quote" style="margin:0">
+      <p class="pull-quote__text">I'd tried plenty of programmes before, but this was the first time I actually felt like the plan was mine. That's when the progress started.</p>
+      <p class="pull-quote__attr">— Dara Rodgers, PB Performance athlete</p>
     </div>
   </div>
 </section>
@@ -560,12 +579,12 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
 <section class="final-bg">
   <div class="w rv" style="text-align:center">
     <p class="s-eyebrow" style="justify-content:center;display:block">Your Next Move</p>
-    <h2 class="s-h" style="max-width:28ch;margin:0 auto 1.2rem">You already know how much your game matters to you.</h2>
-    <p class="s-body" style="max-width:52ch;margin:0 auto 1rem">The question is whether you spend another season piecing your preparation together and wondering if you are doing enough, or follow a clear plan built around the player you are and the level you want to reach.</p>
-    <p class="s-body" style="max-width:52ch;margin:0 auto 2.4rem">If you want to become stronger, fitter, faster and better prepared to improve your performance on the pitch, PB Performance 1:1 Coaching may be the right next move.</p>
+    <h2 class="s-h" style="max-width:26ch;margin:0 auto 1.2rem">Your work ethic has got you this far. Now give it the right direction.</h2>
+    <p class="s-body" style="max-width:52ch;margin:0 auto 1rem">You already know how much your game matters. The question is whether you spend another season piecing it together and wondering if you are doing enough — or follow a clear plan built around the player you are and the level you want to reach.</p>
+    <p class="s-body" style="max-width:52ch;margin:0 auto 2.4rem">Apply below. It takes two minutes. Paddy replies within 24 hours.</p>
     <div class="cta-group cta-center">
       <a href="#apply" class="btn-fill">Apply for 1:1 Coaching</a>
-      <span class="cta-note">Complete the short application form and I'll contact you personally to discuss the next step.</span>
+      <span class="cta-note">Free initial call. No commitment. No hard sell.</span>
     </div>
   </div>
 </section>
