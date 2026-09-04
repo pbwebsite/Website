@@ -101,7 +101,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* ── SECTION 7: RESULTS ── */
 .results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem;margin-bottom:2rem}
-.result-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.8rem}
+.result-card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.result-card__img{width:100%;height:200px;object-fit:cover;object-position:center 25%;display:block}
+.result-card__body{padding:1.4rem 1.6rem 1.6rem}
 .result-card__heading{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-b);margin-bottom:1rem}
 .result-card__stats{display:flex;flex-direction:column;gap:.45rem;margin-bottom:0}
 .result-stat{font-size:.88rem;color:var(--muted);line-height:1.5;font-variant-numeric:tabular-nums}
@@ -109,6 +111,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .result-card__quote{font-size:.9rem;color:var(--text);font-style:italic;line-height:1.72;position:relative;padding-left:1.1rem;margin-bottom:.8rem}
 .result-card__quote::before{content:'"';position:absolute;left:0;top:-.1em;font-size:1.6rem;color:var(--teal);font-style:normal;line-height:1}
 .result-card__attr{font-size:.72rem;color:var(--dim)}
+/* section 2 proof layout */
+.proof-inner{display:grid;grid-template-columns:280px 1fr;gap:2.5rem;align-items:flex-start}
+.proof-photo{width:280px;height:320px;object-fit:cover;object-position:center 20%;border-radius:10px;border:2px solid var(--teal);filter:saturate(.85);flex-shrink:0}
 
 /* ── SECTION 8: FIT FILTER ── */
 .fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:10px;overflow:hidden}
@@ -153,6 +158,8 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
   .fit-grid{grid-template-columns:1fr}
   .fit-col:first-child{border-bottom:1px solid var(--border)}
   .about-inner{grid-template-columns:1fr}
+  .proof-inner{grid-template-columns:1fr}
+  .proof-photo{width:100%;height:260px}
   .ff-row{grid-template-columns:1fr}
 }
 </style>
@@ -213,14 +220,21 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
   <div class="w w--wide rv">
     <p class="s-eyebrow">Primary Proof</p>
     <h2 class="s-h">From reserve player to established starter</h2>
-    <p class="s-body">Over 14 months, this player:</p>
-    <ul class="proof-list">
-      <li>Reduced bodyweight from 86kg to 80kg</li>
-      <li>Increased his squat from 125kg to 140kg</li>
-      <li>Increased his bench press from 70kg to 95kg</li>
-      <li>Improved chin-ups from 6 to 12</li>
-      <li>Progressed from the reserves to becoming an established starter</li>
-    </ul>
+    <div class="proof-inner">
+      <img src="images/athlete-owen.png" alt="Owen" class="proof-photo">
+      <div>
+        <p class="s-body">Over 14 months, Owen:</p>
+        <ul class="proof-list">
+          <li>Reduced bodyweight from 86kg to 80kg</li>
+          <li>Increased his squat from 125kg to 140kg</li>
+          <li>Increased his bench press from 70kg to 95kg</li>
+          <li>Improved chin-ups from 6 to 12</li>
+          <li>Progressed from the reserves to becoming an established starter</li>
+        </ul>
+        <p class="result-card__quote" style="padding-left:1.1rem;margin-top:1.2rem">"I went from being a reserve player who wasn't getting selected for the senior team to becoming a regular league starter and featuring in the Championship. I also hit a 140kg squat in testing. The levels I reached were unbelievable."</p>
+        <p class="result-card__attr">— Owen</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -326,27 +340,46 @@ footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--dim);border-t
     <h2 class="s-h">Three months of measurable progress</h2>
     <div class="results-grid">
       <div class="result-card rv">
-        <p class="result-card__heading">Three months of measurable progress</p>
-        <div class="result-card__stats">
-          <div class="result-stat"><strong>3RM squat:</strong> 125kg → 175kg</div>
-          <div class="result-stat"><strong>Bench press:</strong> 90kg → 120kg</div>
-          <div class="result-stat"><strong>Chin-ups:</strong> 17 → 25</div>
-          <div class="result-stat"><strong>5RM deadlift:</strong> 150kg → 170kg</div>
+        <img src="images/athlete-aimon.png" alt="Aimon" class="result-card__img">
+        <div class="result-card__body">
+          <p class="result-card__heading">Three months of measurable progress</p>
+          <div class="result-card__stats">
+            <div class="result-stat"><strong>3RM squat:</strong> 125kg → 175kg</div>
+            <div class="result-stat"><strong>Bench press:</strong> 90kg → 120kg</div>
+            <div class="result-stat"><strong>Chin-ups:</strong> 17 → 25</div>
+            <div class="result-stat"><strong>5RM deadlift:</strong> 150kg → 170kg</div>
+          </div>
+          <p class="result-card__attr" style="margin-top:.9rem">— Aimon</p>
         </div>
       </div>
       <div class="result-card rv" style="transition-delay:.07s">
-        <p class="result-card__heading">A stronger and faster camogie player in 12 weeks</p>
-        <div class="result-card__stats">
-          <div class="result-stat"><strong>Maximum speed:</strong> 5.5m/s → 6.7m/s</div>
-          <div class="result-stat"><strong>Squat:</strong> 60kg → 77kg</div>
-          <div class="result-stat"><strong>Bench press:</strong> 39kg → 52.5kg</div>
-          <div class="result-stat"><strong>Chin-ups:</strong> 0 → multiple reps</div>
+        <img src="images/athlete-niamh.png" alt="Niamh" class="result-card__img">
+        <div class="result-card__body">
+          <p class="result-card__heading">A stronger and faster camogie player in 12 weeks</p>
+          <div class="result-card__stats">
+            <div class="result-stat"><strong>Maximum speed:</strong> 5.5m/s → 6.7m/s</div>
+            <div class="result-stat"><strong>Squat:</strong> 60kg → 77kg</div>
+            <div class="result-stat"><strong>Bench press:</strong> 39kg → 52.5kg</div>
+            <div class="result-stat"><strong>Chin-ups:</strong> 0 → multiple reps</div>
+          </div>
+          <p class="result-card__attr" style="margin-top:.9rem">— Niamh</p>
         </div>
       </div>
       <div class="result-card rv" style="transition-delay:.14s">
-        <p class="result-card__heading">The fastest I have ever progressed in the gym</p>
-        <p class="result-card__quote">The programme is well designed to push you but not leave you fatigued for the next session. Paddy is quick to make any necessary changes to accommodate.</p>
-        <p class="result-card__attr">— PB Performance client</p>
+        <img src="images/athlete-kieran.jpg" alt="Kieran" class="result-card__img">
+        <div class="result-card__body">
+          <p class="result-card__heading">The fastest I have ever progressed in the gym</p>
+          <p class="result-card__quote">The programme is well designed to push you but not leave you fatigued for the next session. Paddy is quick to make any necessary changes to accommodate.</p>
+          <p class="result-card__attr">— Kieran</p>
+        </div>
+      </div>
+      <div class="result-card rv" style="transition-delay:.21s">
+        <img src="images/athlete-eamonn.jpg" alt="Eamonn" class="result-card__img">
+        <div class="result-card__body">
+          <p class="result-card__heading">Meaningful progress with limited time</p>
+          <p class="result-card__quote">After a season ravaged by injuries, I wanted to put on size and set myself up properly. I gained around 3kg of muscle and improved my strength massively. The short, simple sessions meant I could still tick every box, even with limited time.</p>
+          <p class="result-card__attr">— Eamonn</p>
+        </div>
       </div>
     </div>
     <div class="cta-group cta-center rv">
