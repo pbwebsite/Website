@@ -211,7 +211,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .result-card__heading{font-size:.67rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem}
 .result-card__quote{font-size:.88rem;color:var(--text);font-style:italic;line-height:1.75;margin-bottom:.8rem}
 .result-card__attr{font-size:.67rem;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-.swipe-hint{display:none;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:-.6rem 0 1.2rem}
+.dots{display:none;justify-content:center;gap:.5rem;padding:1.1rem 0 .2rem}
+.dots button{width:8px;height:8px;border-radius:4px;border:0;padding:0;background:var(--dim);cursor:pointer;transition:width .25s,background .25s}
+.dots button.on{width:22px;background:var(--accent)}
+.dots button:focus-visible{outline:2px solid var(--accent-b);outline-offset:2px}
 
 /* FIT FILTER */
 .fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
@@ -249,11 +252,11 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
   .hero__c{padding:9rem 1.5rem 2.8rem}
   .s-vsl{padding:3.5rem 2rem}
   /* testimonials become a swipe carousel */
-  .swipe-hint{display:block}
-  .results-grid{columns:auto;display:flex;align-items:flex-start;gap:.9rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 -2rem 2rem;padding:0 2rem;scroll-padding:0 2rem}
+  .results-grid{columns:auto;display:flex;align-items:stretch;gap:.9rem;overflow-x:auto;scroll-snap-type:x mandatory;touch-action:pan-y;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 -2rem;padding:0 2rem;scroll-padding:0 2rem}
   .results-grid::-webkit-scrollbar{display:none}
   .result-card{display:flex;flex-direction:column;flex:0 0 84%;scroll-snap-align:start;margin-bottom:0}
-  .result-card__body{flex:1}
+  .result-card__body{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .dots{display:flex}
   .step{padding:1.6rem 1.5rem 1.7rem}
   .step__num{font-size:1.4rem;margin-bottom:.8rem}
   .fit-grid{grid-template-columns:1fr}
@@ -267,7 +270,7 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
 @media(max-width:480px){
   .w{padding:4rem 1.5rem}
   .s-vsl{padding:3rem 1.5rem}
-  .results-grid{margin:0 -1.5rem 2rem;padding:0 1.5rem;scroll-padding:0 1.5rem}
+  .results-grid{margin:0 -1.5rem;padding:0 1.5rem;scroll-padding:0 1.5rem}
   nav{padding:.85rem 1.25rem}
 }
 </style>
@@ -390,7 +393,6 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
   <div class="w rv">
     <p class="s-eyebrow">What Players Say</p>
     <h2 class="s-h">Results from real athletes</h2>
-    <p class="swipe-hint" aria-hidden="true">Swipe to see more &rarr;</p>
     <div class="results-grid">
       <!-- Aimon — photo, updated to quote -->
       <div class="result-card rv">
@@ -454,7 +456,6 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
   <div class="w rv">
     <p class="s-eyebrow">More Player Results</p>
     <h2 class="s-h">Fitter, stronger and better prepared</h2>
-    <p class="swipe-hint" aria-hidden="true">Swipe to see more &rarr;</p>
     <div class="results-grid">
       <!-- Eamonn — photo, existing -->
       <div class="result-card rv">
@@ -554,7 +555,6 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
   <div class="w rv">
     <p class="s-eyebrow">Player Results</p>
     <h2 class="s-h">The difference a clear plan makes</h2>
-    <p class="swipe-hint" aria-hidden="true">Swipe to see more &rarr;</p>
     <div class="results-grid results-grid--2">
       <!-- Maria — no photo -->
       <div class="result-card rv">
@@ -684,6 +684,55 @@ async function submitMailchimp(e) {
 }
 popup.addEventListener('click', e => { if (e.target === e.currentTarget) closePopup(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && !popup.classList.contains('hidden')) closePopup(); });
+
+/* ── Testimonial carousels (phones only) ─────────────────────────────
+   Horizontal drags are handled here with a firm axis lock so a slightly
+   diagonal swipe never scrolls the page; vertical drags stay native. */
+document.querySelectorAll('.results-grid').forEach(track => {
+  const cards = [...track.children];
+  if (cards.length < 2) return;
+  const dots = document.createElement('div');
+  dots.className = 'dots';
+  cards.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.type = 'button';
+    d.setAttribute('aria-label', 'Show testimonial ' + (i + 1) + ' of ' + cards.length);
+    d.addEventListener('click', () => go(i));
+    dots.appendChild(d);
+  });
+  track.after(dots);
+  const padL = () => parseFloat(getComputedStyle(track).paddingLeft) || 0;
+  const posOf = i => cards[i].getBoundingClientRect().left - track.getBoundingClientRect().left + track.scrollLeft - padL();
+  const current = () => { let best = 0, bd = Infinity; cards.forEach((_, i) => { const d = Math.abs(posOf(i) - track.scrollLeft); if (d < bd) { bd = d; best = i; } }); return best; };
+  const go = i => { i = Math.max(0, Math.min(cards.length - 1, i)); track.scrollTo({ left: posOf(i), behavior: 'smooth' }); };
+  const update = () => { const i = current(); [...dots.children].forEach((d, j) => d.classList.toggle('on', j === i)); };
+  track.addEventListener('scroll', update, { passive: true });
+  update();
+
+  let sx = 0, sy = 0, sl = 0, axis = null, startIdx = 0;
+  track.addEventListener('touchstart', e => {
+    const t = e.touches[0]; sx = t.clientX; sy = t.clientY; sl = track.scrollLeft; axis = null; startIdx = current();
+  }, { passive: true });
+  track.addEventListener('touchmove', e => {
+    const t = e.touches[0]; const dx = t.clientX - sx, dy = t.clientY - sy;
+    if (!axis) {
+      if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+      axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+      if (axis === 'x') track.style.scrollSnapType = 'none';
+    }
+    if (axis === 'x') { if (e.cancelable) e.preventDefault(); track.scrollLeft = sl - dx; }
+  }, { passive: false });
+  const end = e => {
+    if (axis === 'x') {
+      const dx = (e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : sx) - sx;
+      track.style.scrollSnapType = '';
+      go(dx < -40 ? startIdx + 1 : dx > 40 ? startIdx - 1 : current());
+    }
+    axis = null;
+  };
+  track.addEventListener('touchend', end);
+  track.addEventListener('touchcancel', end);
+});
 
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
