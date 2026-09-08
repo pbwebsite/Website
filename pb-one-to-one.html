@@ -1,11 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-IE">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>1:1 Online Coaching | PB Performance Coaching</title>
-<meta name="description" content="Individual 1:1 online coaching for ambitious GAA players. Become stronger, fitter, faster and better prepared to perform on the pitch.">
+<title>1:1 Online S&amp;C Coaching for GAA Players | PB Performance Coaching</title>
+<meta name="description" content="Individual online strength &amp; conditioning coaching for ambitious GAA players, from Antrim senior hurler and MSc performance coach Paddy Burke.">
+<link rel="canonical" href="https://pbperformancecoaching.com/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="Paddy Burke">
+<meta name="theme-color" content="#080e12">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PB Performance Coaching">
+<meta property="og:locale" content="en_IE">
+<meta property="og:url" content="https://pbperformancecoaching.com/">
+<meta property="og:title" content="1:1 Online Coaching for Ambitious GAA Players">
+<meta property="og:description" content="Physical performance coaching built around your season, your schedule and your goals. Coached personally by Antrim senior hurler Paddy Burke.">
+<meta property="og:image" content="https://pbperformancecoaching.com/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Paddy Burke coaching a GAA player through a testing session in the gym">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="1:1 Online Coaching for Ambitious GAA Players">
+<meta name="twitter:description" content="Physical performance coaching built around your season, your schedule and your goals. Coached personally by Antrim senior hurler Paddy Burke.">
+<meta name="twitter:image" content="https://pbperformancecoaching.com/images/og-image.jpg">
+
 <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="preload" as="image" href="images/hurling-portrait.jpg" fetchpriority="high">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://pbperformancecoaching.com/#org",
+      "name": "PB Performance Coaching",
+      "url": "https://pbperformancecoaching.com/",
+      "logo": "https://pbperformancecoaching.com/images/logo.jpg",
+      "founder": { "@id": "https://pbperformancecoaching.com/#paddy" },
+      "areaServed": "Ireland"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://pbperformancecoaching.com/#paddy",
+      "name": "Paddy Burke",
+      "jobTitle": "Strength & Conditioning Coach",
+      "description": "Antrim senior hurler with more than ten years of intercounty experience, Strength & Conditioning Coach and MSc Performance Coaching graduate.",
+      "image": "https://pbperformancecoaching.com/images/paddy-bench.jpg",
+      "worksFor": { "@id": "https://pbperformancecoaching.com/#org" },
+      "url": "https://pbperformancecoaching.com/"
+    },
+    {
+      "@type": "Service",
+      "name": "1:1 Online Coaching for GAA Players",
+      "serviceType": "Online strength and conditioning coaching",
+      "provider": { "@id": "https://pbperformancecoaching.com/#org" },
+      "audience": { "@type": "Audience", "audienceType": "GAA players, club to intercounty" },
+      "areaServed": "Ireland",
+      "url": "https://pbperformancecoaching.com/",
+      "description": "Individual physical performance coaching for ambitious GAA players: an initial assessment, a programme built around your team schedule, weekly check-ins, adjustments and direct access to your coach."
+    },
+    {
+      "@type": "WebSite",
+      "name": "PB Performance Coaching",
+      "url": "https://pbperformancecoaching.com/",
+      "publisher": { "@id": "https://pbperformancecoaching.com/#org" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "How does online coaching work?", "acceptedAnswer": { "@type": "Answer", "text": "After your initial assessment, your programme is delivered through the coaching app with exercise demonstrations and progress tracking. You complete a weekly check-in, receive adjustments and can contact Paddy directly when you need support." } },
+        { "@type": "Question", "name": "How many sessions will I complete?", "acceptedAnswer": { "@type": "Answer", "text": "That depends on your team schedule, goals and stage of the season. Your plan is built around the time you realistically have. More sessions are not automatically better." } },
+        { "@type": "Question", "name": "Will the gym work leave me tired for matches?", "acceptedAnswer": { "@type": "Answer", "text": "Your programme is planned around team training and fixtures. Volume and intensity are managed so that your gym work supports rather than competes with your performance on the pitch." } },
+        { "@type": "Question", "name": "How long does coaching last?", "acceptedAnswer": { "@type": "Answer", "text": "Meaningful physical development takes time. Coaching begins with an initial 90-day commitment, after which we review the next phase around your goals and season." } },
+        { "@type": "Question", "name": "Is this only for intercounty players?", "acceptedAnswer": { "@type": "Answer", "text": "No. The coaching is for ambitious GAA players from club level through to intercounty. Your current level matters less than your willingness to work, communicate and improve." } },
+        { "@type": "Question", "name": "What happens after I apply?", "acceptedAnswer": { "@type": "Answer", "text": "Paddy will review your application personally and contact you to arrange a conversation. You'll discuss where you are now, what you want to improve and whether the coaching is the right fit for you." } }
+      ]
+    }
+  ]
+}
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -34,7 +111,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* HERO */
 .hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.hero__bg{position:absolute;inset:0;background:url('images/hurling-portrait.jpg') 50% 18%/cover no-repeat;filter:brightness(.48) saturate(.8)}
+.hero__bg{position:absolute;inset:-32px;background:url('images/hurling-portrait.jpg') 50% 18%/cover no-repeat;filter:blur(18px) brightness(.4) saturate(.7)}
+.hero__img{position:absolute;top:0;left:50%;height:125%;width:auto;max-width:none;transform:translate(-50%,-9%);filter:brightness(.48) saturate(.8);-webkit-mask-image:linear-gradient(to right,transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(to right,transparent,#000 22%,#000 78%,transparent)}
 .hero__g{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(8,14,18,.25) 0%,rgba(8,14,18,.15) 30%,rgba(8,14,18,.65) 68%,#080e12 100%)}
 .hero__c{position:relative;z-index:2;max-width:700px;padding:7rem 2rem 5rem;width:100%;text-align:center}
 .hero__tag{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem}
@@ -176,6 +254,7 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
 <!-- HERO -->
 <section class="hero">
   <div class="hero__bg"></div>
+  <img class="hero__img" src="images/hurling-portrait.jpg" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
   <div class="hero__g"></div>
   <div class="hero__c">
     <span class="hero__tag">Individual 1:1 Online Coaching</span>
@@ -211,7 +290,7 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
     <p class="s-eyebrow">Player Results</p>
     <h2 class="s-h">From reserve player to established starter</h2>
     <div class="proof-inner">
-      <img src="images/athlete-owen.png" alt="Owen" class="proof-photo">
+      <img src="images/athlete-owen.png" alt="Owen, GAA player coached by PB Performance" class="proof-photo" loading="lazy" decoding="async">
       <div>
         <p class="s-body">Over 14 months, Owen:</p>
         <ul class="proof-list">
@@ -237,7 +316,7 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
 
       <!-- Aimon — photo, updated to quote -->
       <div class="result-card rv">
-        <img src="images/athlete-aimon.png" alt="Aimon" class="result-card__img">
+        <img src="images/athlete-aimon.png" alt="Aimon" class="result-card__img" loading="lazy" decoding="async">
         <div class="result-card__body">
           <p class="result-card__heading">Stronger and more powerful on the pitch</p>
           <p class="result-card__quote">"I feel physically stronger on the pitch and more powerful in every aspect. I reached a 100kg bench press and a 150kg squat. The attention to detail and the way the programme was built around my goals were top drawer."</p>
@@ -247,7 +326,7 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
 
       <!-- Niamh — photo, updated quote -->
       <div class="result-card rv" style="transition-delay:.05s">
-        <img src="images/athlete-niamh.png" alt="Niamh" class="result-card__img">
+        <img src="images/athlete-niamh.png" alt="Niamh" class="result-card__img" loading="lazy" decoding="async">
         <div class="result-card__body">
           <p class="result-card__heading">A noticeable difference through the tackle</p>
           <p class="result-card__quote">"I noticed a big difference in my strength, especially when taking the ball through a tackle — I can carry it much better. The structured programme took all the guesswork out of the gym, and I could build it around my lifestyle and busy schedule."</p>
@@ -257,7 +336,7 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
 
       <!-- Kieran — photo, updated quote -->
       <div class="result-card rv" style="transition-delay:.1s">
-        <img src="images/athlete-kieran.jpg" alt="Kieran" class="result-card__img">
+        <img src="images/athlete-kieran.jpg" alt="Kieran" class="result-card__img" loading="lazy" decoding="async">
         <div class="result-card__body">
           <p class="result-card__heading">Progress without carrying fatigue into training</p>
           <p class="result-card__quote">"This is the fastest I have ever progressed in the gym and the highest weights I have hit. The programme pushed me without leaving me fatigued for the next session, and any changes I needed were made quickly."</p>
@@ -267,7 +346,7 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
 
       <!-- Eamonn — photo, existing -->
       <div class="result-card rv" style="transition-delay:.15s">
-        <img src="images/athlete-eamonn.jpg" alt="Eamonn" class="result-card__img">
+        <img src="images/athlete-eamonn.jpg" alt="Eamonn" class="result-card__img" loading="lazy" decoding="async">
         <div class="result-card__body">
           <p class="result-card__heading">Meaningful progress with limited time</p>
           <p class="result-card__quote">"After a season ravaged by injuries, I wanted to put on size and set myself up properly. I gained around 3kg of muscle and improved my strength massively. The short, simple sessions meant I could still tick every box, even with limited time."</p>
@@ -442,7 +521,7 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
   <div class="w rv">
     <h2 class="s-h" style="margin-bottom:1.8rem">Meet Paddy</h2>
     <div class="about-inner">
-      <img src="images/paddy-bench.jpg" alt="Paddy Burke" class="about-photo" onerror="this.style.display='none'">
+      <img src="images/paddy-bench.jpg" alt="Paddy Burke, Antrim senior hurler and strength and conditioning coach" class="about-photo" loading="lazy" decoding="async">
       <div>
         <div class="about-creds-row">
           <span class="about-cred">Antrim Senior Hurler</span>
