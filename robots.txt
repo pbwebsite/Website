@@ -3,4 +3,16 @@ Allow: /
 Disallow: /admin.html
 Disallow: /api
 
+# Draft / source pages — the live page is served at the root URL
+Disallow: /coaching.html
+Disallow: /championship.html
+Disallow: /pb-home.html
+Disallow: /pb-plans.html
+Disallow: /pb-preseason.html
+Disallow: /pb-inseason.html
+Disallow: /pb-offseason.html
+Disallow: /pb-article.html
+Disallow: /pb-articles.html
+Disallow: /programs-draft.html
+
 Sitemap: https://pbperformancecoaching.com/sitemap.xml
