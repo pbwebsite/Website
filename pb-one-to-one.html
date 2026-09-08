@@ -187,6 +187,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .result-card__heading{font-size:.67rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem}
 .result-card__quote{font-size:.88rem;color:var(--text);font-style:italic;line-height:1.75;margin-bottom:.8rem}
 .result-card__attr{font-size:.67rem;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.swipe-hint{display:none;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:-.6rem 0 1.2rem}
 
 /* FIT FILTER */
 .fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
@@ -220,7 +221,17 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
   .steps{grid-template-columns:1fr}
 }
 @media(max-width:680px){
-  .results-grid{columns:1}
+  .hero{min-height:100svh;align-items:flex-end}
+  .hero__c{padding:9rem 1.5rem 2.8rem}
+  .s-vsl{padding:3.5rem 2rem}
+  /* testimonials become a swipe carousel */
+  .swipe-hint{display:block}
+  .results-grid{columns:auto;display:flex;align-items:flex-start;gap:.9rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 -2rem 2rem;padding:0 2rem;scroll-padding:0 2rem}
+  .results-grid::-webkit-scrollbar{display:none}
+  .result-card{display:flex;flex-direction:column;flex:0 0 84%;scroll-snap-align:start;margin-bottom:0}
+  .result-card__body{flex:1}
+  .step{padding:1.6rem 1.5rem 1.7rem}
+  .step__num{font-size:1.4rem;margin-bottom:.8rem}
   .fit-grid{grid-template-columns:1fr}
   .about-inner{grid-template-columns:1fr}
   .about-photo{width:100%;height:auto;aspect-ratio:4/3;border-radius:12px;object-position:50% 35%}
@@ -231,7 +242,8 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
 }
 @media(max-width:480px){
   .w{padding:4rem 1.5rem}
-  .s-vsl{padding:4rem 1.5rem}
+  .s-vsl{padding:3rem 1.5rem}
+  .results-grid{margin:0 -1.5rem 2rem;padding:0 1.5rem;scroll-padding:0 1.5rem}
   nav{padding:.85rem 1.25rem}
 }
 </style>
@@ -306,6 +318,7 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
   <div class="w w--wide rv">
     <p class="s-eyebrow">What Players Say</p>
     <h2 class="s-h">Results from real athletes</h2>
+    <p class="swipe-hint" aria-hidden="true">Swipe to see more &rarr;</p>
     <div class="results-grid">
 
       <!-- Aimon — photo, updated to quote -->
