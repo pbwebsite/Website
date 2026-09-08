@@ -89,7 +89,7 @@
   --bg:#080e12;--surface:#0c1820;--card:#101e2a;
   --border:#1a2f3d;
   --accent:#27bad6;--accent-b:#45d1ea;
-  --text:#e6f2f6;--muted:#5e8899;--dim:#1e3545;
+  --text:#e6f2f6;--muted:#7f9fae;--dim:#1e3545;
   --white:#f4fafc;
 }
 html{scroll-behavior:smooth}
@@ -156,24 +156,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* CHECKLIST */
 .checklist{list-style:none;display:flex;flex-direction:column;gap:.85rem;margin:1.4rem 0 2.2rem}
-.checklist li{font-size:.93rem;color:var(--muted);line-height:1.65;padding-left:1.5rem;position:relative}
+.checklist li{font-size:.95rem;color:var(--muted);line-height:1.65;padding-left:1.5rem;position:relative}
 .checklist--dot li::before{content:'';width:5px;height:5px;background:var(--muted);border-radius:50%;position:absolute;left:0;top:.72em;display:block}
 .checklist--tick li::before{content:'✓';position:absolute;left:0;color:var(--accent);font-weight:700}
-.checklist--x li::before{content:'✕';position:absolute;left:0;color:var(--dim);font-weight:700}
+.checklist--x li::before{content:'✕';position:absolute;left:0;color:var(--muted);opacity:.6;font-weight:700}
 
 /* STEPS */
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:2.8rem}
-.step{background:var(--card);padding:2rem 1.8rem}
-.step__num{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem;display:block}
-.step__title{font-size:.82rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--text);margin-bottom:.65rem}
-.step__body{font-size:.86rem;color:var(--muted);line-height:1.7}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-bottom:2.8rem}
+.step{background:var(--card);border:1px solid var(--border);border-top:2px solid var(--accent);border-radius:12px;padding:1.9rem 1.8rem 2.1rem}
+.step__num{font-size:1.7rem;font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--accent);margin-bottom:1.1rem;display:block;font-variant-numeric:tabular-nums}
+.step__title{font-size:1.02rem;font-weight:800;letter-spacing:-.01em;color:var(--text);margin-bottom:.6rem}
+.step__body{font-size:.93rem;color:var(--muted);line-height:1.72}
 
 /* INCLUDED */
-.inc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.4rem}
-.inc-item{background:var(--card);padding:1.4rem 1.6rem;display:flex;gap:.9rem;align-items:flex-start}
-.inc-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent);margin-top:.05rem}
-.inc-title{font-size:.88rem;font-weight:600;line-height:1.42;color:var(--text)}
-.inc-note{font-size:.84rem;color:var(--muted);line-height:1.78;font-style:italic;margin-top:.5rem}
+.inc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem;margin-bottom:1.6rem}
+.inc-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.4rem 1.6rem;display:flex;gap:1.1rem;align-items:center}
+.inc-icon{width:42px;height:42px;border-radius:10px;background:rgba(39,186,214,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent)}
+.inc-icon svg{width:20px;height:20px}
+.inc-title{font-size:.98rem;font-weight:600;line-height:1.45;color:var(--text)}
+.inc-note{font-size:.9rem;color:var(--muted);line-height:1.75;font-style:italic;margin-top:.5rem}
 
 /* RESULT CARDS */
 .results-grid{columns:3;column-gap:1.1rem;margin-bottom:2.4rem}
@@ -185,9 +186,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .result-card__attr{font-size:.67rem;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 
 /* FIT FILTER */
-.fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:10px;overflow:hidden}
-.fit-col{background:var(--card);padding:1.8rem}
-.fit-head{font-size:.65rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:1.2rem}
+.fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+.fit-col{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.8rem 1.9rem 2rem}
+.fit-col .checklist{margin:0}
+.fit-head{font-size:.7rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:1.2rem}
 .fit-head--yes{color:var(--accent)}
 .fit-head--no{color:var(--muted)}
 
@@ -212,11 +214,11 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
 
 @media(max-width:899px){
   .results-grid{columns:2}
+  .steps{grid-template-columns:1fr}
 }
 @media(max-width:680px){
   .results-grid{columns:1}
   .fit-grid{grid-template-columns:1fr}
-  .fit-col+.fit-col{border-top:1px solid var(--border)}
   .about-inner{grid-template-columns:1fr}
   .about-photo{width:100px;height:100px;border-radius:50%}
   .proof-inner{grid-template-columns:1fr}
@@ -426,17 +428,17 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
     <h2 class="s-h">A clear process built around you</h2>
     <div class="steps">
       <div class="step rv" style="transition-delay:.05s">
-        <span class="step__num">Step 1</span>
+        <span class="step__num">01</span>
         <div class="step__title">Assess and prioritise</div>
         <p class="step__body">We identify where you are now, what you need to improve and what should be prioritised first.</p>
       </div>
       <div class="step rv" style="transition-delay:.1s">
-        <span class="step__num">Step 2</span>
+        <span class="step__num">02</span>
         <div class="step__title">Build and adapt</div>
         <p class="step__body">You follow an individual plan built around your goals, team training, matches and stage of the season.</p>
       </div>
       <div class="step rv" style="transition-delay:.15s">
-        <span class="step__num">Step 3</span>
+        <span class="step__num">03</span>
         <div class="step__title">Track and progress</div>
         <p class="step__body">We measure your strength, speed and fitness, then adjust the plan based on what is working and what you need next.</p>
       </div>
