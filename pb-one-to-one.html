@@ -102,6 +102,29 @@ body{background:var(--bg);color:var(--text);font-family:'Manrope','Segoe UI',sys
 .rv.vis{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 
+/* POPUP (email capture) */
+.popup-overlay{position:fixed;inset:0;background:rgba(8,14,18,.86);backdrop-filter:blur(8px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1.5rem;animation:fIn .3s ease}
+.popup-overlay.hidden{display:none}
+@keyframes fIn{from{opacity:0}to{opacity:1}}
+.popup{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:14px;padding:2.4rem 2rem 2rem;width:100%;max-width:400px;position:relative;animation:sUp .35s ease}
+@keyframes sUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.popup-overlay,.popup{animation:none}}
+.popup__close{position:absolute;top:.9rem;right:.9rem;width:32px;height:32px;background:none;border:none;cursor:pointer;color:var(--muted);display:flex;align-items:center;justify-content:center;border-radius:6px;transition:color .15s,background .15s}
+.popup__close:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.popup__eyebrow{font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.55rem}
+.popup__title{font-size:1.45rem;font-weight:800;letter-spacing:-.025em;line-height:1.15;margin-bottom:.5rem;text-wrap:balance}
+.popup__sub{font-size:.88rem;color:var(--muted);line-height:1.65;margin-bottom:1.4rem}
+.pf{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.75rem}
+.pf label{font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.pf input{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;color:var(--text);font-size:1rem;font-family:inherit;outline:none;transition:border-color .15s;width:100%}
+.pf input:focus{border-color:var(--accent)}
+.popup__btn{width:100%;padding:.95rem;background:var(--accent);color:#fff;font-size:.9rem;font-weight:800;letter-spacing:.04em;border:none;border-radius:8px;cursor:pointer;margin-top:.3rem;font-family:inherit;transition:background .2s}
+.popup__btn:hover{background:var(--accent-b)}
+.popup__btn:focus-visible,.popup__close:focus-visible,.popup__skip:focus-visible{outline:2px solid var(--accent-b);outline-offset:3px}
+.popup__skip{display:block;text-align:center;margin-top:.9rem;font-size:.78rem;color:var(--muted);opacity:.75;cursor:pointer;background:none;border:none;width:100%;font-family:inherit;transition:opacity .15s}
+.popup__skip:hover{opacity:1}
+.popup__msg{text-align:center;font-size:.88rem;color:var(--accent-b);margin-top:.7rem;min-height:1.2em}
+
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2rem;background:rgba(8,14,18,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
 .nav__logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--text)}
@@ -180,8 +203,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .inc-note{font-size:.9rem;color:var(--muted);line-height:1.75;font-style:italic;margin-top:.5rem}
 
 /* RESULT CARDS */
-.results-grid{columns:3;column-gap:1.1rem;margin-bottom:2.4rem}
-.result-card{display:inline-block;width:100%;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;break-inside:avoid;margin-bottom:1.1rem}
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;align-items:start}
+.results-grid--2{grid-template-columns:repeat(2,1fr)}
+.result-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .result-card__img{width:100%;height:190px;object-fit:cover;object-position:center 25%;display:block}
 .result-card__body{padding:1.35rem 1.5rem 1.5rem;border-top:2px solid var(--accent)}
 .result-card__heading{font-size:.67rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem}
@@ -217,7 +241,7 @@ footer{padding:2rem;text-align:center;font-size:.72rem;color:var(--muted);border
 footer a{color:inherit;text-decoration:none;opacity:.7}
 
 @media(max-width:899px){
-  .results-grid{columns:2}
+  .results-grid{grid-template-columns:repeat(2,1fr)}
   .steps{grid-template-columns:1fr}
 }
 @media(max-width:680px){
@@ -249,6 +273,27 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
 </style>
 </head>
 <body>
+
+<!-- POPUP: free-guide email capture. It stays hidden until MAILCHIMP_ACTION is set in the script at the bottom of the page. -->
+<div class="popup-overlay hidden" id="popupOverlay" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+  <div class="popup">
+    <button class="popup__close" type="button" onclick="closePopup()" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <p class="popup__eyebrow">Free Resource</p>
+    <h2 class="popup__title" id="popupTitle">Get Paddy's Free GAA Training Guide</h2>
+    <p class="popup__sub">Drop your email and get a free S&amp;C starter guide &mdash; plus be first to hear about new coaching spots.</p>
+    <form id="mc-embedded-subscribe-form" method="post" novalidate onsubmit="submitMailchimp(event)">
+      <div class="pf"><label for="mce-FNAME">Name</label><input type="text" name="FNAME" id="mce-FNAME" placeholder="Your name" autocomplete="given-name"></div>
+      <div class="pf"><label for="mce-EMAIL">Email</label><input type="email" name="EMAIL" id="mce-EMAIL" placeholder="your@email.com" required autocomplete="email"></div>
+      <!-- Mailchimp bot-protection field; its name is filled in from the action URL -->
+      <div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_" id="mcHoneypot" tabindex="-1" value=""></div>
+      <button type="submit" class="popup__btn">Get the Free Guide &rarr;</button>
+    </form>
+    <p class="popup__msg" id="popupMsg" aria-live="polite"></p>
+    <button class="popup__skip" type="button" onclick="closePopup()">No thanks, skip for now</button>
+  </div>
+</div>
 
 <nav>
   <a class="nav__logo" href="index.html">
@@ -313,99 +358,8 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
   </div>
 </section>
 
-<!-- PLAYER TESTIMONIALS -->
-<section class="sec">
-  <div class="w w--wide rv">
-    <p class="s-eyebrow">What Players Say</p>
-    <h2 class="s-h">Results from real athletes</h2>
-    <p class="swipe-hint" aria-hidden="true">Swipe to see more &rarr;</p>
-    <div class="results-grid">
-
-      <!-- Aimon — photo, updated to quote -->
-      <div class="result-card rv">
-        <img src="images/athlete-aimon.jpg" alt="Aimon" class="result-card__img" loading="lazy" decoding="async">
-        <div class="result-card__body">
-          <p class="result-card__heading">Stronger and more powerful on the pitch</p>
-          <p class="result-card__quote">"I feel physically stronger on the pitch and more powerful in every aspect. I reached a 100kg bench press and a 150kg squat. The attention to detail and the way the programme was built around my goals were top drawer."</p>
-          <p class="result-card__attr">— Aimon</p>
-        </div>
-      </div>
-
-      <!-- Ronan — no photo -->
-      <div class="result-card rv" style="transition-delay:0.05s">
-        <div class="result-card__body">
-          <p class="result-card__heading">A clear plan that translated to match performance</p>
-          <p class="result-card__quote">"Before joining, I struggled with consistency and wasn't sure if I was training in the most effective way for my goals. Having everything planned out took the guesswork away. I became fitter, stronger and more consistent than I'd ever been, was covering the pitch better and felt far more prepared for matches."</p>
-          <p class="result-card__attr">— Ronan</p>
-        </div>
-      </div>
-
-      <!-- Padraic — no photo -->
-      <div class="result-card rv" style="transition-delay:0.1s">
-        <div class="result-card__body">
-          <p class="result-card__heading">Selected for the senior Championship squad</p>
-          <p class="result-card__quote">"I noticed multiple weights going up in the gym and managed to get into the senior Championship squad for the first time. The sessions fitted nicely around my training schedule, and Paddy understands the load that is on GAA players."</p>
-          <p class="result-card__attr">— Padraic</p>
-        </div>
-      </div>
-
-      <!-- Niamh — photo, updated quote -->
-      <div class="result-card rv" style="transition-delay:0.15s">
-        <img src="images/athlete-niamh.jpg" alt="Niamh" class="result-card__img" loading="lazy" decoding="async">
-        <div class="result-card__body">
-          <p class="result-card__heading">A noticeable difference through the tackle</p>
-          <p class="result-card__quote">"I noticed a big difference in my strength, especially when taking the ball through a tackle — I can carry it much better. The structured programme took all the guesswork out of the gym, and I could build it around my lifestyle and busy schedule."</p>
-          <p class="result-card__attr">— Niamh</p>
-        </div>
-      </div>
-
-      <!-- Maria — no photo -->
-      <div class="result-card rv" style="transition-delay:0.2s">
-        <div class="result-card__body">
-          <p class="result-card__heading">Stronger, faster and more confident on the pitch</p>
-          <p class="result-card__quote">"My back squat went from 45kg to 67.5kg, my bent-over row from 30kg to 57.5kg, and I achieved my first unassisted chin-ups. My 40m sprint improved massively. The work I put in for the season ahead boosted my confidence on the pitch, and I could feel it paying off during team training and games."</p>
-          <p class="result-card__attr">— Maria</p>
-        </div>
-      </div>
-
-      <!-- Dara — no photo -->
-      <div class="result-card rv" style="transition-delay:0.25s">
-        <div class="result-card__body">
-          <p class="result-card__heading">More work wasn't always better</p>
-          <p class="result-card__quote">"I felt faster, stronger and more complete on the pitch, and I got my rewards both individually and with the team. Realising that more wasn't always better was a game changer. Having a coach reassure me that I was on the right path changed how I approached training."</p>
-          <p class="result-card__attr">— Dara</p>
-        </div>
-      </div>
-
-      <!-- Kieran — photo, updated quote -->
-      <div class="result-card rv" style="transition-delay:0.3s">
-        <img src="images/athlete-kieran.jpg" alt="Kieran" class="result-card__img" loading="lazy" decoding="async">
-        <div class="result-card__body">
-          <p class="result-card__heading">Progress without carrying fatigue into training</p>
-          <p class="result-card__quote">"This is the fastest I have ever progressed in the gym and the highest weights I have hit. The programme pushed me without leaving me fatigued for the next session, and any changes I needed were made quickly."</p>
-          <p class="result-card__attr">— Kieran</p>
-        </div>
-      </div>
-
-      <!-- Eamonn — photo, existing -->
-      <div class="result-card rv" style="transition-delay:0.35s">
-        <img src="images/athlete-eamonn.jpg" alt="Eamonn" class="result-card__img" loading="lazy" decoding="async">
-        <div class="result-card__body">
-          <p class="result-card__heading">Meaningful progress with limited time</p>
-          <p class="result-card__quote">"After a season ravaged by injuries, I wanted to put on size and set myself up properly. I gained around 3kg of muscle and improved my strength massively. The short, simple sessions meant I could still tick every box, even with limited time."</p>
-          <p class="result-card__attr">— Eamonn</p>
-        </div>
-      </div>
-
-    </div>
-    <div class="cta-center rv">
-      <a href="https://forms.gle/bQ3gywgc1xEoW6SE8" target="_blank" rel="noopener" class="btn-fill">Apply for 1:1 Coaching <svg class="arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-    </div>
-  </div>
-</section>
-
 <!-- DOES THIS SOUND FAMILIAR? -->
-<section class="sec sec--alt">
+<section class="sec">
   <div class="w rv">
     <p class="s-eyebrow">Does This Sound Familiar?</p>
     <h2 class="s-h">You're willing to work. You just want to know the work is moving you forward.</h2>
@@ -421,13 +375,51 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
 </section>
 
 <!-- THE CORE PROBLEM -->
-<section class="sec">
+<section class="sec sec--alt">
   <div class="w rv">
     <p class="s-eyebrow">The Core Problem</p>
     <h2 class="s-h">Hard work will only take you so far</h2>
     <p class="s-body">At the start, simply going to the gym and training harder may have helped you improve.</p>
     <p class="s-body">But once you reach a certain level, more work is not always the answer. You need to know what qualities you need to improve, what your team training already covers and how everything fits together across the season.</p>
     <p class="s-strong">The problem isn't your work ethic. It's not having a plan you trust.</p>
+  </div>
+</section>
+
+<!-- PLAYER TESTIMONIALS 1 -->
+<section class="sec">
+  <div class="w rv">
+    <p class="s-eyebrow">What Players Say</p>
+    <h2 class="s-h">Results from real athletes</h2>
+    <p class="swipe-hint" aria-hidden="true">Swipe to see more &rarr;</p>
+    <div class="results-grid">
+      <!-- Aimon — photo, updated to quote -->
+      <div class="result-card rv">
+        <img src="images/athlete-aimon.jpg" alt="Aimon" class="result-card__img" loading="lazy" decoding="async">
+        <div class="result-card__body">
+          <p class="result-card__heading">Stronger and more powerful on the pitch</p>
+          <p class="result-card__quote">"I feel physically stronger on the pitch and more powerful in every aspect. I reached a 100kg bench press and a 150kg squat. The attention to detail and the way the programme was built around my goals were top drawer."</p>
+          <p class="result-card__attr">— Aimon</p>
+        </div>
+      </div>
+      <!-- Niamh — photo, updated quote -->
+      <div class="result-card rv" style="transition-delay:0.06s">
+        <img src="images/athlete-niamh.jpg" alt="Niamh" class="result-card__img" loading="lazy" decoding="async">
+        <div class="result-card__body">
+          <p class="result-card__heading">A noticeable difference through the tackle</p>
+          <p class="result-card__quote">"I noticed a big difference in my strength, especially when taking the ball through a tackle — I can carry it much better. The structured programme took all the guesswork out of the gym, and I could build it around my lifestyle and busy schedule."</p>
+          <p class="result-card__attr">— Niamh</p>
+        </div>
+      </div>
+      <!-- Kieran — photo, updated quote -->
+      <div class="result-card rv" style="transition-delay:0.12s">
+        <img src="images/athlete-kieran.jpg" alt="Kieran" class="result-card__img" loading="lazy" decoding="async">
+        <div class="result-card__body">
+          <p class="result-card__heading">Progress without carrying fatigue into training</p>
+          <p class="result-card__quote">"This is the fastest I have ever progressed in the gym and the highest weights I have hit. The programme pushed me without leaving me fatigued for the next session, and any changes I needed were made quickly."</p>
+          <p class="result-card__attr">— Kieran</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -457,8 +449,44 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
   </div>
 </section>
 
-<!-- WHAT'S INCLUDED -->
+<!-- PLAYER TESTIMONIALS 2 -->
 <section class="sec">
+  <div class="w rv">
+    <p class="s-eyebrow">More Player Results</p>
+    <h2 class="s-h">Fitter, stronger and better prepared</h2>
+    <p class="swipe-hint" aria-hidden="true">Swipe to see more &rarr;</p>
+    <div class="results-grid">
+      <!-- Eamonn — photo, existing -->
+      <div class="result-card rv">
+        <img src="images/athlete-eamonn.jpg" alt="Eamonn" class="result-card__img" loading="lazy" decoding="async">
+        <div class="result-card__body">
+          <p class="result-card__heading">Meaningful progress with limited time</p>
+          <p class="result-card__quote">"After a season ravaged by injuries, I wanted to put on size and set myself up properly. I gained around 3kg of muscle and improved my strength massively. The short, simple sessions meant I could still tick every box, even with limited time."</p>
+          <p class="result-card__attr">— Eamonn</p>
+        </div>
+      </div>
+      <!-- Ronan — no photo -->
+      <div class="result-card rv" style="transition-delay:0.06s">
+        <div class="result-card__body">
+          <p class="result-card__heading">A clear plan that translated to match performance</p>
+          <p class="result-card__quote">"Before joining, I struggled with consistency and wasn't sure if I was training in the most effective way for my goals. Having everything planned out took the guesswork away. I became fitter, stronger and more consistent than I'd ever been, was covering the pitch better and felt far more prepared for matches."</p>
+          <p class="result-card__attr">— Ronan</p>
+        </div>
+      </div>
+      <!-- Padraic — no photo -->
+      <div class="result-card rv" style="transition-delay:0.12s">
+        <div class="result-card__body">
+          <p class="result-card__heading">Selected for the senior Championship squad</p>
+          <p class="result-card__quote">"I noticed multiple weights going up in the gym and managed to get into the senior Championship squad for the first time. The sessions fitted nicely around my training schedule, and Paddy understands the load that is on GAA players."</p>
+          <p class="result-card__attr">— Padraic</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section class="sec sec--alt">
   <div class="w w--wide rv">
     <p class="s-eyebrow">What's Included</p>
     <h2 class="s-h">Everything you need to take control of your physical preparation</h2>
@@ -493,7 +521,7 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
 </section>
 
 <!-- WHO IT'S FOR -->
-<section class="sec sec--alt">
+<section class="sec">
   <div class="w rv">
     <p class="s-eyebrow">Who the Coaching Is For</p>
     <h2 class="s-h" style="margin-bottom:1.8rem">Be honest with yourself.</h2>
@@ -516,6 +544,33 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
           <li>You expect coaching to replace your own effort.</li>
           <li>You want guaranteed selection or instant results.</li>
         </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAYER TESTIMONIALS 3 -->
+<section class="sec sec--alt">
+  <div class="w rv">
+    <p class="s-eyebrow">Player Results</p>
+    <h2 class="s-h">The difference a clear plan makes</h2>
+    <p class="swipe-hint" aria-hidden="true">Swipe to see more &rarr;</p>
+    <div class="results-grid results-grid--2">
+      <!-- Maria — no photo -->
+      <div class="result-card rv">
+        <div class="result-card__body">
+          <p class="result-card__heading">Stronger, faster and more confident on the pitch</p>
+          <p class="result-card__quote">"My back squat went from 45kg to 67.5kg, my bent-over row from 30kg to 57.5kg, and I achieved my first unassisted chin-ups. My 40m sprint improved massively. The work I put in for the season ahead boosted my confidence on the pitch, and I could feel it paying off during team training and games."</p>
+          <p class="result-card__attr">— Maria</p>
+        </div>
+      </div>
+      <!-- Dara — no photo -->
+      <div class="result-card rv" style="transition-delay:0.06s">
+        <div class="result-card__body">
+          <p class="result-card__heading">More work wasn't always better</p>
+          <p class="result-card__quote">"I felt faster, stronger and more complete on the pitch, and I got my rewards both individually and with the team. Realising that more wasn't always better was a game changer. Having a coach reassure me that I was on the right path changed how I approached training."</p>
+          <p class="result-card__attr">— Dara</p>
+        </div>
       </div>
     </div>
   </div>
@@ -592,6 +647,44 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
 <footer>© 2026 PB Performance Coaching &nbsp;·&nbsp; <a href="index.html">pbperformancecoaching.com</a></footer>
 
 <script>
+/* ── Email popup ─────────────────────────────────────────────────────
+   Paste the Mailchimp form action URL between the quotes below.
+   (Mailchimp → Audience → Signup forms → Embedded forms → the form's action="..." URL,
+    it looks like https://xxxx.usNN.list-manage.com/subscribe/post?u=...&id=...)
+   The popup stays hidden until this is set, so no sign-ups are lost. */
+const MAILCHIMP_ACTION = '';
+const POPUP_DELAY_MS = 6000;
+
+const popup = document.getElementById('popupOverlay');
+const popupForm = document.getElementById('mc-embedded-subscribe-form');
+function popupDismissed() { try { return !!sessionStorage.getItem('pbDismissed'); } catch (_) { return true; } }
+function closePopup() {
+  popup.classList.add('hidden');
+  try { sessionStorage.setItem('pbDismissed', '1'); } catch (_) {}
+}
+if (MAILCHIMP_ACTION && !popupDismissed()) {
+  popupForm.action = MAILCHIMP_ACTION;
+  try {
+    const q = new URL(MAILCHIMP_ACTION).searchParams;
+    if (q.get('u') && q.get('id')) document.getElementById('mcHoneypot').name = 'b_' + q.get('u') + '_' + q.get('id');
+  } catch (_) {}
+  setTimeout(() => popup.classList.remove('hidden'), POPUP_DELAY_MS);
+}
+async function submitMailchimp(e) {
+  e.preventDefault();
+  const email = document.getElementById('mce-EMAIL');
+  const msg = document.getElementById('popupMsg');
+  if (!email.value.trim() || !email.validity.valid) { msg.textContent = 'Please enter a valid email address.'; email.focus(); return; }
+  const body = new URLSearchParams(new FormData(popupForm));
+  try { await fetch(popupForm.action, { method: 'POST', mode: 'no-cors', body }); } catch (_) {}
+  popupForm.hidden = true;
+  msg.textContent = '✓ Done — check your inbox shortly!';
+  try { sessionStorage.setItem('pbDismissed', '1'); } catch (_) {}
+  setTimeout(closePopup, 2200);
+}
+popup.addEventListener('click', e => { if (e.target === e.currentTarget) closePopup(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !popup.classList.contains('hidden')) closePopup(); });
+
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
 }, { threshold: 0.07 });
