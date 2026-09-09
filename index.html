@@ -167,6 +167,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .vsl-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:url('images/hero-coaching.jpg') center 35%/cover no-repeat}
 .vsl-placeholder::before{content:'';position:absolute;inset:0;background:rgba(8,14,18,.66)}
 .vsl-play{position:relative;width:72px;height:72px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 12px rgba(39,186,214,.14)}
+.vsl-sound{position:absolute;left:50%;bottom:16%;transform:translateX(-50%);z-index:3;display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.4rem;background:var(--accent);color:#fff;border:0;border-radius:999px;font-family:inherit;font-size:.82rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.45),0 0 0 6px rgba(39,186,214,.18);animation:pulse 2.2s ease-in-out infinite;transition:background .2s}
+.vsl-sound:hover{background:var(--accent-b)}
+.vsl-sound:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.vsl-sound.off{display:none}
+@keyframes pulse{0%,100%{box-shadow:0 6px 24px rgba(0,0,0,.45),0 0 0 6px rgba(39,186,214,.18)}50%{box-shadow:0 6px 24px rgba(0,0,0,.45),0 0 0 12px rgba(39,186,214,.08)}}
+@media(prefers-reduced-motion:reduce){.vsl-sound{animation:none}}
 .vsl-ext{display:inline-block;margin-top:1rem;font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
 .vsl-ext:hover{color:var(--accent-b)}
 .vsl-ext:focus-visible{outline:2px solid var(--accent-b);outline-offset:3px}
@@ -341,10 +347,15 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
           <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
         </span>
       </div>
-      <iframe src="https://www.youtube.com/embed/6qhyjAkQmVU?autoplay=1&amp;mute=1&amp;playsinline=1&amp;loop=1&amp;playlist=6qhyjAkQmVU&amp;rel=0&amp;controls=1"
+      <iframe id="vslFrame" src="https://www.youtube.com/embed/6qhyjAkQmVU?autoplay=1&amp;mute=1&amp;playsinline=1&amp;loop=1&amp;playlist=6qhyjAkQmVU&amp;rel=0&amp;controls=1&amp;enablejsapi=1"
               title="How PB Performance 1:1 coaching works"
               allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
               allowfullscreen></iframe>
+      <!-- Browsers only allow silent autoplay; this one tap restarts the video with sound -->
+      <button type="button" class="vsl-sound" id="vslSound">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a9 9 0 010 14"/></svg>
+        Tap for sound
+      </button>
     </div>
   </div>
   <a class="vsl-ext" href="https://youtu.be/6qhyjAkQmVU" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&nearr;</span></a>
@@ -659,6 +670,29 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
 <footer>© 2026 PB Performance Coaching &nbsp;·&nbsp; Paddy Burke &nbsp;·&nbsp; <a href="https://www.instagram.com/pbperformancecoaching/" target="_blank" rel="noopener">Instagram</a></footer>
 
 <script>
+/* ── Video sound: browsers only allow silent autoplay, so this single tap
+   restarts the video from the start with sound (via the YouTube player API). ── */
+(function () {
+  const frame = document.getElementById('vslFrame');
+  const btn = document.getElementById('vslSound');
+  const send = (func, args) => frame.contentWindow && frame.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args: args || [] }), '*');
+  btn.addEventListener('click', () => {
+    send('seekTo', [0, true]);
+    send('unMute');
+    send('setVolume', [100]);
+    send('playVideo');
+    btn.classList.add('off');
+  });
+  // Hide the button if the viewer unmutes with YouTube's own control instead
+  window.addEventListener('message', e => {
+    if (!/^https:\/\/(www\.)?youtube(-nocookie)?\.com$/.test(String(e.origin))) return;
+    let d; try { d = JSON.parse(e.data); } catch (_) { return; }
+    if (d && d.event === 'onReady') send('addEventListener', ['onStateChange']);
+    if (d && d.info && d.info.muted === false) btn.classList.add('off');
+  });
+  frame.addEventListener('load', () => frame.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }), '*'));
+})();
+
 /* ── Email popup ─────────────────────────────────────────────────────
    Paste the Mailchimp form action URL between the quotes below.
    (Mailchimp → Audience → Signup forms → Embedded forms → the form's action="..." URL,
