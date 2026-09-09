@@ -167,12 +167,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .vsl-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:url('images/hero-coaching.jpg') center 35%/cover no-repeat}
 .vsl-placeholder::before{content:'';position:absolute;inset:0;background:rgba(8,14,18,.66)}
 .vsl-play{position:relative;width:72px;height:72px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 12px rgba(39,186,214,.14)}
-.vsl-link{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;justify-content:flex-end;padding:.85rem;text-decoration:none;color:#fff}
-.vsl-badge{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem .95rem;background:rgba(8,14,18,.78);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);border-radius:999px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;transition:background .2s,border-color .2s}
-.vsl-badge svg{color:var(--accent-b)}
-.vsl-link:hover .vsl-badge{background:rgba(39,186,214,.9);border-color:transparent}
-.vsl-link:hover .vsl-badge svg{color:#fff}
-.vsl-link:focus-visible{outline:3px solid var(--accent-b);outline-offset:-3px}
+.vsl-ext{display:inline-block;margin-top:1rem;font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.vsl-ext:hover{color:var(--accent-b)}
+.vsl-ext:focus-visible{outline:2px solid var(--accent-b);outline-offset:3px}
 .vsl-play svg{margin-left:5px}
 .vsl-note{position:relative;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text);opacity:.85}
 
@@ -338,18 +335,19 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
 <section class="s-vsl rv">
   <div class="vsl-wrap">
     <div class="vsl-aspect">
-      <!-- Poster shows until the muted, autoplaying YouTube player is inserted when this scrolls into view.
-           The link on top opens the video on YouTube (with sound). -->
+      <!-- Poster sits behind the player while YouTube loads -->
       <div class="vsl-placeholder" aria-hidden="true">
         <span class="vsl-play">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
         </span>
       </div>
-      <a class="vsl-link" id="vslLink" href="https://youtu.be/6qhyjAkQmVU" target="_blank" rel="noopener" data-video="6qhyjAkQmVU" aria-label="Watch the video on YouTube with sound">
-        <span class="vsl-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch with sound on YouTube</span>
-      </a>
+      <iframe src="https://www.youtube.com/embed/6qhyjAkQmVU?autoplay=1&amp;mute=1&amp;playsinline=1&amp;loop=1&amp;playlist=6qhyjAkQmVU&amp;rel=0&amp;controls=1"
+              title="How PB Performance 1:1 coaching works"
+              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+              allowfullscreen></iframe>
     </div>
   </div>
+  <a class="vsl-ext" href="https://youtu.be/6qhyjAkQmVU" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&nearr;</span></a>
 </section>
 
 <!-- PRIMARY PROOF: OWEN -->
@@ -661,30 +659,6 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
 <footer>© 2026 PB Performance Coaching &nbsp;·&nbsp; Paddy Burke &nbsp;·&nbsp; <a href="https://www.instagram.com/pbperformancecoaching/" target="_blank" rel="noopener">Instagram</a></footer>
 
 <script>
-/* ── Video: muted autoplay when scrolled into view, paused when out of view.
-   The player is only created the first time it comes near the screen. ── */
-(function () {
-  const link = document.getElementById('vslLink');
-  const box = link.parentElement;
-  const id = link.dataset.video;
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let frame = null;
-  const send = cmd => { if (frame && frame.contentWindow) frame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: cmd, args: [] }), '*'); };
-  new IntersectionObserver(entries => entries.forEach(e => {
-    if (e.isIntersecting) {
-      if (!frame) {
-        frame = document.createElement('iframe');
-        frame.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=' + (reduced ? 0 : 1) + '&mute=1&controls=0&loop=1&playlist=' + id + '&playsinline=1&rel=0&enablejsapi=1';
-        frame.title = 'How PB Performance 1:1 coaching works (muted preview)';
-        frame.allow = 'autoplay; encrypted-media';
-        frame.tabIndex = -1;
-        frame.setAttribute('aria-hidden', 'true');
-        box.insertBefore(frame, link);
-      } else if (!reduced) send('playVideo');
-    } else send('pauseVideo');
-  }), { threshold: 0.35, rootMargin: '120px 0px' }).observe(box);
-})();
-
 /* ── Email popup ─────────────────────────────────────────────────────
    Paste the Mailchimp form action URL between the quotes below.
    (Mailchimp → Audience → Signup forms → Embedded forms → the form's action="..." URL,
