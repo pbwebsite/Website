@@ -5,7 +5,15 @@ export default {
     if (new URL(req.url).pathname === '/api' && req.method === 'POST') {
       return handle(req, env);
     }
-    return env.ASSETS.fetch(req);
+    const res = await env.ASSETS.fetch(req);
+    // HTML must always be revalidated so phones never show a stale build after a deploy.
+    // Images, fonts and other assets keep their normal caching.
+    if ((res.headers.get('content-type') || '').includes('text/html')) {
+      const fresh = new Response(res.body, res);
+      fresh.headers.set('Cache-Control', 'no-cache');
+      return fresh;
+    }
+    return res;
   }
 };
 
