@@ -164,12 +164,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .vsl-wrap{max-width:860px;margin:0 auto;border-radius:12px;overflow:hidden;border:1px solid var(--border)}
 .vsl-aspect{position:relative;padding-top:56.25%}
 .vsl-aspect iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.vsl-placeholder{position:absolute;inset:0;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.1rem;background:url('images/hero-coaching.jpg') center 35%/cover no-repeat;border:0;padding:0;cursor:pointer;font-family:inherit;color:inherit}
-.vsl-placeholder::before{content:'';position:absolute;inset:0;background:rgba(8,14,18,.66);transition:background .2s}
-.vsl-placeholder:hover::before{background:rgba(8,14,18,.55)}
-.vsl-placeholder:focus-visible{outline:3px solid var(--accent-b);outline-offset:-3px}
-.vsl-play{position:relative;width:72px;height:72px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 12px rgba(39,186,214,.14);transition:transform .2s,background .2s}
-.vsl-placeholder:hover .vsl-play{transform:scale(1.06);background:var(--accent-b)}
+.vsl-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:url('images/hero-coaching.jpg') center 35%/cover no-repeat}
+.vsl-placeholder::before{content:'';position:absolute;inset:0;background:rgba(8,14,18,.66)}
+.vsl-play{position:relative;width:72px;height:72px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 12px rgba(39,186,214,.14)}
+.vsl-link{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;justify-content:flex-end;padding:.85rem;text-decoration:none;color:#fff}
+.vsl-badge{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem .95rem;background:rgba(8,14,18,.78);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);border-radius:999px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;transition:background .2s,border-color .2s}
+.vsl-badge svg{color:var(--accent-b)}
+.vsl-link:hover .vsl-badge{background:rgba(39,186,214,.9);border-color:transparent}
+.vsl-link:hover .vsl-badge svg{color:#fff}
+.vsl-link:focus-visible{outline:3px solid var(--accent-b);outline-offset:-3px}
 .vsl-play svg{margin-left:5px}
 .vsl-note{position:relative;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text);opacity:.85}
 
@@ -335,13 +338,16 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
 <section class="s-vsl rv">
   <div class="vsl-wrap">
     <div class="vsl-aspect">
-      <!-- Click-to-play: the YouTube player only loads after a tap, keeping the page light -->
-      <button type="button" class="vsl-placeholder" id="vslPlay" data-video="6qhyjAkQmVU" aria-label="Play the video: how PB Performance 1:1 coaching works">
+      <!-- Poster shows until the muted, autoplaying YouTube player is inserted when this scrolls into view.
+           The link on top opens the video on YouTube (with sound). -->
+      <div class="vsl-placeholder" aria-hidden="true">
         <span class="vsl-play">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
         </span>
-        <span class="vsl-note">Play video</span>
-      </button>
+      </div>
+      <a class="vsl-link" id="vslLink" href="https://youtu.be/6qhyjAkQmVU" target="_blank" rel="noopener" data-video="6qhyjAkQmVU" aria-label="Watch the video on YouTube with sound">
+        <span class="vsl-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch with sound on YouTube</span>
+      </a>
     </div>
   </div>
 </section>
@@ -655,17 +661,29 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
 <footer>© 2026 PB Performance Coaching &nbsp;·&nbsp; Paddy Burke &nbsp;·&nbsp; <a href="https://www.instagram.com/pbperformancecoaching/" target="_blank" rel="noopener">Instagram</a></footer>
 
 <script>
-/* ── Video: swap the poster for the YouTube player on tap ── */
-document.getElementById('vslPlay').addEventListener('click', function () {
-  const id = this.dataset.video;
-  const f = document.createElement('iframe');
-  f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
-  f.title = 'How PB Performance 1:1 coaching works';
-  f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-  f.setAttribute('allowfullscreen', '');
-  this.replaceWith(f);
-  f.focus();
-});
+/* ── Video: muted autoplay when scrolled into view, paused when out of view.
+   The player is only created the first time it comes near the screen. ── */
+(function () {
+  const link = document.getElementById('vslLink');
+  const box = link.parentElement;
+  const id = link.dataset.video;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let frame = null;
+  const send = cmd => { if (frame && frame.contentWindow) frame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: cmd, args: [] }), '*'); };
+  new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) {
+      if (!frame) {
+        frame = document.createElement('iframe');
+        frame.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=' + (reduced ? 0 : 1) + '&mute=1&controls=0&loop=1&playlist=' + id + '&playsinline=1&rel=0&enablejsapi=1';
+        frame.title = 'How PB Performance 1:1 coaching works (muted preview)';
+        frame.allow = 'autoplay; encrypted-media';
+        frame.tabIndex = -1;
+        frame.setAttribute('aria-hidden', 'true');
+        box.insertBefore(frame, link);
+      } else if (!reduced) send('playVideo');
+    } else send('pauseVideo');
+  }), { threshold: 0.35, rootMargin: '120px 0px' }).observe(box);
+})();
 
 /* ── Email popup ─────────────────────────────────────────────────────
    Paste the Mailchimp form action URL between the quotes below.
