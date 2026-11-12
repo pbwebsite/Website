@@ -44,6 +44,7 @@
       "alternateName": ["PB Performance", "Paddy Burke Coaching", "Paddy Burke Performance Coaching"],
       "url": "https://pbperformancecoaching.com/",
       "logo": "https://pbperformancecoaching.com/images/logo.jpg",
+      "email": "paddy@pbperformancecoaching.com",
       "founder": { "@id": "https://pbperformancecoaching.com/#paddy" },
       "sameAs": ["https://www.instagram.com/pbperformancecoaching/"],
       "areaServed": "Ireland"
@@ -127,6 +128,9 @@ body{background:var(--bg);color:var(--text);font-family:'Manrope','Segoe UI',sys
 .popup__btn:hover{background:var(--accent-b)}
 .popup__btn:focus-visible,.popup__close:focus-visible,.popup__skip:focus-visible{outline:2px solid var(--accent-b);outline-offset:3px}
 .popup__skip{display:block;text-align:center;margin-top:.9rem;font-size:.78rem;color:var(--muted);opacity:.75;cursor:pointer;background:none;border:none;width:100%;font-family:inherit;transition:opacity .15s}
+.popup__consent{font-size:.68rem;color:var(--muted);text-align:center;line-height:1.5;margin-top:.7rem}
+.popup__consent a{color:var(--muted);text-decoration:underline}
+.popup__consent a:hover{color:var(--accent-b)}
 .popup__skip:hover{opacity:1}
 .popup__msg{text-align:center;font-size:.88rem;color:var(--accent-b);margin-top:.7rem;min-height:1.2em}
 
@@ -306,6 +310,7 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
       <!-- Mailchimp bot-protection field; its name is filled in from the action URL -->
       <div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_" id="mcHoneypot" tabindex="-1" value=""></div>
       <button type="submit" class="popup__btn">Get the Free Guide &rarr;</button>
+      <p class="popup__consent">By signing up you agree to our <a href="legal.html#privacy">privacy policy</a>. Unsubscribe any time.</p>
     </form>
     <p class="popup__msg" id="popupMsg" aria-live="polite"></p>
     <button class="popup__skip" type="button" onclick="closePopup()">No thanks, skip for now</button>
@@ -667,7 +672,7 @@ footer a{color:inherit;text-decoration:none;opacity:.7}
   </div>
 </section>
 
-<footer>© 2026 PB Performance Coaching &nbsp;·&nbsp; Paddy Burke &nbsp;·&nbsp; <a href="https://www.instagram.com/pbperformancecoaching/" target="_blank" rel="noopener">Instagram</a></footer>
+<footer>© 2026 PB Performance Coaching &nbsp;·&nbsp; Paddy Burke &nbsp;·&nbsp; <a href="mailto:paddy@pbperformancecoaching.com">paddy@pbperformancecoaching.com</a> &nbsp;·&nbsp; <a href="https://www.instagram.com/pbperformancecoaching/" target="_blank" rel="noopener">Instagram</a> &nbsp;·&nbsp; <a href="legal.html">Privacy &amp; Terms</a></footer>
 
 <script>
 /* ── Video sound: browsers only allow silent autoplay, so this single tap
